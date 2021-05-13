@@ -75,11 +75,11 @@ RandomTalk : nonoverlap
 	
 	"\1\s[18]Snake, have you heard of Danganronpa?\0\s[8]Dan can Ron what?\1\s[15]\f[italic,true] Danganronpa.\f[italic,default] It's a Japanese video game series about highschoolers murdering each other because of a higher power, a large bear named Monokuma.\0\s[8] Japanese, huh? Figures.\1\s[17]\nHey! I'm not that predictable!\0\s[5]\w8\e"
 	
-	"\1\s[18]Hey Snake, have I told you about Gundam SEED? \w8 It's the ninth installment of the Mobile Suit Gundam IP, one of my favorites. \nHumans have developed two subspecies of themselves. Naturals, who are your ordinary people that reside on Earth, and Coordinators, genetically...\w8 enhanced\w8 humans...\n\w8\w8\w8\0\s[8]\1\s[14] Ah, er... maybe we should watch something else.\e" 
+	"\1\s[18]Hey Snake, have I told you about Gundam SEED? \w8 It's the ninth installment of the Mobile Suit Gundam IP, one of my favorites. \n\nHumans have developed two subspecies of themselves. Naturals, who are your ordinary people that reside on Earth, and Coordinators, genetically...\w8 enhanced\w8 humans...\n\w8\w8\w8\0\s[8]\1\s[14] Ah, er... maybe we should watch something else.\e" 
 	
-	"\1\s[18]Have we watched Death Note together, yet, Snake? You get to see what would really happen if someone was given absolute power of judge, jury, and executioner! Light Yagami, our main character, finds something called a 'Death Note', which kills people when their names are written in it. Pretty gruesome, huh?\e"
+	"\1\s[18]Have we watched Death Note together, yet, Snake? You get to see what would really happen if someone was given absolute power of judge, jury, and executioner! \n\nLight Yagami, our main character, finds something called a 'Death Note', which kills people when their names are written in it. Pretty gruesome, huh?\e"
 	
-	//OKUAJUB: Codec Moments, Snake will upload a picture to Otacon, and then they'll have a small conversation regarding it.
+	//OKUAJUB: Codec Moments, Snake will upload a picture to Otacon, and then they'll have a small conversation regarding it. I should probably make this all one big response dialogue, but, I like it this way!
 
 	"\1\s[10]So... Any Codec moments from you, Snake?\n\n[half]Okay, first up...\w8\w8\w8\0\s[0]\_b[img\codecmomentdragonmotorcycle.png,inline]0\s[0]\nThis guy can go anywhere he wants, right?\1\s[15]\n\nOn a ride like that? Absolutely.\e"
 
@@ -94,11 +94,21 @@ RandomTalk : nonoverlap
 	//"\1\s[10]So... Any Codec moments from you, Snake?\n\n[half]Okay, first up...\w8\w8\w8\0\s[0]\_b[img\codecmoments,inline]\0\s[0]\n\nSnake says something relevant to the picture.\e" Commented out, for future Codec Moments.
 	//If you'd like to add your own Codec Moment, Save an image as codecmoment[whatever your image name would be], place it in the img folder in Ghost/Master, Copy and paste one of the lines above and replace all instances of codecmoment[imagename] with your codecmoment image. They're all named codecmoment for organization rather than necessity, honestly.
 	
-	//Otacon will tell the user tips about working with a Ukagaka. Short-cuts, small features, etc!
+	//Otacon will tell the user tips about working with a Ukagaka. Short-cuts, small features, etc! These will be here in every version until commented out, nice and hand-holdy like MGS4 Otacon. "Do you have a gun that can take out those Gekko, Snake?"
 	
-	"\1\s[18]Hey, %(username), did you know that CTRL will speed up how fast we talk? You can skip to the end of almost anything we say!\n\n[half] It's a weird feeling.\e"
+	"\1\s[18]Hey, %(username), did you know that, by default, CTRL will speed up how fast we talk? You can skip to the end of almost anything we say!\n\n[half] It's a weird feeling.\e"
 	
 	"\1\s[18]Hey, %(username), did you know that I can set your wallpaper if you drag and drop an image file onto us? It's pretty easy! You should try it when you want to change things up a little around here.\e"
+	
+	"\1\s[18]Hey, %(username), did you know that, when configured correctly, I can check your email for you? Try playing with the settings!\e"
+	
+	"\1\s[18]Hey, %(username), did you know that I can read RSS feeds for you? Try dragging and dropping a feed onto us!\f[height,6] Do they still have RSS Feeds..?\f[height,default]\e"
+	
+	"\1\s[18]Hey, %(username), did you know that we can empty your recycle bin for you? Try the SwissArmyKnife plugin! It should come with every version of SSP.\e"
+	
+	"\1\s[18]Hey, %(username), did you know that you can change the shape of our balloons? You should try it sometime! It's underneath 'Balloons' in the main menu.\e"
+	
+	"\1\s[18]Hey, %(username), did you know gaming?\f[height,6] ...what?\f[height,default]\e"
 	
 	//OKUAJUB: My dialogue ends here.
 	

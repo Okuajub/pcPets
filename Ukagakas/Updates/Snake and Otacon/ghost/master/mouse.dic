@@ -167,7 +167,7 @@ MouseDoubleClickKero
  	if reference4 == "Face" //Hitting Otacon's face
 	{
 		"\1\s[12]Ouch! That hurt!\w8\0\s[7]Leave him alone.\w8\1\s[11] \n\n[half]Snake..?\e"
-		"\1\s[12]That makes my head hurt, please stop!\e"
+		"\1\s[12]Ow! That hurt, please stop!\e"
 		"\1\s[12]Ah! Stop hitting me, p-please!.\e"
 		"\1\s[12]hh-! P-please stop. Please...\w8\0\s[7]Stop right now.\w8\1\s[11]Snake...?\e"
 		//Replace the dialogue here for the second character with whatever you want. What I said above about adding or trimming still holds here.
