@@ -1,0 +1,172 @@
+//---------------------------Anchors and OnTranslate--------------------------
+
+//This .dic file is for setting up anchor words, which are links to set conversations attached to certain words automatically. It also deals with OnTranslate, which is a fairly unique function. All text goes through OnTranslate first before it displays on your ghost, which is how it knows to turn certain words into links.
+//Why should I care about anchor words, you ask? Or what can I use them for? Well, you can set up anchor words to easy explanations for things your ghost might talk about that might confuse your user. People they know, places they've been, pop culture references the user might not get, information about you the creator or the world the characters from, items in an item menu, basically any number of things. Anchor words can be a handy repository of information! Or just an easy way to set up some cheap jokes. The power is yours!
+
+//Make sure to read the walkthrough (http://www.ashido.com/ukagaka/walkthrough.html) for more details about how to properly format ghost dialogue!
+//I will reiterate that you should be editing these in Notepad++, and in particular, you should set the Language to C to properly highlight all the text. It will make things A LOT EASIER for you, trust me! It will also help you keep track of your brackets in case you forget some. If you click on a line with a bracket in Notepad++, it should highlight where the other bracket ends, or turn purple if there's no finishing bracket (which you should definitely fix!)
+//It will also highlight my commented lines in green, so you'll know where they are. Any line beginning with // is a commented line that the code will not read. It's just for your reference!
+
+//This file is very short, so don't worry! And if you aren't planning on using anchor words, you just have to delete a few things and you'll be done!
+//OKUAJUB: I somewhat plan on using this in the future, so this is staying as is.
+
+//--OnTranslate
+
+//As I said above, OnTranslate filters through all the text your ghost displays and does whatever you specify to it. That doesn't have to just be turning things into links, it could be anything. This is a powerful function that can be used in a lot of creative ways I bet, but I wouldn't mess with it too much since you can pretty easily break stuff if you don't know what you're doing.
+//If you're not interested in any anchor words, delete all the lines that start with _talk = REPLACE under OnTranslate.
+
+OnTranslate
+	{
+	_talk = reference0
+ 	_talk = REPLACE(_talk, "Anchor 1", "\_a[anchor1]Anchor 1\_a")
+ 	_talk = REPLACE(_talk, "Anchor 2", "\_a[anchor2]Anchor 2\_a")
+ 	_talk = REPLACE(_talk, "Anchor 3", "\_a[anchor3]Anchor 3\_a")
+	
+		if reference1 == "" && reference2 == "" { //send input box : no event (ref2) , no special flag (ref1)
+            EVAL('"' + REPLACE(_talk,'"','" + CHR(0x22) + "') + '"')
+        }
+        else { //event result from ghost
+            TOSTR(_talk)
+        }
+	}
+	
+	//Some brief explanation about what's going on in those REPLACE lines! Basically, the function looks through the script and looks for a defined word or set of words. In this case, it's "Anchor 1". It then replaces "Anchor 1" with the second set of text, "\_a[anchor1]Anchor 1\_a". \_a if you recall is the dialogue code for linking something, so this is linking the words Anchor 1 to something called anchor1 set up in the next function, OnAnchorSelect.
+	//This is being used to change a word into a link, but you could conceivably use this to replace any text with any other kind of text if you wanted.
+
+	
+//--OnAnchorSelect
+//OnAnchorSelect runs whenever someone clicks one of the links as specified above, or a link that begins with http://.
+
+OnAnchorSelect
+{
+	if "http://" _in_ reference0 || "https://" _in_ reference0 //checking to see if the link is a web address
+	{
+	"\j[%(reference0)]\e" // \j is a tag that will open a specified url in the user's browser of choice. This basically just tells the ghost to open the webpage stored in reference0, which would be the address that the user just clicked. I didn't get too much into \j in the walkthrough page because I have literally never used it except here.
+	}
+	else //if it's NOT a web address
+	{
+	case reference0 //case is a unique thing that only really shows up in anchor.dic, and it basically sets up reference0 for evaluation to see if matches any of the below criteria, which are all tagged with when. You can read more about this on the coding page on the walkthrough site. You can add as many things here as you want to set up above as long as you follow the basic format.
+		{
+			when "talkingTip" //OKUAJUB: all anchors ending in 'tip' are used by Otacon in menu.dic for providing Ukagaka usage tips when clicked, since this is aimed at beginners. This is a speeding up talking tip.
+			{
+				"\1\s[10]Oh, you want us to talk a faster sometimes? Okay! By default, CTRL will speed up how fast we talk. You can skip to the end of almost anything we say!\n\n[half]\w8\w8It's a weird feeling.\e"
+			}
+			when "wallpaperTip" //Wallpaper Tip
+			{
+				"\1\s[10] You want to set your wallpaper? Okay, I can definitely tell you how to do that. It's pretty easy! I can set your wallpaper if you drag and drop an image file onto either of us. You should try it when you want to change things up a little around here.\e"
+			}
+			when "emailTip" //Email Tip
+			{
+				"\1\s[10]Yeah, we can check your email for you! \1\s[13] Err,\w8 setting it up is a little specific, though. I can't walk you through it entirely, but try navigating to 'Options>Preferences' in Snake's right-click menu, and adjusting the POP settings.\1\s[14] If it's all correct, I should be able to connect and see how many emails you have!\e"
+			}
+			when "trashTip" //Recycle bin tip.
+			{
+				"\1\s[10]We can empty the recycle bin if you double click Snake, like how you accessed this menu, and choose 'Functions'. Then, one of us will go and empty it for you! Be careful, though, because it's hard to stop us once we've started emptying it.\e"
+			}
+			when "rssTip" //RSS Feed Tip
+			{
+				"\1\s[18]You want to install an RSS Feed, huh? Alright, that's pretty simple! Just grab the link to the RSS feed by clicking and dragging, and drop it onto us. After that, we'll take over the rest! Once it's installed you can view RSS Feeds in Snake's right-click menu, under 'Headlines and RSS Feeds'.\e"
+			}
+			when "specsTip" //System Info tip
+			{
+				"\1\s[10]I can check your computer specs, yeah! Double click Snake, avoiding his face, and choose 'Functions' and then 'System Information'. Then, some things like your OS and Ukagaka system, like SSP, will be shown. Pretty neat, huh?\e"
+			}
+			when "iconifyTip" //Iconify Tip
+			{
+				"\1\s[10]Oh! Iconify is in Snake's right-click menu. When it's selected, we'll minimize into your taskbar. To get us back, right-click on the icon that looks like me, and then select Iconify again.\0\s[9]It feels pretty weird, though.\e"
+			}
+			when "whoSnake" //Describes Snake. Used in the FAQ.
+			{
+				"\1\s[16]Who's Snake? Well...\w8\w8\w8 he's...\w8\1\s[15] \f[italic,true]the shit!\f[italic,default]\w8\0\s[1]\1\s[15] He's infiltrated dozens of facilities, taken out a \f[italic,true]tank\f[italic,default] on foot, and destroyed multiple Metal Gears!\0\s[9]\1\s[15] He's probably one of the most impressive people I've ever met.\0\s[5]\1\s[16] Which is why he's my partner. We do our best to destroy Metal Gears, together.\0\s[5]That's high praise, Hal.\1\s[30]\nWell...\nYou're welcome.\e"
+			}
+			when "whoHal" //Describes Otacon. Used in the FAQ
+			{
+				"\1\s[10]I'm Otacon! I'm Snake's partner, I help him out on missions and keep him company. I'm an anime otaku, I really like mecha and I actually got my PhD at MIT because of how much I admire them. I actually did build one, \_a[whoRex]REX\_a... Anyway, I hope that helps.\e"
+			}
+			when "whoRex" //Describes Metal Gear REX
+			{
+				if otaconFeelings >= 20
+				{
+				clickRex += 1
+				"\1\s[18]Oh, um... REX was a project that I was working on at \_a[whoShadowMoses]Shadow Moses\_a, I was the chief engineer. I thought it was going to be used as a mobile defence system, but they had equipped it with nuclear weapons... Anyway. Snake took it out on Februrary 28th, 2005, but the plans had already been leaked, so Snake and I partnered together to take out any copy cats."
+				--
+				if clickRex < 2 
+				{
+					"\1\s[18]\n\n\f[italic,true]You've learned about Metal Gear REX. You can now ask Otacon about it at any time in the FAQ."
+				}
+				--
+				"\e"
+				} elseif otaconFeelings <= 19 && clickRex <= 0
+				{
+					"\1\s[13]Err... Uh. I- Sorry, I don't want to talk about that. Right now.\e"
+				} 
+				elseif otaconFeelings <= -20 && clickRex >= 1
+				{
+					"\1\s[12]I'm such a fool... I can't believe I told you about that...\e"
+				} 
+				elseif otaconFeelings
+			}
+			when "whoShadowMoses" //Describes Shadow Moses Island
+			{
+				clickShadowMoses += 1
+				"\1\s[18]Shadow Moses..? The island itself is a-\w4 \f[italic,true]was a\f[italic,default] nuclear weapons disposal facility. Unless you were in the know, that's all it was."
+				--
+				if otaconFeelings >= 10
+				"But it was also used as a facility to develop weapons by ArmsTech, due to how remote it was. The Shadow Moses \f[italic,true]Incident\f[italic,default]... Well, you should ask Snake about that."
+				--
+				if clickShadowMoses < 2 
+				{
+					"\1\s[18]\n\n\f[italic,true]You've learned about Shadow Moses. You can now ask Otacon about it at any time in the FAQ."
+				}
+				--
+				"\e"
+			}
+			when "whoShadowMosesIncident" //Describes Shadow Moses Incident. Series of checks to determine what response Snake gives. Snake's responses to questions are highly dependant on his feelings towards the user.
+			{
+				if snakeFeelings >= 50
+				{
+					"\0\s[9]I was assigned to infiltrate Shaodw Moses Island during the Shadow Moses Incident. Otacon and I met on Shadow Moses.\0\s[4] My old unit, FOXHOUND, came under the command of Liquid Snake, another clone of Big Boss, and took over Shadow Moses. They also captured Metal Gear REX, Otacon's project.\0\s[0] I had to kill each of the elite members: Decoy Octopus, Psycho Mantis, Sniper Wolf, Vulcan Raven,\0\s[4] and... Liquid. The other member, Ocelot, escaped with his life. With the help of... an old friend, we managed to destroy REX.\0\s[0] It all came at a heavy price, but I don't regret it.\e"
+				}
+				elseif snakeFeelings >= 20 && snakeFeelings <= 30
+				{
+					"\0\s[4]The Shadow Moses Incident was the terrorist take-over of Shadow Moses Island by Liquid Snake.\f[size,8] We're related, in a way.\f[size,default]\0\s[0] He and the rest of the terrorist group, FOXHOUND, captured the base for the Metal Gear inside. Eventually, under the guidance on Colonel Campbell, my former commander, the government was successful in taking them down."
+				}
+				elseif snakeFeelings >= -29 && snakeFeelings <= 20
+				{	
+					"\0\s[8]Hmm...\n\n\f[italic,true]Snake huffs. It seems he won't talk to you about this right now.\f[italic,default]\e"
+				}
+				elseif snakeFeelings <= -30 && snakeFeelings >= -49
+				{
+					"\0\s[8]\f[italic,true]Snake glares at you. His hair prickles slightly. Oops.\f[italic,default]\e"
+				}
+				elseif snakeFeelings <= -50 && snakeFeelings >= -89
+				{
+					"\0\s[7]Why the hell would I tell someone like you?\1\s[13]\0\s[7]\n\n\f[italic,true]It's clear Snake didn't like that.\f[italic,default]\e"
+					snakeFeelings--
+				}
+				else
+				{
+					"\0\s[9]\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\0\s[0]\w8\w8\w8Fuck you.\e"
+					snakeFeelings -= 5
+				}
+			}
+			when "whoMeiLing"
+			{
+				clickMeiLing += 1
+				"\1\s[18]Mei Ling? She was one of the people assigned to Snake's radio support team during the Shadow Moses Incident.\0\s[0]She's a data analyst. She'd be the one to record what I was doing.\1\s[10] Kind of like saving Snake's progress.\nShe also developed the Codec and Soliton Radar! Pretty neat, huh? I admire her work a lot.\e"
+				--
+				if clickMeiLing < 2 
+				{
+					"\1\s[18]\n\n\f[italic,true]You've learned about Mei Ling. You can now ask Otacon about her at any time in the FAQ."
+				}
+				--
+				if clickMeiLing > 99
+				{
+					"\1\s[19]...You know, you sure ask about her a lot. What's up with that, %(username)?"
+				}
+				--
+				"\e"
+			}
+		}
+	}
+}

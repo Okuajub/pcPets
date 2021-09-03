@@ -1,0 +1,584 @@
+﻿//---------------------------AI Talk--------------------------
+//Alright, this is it! The bread and butter of your ghost. This is where all their random conversations are stored. Of all the .dic files, this is the one you will probably be adding stuff to and updating the most as new dialogue comes to your mind. It is relatively simple in that there aren't many functions or real coding involved with this file, but there are a few cool tricks you can do within randomtalk that can make dialogue with interesting effects, so I'll point them out as we go along.
+//I'm going to leave a lot of examples of different types of dialogue in here that you can study if the possibilities they present intrigue you. Study them carefully!
+
+//Make sure to read the walkthrough (http://www.ashido.com/ukagaka/) for more details about how to properly format ghost dialogue!
+//I will reiterate that you should be editing these in Notepad++, and in particular, you should set the Language to C (or Java I guess) to properly highlight all the text. It will make things A LOT EASIER for you, trust me! It will also help you keep track of your brackets in case you forget some. If you click on a line with a bracket in Notepad++, it should highlight where the other bracket ends, or turn purple if there's no finishing bracket (which you should definitely fix!)
+//It will also highlight my commented lines in green, so you'll know where they are. Any line beginning with // is a commented line that the code will not read. It's just for your reference!
+
+//--AiTalk
+//Leave this alone.
+//Advanced users, this is mostly setting up whether or not dialogue is in a chain before it displays. Again, you can leave it alone unless you want to screw around with chains for some strange reason.
+
+AiTalk
+ {
+	if RAND(100) < communicateratio
+ 	{
+ 		StartCommunicate
+	}
+ 	else
+	{
+ 		if mikireflag == 0
+		{
+			if CHAIN.IDName == "" {
+ 				lastTalk = RandomTalk
+			}
+			else {
+				lastTalk = ChainTalk
+			}
+			lastTalk
+		}
+ 		else
+		{ 
+		MikireTalk
+ 		}
+	}
+ }
+
+//--RandomTalk 
+ //Alright, here we go! This is where ALL your ghost's random dialogue will go! These are the conversations that they'll have with you or each other that pop up depending on the talk rate defined in menu.dic (or if you ignored that, set in bootend.dic in the first boot, which would be every five minutes).
+ 
+//*********************Advanced User Info*******************************
+//These text boxes are meant for those who have an interest in expanding or using more complicated functions in their ghost. Also for my own reference in the future since I plan on using this template too, haha. If you have no interest in any of this and just want to keep things as simple as possible, feel free to skip these boxes.
+
+//You CAN link to other pools of dialogue in RandomTalk using envelopes/functions, such as %(teatalk) to pull from a pool of dialogue about tea. Then you'd just add that line in among the other dialogue in here with %(teatalk). However, this vastly lowers the probability of dialogue in that function being called. If teatalk only gets called 1/5 times, and it has 10 pieces of dialogue in there, then you're only getting... uh... god, I'm bad at fractions... 1...50th? a chance that a certain teatalk line will appear. LOOK THE GIST IS THAT THE PROBABILITY GETS LOW. This applies to any kind of dialogue in a conditional. A simpler example would be if you have one piece of normal dialogue, and one piece that's an if check that has four pieces of dialogue in there. You'd end up with a 50% chance to get that normal dialogue, and a 50% chance for ONE of the other four pieces of dialogue... which makes the odds of seeing any specific line in that special dialogue that much lower.
+
+//You can't do things like put OnSystemBoot or something in RandomTalk. You could use \![raise] to pull something though, although I'd be careful about it. More on these kind of things and conditionals in general in the coding page on the walkthrough.
+
+//If you split up RandomTalk with if/else checks, then you can redirect in an If to another function, like... if chargermode == "on" { ChargerChatting } else {normal random talk dialogue}. This would redirect the random dialogue to ChargerChatting instead. You can't just throw a function into RandomTalk directly though, like "dialogue 1" "dialogue 2" OnFunctionname "dialogue 3", that kind of thing. You'll have to split it off into its own if or point to it with an envelope.
+
+//You can do multiple ifs in RandomTalk if required... like an if for if a character is asleep, or if a third character is present, or if they're having a nervous breakdown, or if they're sulking. It depends! You can add a bunch of checks leading to specialized pools if you want. Just make sure you leave some normal dialogue in the last else for RandomTalk (unless you want to redirect that somewhere else with an envelope too... although that seems a bit redundant, honestly.)
+//***********************************************************************
+
+RandomTalk : nonoverlap
+{
+	
+	//OKUAJUB: Alright, here's where the dialogue starts. Basic strands.
+	
+	"\0\s[0]Hmm.\e"
+	
+	"\0\s[0]...\e"
+	
+	"\0\s[0]Hmph.\e"
+	
+	"\0\s[8]...\n\n\f[italic,true]Snake doesn't seem very talkative.\f[italic,default]\e"
+	
+	"\1\s[10]You know, you should really take a break from the computer every once and a while, %(username).\e"
+	
+	"\0\s[0]Don't forget to take a break from screens, %(username). Every good soldier needs to get up and stretch his legs.\e"
+	
+	"\0\s[0]Otacon, what are you thinking about?\w8\1\s[10]Oh, the usual stuff. What leads we have on the next Metal Gear, new worms to code, Kuromi...\e"
+	
+	"\1\s[10]How's it going, Snake?\w8\0\s[0]I could use a smoke.\1\s[17] Hey! You know that's bad for your lungs.\0\s[5]\e"
+	
+	"\1\s[14]Snake..? Can I ask you about what happened between you and Big Boss?\w8\w8\w8\w8\0\s[9]...Not here. Not now.\1\s[32] Alright, I understand.\e" //Once I include the friendship system, I'm going to have it so Snake will answer this question once the user's friendship is high enough.
+	
+	"\1\s[14]Snake,\w8 what was Frank like?\0\s[8]Jaeger? Best damn soldier I ever knew. He and I were close. When he got captured during N312, I knew I had to do something. In my naivety, I thought Big Boss picked me for N313 for that very reason.\1\s[18]\w8\w8...You loved him. Frank.\0\s[4] I'd have done anything to save him.\e" //Snake doesn't mind bragging on Gray Fox in front of the player.
+	
+	"\0\s[9]Otacon,\w5 what was Emma like?\1\s[14]Oh, um...\w8 Let me think for a second...\w8\w8\w8 Well, when we were young, we used to play a lot of games together. House, Monopoly, you know.\w8\1\s[32] She always wanted to be doing what I was doing, too, so we watched a lot of anime.\w8\1\s[16] Hahahh... I loved to show her the newest episodes of Hello Kitty, my otaku pals online were pretty nice about finding episodes for her.\w8\w8 \n\n[half]She also loved to sit in my lap and listen to my heart beat. She'd shove and wiggle her way into my lap in any way she could when she wanted to do that.\w8\w8 I have a hunch she'd ask me for piggy back rides just to do the same thing, because she would grow real quiet and calm...\0\s[5] Sounds like a good kid.\1\s[14] \nShe...\w8 was.\w8\w8\0\s[4]\n\w8.\w8.\w8.\w8I understand.\e"
+	
+	"\0\s[0]Otacon, what's our next move?\1\s[10]Well, we have a lot of options, Snake. Not a lot is pressing us. I think we could hang around here for awhile longer?\0\s[8] Hmm... Got it.\e"
+	
+	"\0\s[0]What's next, Otacon?\1\s[10] It's really up to you, Snake. We have enough leads to go after a couple Metal Gears, but we also have little enough to relax for a while.\0\s[5] I think I like the idea of being with you for a little while longer.\1\s[30] M-Me too."
+	
+	"\1\s[10]Snake... Can I ask you a question?\0\s[0]You just did.\1\s[17] You know what I mean!-\0\s[0]\n\nYes.\w8\1\s[10]Huh? Oh, um...\w8\n\n[half]Do you think love can bloom, even on the battlefield?\0\s[5]\n\n\Yeah, I do. I believe at any time, any place, people can fall in love with each other.\n\nBut...\w3 if you love someone, you have to be able to protect them.\1\s[30]\n\n[half] I think so, too. I'll do my best, Snake.\e" 
+	
+	"\0\s[0]Otacon, have you heard anything from Raiden, recently?\1\s[18]Sorry, Snake, nothing... I get worried about him, it's been a while since we heard something. I hope he and Rosemary are doing alright.\e"
+	
+	//OKUAJUB: Okay, this one's fun. sorry for all the waits but I wanted to make it seem like he really went somewhere.
+	
+	"\1\s[18]Hey, Snake, could you go and check %(usersfolder) for me? I think I saw something I wanted...\w8\w8\0\s[8]Hmm. Sure. Contact me by Codec once I get there to tell me what I should be looking for.\1\s[15] Got it.\w8\w8\0\s[20]\w2\0\s[21]\w2\0\s[22]\w1\0\s[-1]\w8\w8\w8\w8\1\s[10]\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\0\s[-1]\n\nFile retrieved. Returning to base.\1\s[10]\n\nGreat, I'll see you soon.\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\0\s[22]\w3\0\s[21]\w2\0\s[20]\0\s[0]\1\s[15]\n\nGood to have you back, Snake! Thanks for running that errand for me.\0\s[5]\n\nAny time.\e"
+	
+	//OKUAJUB: Here's some fun branching dialogue. First one is Otacon discusses new Metal Gear locations, with a little opinion thrown in, too. Might expand to other countries as we go.
+	
+	{
+	"\0\s[0]So, Otacon, what's the most recent intel on Metal Gears?\1\s[19]You're always so obsessed with work.\w8\1\s[18] Anyway, let's see... off the top of my head, there was a recent tip about a Metal Gear being constructed in "
+	--
+	"Florida. it'll be pretty humid down there, Snake! We might need to get \_a[whoMeiLing]Mei Ling\_a to modify your suit."
+	
+	"Alaska. Lucky you, we won't have many travel costs, or risks of being tracked buying tickets and shady rental cars."
+	
+	"West Virginia. Hey, maybe we'll get there in time for the Mothman festival? I've always had a bit of a soft spot for him."
+	
+	"New Mexico. It'll be pretty dry, you better remember to hydrate."
+	
+	"Canada, specifically British Columbia. Not too far south of base, huh?"
+	--
+	"\e"
+	}
+	//OKUAJUB: Otacon tells Snake about some of those Japanese Animes...
+	
+	"\1\s[18]Snake, have you heard of Danganronpa?\0\s[8]Dan can Ron what?\1\s[15]\f[italic,true] Danganronpa.\f[italic,default] It's a Japanese video game series about highschoolers murdering each other because of a higher power, a large bear named Monokuma.\0\s[8] Japanese, huh? Figures.\1\s[17]\nHey! I'm not that predictable!\0\s[5]\w8\e"
+	
+	"\1\s[18]Hey Snake, have I told you about Gundam SEED? \w8 It's the ninth installment of the Mobile Suit Gundam IP, one of my favorites. \n\nHumans have developed two subspecies of themselves. Naturals, who are your ordinary people that reside on Earth, and Coordinators, genetically...\w8 enhanced\w8 humans...\n\w8\w8\w8\0\s[8]\1\s[14] Ah, er... maybe we should watch something else.\e" 
+	
+	"\1\s[18]Have we watched Death Note together, yet, Snake? You get to see what would really happen if someone was given absolute power of judge, jury, and executioner! \n\nLight Yagami, our main character, finds something called a 'Death Note', which kills people when their names are written in it. Pretty gruesome, huh?\0\s[9]...Yeah. Gruesome."
+	
+	"\1\s[18]Hey Snake, have I told you about Digimon, yet?\0\s[8]Doesn't it have something to do with those peek-at-chus or something?\1\s[15] Hah! No! That's Pokemon. Digimon are \f[italic,true]digital\f[italic,default] monsters.\0\s[0]\1\s[15] They live in the digital world, and a human with a Digivice can become a Digimon Tamer! Each series deals with a new, traumatic event, and how to deal with it.\w8\w8\0\s[8]\1\s[18] You still don't get it, do you?\1\s[32]\w8\w8\w8\w8\w8\f[italic,true] *sigh*\f[italic,default]\e"
+	
+	"\1\s[18]Hey, Snake. Have you seen JoJo's Bizzare Adventure? That one gets wild! The main draw to the series is the concept of Stands and being a 'stand user'. A Stand is a powerful entity summoned by the user, holding powerful abilities greater than the user themself. \n\nBut because these Stands are manifestations of the user's life energy, if another Stand hurts it, you hurt the user, too! Pretty cool, huh?\0\s[9]...I don't get it.\1\s[15] You'll just have to watch with me! You'll pick it up.\e"
+	
+	//OKUAJUB: Codec Moments, Snake will upload a picture to Otacon, and then they'll have a small conversation regarding it. I should probably make this all one big response dialogue, but, I like it this way!
+
+	{
+	"\1\s[10]So... Any Codec moments from you, Snake?\n\n[half]Okay, first up...\w8\w8\w8" 
+	--
+	"\0\s[0]\_b[img\codecmomentdragonmotorcycle.png,inline]0\s[0]\nThis guy can go anywhere he wants, right?\1\s[15]\n\nOn a ride like that? Absolutely.\e"
+
+	"\0\s[0]\_b[img\codecmomentsmarinecommandant.png,inline]\1\s[18]\n\nHey, this is the Marine Commandant. Are you a fan or something?\1\s[10]\nAnd the next one is...\w8\w8\w8\0\s[0]\n\n\_b[img\codecmomentsmarinecommandant.png,inline]\1\s[19]The Commandant again. Look, if you like him so much, I'll print this out and make a panel out of it.\nPut it over your bed or something.\1\s[10]\nOkay, what am I seeing now...\w8\w8\w8\0\s[0]\n\n\_b[img\codecmomentsmarinecommandant2.png,inline]\1\s[17]Will you PLEASE stop sending me pictures of the Commandant?\1\s[10]\nOkay... What am I seeing now...\w8\w8\w8\0\s[5]\n\n\_b[img\codecmomentsmarinecommandant.png,inline]\1\s[12]\nStop it, okay?! Are you trying to freak me out?\e"
+
+	"\0\s[0]\_b[img\codecmomentsufcbernie.png,inline]\1\s[18]\n\n%(laugh)\w4\1\s[15]Hahahaha! I never knew President Sanders became a UFC fighter. Where'd you get this?\e"
+	
+	"\0\s[0]\_b[img\codecmomentscomputercarpincho.png,inline]\0\s[8]\n\nOtacon, what animal is this, and why is it using the internet?\1\s[10] Oh! This is a 'capybara', also known as a 'carpincho'.\1\s[18] Normally they can't use the internet... What's up with that? New experiments, maybe?\e"
+	
+	"\0\s[0]\_b[img\codecmomentsdinosurf,inline]\1\s[10]\n\n%(laugh)\w4\1\s[15]Hahahaha! This is hillarious! This rules. A dinosaur surfing with a jet ski?!\e"
+	}
+	
+	//\0\s[0]\_b[img\codecmoments.png,inline] Commented out, coding for future Codec Moments. makes it easier to reproduce quickly.
+	//If you'd like to add your own Codec Moment, Save an image as codecmoment[whatever your image name would be], place it in the img folder in Ghost/Master, copy the coding in the line above and paste it, and replace the codecoment.png with codecmoment[whatever your image name would be].png and you should be good to go!
+	
+	//Otacon will tell the user tips about working with a Ukagaka. Short-cuts, small features, etc! These will be here in every version until commented out, nice and hand-holdy like MGS4 Otacon. "Do you have a gun that can take out those Gekko, Snake?"
+	{
+	"\1\s[18]Hey, %(username),"
+	--
+	" did you know that, by default, CTRL will speed up how fast we talk? You can skip to the end of almost anything we say!\n\n[half]\w8\w8It's a weird feeling.\e"
+	
+	" did you know that I can set your wallpaper if you drag and drop an image file onto us? It's pretty easy! You should try it when you want to change things up a little around here.\e"
+	
+	" did you know that, when configured correctly, I can check your email for you? Try playing with the settings!\e"
+	
+	" did you know that I can read RSS feeds for you? Try dragging and dropping a feed onto us!\f[height,6] Do they still have RSS Feeds..?\f[height,default]\e"
+	
+	" did you know that if you double click either Snake or myself, a unique menu will open up? Try double clicking on me if you ever want more tips!\e"
+	
+	" did you know that I can tell you the specs of your computer? You can find that in Snake's functions menu! Double click Snake, be careful not to double click his face, and he'll give you some options.\e"
+	
+	" did you know that we have a built-in calendar? You should check it out sometime! It can be found in Snake's functions menu.  Double click Snake, be careful not to double click his face, and he'll give you some options.\e"
+	
+	" did you know that we can empty your recycle bin for you? Try 'Empty Recycle Bin' it from the 'functions' option in Snake's menu! Double click Snake, be careful not to double click his face, and he'll give you some options.\e"
+	
+	" did you know that you can change the shape of our balloons? You should try it sometime! It's underneath 'Balloons' in the main menu.\e"
+	
+	" did you know that you can hide us using the 'Iconify' option? It's useful for hiding us temporarily! You should try it. If you want to bring us back from Iconify, on Windows, just hit the '^' symbol on your taskbar, and click the icon that looks like me!\e"
+	
+	" did you know that you can have multiple ghosts out at once? Try using the 'Call Ghost' function in the menu! If you want to dismiss them (or me..), then you can simply hit 'Close' in their menu.\e"
+	
+	" did you know gaming?\f[height,6] ...what?\f[height,default]\e"
+	}
+	//OKUAJUB: Most standard dialogue ends here.
+	
+	//--If statements
+	//You can put if statements in RandomTalk! They don't even need Else statements, unless you want to keep two sets of statements completely separate - for example, you have one pool of conversations for when there are two characters, and one for if there are three characters. You wouldn't want these to overlap, so you'd put one pool in the if statement and the other in the else. Most of the time though, you won't need an Else statement for these, since they'll mostly only be adding in dialogue if the if statement is true. 
+	
+	if nowshell == "master" //This checks to see what shell they're currently using. You may remember this value being defined back in bootend.dic. If they're in their default shell...
+	{
+	//Then these conversations are available! Note the brackets enclosing this set of dialogue.
+	"\0\s[0]Why exactly are you made of little blocks, Otacon?\w8\1\s[10]Well, I'm technically not actually here right now. I'm using a terminal to communicate with you through this avatar!\0\s[8]\w8\w8 Huh?\1\s[18] Maybe I should just come here as myself...\e"
+	
+	"\1\s[30]I miss being close to you, Dave, this avatar doesn't do you justice...\0\s[6]\e"
+	}
+	//OKUAJUB: Increases the chances of a user who has not clicked Mei Ling's anchor encountering a phrase with her anchor. This is becaues Mei Ling's FAQ can only be accessed by random talk and I don't want it to be too slim.
+	if clickMeiLing == 0
+	{
+		"\1\s[10]I wonder how \_a[whoMeiLing]Mei Ling\_a is doing...\e"
+	}
+	//You can also put in multiple ifs checking for the same thing to vary the responses. In this case, it's checking to see if they're wearing another shell. You don't need to use elseifs for this! Just an if is fine.
+	if nowshell == "Octopus"
+	{
+	"\0\s[0]Feels nice to have you here, Otacon.\w8\1\s[30]I feel the same way.\e"
+	
+	"\1\s[16]I like seeing you in person, reminds me of the early days of Philanthropy, off the grid in Alaska, just figuring out how to live...\w8\0\s[5]It's been a long time, since then, huh?\e"
+	}
+	//This starts some checks for which month it is. Depending on which, it'll have a chance to draw some random dialogue. Remember, these don't just get added to the dialogue pool, each 'if' acts like one line of random dialogue.
+	if month >= 12
+	{
+		"\0\s[0]It's December, Otacon. You have any plans?\w8\1\s[18]Not really... I guess I'll be spending the holiday season with you?\0\s[0]I've got no god's birthday to celebrate, I'd prefer the time with you.\e"
+		
+		"\1\s[0]Brrr! Aren't you cold, Snake? It's freezing out!\w8\0\s[5]The sneaking suit has poly-thermal technology, I could and did survive a blizzard.\1\s[3] Well, jeez, now I'm kind of jealous.\e"
+		
+		"\0\s[0]Are you cold, Otacon?\w8\1\s[10]Hah, umm... Now that you mention it, yes.\0\s[0] Come closer, then, if you'd like.\1\s[30] A-Alright!\w8\5\w8\w8\w8 ...Thank you, Dave.\0\s[0]\w8\w8\w8\nAny time, Hal.\e"
+	}
+	
+	//So you can use these to check for any number of situations. I think this feature is really neat, so I'm going to set up some quick default responses for the months, days, and time of day. If you don't want to do these, you can just delete this whole set of ifs down to the //--Double Envelopes section below.
+	//You can also nest ifs within these, so you could check if it was the 25 of April in the morning for example. You can also add or take away dialogue from these as you like, so if you want to have five dialogue options for April or one for January, you can totally do that.
+	//OKAUJUB: Otacon bitches a lot about the weather, the code chunk.
+	
+	if month == 1
+	{
+		"\0\s[0]Are you cold, Otacon?\w8\1\s[10]Hah, umm... Now that you mention it, yes.\0\s[0] Come closer, then, if you'd like.\1\s[30] A-Alright!\w8\5\w8\w8\w8 ...Thank you, Dave.\0\s[0]\w8\w8\w8\nAny time, Hal.\e"
+		
+		"\0\s[5]It's a good thing this sneaking suit was designed for the cold. I'd be freezing.\w8\1\s[10]Yeah, I should huddle up next to you, I'm still just in my jacket!\e"
+	}
+	if month == 2
+	{
+		"\0\s[0]February. That's the month we first met, Otacon.\w8\1\s[10]Yeah, it's been a long time since then, huh?\e"
+		
+		"\0\s[5]It's a good thing this sneaking suit was designed for the cold. I'd be freezing.\w8\1\s[10]Yeah, I should huddle up next to you, I'm still just in my jacket!\e"
+		
+		"\0\s[0]Are you cold, Otacon?\w8\1\s[10]Hah, umm... Now that you mention it, yes.\0\s[0] Come closer, then, if you'd like.\1\s[30] A-Alright!\w8\5\w8\w8\w8 ...Thank you, Dave.\0\s[0]\w8\w8\w8\nAny time, Hal.\e"
+	}
+	if month == 3
+	{
+		"\0\s[0]It's March, huh?\w8\1\s[10]Yeah, we're not too far from being into the full swing of spring.\e"
+		
+		"\0\s[0]Finally warming up a little. Does that suit you better, Otacon?\w8\1\s[10]Still way too cold for me. You should let me borrow that suit of yours for a while.\0\s[5] You'll have to get it off me first. Or would you prefer it on?\1\s[11] S-Snake! Not in front of %(username)!\e"
+	}
+	if month == 4
+	{
+		"\0\s[0]It's April, Otacon.\w8\1\s[10]Yeah... I think we're thinking the same thing.\e"
+		
+		"\0\s[0]Have you heard anything from Raiden, recently, Otacon? I'd think he'd be taking it hard this month.\w8\1\s[14]I've not heard anything from him for a while, sorry...\0\s[8]\e"
+		
+		"\1\s[18]Snake, have you thought of going to updog this year?\w8\0\s[8]What's updog?\w8\w8\w8\w8\w8\0\s[1]\n\n....\n\nIt's always April 1st for you, isn't it?\1\s[15] Hahahaha! The look on your face. That was great.\e"
+	}
+	if month == 5
+	{
+		"\1\s[10]Hey, you know, it's May this month, that's the birth month of this Ukagaka!\0\s[8]How do you give birth to a program?\1\s[30] Uhhh... You don't wanna know.\e"
+		
+		"\0\s[0]May this month, huh?\w8\1\s[10]Yep, it's finally getting warm for a change..\e"
+	}
+	if month == 6
+	{
+		"\1\s[14]Father's day this month.\0\s[9]\w8\w8\w8\w8\w8I don't want to think about it."
+		
+		"\0\s[0]Eugh, I'm sweltering.\w8\1\s[10]Finally, the temperature playing field levels out a little.\e"
+	}
+	if month == 7
+	{
+		"\0\s[0]Eugh, I'm sweltering.\w8\1\s[10]Finally, the temperature playing field levels out a little.\e"
+		
+		"\0\s[0]It's Sunny's birthday this month.\w8\1\s[10]Yeah, July 5th, kind of fitting for someone raised by such... Patriotic people.\0\s[8] I'll have to think of something to do for her.\e"
+		
+		"\0\s[0]Do you celebrate the fourth of July, Otacon?\w8\1\s[10]Er, not really, no.\0\s[0] Me neither, we probably have pretty similar reasoning.\e"
+	}
+	if month == 8
+	{
+		"\0\s[0]Eugh, I'm sweltering.\w8\1\s[10]Finally, the temperature playing field levels out a little.\e"
+		
+		"\0\s[0]Otacon, have you gotten any new leads on Metal Gears lately?\w8\1\s[10]Yeah, actually. There's one I'd bet on pretty handily.\0\s[8] Who is it from?\1\s[30] Err...\w8\w8 I hacked it out of the Pentagon myself, and I think it's our next stop.\0\s[9]\w8 Really.\w8\0\s[0] Alright then. Good to know.\e"
+		
+		"\1\s[14]\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\0\s[4]...You're thinking about her, aren't you? Emma.\w8\w8\w8\w8\w8\1\s[14]Yeah... Can we talk about something else, please?\0\s[0] Otacon-\1\s[14] Please, Dave.\e"
+		
+		"\1\s[14]\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\ It's my dad's birthday this month.\0\s[4]...\w8\w8\w8\w8\w8\1\s[14]\nYeah...\w8\0\s[4]It wasn't your fault, you know.\w8\w8\w8\w8\1\s[14]\nMaybe.\e"
+	}
+	if month == 9
+	{
+		"\0\s[0]September, huh?\w8\1\s[10]The chill is back in the air, again.\e"
+		
+		"\0\s[0]Otacon, does anything actually happen in September?\w8\1\s[10]Well, Rosh Hashanah is generally in September, that's the Jewish New Year.\1\s[37] My dad was an atheist, though, so I couldn't tell you much more about it.\0\s[8]Huh. That's interesting.\e"
+	}
+	if month == 10
+	{
+		"\0\s[0]Any plans for Halloween, Otacon?\w8\1\s[10]It's been a long time since I've had any. I was thinking of dressing up in a lazy Gundam costume, but we don't exactly get many visitors.\e"
+		
+		"\1\s[18]So, have you thought of anything for Halloween, Snake? Any costume you have in mind?\0\s[8]\w8\w8...I haven't thought of that in a long time. Hnnmm...\1\s[15] Well if you can't think of anything, I'm sure I could think of some \f[italic,true]fun\f[italic,false] costumes.\w8\w8\0\s[2]\cHuh?\w4\1\s[11] Hey! Don't look at me like \f[italic,true]that.\f[italic,default]\0\s[8]\1\s[11] I meant something like a matching costume set!\1\s[19]\w8\w8\w8 You know, like, Ash and Pikachu or something...\0\s[9]\c\f[italic,true]Otacon...\f[italic,default]\e"
+		
+		"\0\s[0]Boo.\w8\1\s[12]Augh! Don't scare me like that! How did that even work?!\e"
+	}
+	if month == 11
+	{
+		"\0\s[0]November, huh?\w8\1\s[10]It's getting cold!\e"
+		
+		"\0\s[0]Thanksgiving's this month.\w8\1\s[10]Yeah, it's a nice time to pick up all the clearance items they didn't sell.\e"
+	}
+	//These ifs check what day of the week it is.
+	if weekday == 1
+	{
+		"\0\s[0]Monday, huh?\e"
+		
+		"\1\s[18]Snake, you're going to have to watch out, today. Garfield has been seen in the area, and \w4\1\s[13]he's got a bad case of the Mondays!\0\s[8]\w8Otacon. \w8Are you serious?\1\s[16]\n\f[italic,true]*snrk*\f[italic,false]\e"
+	}
+	if weekday == 2
+	{
+		"\0\s[0]Tuesday, huh?\e"
+		
+		"\0\s[0]Tuesday.\w8\1\s[10]You don't sound very enthused.\0\s[8] What is there to say abou it?\1\s[18] Huh. I guess you're right.\e"
+	}
+	if weekday == 3
+	{
+		"\0\s[0]Wednesday, huh?\e"
+		
+		"\0\s[0]Middle of the week now, Wednesday.\w8\1\s[10]Hump day!\n\w8\1\s[18]...I never got that saying. \w5What do camels' humps have to do with Wednesday?\0\s[8] I really don't think that means what you think it means, Otacon.\e"
+	}
+	if weekday == 4
+	{
+		"\0\s[0]Thursday, huh?\e"
+		
+		"\w8\1\s[15]\b[2]\_b[img\wednesdayasuka.jpg,inline]\w8\w8\0\s[2]How did you do that with your mouth?!\e"
+	}
+	if weekday == 5
+	{
+		"\0\s[0]Friday, huh?\e"
+		
+		"\1\s[10]Weekend is coming up.\w8\0\s[0]No rest for the wicked, though. We'll always have plenty to do.\1\s[17] Hey! You're not wicked, and neither am I.\0\s[9] It's a figure of speech, Otacon.\1\s[30]\n ...oh.\e"
+	}
+	if weekday == 6
+	{
+		"\0\s[0]Saturday, huh?\e"
+		
+		"\1\s[15]It's Anime Night tonight, I love it when Saturday rolls around!\w8\0\s[0]It's nice to spend time with you. One of my favorite days.\e"
+	}
+	if weekday == 7
+	{
+		"\0\s[0]Sunday, huh?\e"
+		
+		"\0\s[0]Sunday, the day of rest.\w8\1\s[10]'No rest for the wicked' though, hm!\0\s[8] No wonder Emma named her parrot after you, huh?\w5\1\s[14] Hey.\w8\w8\w8\0\s[4] \n\nSorry.\e"
+	}
+	//These ifs check for the time of day as defined in bootend.dic. Do you remember the words used for each chunk of time in GetTimeSlot? These are the same words!
+	if timeslot == "earlymorning"
+	{
+		"\0\s[0]Up bright and early, hm?\w8\1\s[10]I can't believe you used to wake up at 6 AM every day, Snake.\0\s[10] Sometimes earlier. Survival training was brutal.\e"
+		
+		"\1\s[10]Good morning, %(username).\w8\0\s[0]Mhm.\e"
+		
+		"\1\s[31]\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\1\s[32]\w8\w8\w8\w8\w8\w8\1\s[32]\f[italic,true]*zzz...*\f[italic,false]\1\s[32]\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\1\s[33]\f[height,6]Julie...? s-stop..\f[height,default]\0\s[8]\w8\w8\w8\1\s[33]\f[height,6] hhuh..? where are you... why.. no, stop..!\f[height,default]\0\s[2]Otacon! Wake up!\1\s[12]\cAh! Who's touching me, what's happening?!\0\s[4] It's okay, it's me. David. No one is touching you.\1\s[14] Oh, thank god...\e"
+	}
+	if timeslot == "morning"
+	{
+		"\0\s[0]Had some kit yet? If you feel hungry, it's best to eat.\w8\1\s[10]Yeah, take care of yourself, %(username).\e"
+		
+		"\1\s[31]\0\s[0]Morning.\w8\1\s[31]\f[italic,true]*yawn*\f[italic,false]\e"
+		
+		"\1\s[10]Good morning, %(username).\w8\0\s[0]Mhm.\e"
+		
+		"\1\s[31]\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\1\s[32]\w8\w8\w8\w8\w8\w8\1\s[32]\f[italic,true]*zzz...*\f[italic,false]\1\s[32]\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\1\s[33]\f[height,6]Julie...? s-stop..\f[height,default]\0\s[8]\w8\w8\w8\1\s[33]\f[height,6] hhuh..? where are you... why.. no, stop..!\f[height,default]\0\s[2]Otacon! Wake up!\1\s[12]\cAh! Who's touching me, what's happening?!\0\s[4] It's okay, it's me. David. No one is touching you.\1\s[14] Oh, thank god...\e"
+	}
+	if timeslot == "lunch"
+	{
+		"\0\s[0]Had a meal yet? If you feel hungry, it's best to eat.\w8\1\s[10]Yeah, take care of yourself, %(username).\e"
+	}
+	if timeslot == "afternoon"
+	{
+		"\1\s[32]Afternoons always make me sleepy...\e"
+		
+		"\0\s[0]Afternoon, %(username).\w8\1\s[10]Have anything fun to do?\e"
+	}
+	if timeslot == "evening"
+	{
+		"\0\s[0]Had a meal yet? If you feel hungry, it's best to eat.\w8\1\s[10]Yeah, take care of yourself, %(username).\e"
+		
+		"\0\s[0]Feeling tired yet, %(username)?\w8\1\s[10]If it's getting dark, you might consider using a blue light filter. It's really better on the eyes!\0\s[5] You say that, and yet I find you hunched over at 0200 with the brightness on 100.\1\s[17] Hey\w4.\w4.\w4!\w8\1\s[19] I'm allowed to be a hypocrite...\e"
+	}
+	if timeslot == "latenight"
+	{
+		"\1\s[10]Still up, %(username)?\w8\1\s[18] I don't want to be a nag, but sleep is important. Consider saving your work and going to bed.\e"
+		
+		"\0\s[0]Every good soldier needs to get enough sleep. Master Miller made sure I knew that. Make sure you have enough time to get at least eight hours, %(username).\e"
+		
+		"\1\s[10]Have you considered going to bed soon, %(username)? It's getting kind of late...\e"
+	}
+	if timeslot == "midnight"
+	{
+		"\1\s[10]Aren't you ever tired, Snake?\w8\0\s[0]No.\1\s[19] You've \w4got\w4 to be kidding.\0\s[10] I do get tired, Otacon. Did you seriously think I don't?\1\s[17]N-No! You're a super soldier, what am I supposed to expect?\1\s[19]\0\s[10] Master Miller trained me to always be alert. That's why it seems like I don't get tired.\1\s[19] Lucky you.\e"
+		
+		"\0\s[0]Your time of night, huh, Otacon?\w8\1\s[10]Yep, this is my favorite time to gather intel, or just anything, really. Probably the otaku in me.\e"
+	}
+		
+	//--Multiple Responses
+	//If you've poked around menu.dic or string.dic or read the walkthrough, you may have seen me touch on setting multiple options for any one given bit of dialogue. This kind of dialogue follows much the same format.
+	
+	{ //Again, note the brackets around these unique bits of dialogue. Dialogue that's more complicated than just a single line of "dialogue/more dialogue/more dialogue/end" usually needs to be put in brackets like this. 
+	
+	"\0\s[0]Otacon, what anime are we going to watch next?\w8\1\s[10]"
+	//Notice that the last few tags set up Triangle's pose before going into his text below. You don't have to do this if you want each response to have its own pose, but if he'll have the same expression regardless of what he's saying, you might as well save yourself the work. Note this does not end with \e either, since the dialogue isn't done yet.
+	-- //You've probably seen these double dashes before in other .dic files. In this case, these dashes enclose a set of multiple responses. More on double dashes in the coding page on the walkthrough site.
+	"Sailor Moon! It's a classic, every anime fan should see it at least once. Or twice.\n...Or maybe a couple times more than that."
+	"Mobile Suit Gundam. Despite our... challenges with large robots, it's still one of my favorites. It came out almost the same year I was born, you know! Anyway..."
+	"Cowboy Bebop, despite the strange name, the way it protrays life is incredible."
+	"Polar Bear Cafe! It's so cute, Snake. The wolf wants to be a baker..!"
+	"Blue Exorcist. Now this one is exciting, it's a bit more action focused than my usual picks."
+	"Evangelion! I know we've dealt with enough robots piloted by kids, but... er, it's still really good."
+	//As you can see here, there are six potential replies Triangle might have to Snakel's question. Each time this dialogue is called, he will randomly select one response from these six.
+	-- //The closing set of dashes for his dialogue options.
+	"\w8\0\s[0]\n\n[half]" //Now we're going back to Snake to set up for his multiple responses in return. This line of tags mostly just sets up for what he will say. Like above, you can see his pose is set in here with \s[0], so he'll have the same pose for each response, and the consistent spacing with \n\n[half].
+	-- //opening dashes
+	"Really, again?"
+	"Sounds good to me."
+	"That one's pretty good."
+	"Huh, have we watched it before? It sounds familiar."
+	"I don't remember seeing that one. At least we won't be watching My Melody for the sixtieth time.\1\s[17] Hey! ...that's one of my favorites.\0\s[5] I know. I don't mind."
+	//Following the same pattern as above, Snake will randomly reply with one of these bits of dialogue. Note that these responses are also randomly chosen, so it may go Otacon says response one, Snake says response three, or Otacon says response four, Snake says response two, or so on and so forth. So make sure the exchange will still make sense regardless of what either of them might say.
+	//OKUAJUB: Zarla didn't mention this, but like I did here with the final dialog to pull, you can switch back and forth between characters in each response. It functions almost exactly like normal dialogue, only it pulls the start and end from diferent pools.
+	-- //closing dashes
+	"\e" //Dialogue ends
+	}
+	
+	//"\0\s[0]\f[height,20]These words are really large.\f[height,default]\w8\1\s[10]These words are a normal size. \w8\f[height,6]These words are small.\f[height,default]\e"
+	
+	//You can use other fancier SakuraScript bits in your dialogue if you want to get font effects, although I won't get too much into them here. In this case, \f[height,20] changes the height of the font, in this case to 20 or to 6, and then \f[height,default] changes them back to normal. I touch more on this in the SakuraScript page of the walkthrough.
+	
+	//"\0\s[0]\f[strike,true]These words are struck out.\f[strike,default]\w8\1\s[10]\f[sub,true]These words are a subscript.\f[sub,false] \f[sup,true]These words are a superscript.\f[sup,false] \f[underline,true]These words are underlined.\f[underline,default] \f[bold,true]These words are bold.\f[bold,false] \f[italic,true]These words are italic.\f[italic,false] \f[color,186,146,112]These words are a color.\f[color,default] This tag would return to default.\f[default]\e"
+	
+	//Here's a list of similar tags you may find useful. You can see they function much like <b> or <i> tags in html. You just enclose the piece of text you want to change with them. Note that they start with \f[word,true] to turn it on, then \f[word,false] or \f[word,default] to turn it off. I assume you can tell what the tags do by the text they enclose.
+	//For the \f[color] tag, the three colors listed are the RGB values of the color you want to use for your text. Change them to whatever color you want to use. \f[default] can be an easy way to quickly go back to the default word setting in your balloon after messing with colors and effects a lot.
+	
+	//"\0\s[0]Here's a link to a website. \_a[http://www.website.com/]Right here.\_a\e"
+	
+	//Along the same lines as above, you can use \_a[address] to link to certain things. Note that it ends with \_a to close the link. It's very similar to <a href=address> and </a> in html.
+	
+	//"\0\s[1]\1\s[15]\_sWe are saying this dialogue at the same time.\e" 
+	
+	//This dialogue uses a unique tag, \_s. \_s makes it so both characters will speak the same words at the same time. Try it in Script Input to see how it works. I talk about it a little more on the walkthrough page for scripting.
+	
+	//And so we reach the end of randomtalk! I again reiterate, YOU CAN AND SHOULD WRITE YOUR OWN NEW LINES OF DIALOGUE FOR THIS! I included some random example phrases here for you just to replace the text, but there really aren't that many. You'll want to add more, and doing so is easy! Just copy and paste a line and redo the text. Repeat as many times as you want with as many conversations as you want. You can always expand this section!
+}
+
+
+//Alright, we're done with the random conversations for now, but there are a few other things in aitalk that we'll need to fill out too.
+
+
+//-OnMinuteChange
+//These are time-related bits of dialogue for your ghost to say. If you're uninterested, you can delete it all except for a line for MikireTalk. So it'd look something like
+
+//OnMinuteChange
+//{
+//HourCheck
+//--
+//if mikireflag == 1
+// 	{
+// 		MikireTalk
+//	}
+//}
+
+//But I think these are kind of neat, so I'd leave them myself.
+
+
+//Keeps track of if an hour has passed. Just ignore this.
+HourCheck
+{
+if passmin >= 60
+	{
+		passmin = 0
+		passhour = passhour + 1
+	}
+}
+
+
+OnMinuteChange //This is what will trigger time-based dialogue for your Ghost.
+ {
+	HourCheck //checks to see if an hour has passed, ignore it
+	--
+ 	if minute == 0 //These ifs will check what time it is. Here, it's seeing if the minute equals zero...
+	{
+ 		if hour == 12 //And the hour equals 12, meaning it's noon. You can change this to some other hour if you want.
+		{
+ 			"\w8\1\s[15]It's high noon, partner!\w8\0\s[9]Who are you, Ocelot?\1\s[19] Pff, No!\w8\w8\1\s[18] Probably more like Cowboy Andy.\e"
+			//Replace with appropriate dialogue as you want.
+		}
+ 		elseif hour == 0 //If the hour is zero, aka midnight. Again, you can change this to whatever hour you want to check for. This section is flexible! You can also add more elseifs if you want to check for other hours.
+		{
+ 			"\1\s[10]It's midnight!\0\s[0]Eerie.\e"
+ 			"\0\s[0]Boo.\w8\1\s[12]Augh! Don't scare me like that! How did that even work?!\0\s[0]Maybe midnight is getting to you.\e"
+			//Then replace the dialogue with what's appropriate.
+		}
+		else
+		{
+			"\0\s[0]It's %(hour)00.\e"
+			//%(hour stores the time. This is a general top of the hour notification. I personally like this because it helps me keep track of time when I've been working on something, so when a ghost is all "Hey it's 3 o clock" I can be like woah really when did that happen. If you think this is annoying though, you can just delete this bit of dialogue to leave this else statement blank, or leave "" in here instead.
+		}
+	}
+	//Don't touch this part.
+	elseif mikireflag == 1
+ 	{
+ 		MikireTalk
+	}
+ }
+
+//--OnSecondChange
+//Like the above, this handles what happens every time a second goes by. Most of this you will not have to touch.
+
+OnSecondChange
+ {
+	if passsec == 59
+ 		{
+	 	passsec = 1
+ 		passmin = passmin + 1
+		}
+ 	else
+ 		{
+	 	passsec = passsec + 1
+		}
+	if mikireflag == 0 && reference1 == 1 //Dialogue for putting them off the screen.
+	{
+		"\0\s[0]Hey- What do you think you're doing?!"
+		
+		MikireTalk
+	}
+	if mikireflag == 1 && reference1 == 0 //Dialogue for coming back on the screen
+	{
+		EndMikireTalk
+	}
+	mikireflag = reference1 //reference1 is if the ghost is offscreen or not
+	if reference2 == 1
+	{
+ 		//This dialogue is for when the two characters are overlapping each other. If you don't want your characters to care, you can just leave this blank.
+		
+ 		"\0\s[0]Hal, I don't mind being close, but %(username) can't see both of us well.\w8\1\s[19]Huh, isn't your resolution %screenwidthx%screenheight, %(username)? We should have enough room... I'll move over.\1\s[18]\4\e"
+		
+		//You can see here the use of two envelopes, screenwidth and screenheight, to tell the user their resolution. Oddly, they are not in parentheses. I'm not sure why this is, but they don't display right otherwise. An odd quirk with these two envelopes.
+		//Note also how Triangle moves away at the end of the dialogue. This is due to the \4 tag. That will make any one character move away from the other if they are able. I talked about this tag and its counterpart tag \5 in the SakuraScript page on the walkthrough.
+	}
+ }
+
+ //---- MikireTalk ---------------------------------------------------------------------
+ //MikireTalk is dialogue for when your main character is off-screen. Like if you dragged Snake over to the side of your monitor until she was partially concealed by it.
+ 
+MikireTalk
+ {
+	"\0\s[0]Otacon, I can't see you anymore. Or anything. What's going on?\w8\1\s[10] %(username) pushed you off screen, Snake. Ctrl-Shift-F12 should bring you back to the desktop... if %(username) wants you there.\0\s[7]What?! I don't want to be stuck here, Otacon! %(username)?! Otacon!\e"
+	//Note the hotkey combo Otacon mentions. He's telling the truth, that should bring Snake back on the screen.
+ }
+
+ //----EndMikireTalk--------------------------------------------------------------------
+ //For after you bring the character back on screen.
+ 
+EndMikireTalk
+ {
+	"\0\s[0]Eughugh. That was horrible.\w8\1\s[15]Good to have you back, Snake!\e"
+ }
+
+
+//**** OnSurfaceRestore *****************************************************************
+//OnSurfaceRestore is a handy function. What this does is that after a short period of time, the ghost will go back to its default pose, so you won't have a ghost stuck in one expression for too long. It's also helpful if you've made one of the characters disappear using \s[-1] in dialogue and didn't bring them back at the end of it. This will do that for you.
+//I'm going to comment out the if/else statements in this because the circumstances in which they'd come up seem pretty unlikely and unnecessary if you're just going to be making a simple ghost. You can just leave this function alone and move on if you want. However, if you do want to use them, just uncomment the lines by deleting the slashes and fill in the info as you need.
+
+//*********************Advanced User Info*******************************
+//You can put if statements in OnSurfaceRestore to make exceptions for certain poses, or to make sure that once they're in a certain pose, they stay in that pose. For example, if you turn my Hunter and Smoker ghost into eggplants, there's a check for the their eggplant pose numbers to make sure they STAY eggplants when OnSurfaceRestore is called.
+//You can also use OnSurfaceRestore to clean up things that might be left on the screen, primarily from using p[number]\s[] to call up other objects or characters. Just make sure to add a p[number]\s[-1] to OnSurfaceRestore, and that should get rid of it each time the ghost cleans itself up.
+//***********************************************************************
+
+OnSurfaceRestore
+ {
+ 	//if reference0 == 4 || reference0 == 6 //This is checking what poses they are in. This looks to see if Girl is in pose 4 or pose 6, since she is reference0.
+ 	//{
+ 	//"\1\s[10]You're in a sad pose.\w8\0\s[0]I'll go back to normal then.\e"
+ 	//}
+ 	//elseif reference1 == 14 || reference1 == 16 //This is doing the same but for Triangle, since he's reference1. It looks to see if he's in pose 14 or post 16.
+ 	//{
+ 	//"\0\s[0]You look sad.\w8\1\s[10]I'll go back to normal.\e"
+ 	//}
+ 	//else
+ 	//{
+	"\0\s[0]\1\s[10]\e"
+	//}
+ }
+
+ 
+ //--OnKeyPress
+ //This defines the hotkeys your ghost will use. You can change these to whatever you want, but I don't really know why you would. I'd just leave this alone. Advanced Users can add new hotkeys attached to whatever function if you want.
+ 
+OnKeyPress
+{
+	if reference0 == "t"
+	{
+	OnAiTalk
+	}
+	elseif reference0 == "r"
+	{
+	OnLastTalk
+	}
+	elseif reference0 == "f1"
+	{
+	"\![open,readme]"
+	}
+}
