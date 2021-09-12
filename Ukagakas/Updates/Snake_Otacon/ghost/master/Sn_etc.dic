@@ -77,17 +77,17 @@ OnInstallComplete
  	{	
 		if reference1 == "Octopus" //This is the name of your shell as you defined in descript.txt in the shell folder.
 		{
-		"\s[10]We've installed the Octopus shell. This should let me appear here in person!\w8\0\s[0]I'll be glad to see you again.\e"
+		"\s[10]We've installed the Octopus shell.\1\s[18]Hey... Okuajub never finished that one. How'd you get it?\e"
 		//Replace if needed.
 		}
-		elseif reference1 == "Another totally real shell wow" //As in other files, you can use elseif to expand a list like this to include as many shells as you have or think you'll make. See bootend.dic for more details about elseif.
+		elseif reference1 == "Snake and Otacon - Solid Shell" //As in other files, you can use elseif to expand a list like this to include as many shells as you have or think you'll make. See bootend.dic for more details about elseif.
 		{
-		"\s[0]We have installed another totally real shell.\e"
+		"\s[10]We've installed the Solid Shell.\1\s[15]Sweet! This will let me show up here in person.\e"
 		//Replace if needed.
 		}
 		else //For any other shell they may install.
 		{
-		"\s[0]We've installed a new shell.\w8\1\s[10]It's called  %(reference1), just so you know.\e"
+		"\s[10]We've installed a new shell.\w8\1\s[10]It's called  %(reference1), just so you know.\n\n\1\s[18]Okuajub didn't make this one, is it for another ghost?\e"
 		//%(reference1) here would be the name of the shell they installed. Replace if needed.
 		}
  	}
@@ -301,7 +301,6 @@ OnUpdateBegin
  
 OnUpdateReady
  {
- 
 	reference0++ //makes sure it starts at 1 instead of 0
 	
     "\1\s[15]I found %(reference0) new files. Nice!\w8\e"

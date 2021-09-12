@@ -18,18 +18,7 @@ laugh //Otacon's laughing animation
 }
 checkMenuClicks //OKUAJUB: Used in menu.dic - a series of checks for Otacon's FAQ
 {
-	//'Who" section
-	if clickMeiLing >= 1
-	{
-		"\_a[whoMeiLing]Who's Mei Ling?\_a\n"
-	}
-	--
-	//'What' section
-	if clickShadowMoses >= 1 
-	{
-		"\_a[whoShadowMoses]What's Shadow Moses?\_a\n"
-	}
-	--
+
 }
 posSnakeFeels //OKUAJUB: Snake Feelings go Up
 {

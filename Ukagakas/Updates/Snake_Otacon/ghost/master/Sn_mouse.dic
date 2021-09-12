@@ -55,13 +55,13 @@ MouseMoveSakura
 					"\0\s[8]You think you're entitled to touch me after what you've done?"
 					snakeFeelings--
 				} 
-				elseif snakeFeelings >= -10
+				if snakeFeelings >= -10
 				{
 				"\0\s[1]Huh? Stop that.\e"
 				"\0\s[1]Hmph.\e"
 				snakeFeelings++
 				} 
-				elseif snakeFeelings >= 9
+				if snakeFeelings >= 9
 				{
 				"\0\s[0]....\w8\0\s[1]Feels kind of nice.\e"
 				snakeFeelings++
@@ -77,9 +77,9 @@ MouseMoveSakura
  			{
  				if snakeFeelings <= -50
 				{
-				"\0\s[8]Get your mouse out of my face.\w8\w8\w8\w8\w8\w8\w8\e"
+				"\0\s[8]Get your mouse out of my face.\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\e"
  				"\0\s[8]Stop that.\w8\w8\w8\w8\w8\w8\w8\e"
- 				"\0\s[8]Knock it off. That's not for you to touch.\w8\w8\w8\w8\w8\w8\w8\e"
+ 				"\0\s[8]Knock it off. That's not for you to touch.\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\e"
 				snakeFeelings--
 				} elseif snakeFeelings >= -49
 				{
@@ -113,19 +113,44 @@ MouseMoveKero
 			stroke = 0
 			if reference4 == "Face" //Strokes Otacon's face.
  			{
-				"\1\s[11]Hhh- why are you touching me like that?\0\s[8]\e"
-				"\1\s[11]Wh-what are you doing?\0\s[8]\e"
+				"\1\s[11]Hhh- why are you touching me like that?\0\s[8]\f[italic,true]Snake glares at you.\f[italic,default]\e"
+				"\1\s[11]Wh-what are you doing?\0\s[8]\f[italic,true]Snake glares at you.\f[italic,default]\e"
 				"\1\s[11]Ah.. Hh-.\0\s[8]\_q\ Stop doing that. He doesn't like it.\e"
 				snakeFeelings--
 				//Maybe add negative friendship with Snake when Otacon is Stroked? Otacon freezes, no deduction, Snake dislikes Otacon's face being stroked.
  			}
 			elseif reference4 == "Head" //Pets the top of Otacon's head.
 			{
-				"\1\s[12]Ah-!\w8\1\s[11] Wh..?\w8\1\s[30]Hey, that felt kinda nice...\e" //I know Snake says almost the same thing, I'm trying to think of an alternate phrase.
+				if otaconFeelings <= -50
+				{
+					"\1\s[12]\f[italic,true]Otacon tolerates the touch for a moment before tearing himself away. As he was going to say something, his voice cracks and he thinks better of it, turns away and shuffles towards Snake.\f[italic,default]\5\0\s[8]\1\s[14]\n\n\f[size,10]S-Snake, I think I want to leave.\0\s[9]\f[size,10]\w8\w8\w8I know. \n\w8We'll figure it out.\e"
+					otaconFeelings--
+					snakeFeelings--
+				}
+				if otaconFeelings <= -40
+				{
+					"\1\s[12]\f[italic,true]Otacon flinches away from you with a quiet gasp for air, the whites of his eyes flicking away from you.\f[italic,false]\0\s[8]\f[italic,true]Snake gives you the side-eye.\f[italic,default]\e"
+					"\1\s[12]\f[italic,true]Otacon pulls away from the touch, and his chest heaves as though the action took his breath.\f[italic,default]\0\s[7]Damn it, give him a break, %(username).\e"
+					otaconFeelings--
+				}
+				if otaconFeelings <= -11
+				{
+					"\1\s[13]P-please don't touch me.\e"
+					"\1\s[13]Ah, d-don- um... okay."
+				}
+				if otaconFeelings >= -10
+				{
+				"\1\s[12]Ah-!\w8\1\s[11] Wh..?\w8\1\s[30]Hey, that felt kinda nice.\e" //I know Snake says almost the same thing, I'm trying to think of an alternate phrase.
 				"\1\s[30]Ah, um, h-hey, %(username)..!\e"
-				"\1\s[30]T-thanks! That feels nice... You can do it again, if you, um, want.\e"
-				"\1\s[31]Ah, this is kinda nice... reminds me of my animes..\e"
 				otaconFeelings++
+				}
+				if otaconFeelings >= 20
+				{
+				"\1\s[30]T-thanks!\w8 That feels nice... \n\w8You can do it again, if you, um, want.\e"
+				"\1\s[16]Ah, this is kinda nice...\w4 reminds me of my animes..\e"
+				otaconFeelings++
+				}
+				
 				//Otacon likes being petted. Snake does not mind him being petted.
 			}	
  		}

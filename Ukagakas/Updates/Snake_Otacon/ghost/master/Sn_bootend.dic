@@ -47,10 +47,12 @@ OnFirstBoot
 	nowshell = "master" //This is for a special if check in aitalk.dic to see what shell the ghost is using. You should use the name of your default shell folder here.
 	firstboot = 1 //This marks that this is the first time you've run the ghost. It's so it won't reroute to general name changing dialogue when the user inputs their name.
 	//OKUAJUB: Snake and Otacon specific variables.
-	clickShadowMoses = 0 //OKUAJUB: Click counting variable for Shadow Moses.
-	clickShadowMosesIncident = 0 //OKUAJUB: Click counting variable for Shadow Moses *incident*.
-	clickMeiLing = 0 //OKUAJUB: Click counting variable for Mei Ling.
-	clickRaiden = 0 //OKUAJUB: Click counting variable for Raiden.
+	clickShadowMoses = 0 //OKUAJUB: Click counting variable for Shadow Moses
+	clickShadowMosesIncident = 0 //OKUAJUB: Click counting variable for Shadow Moses *incident*
+	clickMeiLing = 0 //OKUAJUB: Click counting variable for Mei Ling
+	clickRaiden = 0 //OKUAJUB: Click counting variable for Raiden
+	clickJaeger = 0 //OKUAJUB: Click counting variable for Frank Jaeger
+	clickBigBoss = 0 //OKUAJUBL Click counting variable for Big Boss
 	clickRex = 0 //OKUAJUB: Click counting variable for Rex.
 	snakeFeelings = -10 //OKUAJUB: Snake's feelings. its a bit harder to befriend Snake.
 	otaconFeelings = 0 //OKUAJUB: Otacon's feelings. Neutral at first.
@@ -266,7 +268,7 @@ normalboottalk
 		{
 		"\0\s[0]Alone on a friday night?\e"
 		}
-	elseif RAND(100) < 10 //What this does is choose a random number from 1-100, and then checks if that number is less than 10. If it's less than forty, then these dialogue pieces will occur. Remember, you can have multiple lines of dialogue within one set of brackets like this! You just need to make sure they're all enclosed in their own set of quotation marks.
+	elseif RAND(100) < 10 //What this does is choose a random number from 1-100, and then checks if that number is less than 10. If it's less than ten, then this dialogue pieces will occur.
 		{
 		"\0\s[0]Kept you waiting, huh?\w8\1\s[10]Well, I think %(username) is the one that kept us waiting.\e"
 		}
@@ -283,16 +285,67 @@ normalboottalk
 		"\1\s[32]\w8\w8\w8\w8\w8\w8\1\s[32]\f[italic,true]*zzz...*\0\s[8]Still asleep, Otacon?"
 		
 		"\1\s[10]\f[italic,true]*yawn*\f[italic,false] I'm so tired... back in college, this is about the time I'd be going to sleep.\w8\0\s[0]Seriously?\1\s[10] Er, yeah. Powered by coffee and pure nerd. \e"
+		
+		"\0\s[4]\1\s[13]Yikes. That last mission left you in pretty bad shape, Snake.\1\s[18]Is there any more I can do?\0\s[4]You've already done all you can.\1\s[14] Alright. If you need anything.\n\n Er. Morning, %(username).\e"
+		
+		{"\1\s[15]You did pretty great out there, Snake! Good job "
+		--
+		"replacing that hard drive."
+		
+		"taking out those guards."
+		
+		"getting out unnoticed."
+		
+		"staying out of the camera sights."
+		
+		"escaping uninjured."
+		
+		"leaving so quick."
+		
+		"grabbing that intel."
+		
+		"stealing that thumbdrive."
+		
+		"destroying the copy-cat."
+		--
+		"\0\s[1]I wouldn't have been able to do it without you.\1\s[30] W-Well the same goes for you!\e"
+		}
+		
 		}
 		elseif timeslot == "morning"
 		{
 		"\0\s[0]Morning.\e"
 		
 		"\1\s[10]Good morning, %(username).\e"
+		
+		"\0\s[4]\1\s[13]Yikes. That last mission left you in pretty bad shape, Snake.\1\s[18]Is there any more I can do?\0\s[4]You've already done all you can.\1\s[14] Alright. If you need anything.\n\n Er. Morning, %(username).\e"
+		
+		{"\1\s[15]You did pretty great out there, Snake! Good job "
+		--
+		"replacing that hard drive."
+		
+		"taking out those guards."
+		
+		"getting out unnoticed."
+		
+		"staying out of the camera sights."
+		
+		"escaping uninjured."
+		
+		"leaving so quick."
+		
+		"grabbing that intel."
+		
+		"stealing that thumbdrive."
+		
+		"destroying the copy-cat."
+		--
+		"\0\s[1]I wouldn't have been able to do it without you.\1\s[30] W-Well the same goes for you!\e"
+		}
 		}
 		elseif timeslot == "lunch"
 		{
-		"\0\s[0]Taking a break, User?\1\s[10]Don't forget to eat!\e"
+		"\0\s[0]Taking a break, %(username)?\1\s[10]Don't forget to eat!\e"
 		
 		"\1\s[10]Hey, %(username)!\e"
 		}
@@ -314,7 +367,32 @@ normalboottalk
 		}
 		else //the last timeslot we haven't done is midnight, which is what's under here.
 		{
-		"\0\s[0]Your time of night, huh, Otacon?\1\w8\s[10]No kidding, this is when I get my best work done.\e"
+		"\0\s[0]Your time of night, huh, Otacon?\1\w8\s[10]No kidding, this is when I get my best work done!\e"
+		
+		"\0\s[4]\1\s[13]Yikes. That last mission left you in pretty bad shape, Snake.\1\s[18]Is there any more I can do?\0\s[4]You've already done all you can.\1\s[14] Alright. If you need anything.\n\n Er. Morning, %(username).\e"
+		
+		{"\1\s[15]You did pretty great out there, Snake! Good job "
+		--
+		"replacing that hard drive."
+		
+		"taking out those guards."
+		
+		"getting out unnoticed."
+		
+		"staying out of the camera sights."
+		
+		"escaping uninjured."
+		
+		"leaving so quick."
+		
+		"grabbing that intel."
+		
+		"stealing that thumbdrive."
+		
+		"destroying the copy-cat."
+		--
+		"\0\s[1]I wouldn't have been able to do it without you.\1\s[30] W-Well the same goes for you!\e"
+		}
 		}
 	}
 	//OKUAJUB: alright, holiday dialogue! or should i say, ''holiday''.
@@ -336,7 +414,7 @@ normalboottalk
 		}
 	elseif dayslot == "8month 5day" //Tanker Incident.
 		{
-		"\1\s[18]Remembering the Tanker Incident, today?\0\s[9]Yeah. It went worse than I thought it could.\1\s[14] I'm really sorry about that.\0\s[0] I know. I don't blame you. Occupational hazard.\1\s[18] Thanks...\e"
+		"\1\s[18]Remembering the Tanker Incident, today?\0\s[9]Yeah. It went worse than I thought it could.\1\s[14] I'm really sorry about that.\0\s[0] I know. I don't blame you. Occupational hazard.\1\s[14] Thanks...\e"
 		}
 	elseif dayslot == "12month 3day" 
 		{
@@ -390,17 +468,15 @@ OnClose
  				}
  			elseif timeslot == "afternoon"
  				{
- 					"\0\s[0]We'll catch up with you, later..\w8\1\s[10]Mhm!\w8"
+ 					"\0\s[0]We'll catch up with you, later.\w8\1\s[10]Mhm!\w8"
 					
  					"\1\s[10]See you, %(username)!\w8"
  				}
   			elseif timeslot == "evening"
  				{
- 					{
- 						"\0\s[0]Don't forget to get a bite to eat, if you haven't.\w8\1\s[10]See you later!\w8"
-							
- 						"\1\s[10]We'll see you later, make sure you get dinner!\w8"
- 					}
+ 					"\0\s[0]Don't forget to get a bite to eat, if you haven't.\w8\1\s[10]See you later!\w8"
+						
+ 					"\1\s[10]We'll see you later, make sure you get dinner!\w8"
  				}
 			elseif timeslot == "latenight"
 			 	{	
@@ -421,9 +497,9 @@ OnClose
  		
  	else //This dialogue is for if they haven't been open for at least five minutes.
  	{
- 		"\0\s[0]Saying bye so soon?\1\s[14] Bye.\w8\w8"
+ 		"\0\s[0]Saying goodbye so soon?\1\s[14] Bye.\w8\w8"
 		
- 		"\1\s[10]Did you open us accidentally? Sorry...\w8\0\s[0]See you later..\w8\w8"
+ 		"\1\s[10]Did you open us accidentally? Sorry...\w8\0\s[0]See you later.\w8\w8"
  	}
  	--
 	"\-\e" //this bit of code actually closes and ends the ghost. Because \e is here, you don't have to end each line above with it. Again, this will come up very rarely, so OnClose is an unusual case.
@@ -498,7 +574,7 @@ OnGhostChanged
 
 OnShellChanging
  {
-	if reference0 == "Snake and Otacon - Octopus" //reference0 in OnShellChanging is the name of the shell you're swapping to. It should be defined in the descript.txt file in your shell folder. If you do have alternate shells, put in the right name here.
+	if reference0 == "Snake and Otacon - Solid Shell" //reference0 in OnShellChanging is the name of the shell you're swapping to. It should be defined in the descript.txt file in your shell folder. If you do have alternate shells, put in the right name here.
 	{
 	"\1\s[10]Hey, you know, I should probably come here as myself.\w8\0\w8\s[8]Huh?\1\s[10] Er, well. This is just an avatar I'm using to communicate with you, like on the Tanker. Wait just a moment...\1\s[32]\w8\w8\w8\w8\e"
 	}
@@ -526,11 +602,11 @@ OnShellChanged
  		"\0\s[0]\1\s[16]Alright, I'm all settled in again. \0\s[0]What was that you said before you left?\w8\1\s[12]Ah! Nothing, nothing.\w8\0\s[8]\n\n[half]...Alright.\e"
 		//Replace dialogue as required.
  	}
- 	elseif reference0 == "Snake and Otacon - Octopus" //OKUAJUB: haha, you sneaky, you found my future shell plans.
+ 	elseif reference0 == "Snake and Otacon - Solid Shell" //OKUAJUB: haha, you sneaky, you found my future shell plans.
  	{
- 		nowshell = "Octopus"
+ 		nowshell = "Solid Shell"
 		
- 		"\0\s[2]\1\s[10] OKUAJUB: PLACE ANIMATION HERE *dusts off pants* Ah, much better! Good to be here with you, Snake. Happy to see me?\0\s[8]...\w8That was really weird.\0\s[1] It's good to see you, too, Otacon.\w8\0\s[8] You're not usually on the field.\e"
+ 		"\0\s[2]\1\s[10]Ah, much better! Good to be here with you, Snake. Happy to see me?\0\s[8]...\w8That was really weird.\0\s[1] It's good to see you, too, Otacon.\w8\0\s[8] You're not usually on the field.\e"
 		//Replace these bits with whatever you have in mind.
  	}
  	else //For any shell without a specific name, or if you don't want to bother with individual responses to a shell.
@@ -575,15 +651,15 @@ else //if reference0 isn't the main character, then it has to be the side charac
 			"\1\s[10]Aw, I guess they went away..\e"
 			}
 		}
-	elseif reference1 == "neko" //As you've seen above, you can use elseifs to expand the list if you have more than one item.
+	elseif reference1 == "nekomimify" //As you've seen above, you can use elseifs to expand the list if you have more than one item.
 		{
 			if reference2 == 1 //if you're putting it on
 			{
-			"\1\s[10]Nya!\w8\0\s[6]...What?\w8\1\n\n[half]\s[11] You know, like, nya?\e"
+			"\1\s[15]Nya!\w8\0\s[6]...What?\w8\1\n\n[half]\s[18] You know, like, nya?\e"
 			}
 			else //when you take it off
 			{
-			"\1\s[10]Aw, that was fun while it lasted..\e"
+			"\1\s[14]Aw, that was fun while it lasted..\e"
 			}
 		}
 	}

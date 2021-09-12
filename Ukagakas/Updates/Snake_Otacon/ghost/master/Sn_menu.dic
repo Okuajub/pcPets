@@ -121,9 +121,9 @@ Select.interactSAKURA //Interaction menu for Snake. Gift him things, talk to him
 	\![*]\q[Ration,giveRation]\n/
 	\![*]\q[Ketchup,giveKetch]\n\n[half]/
 	\f[italic,true]Say...\f[italic,default]\n/
-	\![*]\q An insult\n/
-	\![*]\q A compliment\n/
-	\![*]\q A joke\n"
+	\![*]\q[An insult,sayInsult]\n/
+	\![*]\q[A compliment,sayCompliment]\n/
+	\![*]\q[A joke,sayJoke]\n"
 	--
 	if snakeFeelings <= -50
 	{
@@ -137,12 +137,23 @@ Select.interactSAKURA //Interaction menu for Snake. Gift him things, talk to him
 	"\n"
 	--
 	"\f[italic,true]Ask...\f[italic,default]\n/
-	\![*]\q \_a[whoShadowMosesIncident]About Shadow Moses Incident\_a\n/
-	\![*]\q About Gray Fox\n/
-	\![*]\q About Big Boss\n/
-	\![*]\q About Otacon\n/
-	\![*]\q About Day\n\n/
-	\![*]\q[Nevermind,BACKTOMENU]/
+	\![*]\q[About Shadow Moses,askShadowMosesIncident]\n"
+	--
+	if clickJaeger >= 1
+	{
+	"\![*]\q[About Gray Fox,askJaeger]\n"
+	}
+	--
+	if clickBigBoss >= 1
+	{
+	"\![*]\q[About Big Boss,askBIgBoss]\n"
+	}
+	--
+	"\![*]\q[About Otacon,askOtacon]\n/
+	\![*]\q[About Day,askDay]\n\n/
+	\![*]\q[Nevermind,BACKTOMENU]\n\n\n/
+	\f[italic,true]Inventory\n/
+	Ketchup %(snakeKetchups)/20\f[italic,default]/
 	\e"
 }
 
@@ -158,17 +169,27 @@ Select.giveCigs
 	{
 		"\1\s[31]\0\s[9]...\w8\w8\n\n\f[italic,true]Snake hesitantly takes the cigarettes with a grunt. Otacon gives you a short glare. It... worked?\f[italic,default]\e"
 	}
-	elseif snakeFeelings >= -20 && snakeFeelings <= 20
+	elseif snakeFeelings >= -20 && snakeFeelings <= 20 && otaconFeelings >= -9
 	{
-		"\0\s[0]Huh. Thanks. I wasn't excpecting that. \1\s[17]%(username)! You know I'm trying to get him to quit! \0\s[5]Well, I have to get them from somewhere, don't I?\1\s[18]Ughh.\n\n\f[italic,true]This won't please both of them, but Snake seems very satisfied...\e"
+		"\0\s[0]Huh. Thanks. I wasn't excpecting that. \1\s[17]%(username)! You know I'm trying to get him to quit! \0\s[5]Well, I have to get them from somewhere, don't I?\1\s[31]Ughh.\n\n\f[italic,true]This won't please both of them, but Snake seems very satisfied...\e"
 	}
 	elseif snakeFeelings >= 20 && snakeFeelings <= 50
 	{
 		"Thank you, %(username), you know my favorite brand.\1\s[33]...\n\n\f[italic,true]This won't please both of them, but Snake seems very satisfied...\e"
 	}
-	else
+	elseif snakeFeelings >= 51 && otaconFeelings >= -19
 	{
-		"\0\s[5]Thanks!\1\s[31]\w8\w8\w8\w8\w8\0\s[4]\n\w8\w8\w8Sorry,\w4 Hal.\1\s[14]\w8\w8\w8I just worry about your health, Dave.\w8\w8 You're not invincible.\e"
+		"\0\s[5]Thanks, %(username)!\1\s[31]\w8\w8\w8\w8\w8\0\s[4]\n\w8\w8\w8Sorry,\w4 Hal.\1\s[14]\w8\w8\w8I just worry about your health, Dave.\w8\w8 You're not invincible.\e"
+	}
+	elseif snakeFeelings >= -20 && snakeFeelings <=20 && otaconFeelings <= -10
+	{
+		"\0\s[0]Huh. Thanks. I wasn't excpecting that. \1\s[17]%(username)! You know I'm trying to get him to quit! \0\s[5]Well, I have to get them from somewhere, don't I?\1\s[31]Ughh. You two are plotting against me.\n\n\f[italic,true]This won't please both of them, but Snake seems very satisfied...\e"
+	}
+	elseif snakeFeelings >= 51 && otaconFeelings <= -30 && snakeApologies == 0
+	{
+		"\0\s[5]Thanks, %(username)!\1\s[33].\w8\.\w8\.\w8I can't believe you, %(username).\1\s[14]\w8\w8 You too, Dave.\0\s[4]\n...Hal. I didn't mean for this to cause a rift between us-\1\s[31]\nWell, it has.\w8\w8\1\s[33]\w8\w8\w8 Look. I can't make you quit, David. I'm usually teasing you, anyway-\1\s[14] But you can stop standing with %(username). You know what %(heshes) done to me.\w8\w8\nYou can make that decision for yourself. I won't bug you about this anymore, Snake."
+		snakeFeelings -= 10
+		snakeApologies++ //I didn't want to create a new variable and so I'm using Snake apologies. It makes sense Otacon wouldn't say this if Snake had also been mistreated, and it will make Snake harsher to judge the player should they mistreat him in the future.
 	}
 	snakeFeelings += 5
 	otaconFeelings -= 3
@@ -177,28 +198,36 @@ Select.giveCigs
 //Giving Snake Rations. lol now i have a purpose for giving ketchup a variable.
 Select.giveRation
 {
+	"\0\s[8]\f[italic,true]You hand Snake an MCI ration.\n\n\f[italic,default]"
+	--
 	if snakeKetchups >= 1 && snakeKetchups <= 9
 	{
 		"\0\s[5]Hey, I can use that ketchup on this. Thanks.\e"
 		snakeKetchups--
-		snakeFeelings++
+		snakeFeelings += 2
 	}
-	elseif snakeKetchups >= 10
+	elseif snakeKetchups >= 10 //This is to prevent a user trying to exploit it by giving him a lot of ketchup, the extra friendship point won't count until the last ten. This still gives a modest 30 points, but it technically only saves 10 clicks, so its not that over powered or anything. Combined with the ketchup cap, i think its fine.
 	{
 		"Jeez, I finally have a use for all that ketchup you gave me.\e"
 		snakeKetchups--
 	}
 	else
 	{
-	"\0\s[8]Uh, thanks?\e"
+	"\0\s[8]Uh, thanks? \f[size,8]Do I even need to eat here..?\f[size,default]\e"
 	}
+	--
 	snakeFeelings++
 }
 
 //Giving Snake Ketchup.
 Select.giveKetch
 {
+	--
+	if snakeKetchups < 20
+	{
 	snakeKetchups++
+	}
+	--
 	"\0\s[8]\f[italic,true]You hand Snake a bottle of ketchup.\f[italic,default]\n\n"
 	--
 	if snakeKetchups == 1
@@ -226,7 +255,7 @@ Select.giveKetch
 	}
 	else
 	{
-		"\f[italic,true]You've somehow managed to give Snake negative ketchup. He hasn't seemed to have noticed, though. Can he even see negative amounts of ketchup? You can, probably, you code sleuth!"
+		"\f[italic,true]You've somehow managed to give Snake negative ketchup. He hasn't seemed to have noticed, though. Can he even see negative amounts of ketchup? *You* can, probably, you code sleuth! (or if you encounter this in normal play, er... thats a bug. report it for me?)"
 	}
 	--
 	"\e"
@@ -244,6 +273,63 @@ Select.sayApology
 	" \w8\w8Make sure your actions speak for your words.\n\n\f[italic,true]Snake has forgiven you. Partially.\f[italic,default]\e"
 	snakeFeelings = -30
 	snakeApologies++
+}
+//Asks Snake about the Shadow Moses Incident. Answer depends on feelings.
+Select.askShadowMosesIncident
+{
+	if snakeFeelings >= 50
+	{
+		"\0\s[9]I was assigned to infiltrate Shadow Moses Island during the Shadow Moses Incident. Otacon and I met on Shadow Moses.\0\s[4] My old unit, FOXHOUND, came under the command of Liquid Snake, another clone of Big Boss, and took over Shadow Moses. They also captured Metal Gear REX, Otacon's project.\0\s[0] I had to kill each of the elite members: Decoy Octopus, Psycho Mantis, Sniper Wolf, Vulcan Raven,\0\s[4] and... Liquid. The other member, Ocelot, escaped with his life. With the help of... an old friend, we managed to destroy REX.\0\s[0] It all came at a heavy price, but I don't regret it.\e"
+	}
+	elseif snakeFeelings >= 20 && snakeFeelings <= 30
+	{
+		"\0\s[4]The Shadow Moses Incident was the terrorist take-over of Shadow Moses Island by Liquid Snake.\f[size,8] We're related, in a way.\f[size,default]\0\s[0] He and the rest of the terrorist group, FOXHOUND, captured the base for the Metal Gear inside. Eventually, under the guidance on Colonel Campbell, my former commander, the government was successful in taking them down."
+	}
+	elseif snakeFeelings >= -29 && snakeFeelings <= 20
+	{	
+		"\0\s[8]Hmm...\n\n\f[italic,true]Snake huffs, and shifts his eyes side to side. It seems he won't talk about this right now.\f[italic,default]\e"
+	}
+	elseif snakeFeelings <= -30 && snakeFeelings >= -49
+	{
+		"\0\s[8]\f[italic,true]Snake glares at you. His hair prickles slightly. Oops.\f[italic,default]\e"
+	}
+	elseif snakeFeelings <= -50 && snakeFeelings >= -89
+	{
+		"\0\s[7]Why the hell would I tell someone like you?\1\s[13]\0\s[7]\n\n\f[italic,true]It's clear Snake didn't like that.\f[italic,default]\e"
+		snakeFeelings--
+	}
+	else
+	{
+		"\0\s[9]\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\0\s[0]\w8\w8\w8Fuck you.\e"
+		snakeFeelings -= 5
+	}
+}
+
+Select.askJaeger
+{
+	if snakeFeelings >= 35
+	{
+	"\0\s[8]Jaeger? Best damn soldier I ever knew. He and I were close. When he got captured during N312, I knew I had to do something. In my naivety, I thought Big Boss picked me for N313 for that very reason.\1\s[18]\w8\w8...You loved him. Frank.\0\s[4] I'd have done anything to save him.\e"
+	}
+	else
+	{
+		"\0\s[0]bullshitbullshitbullshit replace this diaglog"
+	}
+}
+Select.askBigBoss
+{
+	if snakeFeelings >= 30 
+	{
+	"\0\s[8]I thought Big Boss picked me for N313 for that very reason.\e"
+	}
+	elseif snakeFeelings >= 0 && snakeFeelings <= 29
+	{
+		"\0\s[0]bullshitbullshitbullshit replace this dialog i'm silently upset at you"
+	} 
+	else
+	{
+		"\0\s[0]whatever i hate you dad"
+	}
 }
 //If someone selects an option linked to BACKTOMENU, it will go back to MenuRun.
 //Advanced users, note that this is formatted as Select.linkedfunction? Remember how it went \q[Displayed Name,linkedfunction] above? When a user clicks an option that doesn't begin with On, they'll be linked to Select.linkedfunction. Pay close attention as we go through and you'll see this in action.
@@ -678,10 +764,14 @@ OpenKeroMenu
 	\![*]\q[Update,keroupdatecheck]\n/
  	\![*]\q[Bug report,bugreport]\n\n/
 	\![*]\q[FAQ,faq]\n/
-	\![*]\q[Ghost Tips,tips]\n\n/
+	\![*]\q[Ghost Tips,tips]\n/
+	\![*]\q[Interact,interactKERO]\n\n/
+	//Dev Testing options begin. I comment these out on release. usually.
 	\![*]\q[Test variable,testvariable]\n/
 	//When you are done with the test variable, aka your ghost is finished or you just don't want it showing up when you publish your ghost beta or whatevs, simply add two // slashes in front of \![*] to comment the line out. In Notepad++, it will turn green. When you want to use it again, erase the two slashes to turn it back to normal.
-	\![*]\q[Change variablesDEVTEST ONLY,changevariable]\n\n/
+	\![*]\q[View variablesDEVTEST ONLY,viewvariable]\n/
+	\![*]\q[Change variablesDEVTEST ONLY,changevariable]\n/
+	\![*]\q[Run SurfacesDEVTEST ONLY,testKEROsurfaces]\n\n/
 	\![*]\q[Nothing,keroCANCEL]\e"
 }
 
@@ -691,7 +781,7 @@ OpenKeroMenu
 //If you click cancel. Replace dialogue as you want.
 Select.keroCANCEL
 {
-	"\1\s[18]Nothing caught your eye? Alright!\e"
+	"\1\s[18]Nothing caught your eye?\e"
 }
 
 
@@ -709,27 +799,61 @@ Select.keroupdatecheck
 Select.faq //OKUAJUB: FAQ, unlocks more answers as you listen.
 { 
 	
-	"\1\s[10]Got a question for me? Shoot.\n/
-	\_a[whoSnake]Who's Snake?\_a\n/
-	\_a[whoHal]Who's Otacon?\_a\n/
-	%(checkMenuClicks)/
-	\e"
+	"\1\s[18]\b[2]Got a question for me? Shoot.\n/
+	\![*]\_a[whoSnake]Who's Snake?\_a\n/
+	\![*]\_a[whoHal]Who's Otacon?\_a\n"
+	--
+	//'Who" section
+	if clickMeiLing >= 1
+	{
+		"\![*]\_a[whoMeiLing]Who's Mei Ling?\_a\n"
+	}
+	--
+	if clickRaiden >= 1
+	{
+		"\![*]\_a[whoRaiden]Who's Raiden?\_a\n"
+	}
+	--
+	if otaconFeelings >= 70
+		"\![*]\_a[whoEmma]Who's Emma?\_a\n"
+	--
+	if otaconFeelings >= 80
+		"\![*]\_a[whoJulie]Who's Julie?\_a\n"
+	--
+	//'What' section
+	if clickShadowMoses >= 1 
+	{
+		"\![*]\_a[whoShadowMoses]What's Shadow Moses?\_a\n"
+	}
+	--
+	if clickRex >= 1
+	{
+		"\![*]\_a[whoRex]What's REX?\_a\n"
+	}
+	--
+	"\![*]\q[Nevermind,keroCANCEL]\x\e"
 }
 //OKUAJUB: one of Snake and Otacon's main features is to be beginner friendly. So, I thought I might add that option to view specific tips here.
 Select.tips
 {
 	
-	"\1\s[15]Oh! Yeah, you have anything specific you want to ask me about?\n"
+	"\1\s[15]\b2Oh, Yeah! Do you have anything specific you want to ask me about?\n"
 	--
 	"\f[italic,true]How do I...\f[italic,default]\n/
-	\_a[talkingTip]Speed up talking?\_a\n/
-	\_a[wallpaperTip]Set my wallpaper?\_a\n/
-	\_a[emailTip]Check my email?\_a\n/
-	\_a[trashTip]Empty the recycle bin?\_a\n/
-	\_a[rssTip]Use RSS Feeds?\_a\n/
-	\_a[specsTip]Find system information?\_a\n/
-	\_a[iconifyTip]Use Iconfiy?\_a\n/
-	\e"
+	\![*]\_a[talkingTip]Speed up talking?\_a\n/
+	\![*]\_a[wallpaperTip]Set my wallpaper?\_a\n/
+	\![*]\_a[emailTip]Check my email?\_a\n/
+	\![*]\_a[trashTip]Empty the recycle bin?\_a\n/
+	\![*]\_a[rssTip]Use RSS Feeds?\_a\n/
+	\![*]\_a[specsTip]Find system information?\_a\n/
+	\![*]\_a[iconifyTip]Use Iconfiy?\_a\n/
+	\![*]\_a[hitpetTip]Hit or Pet my ghost?\_a\n/
+	\![*]\q[Nevermind,keroCANCEL]\x\e"
+}
+
+Select.interactKERO
+{
+	"\1\s[10]There's nothing in here yet, but Okuajub will add something here soon. Maybe you'll be able to give me stuff or something? Maybe you can earn money in minigames? Who knows!\e"
 }
 //--Test Variable --------------------------------------------------------
 //I briefly mentioned the test variable in bootend.dic and possibly in etc.dic as well, I'm not sure. What exactly is the test variable? Basically, it's a place you can plug in anything you want to test out. While you can use Script Input to test most of your ghost's dialogue, there are some lines it just can't do, and it can't help you test choices. But the test variable can!
@@ -741,7 +865,16 @@ Select.tips
 Select.testvariable
 {
 //Enter your dialogue to test here.
+	"\1\s[18]Testing, attention please!\e"
+	
+}
+Select.testKEROsurfaces //I know Surfacetest exists but simply cycling through the surfaces like this is helpful for me. It helps me notice things I'd overlook in Surfacetest.
+{
+	"\1\s[10]\w8\w8\w8\s[11]\w8\w8\w8\s[12]\w8\w8\w8\s[13]\w8\w8\w8\s[14]\w8\w8\w8\s[15]\w8\w8\w8\s[16]\w8\w8\w8\s[17]\w8\w8\w8\s[18]\w8\w8\w8\s[19]\w8\w8\w8\s[30]\w8\w8\w8\s[31]\w8\w8\w8\s[32]\w8\w8\w8\s[33]\e"
+}
 
+Select.viewvariable
+{
 	"\1\s[18]clickShadowMoses = %(clickShadowMoses)\n/
 	clickShadowMosesIncident = %(clickShadowMosesIncident)\n/
 	clickMeiLing = %(clickMeiLing) \n/
@@ -752,34 +885,35 @@ Select.testvariable
 	snakeKetchups = %(snakeKetchups)\n/
 	snakeApologies = %(snakeApologies)\n/
 	\e"
-	
 }
 //--Changing Variables after First Boot-----------------------------------
 //OKUAJUB: This is a testing variable I've added so I can test variables without having to manually reset them using OnFirstBoot from bootend.dic - Accessed from Otacon's menu.
 Select.changevariable
 {
 
-	clickShadowMoses = 0 //OKUAJUB: Click counting variable for Shadow Moses.
-	clickShadowMosesIncident = 0 //OKUAJUB: Click counting variable for Shadow Moses *incident*.
-	clickMeiLing = 0 //OKUAJUB: Click counting variable for Mei Ling.
-	clickRaiden = 0 //OKUAJUB: Click counting variable for Raiden.
+	clickShadowMoses = 0 //OKUAJUB: Click counting variable for Shadow Moses
+	clickShadowMosesIncident = 0 //OKUAJUB: Click counting variable for Shadow Moses *incident*
+	clickMeiLing = 0 //OKUAJUB: Click counting variable for Mei Ling
+	clickRaiden = 0 //OKUAJUB: Click counting variable for Raiden
+	clickJaeger = 0 //OKUAJUB: Click counting variable for Frank Jaeger
+	clickBigBoss = 0 //OKUAJUBL Click counting variable for Big Boss
 	clickRex = 0 //OKUAJUB: Click counting variable for Rex.
-	snakeFeelings = 0 //OKUAJUB: Snake's feelings. its a bit harder to befriend Snake.
-	otaconFeelings = 0 //OKUAJUB: Otacon's feelings. Neutral at first.
+	snakeFeelings = 100 //OKUAJUB: Snake's feelings. its a bit harder to befriend Snake.
+	otaconFeelings = 100 //OKUAJUB: Otacon's feelings. Neutral at first.
 	snakeKetchups = 0 //OKUAJUB: Count of how many ketchup bottles you have given Snake.
-	snakeApologies = 0 //how many times you have apologized to Snake.
+	snakeApologies = 0 //OKUAJUB: How many times you have apologized to Snake.
 	
 	"\1\s[10]Variables changed. Good luck testing, Okuajub! (Or are you %(username)..?)\n/
 	clickShadowMoses = %(clickShadowMoses)\n/
 	clickShadowMosesIncident = %(clickShadowMosesIncident)\n/
 	clickMeiLing = %(clickMeiLing) \n/
 	clickRaiden = %(clickRaiden)\n/
+	clickJaeger = %(clickJaeger)\n/
+	clickBigBoss = %(clickBigBoss)\n/
 	clickRex = %(clickRex)\n/
 	snakeFeelings = %(snakeFeelings)\n/
 	otaconFeelings = %(otaconFeelings)\n/
 	snakeKetchups = %(snakeKetchups)\n/
 	snakeApologies = %(snakeApologies)\n/
 	\e"
-	
-
 }

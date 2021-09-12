@@ -1,0 +1,22 @@
+V 1.1.1
+(9/xx/21)
+- Added Friendship System
+- Added Snake Interact Menu
+- Added Otacon Interact Menu
+- Added New Dialogue Options
+- Added New aitalk Dialogue
+- Improved Menus
+- Improved Snake surface1507 (Angry)
+- Patched minor typos, word choices, and errors.
+- Changed aitalk, certain dialogues now have prerequisites that must be met.
+- For you devs: Finally got around to renaming their files with a prefix- .dic files like aitalk will now start with Sn_ , no more confusion!
+
+V 1.0.1
+(8/30/21)
+-Minor bug and Typo Fixes
+-New Dialogue
+-FAQ and Usage Tips menu added to Otacon
+
+V 1.0.0
+(5/20/21)
+-Initial release. Woohoo!

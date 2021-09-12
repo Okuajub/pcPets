@@ -57,33 +57,33 @@ RandomTalk : nonoverlap
 	
 	"\0\s[0]Hmm.\e"
 	
-	"\0\s[0]...\e"
-	
-	"\0\s[0]Hmph.\e"
-	
-	"\0\s[8]...\n\n\f[italic,true]Snake doesn't seem very talkative.\f[italic,default]\e"
-	
 	"\1\s[10]You know, you should really take a break from the computer every once and a while, %(username).\e"
 	
 	"\0\s[0]Don't forget to take a break from screens, %(username). Every good soldier needs to get up and stretch his legs.\e"
 	
-	"\0\s[0]Otacon, what are you thinking about?\w8\1\s[10]Oh, the usual stuff. What leads we have on the next Metal Gear, new worms to code, Kuromi...\e"
+	"\1\s[16]Hey, Snake, do you remember the time when we threw snowballs at eachother during that mission in New York?\0\s[6]Yeah. That was a good one."
 	
-	"\1\s[10]How's it going, Snake?\w8\0\s[0]I could use a smoke.\1\s[17] Hey! You know that's bad for your lungs.\0\s[5]\e"
+	"\1\s[16]Mhm..\0\s[8]Something on your mind, Otacon?\1\s[16] Yeah. Just remembering a good Saturday night. The time we couldn't find a sub or dub and you translated for us.\0\s[5]I remember."
 	
-	"\1\s[14]Snake..? Can I ask you about what happened between you and Big Boss?\w8\w8\w8\w8\0\s[9]...Not here. Not now.\1\s[32] Alright, I understand.\e" //Once I include the friendship system, I'm going to have it so Snake will answer this question once the user's friendship is high enough.
+	"\1\s[14]...I'm really glad you're here, Dave.\0\s[8]Where's this coming from?\1\s[14]Just.. remembering something."
 	
-	"\1\s[14]Snake,\w8 what was Frank like?\0\s[8]Jaeger? Best damn soldier I ever knew. He and I were close. When he got captured during N312, I knew I had to do something. In my naivety, I thought Big Boss picked me for N313 for that very reason.\1\s[18]\w8\w8...You loved him. Frank.\0\s[4] I'd have done anything to save him.\e" //Snake doesn't mind bragging on Gray Fox in front of the player.
+	"\1\s[16]Hah.\0\s[8]Hm?\1\s[16] Just thinking about that time our meetup point was in gay bar. That was different.\0\s[5] I guess that one was different, huh?"
 	
-	"\0\s[9]Otacon,\w5 what was Emma like?\1\s[14]Oh, um...\w8 Let me think for a second...\w8\w8\w8 Well, when we were young, we used to play a lot of games together. House, Monopoly, you know.\w8\1\s[32] She always wanted to be doing what I was doing, too, so we watched a lot of anime.\w8\1\s[16] Hahahh... I loved to show her the newest episodes of Hello Kitty, my otaku pals online were pretty nice about finding episodes for her.\w8\w8 \n\n[half]She also loved to sit in my lap and listen to my heart beat. She'd shove and wiggle her way into my lap in any way she could when she wanted to do that.\w8\w8 I have a hunch she'd ask me for piggy back rides just to do the same thing, because she would grow real quiet and calm...\0\s[5] Sounds like a good kid.\1\s[14] \nShe...\w8 was.\w8\w8\0\s[4]\n\w8.\w8.\w8.\w8I understand.\e"
+	"\1\s[18]Hey, Snake. Which one was it where I had to put your arm back in its socket?\0\s[8]Hm... I think that one was in Detroit. Why?\1\s[14] I don't know. Wanted to feel a little queasy I guess."
+	
+	"\0\s[0]You been practicing your stitches, Otacon?\1\s[13]Uh.. yeah. Why..?\0\s[8]I'm thinking about this next lead."
+
+	"\0\s[0]Otacon, what are you thinking about?\w8\1\s[32]Oh, the usual stuff. What leads we have on the next Metal Gear, new worms to code... \n\nKuromi...\e"
+	
+	"\1\s[10]How's it going, Snake?\w8\0\s[0]I could use a smoke.\1\s[18] Hey! You know that's bad for your lungs.\0\s[5]\e"
+	
+	"\1\s[10]How's it going, Snake?\0\s[0]Hmm...Feels like I've been in one place too long.\e"
 	
 	"\0\s[0]Otacon, what's our next move?\1\s[10]Well, we have a lot of options, Snake. Not a lot is pressing us. I think we could hang around here for awhile longer?\0\s[8] Hmm... Got it.\e"
 	
-	"\0\s[0]What's next, Otacon?\1\s[10] It's really up to you, Snake. We have enough leads to go after a couple Metal Gears, but we also have little enough to relax for a while.\0\s[5] I think I like the idea of being with you for a little while longer.\1\s[30] M-Me too."
+	"\0\s[0]What's next, Otacon?\1\s[10] It's really up to you, Snake. We have enough leads to go after a couple Metal Gears, but we also have little enough to relax here for a while.\0\s[5] I think I like the idea of being with you for a little while longer.\1\s[30] M-Me too."
 	
-	"\1\s[10]Snake... Can I ask you a question?\0\s[0]You just did.\1\s[17] You know what I mean!-\0\s[0]\n\nYes.\w8\1\s[10]Huh? Oh, um...\w8\n\n[half]Do you think love can bloom, even on the battlefield?\0\s[5]\n\n\Yeah, I do. I believe at any time, any place, people can fall in love with each other.\n\nBut...\w3 if you love someone, you have to be able to protect them.\1\s[30]\n\n[half] I think so, too. I'll do my best, Snake.\e" 
-	
-	"\0\s[0]Otacon, have you heard anything from Raiden, recently?\1\s[18]Sorry, Snake, nothing... I get worried about him, it's been a while since we heard something. I hope he and Rosemary are doing alright.\e"
+	"\0\s[0]Otacon, have you heard anything from Raiden, recently?\1\s[18]Sorry, Snake, nothing... I get worried about him, it's been a while since we heard something. I hope he and Rose are doing alright.\e"
 	
 	//OKUAJUB: Okay, this one's fun. sorry for all the waits but I wanted to make it seem like he really went somewhere.
 	
@@ -135,12 +135,14 @@ RandomTalk : nonoverlap
 	}
 	
 	//\0\s[0]\_b[img\codecmoments.png,inline] Commented out, coding for future Codec Moments. makes it easier to reproduce quickly.
-	//If you'd like to add your own Codec Moment, Save an image as codecmoment[whatever your image name would be], place it in the img folder in Ghost/Master, copy the coding in the line above and paste it, and replace the codecoment.png with codecmoment[whatever your image name would be].png and you should be good to go!
+	//If you'd like to add your own Codec Moment, Save an image as codecmoment[whatever your image name would be].png, place it in the img folder in Ghost/Master, copy the coding in the line above and paste it, and replace the codecoment.png with codecmoment[whatever your image name would be].png and you should be good to go!
 	
-	//Otacon will tell the user tips about working with a Ukagaka. Short-cuts, small features, etc! These will be here in every version until commented out, nice and hand-holdy like MGS4 Otacon. "Do you have a gun that can take out those Gekko, Snake?"
+	//Otacon will tell the user tips about working with a Ukagaka. Short-cuts, small features, etc! These will be here in every version until commented out, or when I convert to YAYA, a flag is flipped. nice and hand-holdy like MGS4 Otacon. "Do you have a gun that can take out those Gekko, Snake?"
 	{
 	"\1\s[18]Hey, %(username),"
 	--
+	" did you know that you can view plenty of usage tips in my menu? Try double clicking my body to open my menu, and then select 'Usage Tips'!\e"
+	
 	" did you know that, by default, CTRL will speed up how fast we talk? You can skip to the end of almost anything we say!\n\n[half]\w8\w8It's a weird feeling.\e"
 	
 	" did you know that I can set your wallpaper if you drag and drop an image file onto us? It's pretty easy! You should try it when you want to change things up a little around here.\e"
@@ -177,22 +179,52 @@ RandomTalk : nonoverlap
 	
 	"\1\s[30]I miss being close to you, Dave, this avatar doesn't do you justice...\0\s[6]\e"
 	}
-	//OKUAJUB: Increases the chances of a user who has not clicked Mei Ling's anchor encountering a phrase with her anchor. This is becaues Mei Ling's FAQ can only be accessed by random talk and I don't want it to be too slim.
-	if clickMeiLing == 0
-	{
-		"\1\s[10]I wonder how \_a[whoMeiLing]Mei Ling\_a is doing...\e"
-	}
 	//You can also put in multiple ifs checking for the same thing to vary the responses. In this case, it's checking to see if they're wearing another shell. You don't need to use elseifs for this! Just an if is fine.
-	if nowshell == "Octopus"
+	if nowshell == "Snake and Otacon - Solid Shell"
 	{
 	"\0\s[0]Feels nice to have you here, Otacon.\w8\1\s[30]I feel the same way.\e"
 	
 	"\1\s[16]I like seeing you in person, reminds me of the early days of Philanthropy, off the grid in Alaska, just figuring out how to live...\w8\0\s[5]It's been a long time, since then, huh?\e"
 	}
+	//OKUAJUB: Increases the chances of a user who has not clicked Mei Ling's anchor encountering a phrase with her anchor. This is becaues Mei Ling's FAQ can only be accessed by random talk and I don't want it to be too slim, unlike Gray Fox's, which is supposed to be a bit hidden.
+	if clickMeiLing == 0
+	{
+		"\1\s[10]I wonder how \_a[whoMeiLing]Mei Ling\_a is doing...\e"
+	}
+	//OKUAJUB: Snake feelings 20+ only dialogue
+	if snakeFeelings >= 20 
+	{
+	"\1\s[14]Snake,\w8 what was Frank like?\0\s[8]\_a[whoJaeger]Jaeger?\_a Best damn soldier I ever knew. He and I were close. We ran a few wargame campaigns on our off time. Would have been ironic if we'd been playing BattleDroids.\1\s[18] Huh! I never thought you'd be a TTRPG type. You're a mystery.\e" //Okay, maybe Snake and Gray Fox didn't really play wargames canonically. but I like him being a secret nerd, even if its an older generation of nerd...
+	}
+	if snakeFeelings <= -1
+	{
+	"\0\s[0]...\e"
+	
+	"\0\s[0]Hmph.\e"
+	
+	"\0\s[8]...\n\n\f[italic,true]Snake doesn't seem very talkative.\f[italic,default]\e"
+	
+	"\1\s[14]Snake..? Can I ask you about what happened between you and Big Boss?\w8\w8\w8\w8\0\s[9]...Not here. Not now.\1\s[32] Alright, I understand.\e"
+	}
+	//OKUAJUB: Otacon feelings 20+ only dialogue
+	if otaconFeelings >= 20
+	{
+		"\1\s[10]Hey, %(username), I know you've been working hard lately. I hope it goes well!\e"
+		
+		"\1\s[30]Thanks for treating me so nicely, %(username).\w8\1\s[15] Hey, maybe I can show you my Gundam collection some time?\e"
+		
+		"\1\s[10]Hey, what kind of music to you listen to, %(username)? I like Vocaloid music, Rin is actually my favorite voice bank! I like Miku, too, but I think Rin needs a little more appreciation.\e"
+		
+		"\0\s[9]Otacon,\w5 what was Emma like?\1\s[14]Oh, um...\w8 Let me think for a second...\w8\w8\w8 Well, when we were young, we used to play a lot of games together. House, Monopoly, you know.\w8\1\s[32] She always wanted to be doing what I was doing, too, so we watched a lot of anime.\w8\1\s[16] Hahahh... I loved to show her the newest episodes of Hello Kitty, my otaku pals online were pretty nice about finding episodes for her.\w8\w8 \n\n[half]She also loved to sit in my lap and listen to my heart beat. She'd shove and wiggle her way into my lap in any way she could when she wanted to do that.\w8\w8 I have a hunch she'd ask me for piggy back rides just to do the same thing, because she would grow real quiet and calm...\0\s[5] Sounds like a good kid.\1\s[14] \nShe...\w8 was.\w8\w8\0\s[4]\n\w8.\w8.\w8.\w8I understand.\e"
+		
+		"\1\s[10]Snake... Can I ask you a question?\0\s[0]You just did.\1\s[17] You know what I mean!-\0\s[0]\n\nYes.\w8\1\s[10]Huh? Oh, um...\w8\n\n[half]Do you think love can bloom, even on the battlefield?\0\s[5]\n\n\Yeah, I do. I believe at any time, any place, people can fall in love with each other.\n\nBut...\w3 if you love someone, you have to be able to protect them.\1\s[30]\n\n[half] I think so, too. I'll do my best, Snake.\e"
+		
+		"\1\s[10]Don't forget to take care of yourself, %(username)."
+	}
 	//This starts some checks for which month it is. Depending on which, it'll have a chance to draw some random dialogue. Remember, these don't just get added to the dialogue pool, each 'if' acts like one line of random dialogue.
 	if month >= 12
 	{
-		"\0\s[0]It's December, Otacon. You have any plans?\w8\1\s[18]Not really... I guess I'll be spending the holiday season with you?\0\s[0]I've got no god's birthday to celebrate, I'd prefer the time with you.\e"
+		"\0\s[0]It's December, Otacon. You have any plans?\w8\1\s[18]Not really... I guess I'll be spending the holiday season with you?\0\s[0]I've got no god's birthday, I'd prefer the time with you.\e"
 		
 		"\1\s[0]Brrr! Aren't you cold, Snake? It's freezing out!\w8\0\s[5]The sneaking suit has poly-thermal technology, I could and did survive a blizzard.\1\s[3] Well, jeez, now I'm kind of jealous.\e"
 		
@@ -202,6 +234,7 @@ RandomTalk : nonoverlap
 	//So you can use these to check for any number of situations. I think this feature is really neat, so I'm going to set up some quick default responses for the months, days, and time of day. If you don't want to do these, you can just delete this whole set of ifs down to the //--Double Envelopes section below.
 	//You can also nest ifs within these, so you could check if it was the 25 of April in the morning for example. You can also add or take away dialogue from these as you like, so if you want to have five dialogue options for April or one for January, you can totally do that.
 	//OKAUJUB: Otacon bitches a lot about the weather, the code chunk.
+	//FUTURE OKUAJUB: I forgot I added that comment, oh my god, haha
 	
 	if month == 1
 	{
@@ -229,7 +262,7 @@ RandomTalk : nonoverlap
 		
 		"\0\s[0]Have you heard anything from Raiden, recently, Otacon? I'd think he'd be taking it hard this month.\w8\1\s[14]I've not heard anything from him for a while, sorry...\0\s[8]\e"
 		
-		"\1\s[18]Snake, have you thought of going to updog this year?\w8\0\s[8]What's updog?\w8\w8\w8\w8\w8\0\s[1]\n\n....\n\nIt's always April 1st for you, isn't it?\1\s[15] Hahahaha! The look on your face. That was great.\e"
+		"\1\s[18]Snake, have you thought of going to updog this year?\w8\0\s[8]What's updog?\w8\w8\w8\w8\w8%(laugh)\0\s[1]\n\n....\n\nIt's always April 1st for you, isn't it?\1\s[15] Hahahaha! The look on your face. That was great.\e"
 	}
 	if month == 5
 	{
@@ -257,7 +290,7 @@ RandomTalk : nonoverlap
 		
 		"\0\s[0]Otacon, have you gotten any new leads on Metal Gears lately?\w8\1\s[10]Yeah, actually. There's one I'd bet on pretty handily.\0\s[8] Who is it from?\1\s[30] Err...\w8\w8 I hacked it out of the Pentagon myself, and I think it's our next stop.\0\s[9]\w8 Really.\w8\0\s[0] Alright then. Good to know.\e"
 		
-		"\1\s[14]\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\0\s[4]...You're thinking about her, aren't you? Emma.\w8\w8\w8\w8\w8\1\s[14]Yeah... Can we talk about something else, please?\0\s[0] Otacon-\1\s[14] Please, Dave.\e"
+		"\1\s[14]\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\0\s[4]...You're thinking about her, aren't you? Emma.\w8\w8\w8\w8\w8\1\s[14]Yeah... Can we talk about something else, please?\0\s[0] Otacon-\1\s[14] Please, Dave.\0\s[4]\e"
 		
 		"\1\s[14]\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\ It's my dad's birthday this month.\0\s[4]...\w8\w8\w8\w8\w8\1\s[14]\nYeah...\w8\0\s[4]It wasn't your fault, you know.\w8\w8\w8\w8\1\s[14]\nMaybe.\e"
 	}
@@ -369,7 +402,7 @@ RandomTalk : nonoverlap
 	}
 	if timeslot == "midnight"
 	{
-		"\1\s[10]Aren't you ever tired, Snake?\w8\0\s[0]No.\1\s[19] You've \w4got\w4 to be kidding.\0\s[10] I do get tired, Otacon. Did you seriously think I don't?\1\s[17]N-No! You're a super soldier, what am I supposed to expect?\1\s[19]\0\s[10] Master Miller trained me to always be alert. That's why it seems like I don't get tired.\1\s[19] Lucky you.\e"
+		"\1\s[10]Aren't you ever tired, Snake?\w8\0\s[0]No.\1\s[19] You've \w4got\w4 to be kidding.\0\s[18] I do get tired, Otacon. Did you seriously think I don't?\1\s[17]N-No! You're a super soldier, what am I supposed to expect?\1\s[30]\0\s[10] Master Miller trained me to always be alert. That's why it seems like I don't get tired.\1\s[19] Lucky you.\e"
 		
 		"\0\s[0]Your time of night, huh, Otacon?\w8\1\s[10]Yep, this is my favorite time to gather intel, or just anything, really. Probably the otaku in me.\e"
 	}
@@ -378,16 +411,15 @@ RandomTalk : nonoverlap
 	//If you've poked around menu.dic or string.dic or read the walkthrough, you may have seen me touch on setting multiple options for any one given bit of dialogue. This kind of dialogue follows much the same format.
 	
 	{ //Again, note the brackets around these unique bits of dialogue. Dialogue that's more complicated than just a single line of "dialogue/more dialogue/more dialogue/end" usually needs to be put in brackets like this. 
-	
-	"\0\s[0]Otacon, what anime are we going to watch next?\w8\1\s[10]"
-	//Notice that the last few tags set up Triangle's pose before going into his text below. You don't have to do this if you want each response to have its own pose, but if he'll have the same expression regardless of what he's saying, you might as well save yourself the work. Note this does not end with \e either, since the dialogue isn't done yet.
+	"\0\s[0]Otacon, what anime are we going to watch next?\w8"
+	//Note this does not end with \e either, since the dialogue isn't done yet.
 	-- //You've probably seen these double dashes before in other .dic files. In this case, these dashes enclose a set of multiple responses. More on double dashes in the coding page on the walkthrough site.
-	"Sailor Moon! It's a classic, every anime fan should see it at least once. Or twice.\n...Or maybe a couple times more than that."
-	"Mobile Suit Gundam. Despite our... challenges with large robots, it's still one of my favorites. It came out almost the same year I was born, you know! Anyway..."
-	"Cowboy Bebop, despite the strange name, the way it protrays life is incredible."
-	"Polar Bear Cafe! It's so cute, Snake. The wolf wants to be a baker..!"
-	"Blue Exorcist. Now this one is exciting, it's a bit more action focused than my usual picks."
-	"Evangelion! I know we've dealt with enough robots piloted by kids, but... er, it's still really good."
+	"\1\s[15]Sailor Moon! It's a classic, every anime fan should see it at least once. Or twice.\n...Or maybe a couple times more than that."
+	"\1\s[15]Mobile Suit Gundam. Despite our... challenges with large robots, it's still one of my favorites. It came out almost the same year I was born, you know! Anyway..."
+	"\1\s[15]Cowboy Bebop, despite the strange name, the way it protrays life is incredible."
+	"\1\s[15]Polar Bear Cafe! It's so cute, Snake. The wolf wants to be a baker..!"
+	"\1\s[18]Blue Exorcist. Now this one is exciting, it's a bit more action focused than my usual picks."
+	"\1\s[18]Evangelion! I know we've dealt with enough robots piloted by kids, but... er, it's still really good."
 	//As you can see here, there are six potential replies Triangle might have to Snakel's question. Each time this dialogue is called, he will randomly select one response from these six.
 	-- //The closing set of dashes for his dialogue options.
 	"\w8\0\s[0]\n\n[half]" //Now we're going back to Snake to set up for his multiple responses in return. This line of tags mostly just sets up for what he will say. Like above, you can see his pose is set in here with \s[0], so he'll have the same pose for each response, and the consistent spacing with \n\n[half].
@@ -516,7 +548,7 @@ OnSecondChange
  		"\0\s[0]Hal, I don't mind being close, but %(username) can't see both of us well.\w8\1\s[19]Huh, isn't your resolution %screenwidthx%screenheight, %(username)? We should have enough room... I'll move over.\1\s[18]\4\e"
 		
 		//You can see here the use of two envelopes, screenwidth and screenheight, to tell the user their resolution. Oddly, they are not in parentheses. I'm not sure why this is, but they don't display right otherwise. An odd quirk with these two envelopes.
-		//Note also how Triangle moves away at the end of the dialogue. This is due to the \4 tag. That will make any one character move away from the other if they are able. I talked about this tag and its counterpart tag \5 in the SakuraScript page on the walkthrough.
+		//Note also how Otacon moves away at the end of the dialogue. This is due to the \4 tag. That will make any one character move away from the other if they are able. I talked about this tag and its counterpart tag \5 in the SakuraScript page on the walkthrough.
 	}
  }
 
