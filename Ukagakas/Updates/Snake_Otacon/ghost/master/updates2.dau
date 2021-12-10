@@ -1,4 +1,4 @@
-changelog.txt207e0e33c2b6d27d6d7c03313aa056eesize=1845date=2021-12-08T21:24:20charset=OSNative
+changelog.txtd49a306e4be9a0c583437d02144edc9csize=1845date=2021-12-10T14:58:31charset=OSNative
 ghost/master/Oticon.ico3a722e42c7c69538122eb7f4659ac466size=1406date=2006-03-30T17:10:32
 ghost/master/Sn_aitalk.dic85e2de1ac36f4c0bd50e615419aa8d96size=53743date=2021-12-08T21:56:26
 ghost/master/Sn_anchor.dic22367b5a3a6aeb4c5bc3687913e9b2fesize=14172date=2021-12-03T20:34:47
@@ -26,7 +26,63 @@ ghost/master/img/wednesdayasuka.jpgc071632af8ffdfefc84fdaa3f1e70819size=11946
 ghost/master/mciaudior.dllb1082bccd2aac2017f7936baf2d967b3size=29696date=2003-03-13T13:23:26
 ghost/master/saori_cpuid.dlld13370aee8e579fe2517d789dba7c45esize=225280date=2004-04-17T16:47:18
 install.txt174b43fd14bdac1894ef4039b11c6b20size=929date=2021-09-12T09:17:06
-readme.txta4d760144bc8ab4fb41d9fb7a55819c4size=2931date=2021-09-22T13:11:30
+readme.txta4d760144bc8ab4fb41d9fb7a55819c4size=2931date=2021-12-10T14:58:09
+shell/Solid Shell/Okuajubreadme.txt6f1db8a5f563f916fb92aff457dee083size=2339date=2021-09-07T19:29:15
+shell/Solid Shell/descript.txt9391e056ca3a79e23905c4f21d6c13b1size=5502date=2021-09-11T19:45:40
+shell/Solid Shell/menu_background.pngb879f0fb6881e4f17e015d14ff71415csize=863date=2021-05-03T18:41:20
+shell/Solid Shell/menu_foreground.pngb8e1717cccc0ef6544bd5655af2b6c35size=864date=2021-05-03T18:41:25
+shell/Solid Shell/menu_sidebar.pngcb1aa144a2b17b5a5556ddd46d2ba533size=225date=2021-05-03T18:41:56
+shell/Solid Shell/read me.txt6856fd1ab7cfd307653af0e350898708size=2064date=2020-11-07T00:22:18
+shell/Solid Shell/surface0.png18d2a862c364e09cdb6378b9b1387abbsize=34333date=2021-05-03T12:29:47
+shell/Solid Shell/surface10.pngfe69c031cda606065e9038bb4ce344c6size=34880date=2021-09-09T17:56:06
+shell/Solid Shell/surface1001.pnga9ae6e6edbf5f6605a06e9d77e4de652size=2254date=2021-05-02T16:22:14
+shell/Solid Shell/surface1002.png5edd03bd9603d56fa74ef7d736e3dbedsize=1968date=2021-05-02T16:22:37
+shell/Solid Shell/surface1101.png372e09a88f8ef31b869ae39da63ec77dsize=704date=2021-05-02T16:46:39
+shell/Solid Shell/surface1102.pngf09415c90f7d38cdfc9d1e65be8c9151size=794date=2021-05-02T16:46:59
+shell/Solid Shell/surface1501.png176f3560ecf5ad73af44a78c5014373csize=36457date=2021-05-03T13:04:59
+shell/Solid Shell/surface1502.pngbd31da08ecfce33bfd6d65cd75fff000size=40619date=2021-05-05T12:15:29
+shell/Solid Shell/surface1503.png5f2d283092a7a3af0a6c113164372758size=41235date=2021-05-03T13:55:57
+shell/Solid Shell/surface1504.png558c0db46f2279d6a2a73653c97c80d7size=34389date=2021-05-05T13:46:45
+shell/Solid Shell/surface1505.pngde0ba854b0d2e2734a1e5c0982e0ee29size=35747date=2021-05-04T12:57:54
+shell/Solid Shell/surface1506.png07a7a392d7630cbbc369433febb52995size=36150date=2021-05-05T14:34:33
+shell/Solid Shell/surface1507.png978cb98d24815c8df8880eba9ea97c08size=40922date=2021-09-06T11:34:14
+shell/Solid Shell/surface1508.png4086fb4502ab54303aa2a909a2330cedsize=35739date=2021-05-05T14:43:12
+shell/Solid Shell/surface1509.pngd93c245833dbeaec5d2916e4ac9cd494size=35739date=2021-05-05T14:38:58
+shell/Solid Shell/surface1510.pngb26773eb669ea5191bbeaa093b65e7b5size=29430date=2021-05-05T14:58:27
+shell/Solid Shell/surface1511.pngdf5225a58e5bae5ee91d7dc3e0614b44size=18995date=2021-05-05T14:59:14
+shell/Solid Shell/surface1512.png50086e5267e18fb21d40da7b7b91f666size=7847date=2021-05-05T14:59:41
+shell/Solid Shell/surface1513.png679756013aa68b4df40753419f5789fbsize=442date=2021-05-05T14:59:59
+shell/Solid Shell/surface1514.png679756013aa68b4df40753419f5789fbsize=442date=2021-05-05T15:00:10
+shell/Solid Shell/surface1515.png679756013aa68b4df40753419f5789fbsize=442date=2021-05-05T15:00:17
+shell/Solid Shell/surface1516.png679756013aa68b4df40753419f5789fbsize=442date=2021-05-05T15:00:24
+shell/Solid Shell/surface1517.png679756013aa68b4df40753419f5789fbsize=442date=2021-05-05T15:00:34
+shell/Solid Shell/surface1518.png679756013aa68b4df40753419f5789fbsize=442date=2021-05-05T15:00:42
+shell/Solid Shell/surface1519.png679756013aa68b4df40753419f5789fbsize=442date=2021-05-05T15:00:50
+shell/Solid Shell/surface2001.png030b64710e06a42d79a9f7b3985bc24dsize=1964date=2021-09-07T19:54:11
+shell/Solid Shell/surface2002.png75dc63c56645642ec78ef43cfe7f0ef2size=1861date=2021-09-07T19:54:44
+shell/Solid Shell/surface2101.pngad707819807ef5b287dcddd95ba78016size=676date=2021-09-09T17:33:45
+shell/Solid Shell/surface2102.png9665a42c412155bda0539ecfa8d3dc8csize=533date=2021-09-09T22:25:12
+shell/Solid Shell/surface2501.png043525e93b20dbbd4f767502457d32a5size=35493date=2021-12-02T14:53:33
+shell/Solid Shell/surface2502.png9cf6e17ac8207b98062e97398bd30977size=34950date=2021-12-02T14:54:10
+shell/Solid Shell/surface2503.png804ec45caf017d94d2dffe37f0cd5ec4size=35026date=2021-12-02T14:54:48
+shell/Solid Shell/surface2504.png8a2546107ddd68020daf43116738918esize=28280date=2021-09-09T23:18:00
+shell/Solid Shell/surface2505.png3b257e2bad5b3fc81706eef7765df5c4size=34880date=2021-12-02T14:55:28
+shell/Solid Shell/surface2506.png757f06cb7d32065bc80e84863ef58e76size=35904date=2021-12-02T14:57:27
+shell/Solid Shell/surface2507.png1a5992c0d615f5d953b0883d657b6758size=35731date=2021-12-02T14:58:12
+shell/Solid Shell/surface2508.pngcf097df9b4624ea59cf3a5bc00464a8asize=36195date=2021-09-11T11:42:42
+shell/Solid Shell/surface2509.pnged622769b3782fb85ceb0c217e58c571size=35726date=2021-12-02T14:57:01
+shell/Solid Shell/surface2510.pngc2ef863cf66d6cc2d14952ccc0436bcbsize=35024date=2021-09-09T18:26:48
+shell/Solid Shell/surface2511.png6fe3645b3fc9f6babae21a68e54d921bsize=28334date=2021-09-09T23:18:00
+shell/Solid Shell/surface2512.png03912747e9ee7840f59a86e84895f249size=28252date=2021-09-09T23:18:00
+shell/Solid Shell/surface2513.pngc2afc6170a914d07dd5a4f0f9433d63asize=28254date=2021-09-09T23:18:00
+shell/Solid Shell/surface2514.png4d75fe3cee03b8dcc34b1fc671ab2adfsize=1496date=2021-05-09T17:54:32
+shell/Solid Shell/surface2515.png7a861f8b73ecb59f5c5d68ea70e07ccdsize=1555date=2021-05-09T17:54:57
+shell/Solid Shell/surface2516.png80911c25e33d02549249100af3c64fe3size=1559date=2021-05-09T17:55:21
+shell/Solid Shell/surface2517.pngb1450f00129107fd8ed8cc7e296af07fsize=36156date=2021-12-02T14:58:38
+shell/Solid Shell/surface4010.png9ffcebe4c28ef2cf228e671ca65d2130size=5477date=2021-09-11T19:39:11
+shell/Solid Shell/surfaces.txtd423bab404b5d3d197e41a5908ca8bbcsize=40816date=2021-09-11T20:05:15
+shell/Solid Shell/surfacetable.txt023705100a456f9e49c2c8dbd7424d1fsize=589date=2021-05-04T20:16:15
+shell/Solid Shell/thumbnail.png4913e6d0fa01bfc81bbe33fde6b67f43size=27543date=2021-09-07T19:02:58
 shell/master/Okuajubreadme.txtdc197ae9484f615b5fa1283afc3d0391size=2558date=2021-08-29T11:31:33
 shell/master/descript.txt4d1fb3a3cea73c994eab34b45ab0b2c8size=5501date=2021-05-18T15:43:54
 shell/master/menu_background.pngb879f0fb6881e4f17e015d14ff71415csize=863date=2021-05-03T18:41:20
