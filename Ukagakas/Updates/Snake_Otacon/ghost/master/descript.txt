@@ -23,7 +23,7 @@ kero.name,Otacon
 
 craftman,Okuajub
 craftmanw,Okuajub
-craftmanurl,https://www.deviantart.com/tiefking
+craftmanurl,https://okuajub.github.io/pcPets/
 
 
 //This is coding stuff, don't touch it.

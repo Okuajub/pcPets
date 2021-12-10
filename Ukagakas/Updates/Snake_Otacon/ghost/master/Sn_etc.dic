@@ -63,7 +63,7 @@ Select.SetWallpaper_Cancel
  
 OnInstallBegin
  {
-	"\0\s[0]Installing something new, huh?\w8\1\s[10]This .zip or .nar contains an install.txt file, I'll get it set up!.\e"
+	"\0\s[0]Installing something new, huh?\w8\1\s[10]This .zip or .nar contains an install.txt file, I'll get it set up!\e"
  }
 
  //---- OnInstallComplete -------------------------------------------------------

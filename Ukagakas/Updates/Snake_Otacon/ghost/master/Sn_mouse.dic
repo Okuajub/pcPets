@@ -81,7 +81,8 @@ MouseMoveSakura
  				"\0\s[8]Stop that.\w8\w8\w8\w8\w8\w8\w8\e"
  				"\0\s[8]Knock it off. That's not for you to touch.\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\e"
 				snakeFeelings--
-				} elseif snakeFeelings >= -49
+				} 
+				elseif snakeFeelings >= -49
 				{
 				"\0\s[8]Get your mouse out of my face.\e"
  				"\0\s[8]Stop that.\e"
@@ -117,7 +118,7 @@ MouseMoveKero
 				"\1\s[11]Wh-what are you doing?\0\s[8]\f[italic,true]Snake glares at you.\f[italic,default]\e"
 				"\1\s[11]Ah.. Hh-.\0\s[8]\_q\ Stop doing that. He doesn't like it.\e"
 				snakeFeelings--
-				//Maybe add negative friendship with Snake when Otacon is Stroked? Otacon freezes, no deduction, Snake dislikes Otacon's face being stroked.
+				//adds negative friendship with Snake when Otacon is Stroked. Otacon freezes, no deduction, Snake dislikes Otacon's face being stroked.
  			}
 			elseif reference4 == "Head" //Pets the top of Otacon's head.
 			{
@@ -140,7 +141,7 @@ MouseMoveKero
 				}
 				if otaconFeelings >= -10
 				{
-				"\1\s[12]Ah-!\w8\1\s[11] Wh..?\w8\1\s[30]Hey, that felt kinda nice.\e" //I know Snake says almost the same thing, I'm trying to think of an alternate phrase.
+				"\1\s[12]Ah-!\w8\1\s[11] Wh..?\w8\1\s[30] Hey, that felt kinda nice.\e" //I know Snake says almost the same thing, I'm trying to think of an alternate phrase.
 				"\1\s[30]Ah, um, h-hey, %(username)..!\e"
 				otaconFeelings++
 				}
@@ -151,7 +152,7 @@ MouseMoveKero
 				otaconFeelings++
 				}
 				
-				//Otacon likes being petted. Snake does not mind him being petted.
+				//Otacon likes being petted when feels are positive. Snake does not mind him being petted, unless Otacon responds strongly.
 			}	
  		}
 	}
@@ -247,8 +248,8 @@ MouseDoubleClickKero
  	if reference4 == "Face" //Hitting Otacon's face
 	{
 		"\1\s[12]Ouch! That hurt!\w8\0\s[7]Leave him alone.\w8\1\s[11] \n\n[half]Snake..?\e"
-		"\1\s[12]Ow! That hurt, please stop!\e"
-		"\1\s[12]Ah! Stop hitting me, p-please!.\e"
+		"\1\s[12]Ow! That hurt, please stop!\0\s[9]\e"
+		"\1\s[12]Ah! Stop hitting me, p-please!\0\s[9]\e"
 		"\1\s[12]hh-! P-please stop. Please...\w8\0\s[7]Stop right now.\w8\1\s[11]Snake...?\e"
 		snakeFeelings += -4
 		otaconFeelings--
@@ -258,11 +259,11 @@ MouseDoubleClickKero
 	{
 		"\1\s[12]Ouch! That hurt!\w8\0\s[7]Leave him alone.\w8\1\s[11] \n\n[half]Snake..?\e"
 		"\1\s[12]Ow! That makes my head hurt, please stop!\0\s[8]\e"
-		"\1\s[12]Ah! Stop hitting me, p-please!.\0\s[8]\e"
+		"\1\s[12]Ah! Stop hitting me, p-please!\0\s[8]\e"
 		"\1\s[12]P-please stop. Please...\w8\0\s[7]Stop right now.\w8\1\s[11] \n\n[half]Snake...?\e"
 		snakeFeelings += -10
 		otaconFeelings--
-		//OKUAJUB: Otacon's head hitting dlalogue. Otacon's hitting dialogue is almost exactly the same. whoops. i think it doesn't really matter much where he's hit, though. he still dislikes it.
+		//OKUAJUB: Otacon's head hitting dialogue. Otacon's hitting dialogue is almost exactly the same. whoops. i think it doesn't really matter much where he's hit, though. he still dislikes it.
 		//OKUAKUB: Snake will be PISSED if you hit Otacon. He can stand himself being hit, but a huge amount of friendship (when the friendship system is engaged) will be docked any time Otacon is hurt, accident or not. Otacon's friendship will go down a very slight amount, but not a lot, as he feels he kind of deserves it.
 		//OKUAJUB: Due to the fact Otacon't hitboxes are a lot larger, I'm thinking of a way where you have consequences but it doesn't feel unfair. I'll probably have his face hit have slightly less of a deduction to compensate.
  	}

@@ -1,15 +1,27 @@
 V 1.1.1
-(9/xx/21)
+(12/xx/21)
+- Installation Path Changed to "Snake_Otacon" instead of "Snake and Otacon". Previous name was proving to be incompatible with Github.
 - Added Friendship System
-- Added Snake Interact Menu
-- Added Otacon Interact Menu
-- Added New Dialogue Options
-- Added New aitalk Dialogue
+  - Snake and Otacon have individual variables for their friendships. Raise or lower these variables to access to things never seen before!
 - Improved Menus
+  - Added New Menu Dialogue
+  - Added New Menu Options
+- Added Snake Interact Menu
+  - Added Give Interaction. Give Cigarettes, Give Ration, Give Ketchup
+  - Added Ask Interaction. Ask About Shadow Moses Incident, Ask about Otacon, Ask about Jaeger
+- Added Otacon Interact Menu
+  - Added Give Interaction. Give Cigarettes, Give Ration, Give Ketchup, Give Something Else?
+  - Added Play Interaction. Play Rock Paper Scissors
+  - Added Say Interaction. Say an Insult, Say A Compliment, Say A Joke
+- Added New Dialogue Options
+  - Otacon can now randomly ask your opinions on things. Answer and gain a small friendship boost.
+  - Otacon's FAQ has additional questions. Unlock new questions by gaining friendship and encountering keywords in dialogue.
+- Added New aitalk Dialogue and made revisions. 
+  - Certain dialogues now have new prerequisites that must be met.
 - Improved Snake surface1507 (Angry)
 - Patched minor typos, word choices, and errors.
-- Changed aitalk, certain dialogues now have prerequisites that must be met.
-- For you devs: Finally got around to renaming their files with a prefix- .dic files like aitalk will now start with Sn_ , no more confusion!
+- Added cheat buttons for friendship variables. When in focus, press F7 to reset their friendships to 0, press F8 to decrease their friendship towards you by 1, press F9 to increase their friendship towards you by 1.
+- For you devs: Finally got around to renaming their files with a prefix; .dic files like aitalk will now start with Sn_ , no more confusion when digging around!
 
 V 1.0.1
 (8/30/21)

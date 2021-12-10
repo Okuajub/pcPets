@@ -1,0 +1,9 @@
+Charset,UTF-8
+install,683761451
+homeurl_found,1
+surfacecount,46
+homeurl,https://raw.githubusercontent.com/Okuajub/pcPets/master/Ukagakas/Updates/Snake_Otacon/
+update_result,NG(artificial:changelog.txt)
+firstboot,683761451
+commitmemorysize,1679193
+lastboot,692400452

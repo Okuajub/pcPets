@@ -11,14 +11,13 @@ exampleenvelope //OKUAJUB:I've just left this in because... I don't really know.
 	"Example Envelope Dialogue 2"
 	"Example Envelope Dialogue 3"
 }
+//As you can see, we stated a word, opened some brackets, wrote some text, and closed the brackets. Now when you write ghost dialogue, you can write %(exampleenvelope) and your ghost will randomly display any of the three bits of text within the brackets! You can go ahead and test this yourself to see how it works, and I'll include some sample dialogue with this in aitalk.dic.
+
+
 //OKUAJUB: Here's where I'm placing most of my custom envelopes.
-laugh //Otacon's laughing animation
+laugh //Otacon's laughing animation. I should really just make it an animation I can play in his surfaces.txt
 {
 	"\1\s[34]\w1\1\s[35]\w2\1\s[36]\w1\1\s[34]\w1\1\s[35]\w2\1\s[36]\w1\1\s[34]\w1\1\s[35]\w2\1\s[36]\w1\1\s[34]\w1\1\s[35]\w2\1\s[36]\w1\1\s[34]\w1\1\s[35]\w2\1\s[36]\w1\1\s[34]\w1\1\s[35]\w2\1\s[36]\w1\1\s[34]\w1\1\s[35]\w2\1\s[36]\w1"
-}
-checkMenuClicks //OKUAJUB: Used in menu.dic - a series of checks for Otacon's FAQ
-{
-
 }
 posSnakeFeels //OKUAJUB: Snake Feelings go Up
 {
@@ -28,7 +27,61 @@ negSnakeFeels //OKUAJUB: Snake Feelings go Down
 {
 	snakeFeelings--
 }
-//As you can see, we stated a word, opened some brackets, wrote some text, and closed the brackets. Now when you write ghost dialogue, you can write %(exampleenvelope) and your ghost will randomly display any of the three bits of text within the brackets! You can go ahead and test this yourself to see how it works, and I'll include some sample dialogue with this in aitalk.dic.
+pickAndChoose : nonoverlap //OKUAJUB: Array for Otacon asking the user things. nonoverlap so the user doesn't get too many repeats.
+{
+
+	"subs,dubs"
+	"winter,summer"
+	"PlayStation,XBox"
+	"Metal Gear REX, Metal Gear RAY"
+	"jeans,sweatpants"
+	"T-shirts,button-ups"
+	"Digimon,Pokemon"
+	"electric,acoustic guitar"
+	"iced coffee,hot coffee"
+	"dogs,cats"
+	"mountains,plains"
+	"pizza,spaghetti"
+	"cup ramen,scrambled eggs"
+	"rootbeer,pepsi"
+	"water,soda"
+	"Alaska,California"
+	"pen,pencil"
+	"paperback,hardback books"
+	"paper books,E-Books"
+	"watching anime,playing video games"
+	"offbrand products,on brand products"
+	"pirating,buying games"
+	"napping,sleeping"
+	"plushes,figurines"
+	"cute,creepy things"
+}
+
+japaneseAnimes
+{
+	"JoJo"
+	"Beastars"
+	"Mobile Suit Gundam"
+	"Sailor Moon"
+	"Psychopass"
+	"Megalobox"
+	"Inuyasha"
+	"Gurren Lagann"
+	"Cowboy Bebop"
+	"Polar Bear Cafe"
+	"The Way of the Househusband"
+	"Blue Exorcist"
+	"Fullmetal Alchemist"
+	"Bungo Stray Dogs"
+	"Land of The Lustrous"
+	"Assasination Classroom"
+	"Evangelion"
+	"Wolf Children"
+	"Outlaw Star"
+	"Paranoia Agent"
+	"Perfect Blue"
+	"Alien 9"
+}
 
 //What can you use this kind of envelope for? You can store tons of random information to keep your ghost's dialogue varied! You can store various cities you like in %(city), musicians you like in %(musicians), places your ghost has been in %(places), food you like in %(food), movies you like in %(movie), fandoms you like in %(fandom), characters you like in %(fandomcharacter), celebrities you like under %(celebrity) or friends of yours in %(friends) or bnfs in %(bnfs), folders on your computer under %(folders), Pokemon you like under %(pokemon), insults under %(insult), swear words under %(swearword) which could potentially be hilarious, just about anything! You can make lists of absolutely anything to use with dialogue for your ghost! This .dic file is only limited by your imagination!
 //Not only that, but you can put an envelope IN an envelope. Here's another example.
@@ -38,6 +91,15 @@ internalenvelope
 	"Internal Envelope Dialogue 1 - %(exampleenvelope)"
 	"%(username)'s computer"
 	"Here is a blanklist object - %(blanklist)."
+}
+
+randomEmoteSnake
+{
+	"\0\s[4]"
+	"\0\s[5]"
+	"\0\s[6]"
+	"\0\s[8]"
+	"\0\s[9]"
 }
 
 //You can nest envelopes all day long, although it might get kind of convoluted if you don't keep track. This is particularly handy with %(username), so your ghost can be specific if they're talking about something of the user's, like their files or folders for example. I'll leave a few lists in here you can fill out as you like. And if this doesn't give you ideas, you can ignore this file, since nothing in it will show up unless you write it into the dialogue. You can add or take away as many items as you want from each list.
@@ -86,40 +148,6 @@ internalenvelope
 		
 	  //***********************************************************************
 
-blanklist
-{
-	"List object 1"
-	"List object 2"
-	"List object 3"
-	"List object 4"
-	"List object 5"
-}
-
-blanklist2
-{
-	"List object 1"
-	"List object 2"
-	"List object 3"
-	"List object 4"
-	"List object 5"
-	"List object 6"
-	"List object 7"
-	"List object 8"
-}
-
-blanklist3
-{
-	"List object 1"
-	"List object 2"
-	"List object 3"
-	"List object 4"
-}
-
-blanklist4
-{
-	"List object 1"
-	"List object 2"
-}
 
 //This envelope in particular I think is fun. You can use this in dialogue to pretend like your ghost is looking through your user's files!
 

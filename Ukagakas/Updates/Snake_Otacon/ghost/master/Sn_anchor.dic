@@ -47,7 +47,7 @@ OnAnchorSelect
 	{
 	case reference0 //case is a unique thing that only really shows up in anchor.dic, and it basically sets up reference0 for evaluation to see if matches any of the below criteria, which are all tagged with when. You can read more about this on the coding page on the walkthrough site. You can add as many things here as you want to set up above as long as you follow the basic format.
 		{
-			when "talkingTip" //OKUAJUB: all anchors ending in 'tip' are used by Otacon in menu.dic for providing Ukagaka usage tips when clicked, since this is aimed at beginners. This is a speeding up talking tip.
+			when "talkingTip" //OKUAJUB: all anchors ending in 'tip' are used by Otacon in menu.dic for providing Ukagaka usage tips when clicked, since this is aimed at beginners. This is a speeding up talking tip. I might migrate this dialog to menu.dic but we'll see.
 			{
 				"\1\s[10]Oh, you want us to talk a faster sometimes? Okay! By default, CTRL will speed up how fast we talk. You can skip to the end of almost anything we say!\n\n[half]\w8\w8It's a weird feeling.\e"
 			}
@@ -73,7 +73,7 @@ OnAnchorSelect
 			}
 			when "iconifyTip" //Iconify Tip
 			{
-				"\1\s[10]Oh! Iconify is in Snake's right-click menu. When it's selected, we'll minimize into your taskbar. To get us back, right-click on the icon that looks like me, and then select Iconify again.\0\s[9]It feels pretty weird, though.\e"
+				"\1\s[10]Oh! Iconify is in Snake's right-click menu. When it's selected, we'll minimize into your taskbar, in 'Hidden Icons'. To get us back, right-click on the icon that looks like me, and then select Iconify again.\0\s[9]It feels pretty weird, though.\e"
 			}
 			when "hitpetTip" // Hitting/Petting Ghosts tip
 			{
@@ -83,12 +83,19 @@ OnAnchorSelect
 			when "whoJaeger" //OKUAJUB: Anchor for Gray Fox
 			{
 				clickJaeger++
-				"\0\s[8]Jaeger? Best damn soldier I ever knew. He and I were close. When he got captured during N312, I knew I had to do something. In my naivety, I thought Big Boss picked me for N313 for that very reason.\1\s[18]\w8\w8...You loved him. Frank.\0\s[4] I'd have done anything to save him.\e"
+				"\0\s[8]Jaeger? Best damn soldier I ever knew. He and I were close. When he got captured during N312, I knew I had to do something. In my naivety, I thought Big Boss picked me for N313 for that very reason.\1\s[18]\w8\w8...You loved him. Frank.\0\s[4] I'd have done anything to save him."
+				--
+				if clickJaeger == 0
+				{
+				"\n\nYou've learned about Gray Fox. You can now ask Snake about him at any time in his interaction menu."
+				--
+				"\e"
+				}
 			}
 			//OKUABJUB: Otacon's FAQ section
 			when "whoSnake" //Describes Snake. Used in the FAQ
 			{
-				"\1\s[16]Who's Snake? Well...\w8\w8 he's...\w6\1\s[15] \f[italic,true]the shit!\f[italic,default]\w8\0\s[1]\1\s[15] He's infiltrated dozens of facilities, taken out a \f[italic,true]tank\f[italic,default] on foot, and destroyed multiple Metal Gears!\0\s[9]\1\s[15] He's probably the most brave person I've ever met.\0\s[5]\1\s[16] Which is part of why he's my partner. We do our best to destroy Metal Gears, together.\0\s[5]That's high praise, Hal.\1\s[30]\nWell...\w8\nYou're welcome.\e"
+				"\1\s[16]Who's Snake? Well...\w8\w8 he's...\w6\1\s[15] \f[italic,true]the shit!\f[italic,default]\w8\0\s[1]\1\s[15] He's infiltrated dozens of facilities, taken out a \f[italic,true]tank\f[italic,default] on foot, and destroyed multiple Metal Gears!\0\s[9]\1\s[15] He's probably the most brave person I've ever met.\0\s[5]\1\s[16] Which is part of why he's my partner. We do our best to destroy Metal Gears, together.\0\s[5]That's high praise, Hal.\1\s[30]\n\n[half]Well...\w8\nYou're welcome.\e"
 			}
 			when "whoHal" //Describes Otacon. Used in the FAQ
 			{
@@ -135,7 +142,7 @@ OnAnchorSelect
 			when "whoMeiLing" //Describes Mei Ling. Used in the FAQ
 			{
 				clickMeiLing += 1
-				"\1\s[18]Mei Ling? She was one of the people assigned to Snake's radio support team during the Shadow Moses Incident.\0\s[0]She's a data analyst. She'd be the one to record what I was doing.\1\s[10] Kind of like saving Snake's progress.\nShe also developed the Codec and Soliton Radar! Pretty neat, huh? I admire her work a lot.\e"
+				"\1\s[18]Mei Ling? She was one of the people assigned to Snake's radio support team during the Shadow Moses Incident.\0\s[0]She's a data analyst. She'd be the one to record what I was doing.\1\s[10]\n\n[half]Kind of like saving Snake's progress.\nShe also developed the Codec and Soliton Radar! Pretty neat, huh? I admire her work a lot.\e"
 				--
 				if clickMeiLing < 2 
 				{
@@ -149,7 +156,7 @@ OnAnchorSelect
 				--
 				"\e"
 			}
-			when "whoRaiden" //Describes Mei Ling. Used in the FAQ
+			when "whoRaiden" //Describes Raiden. Used in the FAQ
 			{
 				clickRaiden++
 				"\1\s[18]Huh. Okuajub hasn't implemented this dialogue yet. How'd you get here?\n"
@@ -163,11 +170,21 @@ OnAnchorSelect
 			}
 			when "whoEmma" //Describes Emma. only unlocked at high friendships. Used in the FAQ
 			{
-				"\1\s[18]Oh, E.E.? She.. was my sister. Step-sister, but, there's no difference to me."
+				"\1\s[18]Oh, E.E.? She.. was my sister. Step-sister, but, there's no difference to me.\1\s[10] She always wanted be doing what I was doing, so we shared a lot of interests. Anime, programming. You know, even back then she was pretty good at it. \1\s[14]\n\w8\w8She... died during the Big Shell incident. Snake tried to save her but, she needed surgery and we were in no position to get it. \nI have a lot of regrets in my life, but not seeking her out earlier is one of the worst of them.\e"
 			}
-			when "whoJulie"
+			when "whoJulie" //Describes Julie. only unlocked at high friendships. Used in the FAQ.
 			{
-				"\0\s[8]\1\s[18]\w8\w8J\w1u\w1l\w1i\w1e..?\1\s[14] I-I'm not sure where you heard that name but.. she's my dad's wife. Second wife, actually.\1\s[19] She was very friendly with me as a teenager. She really appreciated the way I took care of E.E.- like I was her dad. Unlike her husband, my dad, who always seemed busy with work. Her words, not mine.\w8\w8\w8\1\s[14]\n\nShe... we had an affair. I was so lonely-\n\n\0\s[8]\f[italic,true]Snake clears his throat.\1\s[14]Hal takes a deep breath, steadying himself.\f[italic,default]\n\nI was only fifteen at the time, when she started coming onto me. My dad found out about it when I was seventeen, and drowned himself in the pool, dragging E.E. with him. Maybe it was some sort of last punishment. \n\nI don't know. I ran away the day after. Julie tried to keep in contact but I couldn't even stand to look at her name for a while after.\1\s[10]\n\n I'm sorry. That's probably more than you asked for.\e"
+				"\0\s[8]\1\s[18]\w8\w8J\w1u\w1l\w1i\w1e..?\1\s[14] I-I'm not sure where you heard that name but.. she's my dad's wife. Second wife, actually.\1\s[19] She was very friendly with me as a teenager. She really appreciated the way I took care of E.E.- like I was Emma's dad. Unlike her husband, my dad, who always seemed busy with work. Her words, not mine.\w8\w8\w8\1\s[14]\n\n[half]She... we had an affair. I was so lonely-\n\n\0\s[8]\f[italic,true]Snake clears his throat.\f[italic,default]\1\s[14]\f[italic,true]Hal takes a deep breath, steadying himself.\f[italic,default]\n\n[half]I was only fifteen at the time, when she started coming onto me. My dad found out about it when I was seventeen, and drowned himself in the pool, dragging E.E. with him. Maybe it was some sort of last punishment. \n\n[half]I don't know. I ran away the day after. Julie tried to keep in contact but I couldn't even stand to look at her name for a while after.\1\s[10]\n\n I'm sorry. That's probably more than you asked for.\e"
+			}
+			when "option1"
+			{
+				otaconFeelings++
+				"\1\s[15]Oh! I like that too! Thanks for humoring me."
+			}
+			when "option2"
+			{
+				otaconFeelings++
+				"\1\s[15]That's cool! I should ask you more about it sometime."
 			}
 		}
 	}

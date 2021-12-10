@@ -75,6 +75,10 @@ OnNameTeach
 	{
 		"\0\s[10]That's my name. I don't want any more Snakes around. I've dealt with enough. Enter a different name.\![open,inputbox,OnNameTeach,-1]"
 	}
+	elseif reference0 == "hal" || reference0 == "dave" || reference0 == "david"
+	{
+		"\0\s[8]\1\s[18]Er... Sorry, that might get confusing... Can you type in a different one?\![open,inputbox,OnNameTeach,-1]"
+	}
 	elseif reference0 == "liquid" || reference0 == "liquidsnake" //This is just a fun easter egg.
 	{
 		"\0\s[7]Liquid?! Enter a different name right now!\![open,inputbox,OnNameTeach,-1]"
@@ -97,7 +101,7 @@ OnNameTeach
 	}
 	elseif reference0 == "nigger" || reference0 == "nigga" || reference0 == "faggot" || reference0 == "chingchong" || reference0 == "chinaman" || reference0 == "chink" || reference0 == "shemale"  //Inappropriate Name check. Swear words omitted, who doesn't want Snake to call them "Fucker"? 
 	{
-		"\0\s[7]I'm not saying that.\1\s[12]Why would to do that?!\![open,inputbox,OnNameTeach,-1]"
+		"\0\s[7]You've got to be kidding. I'm not saying that.\1\s[12]Why would to do that?!\![open,inputbox,OnNameTeach,-1]"
 	}
 	elseif reference0 == "kike" || reference0 == "heeb" || reference0 == "hebe" || reference0 == "nazi" || reference0 == "hitler"  //Inappropriate Name check.
 	{
@@ -114,6 +118,11 @@ OnNameTeach
 	elseif reference0 == "tranny" //Inappropriate Name check. Last one.
 	{
 		"\0\s[7]I'm not saying that.\1\s[12]Hey! Rude.\![open,inputbox,OnNameTeach,-1]"
+	}
+	elseif reference0 == "daddy" || reference0 == "master" || reference0 == "mommy" || reference0 == "mistress" || reference0 == "sir" || reference0 == "little one" || reference0 == "littlegirl" || reference0 == "littleboy" || reference0 == "kinkster"
+	{
+		"\0\s[8]I'm not calling you that.\1\s[13]Uh... Enter something else....?\![open,inputbox,OnNameTeach,-1]"
+		"\0\s[9]Kinky, huh? You're not for me. Try something else, kid.\![open,inputbox,OnNameTeach,-1]"
 	}
 	elseif reference0 == "" //This is if the user doesn't put in a name at all, since that'd also get awkward in dialogue.
 	{
@@ -137,8 +146,7 @@ OnNameTeach
 		\![*]\q[-san,titlesan]\n/
 		\![*]\q[Ms.,titlems]\n/
 		\![*]\q[Lady,titlelady]\n/
-		\![*]\q[Mr.,titlemr]\n/
-		\![*]\q[Master,titlemaster]\e/"
+		\![*]\q[Mr.,titlemr]\e/"
 		//Note that the final line here ends with \e instead of \n/, since it is the final option. Make sure your final option (and ONLY your final option) always ends with \e. More on that in the box below.
 	}
 }
@@ -157,12 +165,6 @@ Select.titlenone
 Select.titlemr
 {
 		username = "Mr. " + tempname
-		NameDone
-}
-
-Select.titlemaster
-{
-		username = "Master " + tempname
 		NameDone
 }
 		
