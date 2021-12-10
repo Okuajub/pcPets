@@ -1,5 +1,5 @@
 V 1.1.1
-(12/xx/21)
+(12/10/21)
 - Installation Path Changed to "Snake_Otacon" instead of "Snake and Otacon". Previous name was proving to be incompatible with Github.
 - Added Friendship System
   - Snake and Otacon have individual variables for their friendships. Raise or lower these variables to access to things never seen before!
