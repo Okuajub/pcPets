@@ -1,0 +1,477 @@
+﻿//---------------------------AI Talk--------------------------
+//This is where all their random conversations are stored.
+
+/*
+This file has...
+
+AiTalk
+RandomTalk
+any chains you set up
+HourCheck
+OnMinuteChange
+OnSecondChange
+OffscreenTalk
+EndOffscreenTalk
+OnSurfaceRestore
+OnKeyPress
+*/
+
+
+//--AiTalk
+//Advanced users, this is mostly setting up whether or not dialogue is in a chain before it displays. Again, you can leave it alone unless you want to screw around with chains for some strange reason.
+
+OnAiTalk
+ {
+	if RAND(100) < communicateratio
+ 	{
+ 		StartCommunicate
+	}
+ 	else
+	{
+ 		if mikireflag == 0
+		{
+			//if CHAIN.IDName == "" {
+ 			//	lastTalk = RandomTalk
+			//}
+			//else {
+			//	lastTalk = ChainTalk
+			//}
+			lastTalk
+		}
+ 		else
+		{ 
+		MikireTalk
+ 		}
+	}
+ }
+
+
+//--RandomTalk 
+//These are the conversations that they'll have with you or each other that pop up depending on the talk rate defined in menu.dic (or if you ignored that, set in bootend.dic in the first boot, which would be every five minutes).
+
+//--Rules (By Quonit)
+
+// You can change the size of text using \f[height,(number, or the word default).
+ // \f[strike,true] makes the words struck out.
+ // \f[strike,defualt] resets the text to defualt.
+ // \f[sub,true] makes text subscript.
+ // \f[sub,default] resets text to normal.
+ // \f[sup,true] makes text superscript.
+ // \f[sup,false] makes the text normal again.
+ // \f[underline,true] underlines text.
+ // \f[underline,default] removes the line from under the text.
+ // \f[bold,true] makes your statement bold.
+ // \f[bold,false] makes the text not so bold.
+ // \f[italic,true] makes text slanted.
+ // \f[italic,false] de-slants the text.
+ // \f[color0-255,0-255,0-255] changes the color of the text.
+ // \f[color,default] will return the color to default.
+ // \f[default] returns everything back to normal.
+ // \_a[[http://www.website.com/](put text here)\_a can link a website in dialogue.
+ // \0\s[0]\1\s[0]\_s(put dialogue here) has characters say dialogue at the same time.
+ // The envelope %(username)
+ // The envelope %(heshe)
+ 
+//Envelopes
+ //%(userfolder)
+
+//SURFACE GUIDE
+//put all your surfaces here with a word or two on what they are
+
+
+//nonoverlap_pool should make it so all your dialogue has an equal probability of being called, and it will do each line of dialogue before repeating them. Why is kind of technical and a bit outside the scope of this template, you can look into why elsewhere if you want.
+
+RandomTalk : nonoverlap_pool
+{	
+	if earthquakeNow == 1
+	{
+		//say nothing.
+	}
+	else
+	{
+	
+		//--Chains
+		//Chain dialogue is unique. A dialogue chain consists of multiple bits of dialogue that get called in order over a period of time.
+		
+		//"\0\s[0]This is the first part of a chained dialogue.\w8\1\s[10]Second part to come when we next speak.\e:chain=achain"
+		
+		//Once a dialogue has entered a chain, they won't say any other random dialogue until the chain is finished.
+		
+		
+		if nowshell == "master" //This checks to see what shell they're currently using. You may remember this value being defined back in bootend.dic.
+		{
+		}
+		
+		"\1\s[10]Hey big guy! What is it called when a robot is defunct?\0\s[0](´･ω･`)?\1\s[10]\n\n[half]They rust in peace! Eh? Eh? Pretty good right?\0\s[0]\n\n(-_-)"
+		
+		"\0\s[0](´･ω･`;;) \1\s[10]\i[28]\i[30]\i[20]Mantle what’s wrong?! Is there any seismic activity?!\0\s[0]\n\n(¬_¬')\1\s[10] ...Oh! You need an oil change! \i[19]Haha don’t scare me like that!"
+
+	/* Month dialogue
+
+		if month >= 12
+		{
+			"\0\s[0]This is dialogue for December.\w8\1\s[18]A cold month?\e"
+			
+			"\0\s[0]This is more dialogue for December.\w8\1\s[18]Still cold?\e"
+		}
+		
+		if month == 1
+		{
+			"\0\s[0]This is dialogue for January.\w8\1\s[10]Yup.\e"
+			
+			"\0\s[0]This is more dialogue for January.\w8\1\s[10]That it is.\e"
+		}
+		if month == 2
+		{
+			"\0\s[0]This is dialogue for February.\w8\1\s[10]Yup.\e"
+			
+			"\0\s[0]This is more dialogue for February.\w8\1\s[10]That it is.\e"
+		}
+		if month == 3
+		{
+			"\0\s[0]This is dialogue for March.\w8\1\s[10]Yup.\e"
+			
+			"\0\s[0]This is more dialogue for March.\w8\1\s[10]That it is.\e"
+		}
+		if month == 4
+		{
+			"\0\s[0]This is dialogue for April.\w8\1\s[10]Yup.\e"
+			
+			"\0\s[0]This is more dialogue for April.\w8\1\s[10]That it is.\e"
+		}
+		if month == 5
+		{
+			"\0\s[0]This is dialogue for May.\w8\1\s[10]Yup.\e"
+			
+			"\0\s[0]This is more dialogue for May.\w8\1\s[10]That it is.\e"
+		}
+		if month == 6
+		{
+			"\0\s[0]This is dialogue for June.\w8\1\s[10]Yup.\e"
+			
+			"\0\s[0]This is more dialogue for June.\w8\1\s[10]That it is.\e"
+		}
+		if month == 7
+		{
+			"\0\s[0]This is dialogue for July.\w8\1\s[10]Yup.\e"
+			
+			"\0\s[0]This is more dialogue for July.\w8\1\s[10]That it is.\e"
+		}
+		if month == 8
+		{
+			"\0\s[0]This is dialogue for August.\w8\1\s[10]Yup.\e"
+			
+			"\0\s[0]This is more dialogue for August.\w8\1\s[10]That it is.\e"
+		}
+		if month == 9
+		{
+			"\0\s[0]This is dialogue for September.\w8\1\s[10]Yup.\e"
+			
+			"\0\s[0]This is more dialogue for September.\w8\1\s[10]That it is.\e"
+		}
+		if month == 10
+		{
+			"\0\s[0]This is dialogue for October.\w8\1\s[10]Yup.\e"
+			
+			"\0\s[0]This is more dialogue for October.\w8\1\s[10]That it is.\e"
+		}
+		if month == 11
+		{
+			"\0\s[0]This is dialogue for November.\w8\1\s[10]Yup.\e"
+			
+			"\0\s[0]This is more dialogue for November.\w8\1\s[10]That it is.\e"
+		}
+		
+		*/
+		
+		/*
+		//These ifs check what day of the week it is.
+		
+		if weekday == 1
+		{
+			"\0\s[0]This is dialogue for Monday.\w8\1\s[10]Yup.\e"
+			
+			"\0\s[0]This is more dialogue for Monday.\w8\1\s[10]That it is.\e"
+		}
+		if weekday == 2
+		{
+			"\0\s[0]This is dialogue for Tuesday.\w8\1\s[10]Yup.\e"
+			
+			"\0\s[0]This is more dialogue for Tuesday.\w8\1\s[10]That it is.\e"
+		}
+		if weekday == 3
+		{
+			"\0\s[0]This is dialogue for Wednesday.\w8\1\s[10]Yup.\e"
+			
+			"\0\s[0]This is more dialogue for Wednesday.\w8\1\s[10]That it is.\e"
+		}
+		if weekday == 4
+		{
+			"\0\s[0]This is dialogue for Thursday.\w8\1\s[10]Yup.\e"
+			
+			"\0\s[0]This is more dialogue for Thursday.\w8\1\s[10]That it is.\e"
+		}
+		if weekday == 5
+		{
+			"\0\s[0]This is dialogue for Friday.\w8\1\s[10]Yup.\e"
+			
+			"\0\s[0]This is more dialogue for Friday.\w8\1\s[10]That it is.\e"
+		}
+		if weekday == 6
+		{
+			"\0\s[0]This is dialogue for Saturday.\w8\1\s[10]Yup.\e"
+			
+			"\0\s[0]This is more dialogue for Saturday.\w8\1\s[10]That it is.\e"
+		}
+		if weekday == 0
+		{
+			"\0\s[0]This is dialogue for Sunday.\w8\1\s[10]Yup.\e"
+			
+			"\0\s[0]This is more dialogue for Sunday.\w8\1\s[10]That it is.\e"
+		}
+		
+		//These ifs check for the time of day as defined in bootend.dic.
+		
+		if timeslot == "earlymorning"
+		{
+			"\0\s[0]This is dialogue for the early morning.\w8\1\s[10]Yup.\e"
+			
+			"\0\s[0]This is more dialogue for early morning.\w8\1\s[10]That it is.\e"
+		}
+		if timeslot == "morning"
+		{
+			"\0\s[0]This is dialogue for the morning.\w8\1\s[10]Yup.\e"
+			
+			"\0\s[0]This is more dialogue for the morning.\w8\1\s[10]That it is.\e"
+		}
+		if timeslot == "lunch"
+		{
+			"\0\s[0]This is dialogue for lunch time.\w8\1\s[10]Yup.\e"
+			
+			"\0\s[0]This is more dialogue for lunch time.\w8\1\s[10]That it is.\e"
+		}
+		if timeslot == "afternoon"
+		{
+			"\0\s[0]This is dialogue for the afternoon.\w8\1\s[10]Yup.\e"
+			
+			"\0\s[0]This is more dialogue for the afternoon.\w8\1\s[10]That it is.\e"
+		}
+		if timeslot == "evening"
+		{
+			"\0\s[0]This is dialogue for the evening.\w8\1\s[10]Yup.\e"
+			
+			"\0\s[0]This is more dialogue for the evening.\w8\1\s[10]That it is.\e"
+		}
+		if timeslot == "latenight"
+		{
+			"\0\s[0]This is dialogue for the late night.\w8\1\s[10]Yup.\e"
+			
+			"\0\s[0]This is more dialogue for the late night.\w8\1\s[10]That it is.\e"
+		}
+		if timeslot == "midnight"
+		{
+			"\0\s[0]This is dialogue for midnight.\w8\1\s[10]Yup.\e"
+			
+			"\0\s[0]This is more dialogue for midnight.\w8\1\s[10]That it is.\e"
+		}
+		*/
+		
+		/
+		
+	}
+}
+
+
+//--Chains
+//Here is where you will put your bits of chain dialogue.
+//Each chain function will go through each part of the chain in order even if it's in one function, until it goes to \e:chain=end which will end the chain. So you can put the entire chain dialogue into one place.
+
+//achain
+//{{CHAIN
+	//this will happen the first time the chain is called
+	//"\0\s[0]Here is the second part of the chain.\w8\1\s[10]Will there be more?\e"
+	
+	//they will then go to this dialogue next
+	//"\0\s[0]This is the third part of chained dialogue.\1\w8\s[10]This will lead to a fourth part.\e"
+	
+	//this will be the last piece of dialogue in the chain, then they will go back to their normal dialogue
+	//"\0\s[0]This is the fourth piece of chained dialogue.\1\w8\s[10]This is the end.\e:chain=end"
+//}}CHAIN
+
+//Pay careful attention to the CHAIN text and double brackets for these.
+//Note also it ends with \e:chain=end, basically ending the chain.
+
+
+//-OnMinuteChange
+//These are time-related bits of dialogue for your ghost to say. If you're uninterested, you can delete it all except for a line for MikireTalk. 
+
+//Keeps track of if an hour has passed. Just ignore this.
+HourCheck
+{
+if passmin >= 59
+	{
+		passmin = 0
+		passhour = passhour + 1
+	}
+}
+
+
+OnMinuteChange //This is what will trigger time-based dialogue for your Ghost.
+ {
+	HourCheck //checks to see if an hour has passed, ignore it
+	--
+ 	if minute == 0 //These ifs will check what time it is. 
+	{
+ 		if hour == 12 //And the hour equals 12, meaning it's noon. 
+		{
+ 			//"\0\s[0]It's noon.\w8\1\s[15]Let's have a showdown!\w8\0\n\n[half]\s[9]There are no corrals here, dude.\e"
+		}
+ 		elseif hour == 0
+		{
+ 			//"\0\s[0]It's midnight!\e"
+ 			//"\0\s[0]This is another bit of dialogue for midnight.\w8\1\s[10]BooooOoooOOOooOOOOo.\e"
+ 			//"\0\s[0]This is the third bit of dialogue for midnight.\e"
+		}
+		else
+		{
+			"\1\s[10]It's %(hour12)'o clock!\e"
+			//%(hour12) stores the time. This is a general top of the hour notification.
+		}
+	}
+	elseif hour == 23 && minute == 55 //this checks to see if the hour is 23 and the minutes are at 55... essentially, 11:55 pm.
+	{
+		//"\0\s[0]5 minutes to midnight.\e"
+	}
+	elseif hour == 7 && minute == 30 && weekday == 0 //Here, it's checking for a specific time on a specific day.
+	{			
+		//"\0\s[0]It's 7:30 on Sunday.\e"
+	}
+	//If you're not interested in these more specific checks, you can delete those last two elseifs and just leave the one for minute==0, or clear them all out as mentioned above, although leave in the HourCheck and mikireflag bits.
+	
+	//Don't touch this part.
+	elseif mikireflag == 1
+ 	{
+ 		MikireTalk
+	}
+ }
+
+//--OnSecondChange
+//Like the above, this handles what happens every time a second goes by.
+
+OnSecondChange
+ {
+	if passsec == 59
+ 		{
+			passsec = 0
+			passmin = passmin + 1
+			//Earthquake stuff!
+			if (earthquakeTimer > 0) && (earthquakeJobTimer == -1) && (earthquakeNow != 1) //Check to see if the earthquake job timer is active (if it is -1, it is inactive.) and if the earthquake timer needs to be deducted from.
+			{
+				if earthquakesOff = 0
+				{
+					earthquakeTimer--
+				}
+			}
+			elseif earthquakeTimer == 0 //Once it hits zero.
+			{
+				if earthquakesOff = 0
+				{
+					earthquakeNow = 1 //An earthquake is happening.
+					earthquakeJobTimer = EARTHQUAKE_JOB //Earthquake job timer set to the value set in the config. default 5 mintues.
+					earthquakeTimer = -1 //Acts as a flag to not play the last if.
+					"\0\s[1]\w4\1\s[11]Woah! An earthquake! Quick, Mantle! We gotta get there! Let's go!\w8\w8\w8\0\s[-1]\w8\w8\1\s[-1]"
+				}
+				else
+				{
+					"\1\s[10]Huh. Did you feel a tremor? Must have been my imagination!"
+				}
+				
+			}
+			if earthquakeNow == 1
+			{
+				earthquakeJobTimer-- //Reduces the timer by 1
+			}
+			if earthquakeJobTimer == 0
+			{
+				earthquakeNow = 0 //Earthquake is over.
+				earthquakeJobTimer = -1 //Job is done.
+				"\1\s[10]\0\s[0]\i[5](￣▽￣)\w8\w8\1\s[10]\1\s[10]\i[12]\i[14]\i[22]\i[30]\i[26]You seem pretty happy! We did a good job."
+				earthquakeTimer = EARTHQUAKE_TIMER_MIN + RAND(EARTHQUAKE_TIMER_MAX)
+			}
+		}
+ 	else
+ 		{
+	 	passsec = passsec + 1
+		}
+	if mikireflag == 0 && reference1 == 1 //Dialogue for putting them off the screen. You could make this a unique line if you wanted (Like "Hey! What are you doing?"), and have MikireTalk below be for if they continue to be offscreen ("Why are you leaving me out here? Help!" for example). I'll add an example bit of dialogue and comment it out, you can uncomment it and use it if you like, or just leave it out and use MikireTalk below.
+	{
+		//"\0\s[0]You've moved me off screen."
+		
+		MikireTalk
+	}
+	if mikireflag == 1 && reference1 == 0 //Dialogue for coming back on the screen
+	{
+		EndMikireTalk
+	}
+	mikireflag = reference1 //reference1 is if the ghost is offscreen or not
+	if reference2 == 1
+	{
+ 		//This dialogue is for when the two characters are overlapping each other. If you don't want your characters to care, you can just leave this blank.
+		
+ 		"\0\s[0](>﹏<)\w8\1\s[19]I'll move out of your way, big guy!\4\e"
+	}
+ }
+
+ //---- MikireTalk ---------------------------------------------------------------------
+ //MikireTalk is dialogue for when your main character is off-screen. Like if you dragged Girl over to the side of your monitor until she was partially concealed by it.
+ 
+MikireTalk
+ {
+	"\0\s[0]:-O\w8\1\s[19]I see... We must be in the way Mantle... Let's move over."
+	//Note the hotkey combo Triangle mentions.
+ }
+
+ //----EndMikireTalk--------------------------------------------------------------------
+ //For after you bring the character back on screen.
+ 
+EndMikireTalk
+ {
+	"\0\s[0](｡･∀･)ﾉﾞ\w8\1\s[19]Aaaand we're back... Hey %(username).\e"
+ }
+
+
+//**** OnSurfaceRestore *****************************************************************
+//What this does is that after a short period of time, the ghost will go back to its default pose, so you won't have a ghost stuck in one expression for too long.
+
+OnSurfaceRestore
+ {
+	if earthquakeNow > 0
+	{
+		"\0\s[-1]\1\s[-1]"
+	}
+	else
+	{
+		"\0\s[0]\1\s[10]\e"
+	}
+
+ }
+
+ 
+ //--OnKeyPress
+ //This defines the hotkeys your ghost will use.
+ 
+OnKeyPress
+{
+	if reference0 == "t"
+	{
+	OnAiTalk
+	}
+	elseif reference0 == "r"
+	{
+	OnLastTalk
+	}
+	elseif reference0 == "f1"
+	{
+	"\![open,readme]"
+	}
+}
