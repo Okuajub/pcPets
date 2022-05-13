@@ -30,12 +30,12 @@ OnAiTalk
 	{
  		if mikireflag == 0
 		{
-			//if CHAIN.IDName == "" {
- 			//	lastTalk = RandomTalk
-			//}
-			//else {
-			//	lastTalk = ChainTalk
-			//}
+			if CHAIN.IDName == "" {
+ 				lastTalk = RandomTalk
+			}
+			else {
+				lastTalk = ChainTalk
+			}
 			lastTalk
 		}
  		else
