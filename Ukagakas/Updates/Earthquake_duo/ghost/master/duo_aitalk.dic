@@ -110,9 +110,9 @@ RandomTalk : nonoverlap_pool
 
 		if month >= 12
 		{
-			"\0\s[0]This is dialogue for December.\w8\1\s[18]A cold month?\e"
+			"\0\s[0]This is dialogue for December.\w8\1\s[10]A cold month?\e"
 			
-			"\0\s[0]This is more dialogue for December.\w8\1\s[18]Still cold?\e"
+			"\0\s[0]This is more dialogue for December.\w8\1\s[10]Still cold?\e"
 		}
 		
 		if month == 1
@@ -418,7 +418,7 @@ OnSecondChange
 	{
  		//This dialogue is for when the two characters are overlapping each other. If you don't want your characters to care, you can just leave this blank.
 		
- 		"\0\s[0](>﹏<)\w8\1\s[19]I'll move out of your way, big guy!\4\e"
+ 		"\0\s[0](>﹏<)\w8\1\s[10]I'll move out of your way, big guy!\4\e"
 	}
  }
 
@@ -427,7 +427,7 @@ OnSecondChange
  
 MikireTalk
  {
-	"\0\s[0]:-O\w8\1\s[19]I see... We must be in the way Mantle... Let's move over."
+	"\0\s[0]:-O\w8\1\s[10]I see... We must be in the way Mantle... Let's move over."
 	//Note the hotkey combo Triangle mentions.
  }
 
@@ -436,7 +436,7 @@ MikireTalk
  
 EndMikireTalk
  {
-	"\0\s[0](｡･∀･)ﾉﾞ\w8\1\s[19]Aaaand we're back... Hey %(username).\e"
+	"\0\s[0](｡･∀･)ﾉﾞ\w8\1\s[10]Aaaand we're back... Hey %(username)!\e"
  }
 
 

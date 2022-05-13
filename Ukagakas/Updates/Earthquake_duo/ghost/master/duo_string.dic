@@ -22,7 +22,7 @@ On_username
 
 On_homeurl
 {
-	"https://raw.githubusercontent.com/Okuajub/pcPets/master/Ukagakas/Updates/Earthquake_duo"
+	"https://raw.githubusercontent.com/Okuajub/pcPets/master/Ukagakas/Updates/Earthquake_duo/"
 }
 
 
@@ -153,7 +153,7 @@ On_kero.recommendsites
  
 On_updatebutton.caption
  {
-	"Update Menu Caption"
+	"New Radio Shows?"
 }
 
 //---- Dress-up Menu Caption ----------------------------------------------------------
@@ -161,7 +161,7 @@ On_updatebutton.caption
 
 On_dressuprootbutton.caption
 {
-	"Dress-Up Caption"
+	"Dress-Ups"
 }
 
 //---- Headlines and RSS Feeds ---------------------------------------------------------
