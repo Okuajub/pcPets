@@ -58,7 +58,7 @@ OnFirstBoot
  	{
 		//Unlike most dialogue, it should start with "\![enter,passivemode]". Passivemode basically ensures that the balloons won't disappear, the choices won't time out, the ghosts won't talk randomly, you can't bring up menus, and makes sure that this dialogue plays through to the end correctly.
 		
-		"\![enter,passivemode]\1\s[10]\0\s[0]\1\s[10]Ah, this must be our new station… Oh! Hey! Sorry for intruding, I hope you don't mind us… We’re an earthquake response and rescue team who just happens to have been stationed here. Hopefully you don’t mind!\w8\0\s[0]ヾ(￣▽￣)\w8\0\s[0]\n\n[half] I’m Ridge! (She/her) and this is MAN-713 (He/They/It), but I just call him Mantle...\0\s[0]\n\n[half]:-)\w5\w5\1\s[10]He’s not the talkative type but I guess you could say he’s quite expressive.\0\s[0]\n\n[half](๑•̀ㅂ•́)و✧\w8\1\c\1\s[10]Alright, with us introduced, what are your pronouns?\n\n[half]/
+		"\![enter,passivemode]\1\s[10]\0\s[0]\1\s[10]Ah, this must be our new station… Oh! Hey! Sorry for intruding, I hope you don't mind us… We’re an earthquake response and rescue team who just happens to have been stationed here. Hopefully you don’t mind!\w8\0\s[0]ヾ(￣▽￣)\w8\1\s[10]\n\n[half] I’m Ridge! (She/her) and this is MAN-713 (He/They/It), but I just call him Mantle...\0\s[0]\n\n[half]:-)\w5\w5\1\s[10]He’s not the talkative type but I guess you could say he’s quite expressive.\0\s[0]\n\n[half](๑•̀ㅂ•́)و✧\w8\1\c\1\s[10]Alright, with us introduced, what are your pronouns?\n\n[half]/
 		\w5\_q\![*]\q[He/Him/His,choicefirsthehim]\n/
 		\![*]\q[She/Her/Hers,choicefirstsheher]\n/
 		\![*]\q[They/Them/Their,choicefirsttheythem]\e"

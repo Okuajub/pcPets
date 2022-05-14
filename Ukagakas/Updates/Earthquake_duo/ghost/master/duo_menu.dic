@@ -443,7 +443,7 @@ OnEarthqMax
 
 Select.EARTHMAXMAX
 {
-	EARTHQUAKE_TIMER_MAX = 5 //Sets the maximum additional time between earthquakes. See the system in OnSecondChange for where this is used.
+	EARTHQUAKE_TIMER_MAX = 5 //Sets the maximum additional time between earthquakes. See the system in OnMinuteChange for where this is used.
 	
 	OnEarthqJob //Sends user to the job timer selection.
 }
@@ -512,7 +512,21 @@ Select.JOBPOOR
 OnEarthqDone
 {
 	
-	"\0\s[0]\b2Earthquakes will happen every %(EARTHQUAKE_TIMER_MIN) to %(EARTHQUAKE_TIMER_MAX + EARTHQUAKE_TIMER_MIN) minutes. MAN-713 and Ridge will stay on a job for %(EARTHQUAKE_JOB) minutes."
+	"\0\s[0]\b2Earthquakes will happen every %(EARTHQUAKE_TIMER_MIN) to %(EARTHQUAKE_TIMER_MAX + EARTHQUAKE_TIMER_MIN) minutes. MAN-713 and Ridge will stay on a job for %(EARTHQUAKE_JOB) minutes./
+	\n\n[half]Apply to current Earthquake?\n\n/
+	\![*]\q[Yes,OnApplyEarthq]\n/
+	\![*]\q[No,OnDeclineEarthq]\n"
+}
+
+OnApplyEarthq
+{
+	earthquakeTimer = EARTHQUAKE_TIMER_MIN + RAND(EARTHQUAKE_TIMER_MAX)
+	"\0\s[0]\b2Changes have been applied. Your next earthquake will happen in approximately %(earthquakeTimer) minutes. Thank you for using Official MAN software."
+}
+
+OnDeclineEarthq
+{
+	"\0\s[0]\b2Changes will be applied after your current earthquake has finished. Thank you for using Offical MAN software."
 }
 
 Select.EARTHNONE //If the user decides they don't want earthquakes to happen.
@@ -670,7 +684,7 @@ Select.whoRidge
 
 Select.whoMantle
 {
-	"\1\s[0]You’re curious about Mantle? He’s a robot engineered to help rescue people from the debris of earthquakes. Normally Man000 robots speak to their partners but Man713 is shy, he prefers speaking through emoticons or expressions on his screen./
+	"\1\s[10]You’re curious about Mantle? He’s a robot engineered to help rescue people from the debris of earthquakes. Normally Man000 robots speak to their partners but Man713 is shy, he prefers speaking through emoticons or expressions on his screen./
 	\0\s[0]\n\n[half](*￣3￣)╭\1\s[10]\n\n[half]Like that... Most people don't understand it, but I’ve come to be able to translate his intentions well enough that we can hold conversations! /
 	He’s a real sweetheart and he does his job well, holding up debris and clearing out larger pieces of rubble for me. I’m grateful that I have such a reliable partner.\0\s[0]\n\n[half](^///^)"
 }

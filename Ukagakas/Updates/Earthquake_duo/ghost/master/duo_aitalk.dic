@@ -104,7 +104,25 @@ RandomTalk : nonoverlap_pool
 		
 		"\1\s[10]Hey big guy! What is it called when a robot is defunct?\0\s[0](´･ω･`)?\1\s[10]\n\n[half]They rust in peace! Eh? Eh? Pretty good right?\0\s[0]\n\n(-_-)"
 		
-		"\0\s[0](´･ω･`;;) \1\s[10]\i[28]\i[30]\i[20]Mantle what’s wrong?! Is there any seismic activity?!\0\s[0]\n\n(¬_¬')\1\s[10] ...Oh! You need an oil change! \i[19]Haha don’t scare me like that!"
+		"\0\s[0](´･ω･`;;) \1\s[10]\i[28]\i[30]\i[20]Mantle what’s wrong?! Is there any seismic activity?!\0\s[0]\n\n(¬_¬')\1\s[10]\n\n[half]...Oh! You need an oil change! \i[19]Haha don’t scare me like that!"
+		
+		"\0\s[0](；′⌒`)\1\s[10]Are you nervous Mantle?\0\s[0]\n\n[half]( ˘︹˘ )\1\s[10]\n\n[half]...Maybe a wash when we get back home will cheer you up?\0\s[0]\n\n[half]♪(´▽｀) !"
+		
+		"\0\s[0]?\1\s[10]Huh? Oh I’m fine… Are you worried about my ankle? I just misstepped, it’s nothing serious…\0\s[0]\n\n[half]>:-|\1\s[10]\n\n[half]Alright! I’ll take it easy! Geez, nothing gets past you huh?"
+		
+		"\1\s[10]I wonder if they make clothes for robots...\0\s[0]:-O\1\s[10]\n\n[half]I bet you would look real dapper in a suit!\0\s[0]\i[5]\n\n[half](✿◡‿◡)"
+		
+		"\1\s[10]I have to go shopping when I’m off-duty... Wanna come with?\0\s[0]:-?\1\s[10]\n\n[half]Oh just the essentials, 10 tomatoes and 10 eggs...\0\s[0]\n\n[half](-_-)..." //Maybe I could use some food envelopes here sometime.
+		
+		"\1\s[10]When was the last time we changed your coolant again?\0\s[0]:-O\1\s[10]\n\n[half]We should probably get around to that!\0\s[0]\n\n[half]≧ ﹏ ≦\1\s[10]\n\n[half]Aw, come on you big scaredy cat... Rescuing people from destroyed buildings is fine but having your coolant tubes opened is where you draw the line?"
+		
+		"\1\s[10]Hey Mantle, make that face for me! You know the one!\0\s[0]\w8\w8\w8.\w8.\w8.(^._.^)\w4ﾉ\1\s[10]\n\n[half]\i[21]\i[22]\i[14]\w8\w8Hahah! That’s the one!"
+		
+		"\1\s[10]Hey Mantle, if i were an animal which one would I be...\0\s[0](。・ω・。)\1\s[10]\n\n[half]Hmm, I guess a stoat suits me....\i[21]\i[22]\i[14] I think you’d be a moose or a deer!\0\s[0]\i[5]\n\n[half]╚╚( -_- )╝╝"
+		
+		"\1\s[10]\i[9]Mantle’s being a sourpuss because birds keep landing on him and pooping all over him...\0\s[0](○｀ 3′○)\1\s[10]\n\n[half]\i[21]\i[22]\i[14]Hey it’s not their fault you look like a statue!"
+		
+		"\1\s[10]Your screen keeps getting dusty...\i[21]\i[22]\i[14] Maybe we should outfit you with a windshield wiper! Hahahah!\0\s[0]>:-/"
 
 	/* Month dialogue
 
@@ -367,14 +385,14 @@ OnSecondChange
 			//Earthquake stuff!
 			if (earthquakeTimer > 0) && (earthquakeJobTimer == -1) && (earthquakeNow != 1) //Check to see if the earthquake job timer is active (if it is -1, it is inactive.) and if the earthquake timer needs to be deducted from.
 			{
-				if earthquakesOff = 0
+				if earthquakesOff == 0
 				{
 					earthquakeTimer--
 				}
 			}
 			elseif earthquakeTimer == 0 //Once it hits zero.
 			{
-				if earthquakesOff = 0
+				if earthquakesOff == 0
 				{
 					earthquakeNow = 1 //An earthquake is happening.
 					earthquakeJobTimer = EARTHQUAKE_JOB //Earthquake job timer set to the value set in the config. default 5 mintues.
@@ -405,7 +423,7 @@ OnSecondChange
 		}
 	if mikireflag == 0 && reference1 == 1 //Dialogue for putting them off the screen. You could make this a unique line if you wanted (Like "Hey! What are you doing?"), and have MikireTalk below be for if they continue to be offscreen ("Why are you leaving me out here? Help!" for example). I'll add an example bit of dialogue and comment it out, you can uncomment it and use it if you like, or just leave it out and use MikireTalk below.
 	{
-		//"\0\s[0]You've moved me off screen."
+		"\0\s[0](°ー°〃)\w8.\w8.\w8(。>︿<)\w8!!!"
 		
 		MikireTalk
 	}
