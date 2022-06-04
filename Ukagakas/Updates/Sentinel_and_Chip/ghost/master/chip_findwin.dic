@@ -1,0 +1,35 @@
+﻿//--Findwin Related Stuff------------------------------------------------------
+
+OnFindwinTest
+{
+	findwinTest1 = FUNCTIONEX("findwin.dll","count",,"ApplicationFrameWindow")
+	findwinTest2 = FUNCTIONEX("findwin.dll","find",,"ApplicationFrameWindow")
+
+	if WindowTest2 == 0
+		{
+		"Calculator is not open."
+		}
+	elseif WindowTest2 == 1
+		{
+			if WindowTest1 == 0
+			{
+			"Calcuator is open, but minimized."
+			}
+			else
+			{
+			"Calculator is open."
+			}
+		}
+}
+
+OnFindCaption
+{
+	_findwinCaption = FUNCTIONEX("findwin.dll","getcaption","MozillaWindowClass",)
+	"%(_findwinCaption)"
+}
+
+OnCountWindows
+{
+	_findWinCounts = FUNCTIONEX("findwin.dll","count",,,,)
+	"%(findWinCounts)"
+}

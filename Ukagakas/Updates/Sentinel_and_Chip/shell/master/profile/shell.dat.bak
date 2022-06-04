@@ -1,17 +1,19 @@
 Charset,UTF-8
 __system_settings_version__,2
 seriko.scaling.dither,1
-char0.bind.savearray,41=0 42=1 43=1
+char0.bind.savearray,41=0 42=0 43=0
 balloon,C:\ssp_2_5_49d\balloon\for_H&S\
 Char1.balloon.isleft,1
 balloon0.offset,288.-131
-Char0.centery,1094
+scriptbox.left,-754
+Char0.centery,473
 balloon1.offset,237.-116
 Char0.balloon.isleft,1
 Char.VirtualDesktop,b62a3137-7129-4e84-8084-7351d481b069
-Char0.center,-685
-Char1.centery,1094
-Char1.center,-397
+Char0.center,-1101
+scriptbox.top,375
+Char1.centery,464
+Char1.center,-876
 char1.bind.savearray,51=1 52=0 53=0 54=0 55=0 56=0 57=0
 seriko.scaling.percent.x,100
 seriko.scaling.percent.y,100

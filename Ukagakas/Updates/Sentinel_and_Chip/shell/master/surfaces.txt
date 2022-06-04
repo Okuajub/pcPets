@@ -16,8 +16,8 @@ version,1
 surface0
 //surface0 is the basic default pose for your main character.
 {
-collision0,57,22,112,46,Head
-collision1,65,50,105,91,Face
+collision0,178,57,267,84,Head
+collision1,181,83,263,143,Face
 
 //Collisions define "hot spots" on your ghost where the user can pet or double click them (as defined in mouse.dic).
 //The four numbers after that are x/y coordinates. Specifically, the first two numbers are the x/y coordinates of the TOP LEFT corner of your hotspot. The third and fourth numbers are the coordinates of the BOTTOM RIGHT corner of the hotspot.
@@ -26,6 +26,9 @@ collision1,65,50,105,91,Face
 //Collisions only apply to the Surface they're in, unless they're appended using surface.append at the bottom of this file. 
 
 element0,overlay,surface0.png,0,0
+
+animation0.interval,runonce
+animation0.pattern0,overlay,1000,0,0
 
 
 //*********************Advanced User Info*******************************
@@ -36,11 +39,12 @@ element0,overlay,surface0.png,0,0
 //--Blinking---------------------------------------------------------------------------
 //Here's the animation block to set up a random blink.
 
-animation0.interval,random,4
-animation0.pattern0,overlay,-1,100,0,0
-animation0.pattern1,overlayfast,1002,50,0,0
-animation0.pattern2,overlayfast,1001,100,0,0
-animation0.pattern3,overlay,-1,30,0,0
+animation10.interval,random,4
+animation10.pattern0,stop,0,0
+animation10.pattern1,overlay,1000,100,0,0
+animation10.pattern2,overlayfast,1002,50,0,0
+animation10.pattern3,overlayfast,1001,100,0,0
+animation10.pattern4,overlay,1000,30,0,0
 
 //--Talking-----------------------------------------------------------------------------
 //This block deals with your ghost's mouth moving as it speaks to you. 
@@ -63,79 +67,57 @@ animation4.interval,never
 animation4.pattern0,overlay,1102,140,0,0
 animation4.pattern1,overlay,-1,100,0,0
 
+//Eyes
+animation20.interval,never
+animation20.pattern0,stop,0,0
+animation20.pattern1,stop,10,0
+animation20.pattern2,overlay,1001,0,0
+
+animation21.interval,never
+animation21.pattern0,stop,10,0
+animation21.pattern1,stop,0,0
+animation21.pattern2,overlay,1002,0,0
+
+//Mouths
+animation30.interval,runonce
+animation30.pattern0,overlay,1100,0,0
+
+animation40.interval,runonce
+animation40.pattern0,overlay,1200,0,0
+
 
 animation50.interval,runonce
 animation50.pattern0,overlay,1400,0,0
 
 }
 
-//Main Character Embarrassed pose
-surface1
-{
-element0,overlay,surface1501.png,0,0
-}
-
-//Main Character Surprised pose
-surface2
-{
-element0,overlay,surface1502.png,0,0
-}
-
-//Main Character Worried pose
-surface3
-{
-element0,overlay,surface1503.png,0,0
-}
-
-//Main Character Sad/Disappointed pose
-surface4
-{
-element0,overlay,surface1504.png,0,0
-}
-
-//Main Character Smiling pose
-surface5
-{
-element0,overlay,surface1505.png,0,0
-}
-
-//Main Character Contented pose
-surface6
-{
-element0,overlay,surface1506.png,0,0
-}
-
-//Main Character Angry pose
-surface7
-{
-element1,overlay,surface1507.png,0,0
-}
-
-//Main Character Thoughtful Pose
-surface8
-{
-element1,overlay,surface1508.png,0,0
-}
-
-//Main Character Bored pose
-surface9
-{
-element1,overlay,surface1509.png,0,0
-}
-
-
 //--The Side Character's poses------------------
 
 surface10
 {
-collision0,58,199,85,218,Face
-collision1,96,128,140,162,Point
+collision0,121,89,168,132,Face
+collision1,113,69,172,94,Point
 
 
 element0,overlay,surface10.png,0,0
 
 animation0.interval,runonce
 animation0.pattern0,overlay,2000,0,0,0
+
+animation1.interval,never
+animation1.pattern0,stop,0
+animation1.pattern1,stop,10
+animation1.pattern2,overlay,2001,0,0
+
+animation2.interval,never
+animation2.pattern0,stop,0
+animation2.pattern1,stop,10
+animation2.pattern2,overlay,2002,0,0
+
+animation3.interval,never
+animation3.pattern0,stop,0
+animation3.pattern1,stop,10
+animation3.pattern2,overlay,2003,0,0
 
 //Blinking
 animation10.interval,random,4
@@ -148,13 +130,18 @@ animation10.pattern4,overlay,2000,30,0,0
 animation11.interval,runonce
 animation11.pattern0,overlay,2100,0,0,0
 
+animation12.interval,never
+animation12.pattern0,stop,11
+animation12.pattern1,stop,20
+animation12.pattern2,overlay,2101,0,0
+
 animation20.interval,talk,4
 animation20.pattern0,alternativestart,[21.22.23]
 
 animation21.interval,never
 animation21.pattern0,overlay,1202,100,0,0
-animation21.pattern0,overlay,1201,130,0,0
-animation21.pattern1,overlay,-1,100,0,0
+animation21.pattern1,overlay,1201,130,0,0
+animation21.pattern2,overlay,-1,100,0,0
 
 animation22.interval,never
 animation22.pattern0,overlay,1201,140,0,0
@@ -164,70 +151,37 @@ animation23.interval,never
 animation23.pattern0,overlay,1202,140,0,0
 animation23.pattern1,overlay,-1,100,0,0
 
-
+//eyebrows
 animation30.interval,runonce
 animation30.pattern0,overlay,2200,0,0,0
 
+animation31.interval,never
+animation31.pattern0,stop,30
+animation31.pattern1,overlay,2201,0,0,0
+
+//arms
 animation40.interval,runonce
 animation40.pattern0,overlay,2400,0,0,0
+
+animation41.interval,never
+animation41.pattern0,stop,40
+animation41.pattern1,overlay,2401,0,0,0
+
+animation42.interval,never
+animation42.pattern0,stop,40
+animation42.pattern1,overlay,2402,0,0,0
+
+animation43.interval,never
+animation43.pattern0,stop,40
+animation43.pattern1,overlay,2403,0,0,0
+
+//misc particles
+animation60.interval,never
+animation60.pattern0,overlay,2180,0,0
+
+animation61.interval,never
+animation61.pattern0,overlay,2181,0,0
 }
-
-
-//Side Character Embarrassed pose
-surface11
-{
-element1,overlay,surface2501.png,0,0
-}
-
-//Side Character Surprised pose
-surface12
-{
-element1,overlay,surface2502.png,0,0
-}
-
-//Side Character Worried pose
-surface13
-{
-element1,overlay,surface2503.png,0,0
-}
-
-//Side Character Sad/Disappointed pose
-surface14
-{
-element1,overlay,surface2504.png,0,0
-}
-
-//Side Character Smiling pose
-surface15
-{
-element1,overlay,surface2505.png,0,0
-}
-
-//Side Character Contented pose
-surface16
-{
-element1,overlay,surface2506.png,0,0
-}
-
-//Side Character Angry pose
-surface17
-{
-element1,overlay,surface2507.png,0,0
-}
-
-//Side Character Thoughtful pose
-surface18
-{
-element1,overlay,surface2508.png,0,0
-}
-
-//Side Character Bored pose
-surface19
-{
-element1,overlay,surface2509.png,0,0
-}
-
-
 
 //--surface.append-------------------------------------------------------------------
 //Surface.append basically applies the coding within the brackets to the poses specified in the number range. Specifically in this case it applies to collisions. If the collision areas for your ghost don't change very much from pose to pose, then you can set them here for multiple surfaces at once and save yourself some time.
@@ -237,7 +191,7 @@ surface.append0-9
 
 
 animation41.interval,bind
-animation51.pattern0,bind,3000,20,0,0
+animation41.pattern0,bind,3000,20,0,0
 
 animation42.interval,bind
 animation42.pattern0,bind,3001,20,0,0

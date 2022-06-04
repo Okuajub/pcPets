@@ -22,7 +22,7 @@ On_username
 
 On_homeurl
 {
-	"http://www.somekindofwebhost.com/yourghostsdirectory/"
+	//"https://raw.githubusercontent.com/Okuajub/pcPets/master/Ukagakas/Updates/Sentinel_and_Chip"
 }
 
 
@@ -101,15 +101,15 @@ On_portalrootbutton.caption
  
 On_sakura.portalsites
  {
- 	"Site Name 1"
-	"Site Name 1 Alternate"
+ 	"More PC Pets"
+	"Okuajub's Companions"
 	--
-	"%ASC(1)http://somesite.com/%ASC(2)"
+	"%ASC(1)https://okuajub.github.io/pcPets/%ASC(2)"
 	--
 	
-	"Site Name 2"
+	"PC Pets Github Repository"
 	--
-	"%ASC(1)http://www.anothersite.org/%ASC(2)"
+	"%ASC(1)https://github.com/Okuajub/pcPets/%ASC(2)"
 	--
 
 	"Site Name 3"
@@ -131,7 +131,7 @@ On_sakura.portalsites
 
 On_kero.recommendbuttoncaption
  {
-	"Top Menu Option Caption"
+	"There! Right There!"
  }
 
  //---- Top Menu Websites for the Second Character --------------------------------------
@@ -153,7 +153,9 @@ On_kero.recommendsites
  
 On_updatebutton.caption
  {
-	"Update Menu Caption"
+	"New Radio Shows?"
+	"More Cute Frauds?"
+	"Network Update"
 }
 
 //---- Dress-up Menu Caption ----------------------------------------------------------
@@ -161,7 +163,7 @@ On_updatebutton.caption
 
 On_dressuprootbutton.caption
 {
-	"Dress-Up Caption"
+	"Accessories"
 }
 
 //---- Headlines and RSS Feeds ---------------------------------------------------------
@@ -219,7 +221,7 @@ On_callghostrootbutton.caption
  
 On_quitbutton.caption
  {
-	"Quit"
+	"See you, Space Cowboy!"
 }
 
 

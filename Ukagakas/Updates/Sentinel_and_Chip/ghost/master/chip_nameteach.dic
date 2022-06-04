@@ -30,37 +30,31 @@ OnNameTeach
 	
 	//Those extra TOLOWER/REPLACE things up there basically clean up the user's input so you don't have to check for Girl, GIRL, girl, GiRl, etc. It'll make it much easier to check for any specific name, since you won't have to account for any edge cases. Note that the names you will be checking for should be in all lowercase, however.
 	
-	if reference0 == "girl" //this checks to see if the user input any variation of the name "Girl".
+	if reference0 == "sentinel" //this checks to see if the user input any variation of the name "Girl".
 	{
-		"\0\s[0]That's my name.\w8\1\s[10]That might be confusing. You should try again.\![open,inputbox,OnNameTeach,-1]"
+		"\0\s[0]Sorry, kid. People call me Sentinel.\w8\1\s[10]That might be confusing... Could you use another name?\![open,inputbox,OnNameTeach,-1]"
 		//Note here that it's using the same tag as above to reopen the text box to let the user put in another name.
 	}
-	elseif reference0 == "triangle" 
+	elseif reference0 == "chip" || reference0 == "chiptest" 
 	{
-		"\1\s[10]That's my name. Try putting in another one.\![open,inputbox,OnNameTeach,-1]"
+		"\1\s[10]Whoops, that's me! That could be confusing.. Could you use another name?\![open,inputbox,OnNameTeach,-1]"
 	}
 	elseif reference0 == "" //This is if the user doesn't put in a name at all, since that'd also get awkward in dialogue.
 	{
 		username = "USER" //this sets the user's name to USER.
 		
-		"\1\s[10]You didn't put in anything.\w8\0\s[0]We will call you USER.\e"
+		"\1\s[10]You didn't put in anything...\w8\0\s[0]We'll call you USER.\e"
 	}
 	else //if the user put in something not specified above, ie a proper name the ghost can use. 
 	{
-		"\0\s[0]Do you want a title?\w4\n\n[half]\![*]\q[Nope,titlenone]\n"
+		"\0\s[0]Any title?\w4\n\n[half]\![*]\q[Nope,titlenone]\n"
 		--
-		if presuffix == "masculine" //this value was defined in bootend.dic and menu.dic when the user chose their pronouns. Thus, if someone chose he/him pronouns, they would be able to choose Mr. or Master.
-		{
+
 		"\![*]\q[Mr.,titlemr]\n/
-		\![*]\q[Master,titlemaster]\n"
-		}
-		elseif presuffix == "feminine"
-		{
-		"\![*]\q[Ms.,titlems]\n/
-		\![*]\q[Lady,titlelady]\n"
-		}
-		-- //the titles after this are gender neutral and will appear for all users.
-		"\![*]\q[-ssi,titlessi]\n/
+		\![*]\q[Master,titlemaster]\n/
+		\![*]\q[Ms.,titlems]\n/
+		\![*]\q[Lady,titlelady]\n/
+		\![*]\q[-ssi,titlessi]\n/
 		\![*]\q[-san,titlesan]\e"
 	}
 }

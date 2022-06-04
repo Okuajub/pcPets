@@ -41,16 +41,16 @@ MouseMoveSakura
  			stroke = 0 //resetting the stroke count
 			if reference4 == "Head" //This is where you'd put in the name of your collision, such as head, face, horns, tail, ears, whatever.
  			{
-				"\0\s[0]This is some petting dialogue.\e"
-				"\0\s[0]This is some more petting dialogue.\e"
-				"\0\s[0]This is another bit of petting dialogue.\e"
+				"\0\s[0]What? Stop that.\e"
+				"\0\s[0]What do you think you're doing?\e"
+				"\0\s[0]You think I'm all soft and fuzzy or something?\e"
  			}
- 			elseif reference4 == "Face"
- 			{
- 				"\0\s[0]This is petting dialogue for my face.\e"
- 				"\0\s[0]This is more petting dialogue for my face.\e"
- 				"\0\s[0]This is another bit of petting dialogue for my face. Well, stroking would probably be more accurate.\e"
- 			}
+ 			//elseif reference4 == "Face"
+ 			//{
+ 				//"\0\s[0]This is petting dialogue for my face.\e"
+ 				//"\0\s[0]This is more petting dialogue for my face.\e"
+ 				//"\0\s[0]This is another bit of petting dialogue for my face. Well, stroking would probably be more accurate.\e"
+ 			//}
 			
  		}
 	}

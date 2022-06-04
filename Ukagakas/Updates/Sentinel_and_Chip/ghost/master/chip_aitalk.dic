@@ -84,16 +84,16 @@ RandomTalk : nonoverlap
 	//--Chains
 	//Chain dialogue is unique. A dialogue chain consists of multiple bits of dialogue that get called in order over a period of time.
 	
-	"\0\s[0]This is the first part of a chained dialogue.\w8\1\s[10]Second part to come when we next speak.\e:chain=achain"
+	//"\0\s[0]This is the first part of a chained dialogue.\w8\1\s[10]Second part to come when we next speak.\e:chain=achain"
 	
 	//Once a dialogue has entered a chain, they won't say any other random dialogue until the chain is finished.
 	
 	
 	if nowshell == "master" //This checks to see what shell they're currently using. You may remember this value being defined back in bootend.dic.
 	{
-	"\0\s[0]Here is dialogue related to the default shell.\w8\1\s[10]You can use this to comment on clothing your ghost is wearing.\e"
+	"\0\s[0]You're looking pretty cute today, Chip.\w8\1\s[10]\i[60]\i[61]\i[42]\i[12]\i[3]W-Well, thank you! You always look so handsome...\e"
 	
-	"\0\s[0]Here is more dialogue related to the default shell.\e"
+	"\1\s[10]\i[60]\i[61]\i[42]\i[12]\i[3]You're pretty husky...\e"
 	}
 
 /* Month dialogue
@@ -275,7 +275,7 @@ RandomTalk : nonoverlap
 	_kormean = _korean[1] //Now we make a temporary value called "_kormean", which is what will store the meaning of the Korean word. This is the second value in the array, so we can pull it out of _korean by using _korean[1].
 	
 	//Now we put it all together!
-	"\1\s[10]Here is an example of a double envelope. The Korean word is %(_korword).\w8\0\s[0]The word means %(_kormean).\e"
+	//"\1\s[10]Here is an example of a double envelope. The Korean word is %(_korword).\w8\0\s[0]The word means %(_kormean).\e"
 	
 	//As you can see here, we then use the values we set above for _korword and _kormean up there in the dialogue as our new envelopes.
 	//The underscores in front of korword and kormean mean that the value is temporary, and will disappear when the dialogue has finished.
@@ -287,21 +287,21 @@ RandomTalk : nonoverlap
 	
 	{ //Again, note the brackets around these unique bits of dialogue.
 	
-	"\0\s[0]I am asking you a generic question, Triangle. Generic question?\w8\1\s[10]"
+	"\0\s[0]Have you been doing anything fun lately, kit?\w8\1\s[10]"
 	--
-	"This is my first response."
-	"This is my second response."
-	"This is my third response."
-	"This is my fourth response."
-	"This is my fifth response."
-	"This is my sixth response."
+	"Oh, yeah! I've been having a blast with Sonic Adventure 2... You know I play it solely for the chao!"
+	"I've been messing around making a bunch of simple programs lately. I've been chipping away at a Tamagotchi system! It's pretty fun!"
+	"This is really cheesy but... re-reading Warrior cats with you has been a highlight of my days."
+	"Watching Digimon again! I cry at Wizarmon every time..."
+	"Learning Japanese is always fun! Although flashcards are really boring... Watching subbed anime with you is the most enjoyable test of my Japanese skills."
+	"Recently, restoring old PS1 game cases has been really fun. I love cleaning off the Sharpie and glue from them! They turn out so nice and clean..."
 	--
 	"\w8\0\s[0]\n\n[half]"
 	-- 
-	"First response to your response."
-	"Second response to your response."
-	"Third response to your response."
-	"Fourth response to your response."
+	"Good to hear. I like knowing you're happy."
+	"Mhm..."
+	"Yeah. I think you should do that more often. Just being in the room when you're in a good mood picks me up."
+	"You're just too cute.\1\s[10]\i[60]\i[61]\i[42]\i[12]\i[3]\n\n[half]Sentinel..! You just asked me that on purpose, huh! Hahhh.. "
 	-- //closing dashes
 	"\e" //Dialogue ends
 	}
@@ -350,18 +350,23 @@ OnMinuteChange //This is what will trigger time-based dialogue for your Ghost.
 	{
  		if hour == 12 //And the hour equals 12, meaning it's noon. 
 		{
- 			"\0\s[0]It's noon.\w8\1\s[15]Let's have a showdown!\w8\0\n\n[half]\s[9]There are no corrals here, dude.\e"
+ 			"\0\s[0]It's h\w2i\w2i\w2i\w2i-i\w2i\w2gh no\w2on.\w8\1\s[10]\i[43]\i[12]Bang, bang! It's time for Big Shot!\w8\0\n\n[half]\s[0]\i[21]Heheheheh.\w8\w8 See you, Space Cowboy.\e"
+			"\0\s[0]It's 12:00 PM."
 		}
  		elseif hour == 0
 		{
- 			"\0\s[0]It's midnight!\e"
- 			"\0\s[0]This is another bit of dialogue for midnight.\w8\1\s[10]BooooOoooOOOooOOOOo.\e"
- 			"\0\s[0]This is the third bit of dialogue for midnight.\e"
+ 			"\1\s[10]It's midnight, %(username)! Take care of yourself.\e"
+ 			"\0\s[0]It's 12:00 AM.\w8\1\s[10]Spooky... Remember to rest, sometime, %(username)!\e"
+ 			"\0\s[0]It's 12:00 AM.\e"
 		}
-		else
+		elseif hour > 12
 		{
-			"\0\s[0]It's %(hour12)'o clock.\e"
-			//%(hour12) stores the time. This is a general top of the hour notification.
+			"\0\s[0]It's %(hour12):00 PM.\e"
+			//%(hour12) stores the time. This is a general top of the hour notification for the afternoon.
+		}
+		else //If its none of the above, its AM time.
+		{
+			"\0\s[0]It's %(hour12):00 AM."
 		}
 	}
 	elseif hour == 23 && minute == 55 //this checks to see if the hour is 23 and the minutes are at 55... essentially, 11:55 pm.
@@ -370,7 +375,7 @@ OnMinuteChange //This is what will trigger time-based dialogue for your Ghost.
 	}
 	elseif hour == 7 && minute == 30 && weekday == 0 //Here, it's checking for a specific time on a specific day.
 	{			
-		"\0\s[0]It's 7:30 on Sunday.\e"
+		"\0\s[0]It's 7:30 AM on Sunday.\e"
 	}
 	//If you're not interested in these more specific checks, you can delete those last two elseifs and just leave the one for minute==0, or clear them all out as mentioned above, although leave in the HourCheck and mikireflag bits.
 	
@@ -410,7 +415,7 @@ OnSecondChange
 	{
  		//This dialogue is for when the two characters are overlapping each other. If you don't want your characters to care, you can just leave this blank.
 		
- 		"\0\s[0]Me and Triangle are overlapping.\w8\1\s[19]That's strange since your resolution is %screenwidthx%screenheight, %(username). Shouldn't we have enough space?\4\e"
+ 		"\0\s[0]You feeling friendly all the sudden, kit?\w8\1\s[10]\i[60]\i[61]\i[42]\i[12]\i[3]Ah! Um.. %(username) put me here... If you're uncomfortable, I can move..\0\s[0]\i[21]\n\n[half]I don't mind you being close. You know that.\1\i[60]\i[61]\i[42]\i[3]\n\n[half]Yeah..\e"
 	}
  }
 
@@ -419,7 +424,7 @@ OnSecondChange
  
 MikireTalk
  {
-	"\0\s[0]I'm off the screen.\w8\1\s[10]You can push Ctrl-Shift-F12 to bring her back."
+	"\0\s[0]Hey- What do you think you're doing?!\w8\1\s[10]You can push Ctrl-Shift-F12 when we're in focus to bring him back if he's out of reach!"
 	//Note the hotkey combo Triangle mentions.
  }
 
@@ -428,7 +433,7 @@ MikireTalk
  
 EndMikireTalk
  {
-	"\0\s[0]I'm no longer off the screen.\w8\1\s[19]What a shame.\w8\0\s[9]\n\n[half]Shut up.\e"
+	"\0\s[0]Whew.\w8\1\s[10]That was close!\e"
  }
 
 

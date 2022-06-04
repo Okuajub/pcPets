@@ -478,40 +478,80 @@ OnDressupChanged
 {
 if reference0 == 0 //in OnDressupChanged, reference0 refers to the character, therefore this is evaluating which character in question is getting dressed up. 0 is the main character.
 	{
-	if reference1 == "Clothing for Girl" //This is the name of the clothing item in the descript.txt file, I'm pretty sure.
+	if reference1 == "Hearts" //This is the name of the clothing item in the descript.txt file, I'm pretty sure.
 		{
 			if reference2 == 1 //This checks if you're putting it on.
 			{
-			"\0\s[0]You put my clothing item on me.\w8\1\s[19]lol like zar would ever bother with clothes for a ghost.\w8\0\s[9]\n\n[half]Shut up dude you're going to get us in trouble.\e"
+				if username == "Mr. Dev"
+				{
+					"\0\s[0]Hey, where'd you find these? I swear I shoved them to the back of my drawer.\w8\1\s[10]I knew exactly where they are, because that's where our... stuff.. is?\w8\0\s[0]\n\n[half]\i[20]Remind me to use our.. 'stuff' on you for a long time, later.\1\s[10]\n\n[half]\i[60]\i[61]\i[42]\i[12]\i[3]Y-Yes, Wolf!\e"
+				}
+				else
+				{
+					"\0\s[0]Hey, where'd you find these? I swear I shoved them to the back of my drawer."
+				}
 			}
 			else // This checks if you're taking it off.
 			{
-			"\0\s[0]You took the clothing item off.\e"
+			"\0\s[0]Au Naturael is the way to go.\e"
 			}
-		}		
+		}
+	if reference1 == "Camo" //This is the name of the clothing item in the descript.txt file, I'm pretty sure.
+		{
+			if reference2 == 1 //This checks if you're putting it on.
+			{
+			"\0\s[0]Comfortable.\w8\1\s[10]Yeah, you wear those all the time it seems. They're your favorite, right?\w8\0\s[0]\n\n[half]Yep.\1\s[10]\n\n[half]Nice!\e"
+			}
+			else // This checks if you're taking it off.
+			{
+			"\0\s[0]Au Naturael is the way to go.\e"
+			}
+		}
 	}
 else //if reference0 isn't the main character, then it has to be the side character.
 	{
-	if reference1 == "some kind of clothing for triangle??" //The name of the item of clothing in the descript.txt file in your shell folder.
+	if reference1 == "Milk Bottle" //The name of the item of clothing in the descript.txt file in your shell folder.
 		{
 			if reference2 == 1 //If you put it on
 			{
-			"\1\s[10]I'm wearing some kind of clothing.\w8\0\s[8]Maybe a hat?\e"
+			"\1\s[10]Woah! I look really dizzy, huh Sentinel?\w8\0\s[10]You look pretty funny. Like some kind of comedian or crazy professor.\e"
 			}
 			else //When you take it off.
 			{
-			"\1\s[10]You took off some kind of clothing.\e"
+			"\1\s[10]Hey, now I can't see!\0\s[0]Why? Those weren't prescription anyway.\1\s[10]\n\n[half]Coke-bottle glasses are better than none! I'm super far-sighted.\0\s[0]\n\n[half]..Not enough, clearly, to think to get contacts.\1\s[10]\n\n[half]Aw, give me a break. That's *foresight*...\e"
 			}
 		}
-	elseif reference1 == "i'm gonna say a propeller beanie"
+	elseif reference1 == "Basic"
 		{
 			if reference2 == 1 //if you're putting it on
 			{
-			"\1\s[10]You put a hat on me.\w8\0\s[6]lol.\w8\1\n\n[half]\s[11]Shaddap.\e"
+			"\1\s[10]Ah, I can see!\e"
 			}
 			else //when you take it off
 			{
-			"\1\s[10]You took off the hat.\e"
+			"\1\s[10]Oh. I think I preferred those on, actually,\e"
+			}
+		}
+	elseif reference1 == "Anime Boy"
+		{
+			if reference2 == 1 //if you're putting it on
+			{
+			"\1\s[10]Kachow!\e"
+			}
+			else //when you take it off
+			{
+			"\1\s[10]Aw... Those were really cool.\e"
+			}
+		}
+	elseif reference1 == "Lil Hal"
+		{
+			if reference2 == 1 //if you're putting it on
+			{
+			"\1\s[10]Hopefully I don't get too ironic for you!\e"
+			}
+			else //when you take it off
+			{
+			"\1\s[10]I really think I'm better off without those, actually.\e"
 			}
 		}
 	}

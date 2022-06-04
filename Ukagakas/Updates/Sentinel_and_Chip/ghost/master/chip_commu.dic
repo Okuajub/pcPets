@@ -88,25 +88,38 @@ ReplyToGhost
 
 ReplyToGhost
 {
+		
        if AlreadyResponded == 1 //checking the status of the flag
        {
 		
-             AlreadyResponded = 0 //Resetting the flag.
+		 AlreadyResponded = 0 //Resetting the flag.
 
-             res_reference0 = "" //this will clear the value so the conversation will end
+		 res_reference0 = "" //this will clear the value so the conversation will end
 
-             "Yeah okay."
+		 "\1\s[10]Cool!"
        }
        else
        {
-             res_reference0 = reference0 //targeting the other ghost.
-			 
-             AlreadyResponded = 1 //setting a flag to say they've responded once already
+			es_reference0 = reference0 //targeting the other ghost.
+			
+			AlreadyResponded = 1 //setting a flag to say they've responded once already
+			
+			if reference0 == "Snake"
+			{
+				res_reference0 = "Snake" //res_reference0 would be the name of the ghost they're replying to. if the ghost they're responding to has it enabled, this will allow the other ghost to respond to this statement. if you notice that your ghost is getting stuck in a loop with the other ghost, you can erase this line and it should be fine.
+		
+				"\1\s[10]Hi Snake! Hey Sentinel, do you think those guys look familiar to you?\0\s[0]\i[20]Hmm..\e"
+			}
+			else
+			{
+				res_reference0 = reference0 //see above, although erasing this line may make it so the res_reference0 envelope may not work. In that case, you can write around it instead.
+				{
 
-             {
-             "\0\s[0]Hello, %(res_reference0).\w8\1\s[10]Hope you're doing well.\e"
+					"\0\s[0]Hello, %(res_reference0).\w8\1\s[10]Hope you're doing well.\e"
 
-             "\1\s[10]Hey, %(res_reference0).\e"
-             }
+					"\1\s[10]Hey, %(res_reference0).\e"
+				 
+				}
+			}
        }
 }

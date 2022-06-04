@@ -8,15 +8,15 @@ charset,UTF-8
 
 //The name of your ghost is what will be displayed when you are loading your ghost or switching to it, and also how it is referred to in certain functions. Usually this will be "Character and character" or just "Character" depending on your ghost. The type of the ghost will be ghost, obviously, leave that alone.
 
-name,GT Template - Y Clean
+name,Sentinel and Chiptest
 type,ghost
 
 
 //This defines which is the main character and which is the side character. The main character of a ghost is referred to as "sakura" by the code, and the side character as "kero". If you see these names in the functions, that's who they are referring to. Replace the names as you need.
 
 
-sakura.name,Girl
-kero.name,Triangle
+sakura.name,Sentinel
+kero.name,Chiptest
 
 
 //This is the information about you, the creator of your ghost! Put in your name or whatever alias you want and whatever website you'd like to link to.

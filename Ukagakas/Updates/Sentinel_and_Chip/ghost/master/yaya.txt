@@ -24,6 +24,7 @@ dic, chip_word.dic
 dic, chip_commu.dic
 dic, chip_nameteach.dic
 dic, chip_anchor.dic
+dic, chip_findwin.dic
 
 //---- Log Location -------------------------------------------------------------------------
 //I'm not entirely sure what this does, but basically don't touch it.

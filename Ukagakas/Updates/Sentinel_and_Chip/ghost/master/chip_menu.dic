@@ -46,10 +46,8 @@ MenuRun
 	  "\![*]\q[Repeat Last Dialogue,OnLastTalk]\n\n[half]"
 	}
 	--
- 	"\![*]\q[Say something,OnAiTalk]\n"
-	"\![*]\q[Say something 2,OnAiTalk]\n"
-	
-	//This option will force the ghost to say something from aitalk if the user clicks it.
+ 	"\![*]\q[Talk!,OnAiTalk]\n/
+	\![*]\q[Talk to another ghost!,OnCommunicate]\n"
 	--
 	"\![*]\q[Config Menu,configmenu]\n/
 	\![*]\q[Functions,dosomething]\n\n[half]/
