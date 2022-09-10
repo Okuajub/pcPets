@@ -10,7 +10,7 @@
 //Leave this alone.
 //Advanced users, this is mostly setting up whether or not dialogue is in a chain before it displays. Again, you can leave it alone unless you want to screw around with chains for some strange reason.
 
-AiTalk
+OnAiTalk
  {
 	if RAND(100) < communicateratio
  	{
@@ -37,22 +37,39 @@ AiTalk
 
 //--RandomTalk 
  //Alright, here we go! This is where ALL your ghost's random dialogue will go! These are the conversations that they'll have with you or each other that pop up depending on the talk rate defined in menu.dic (or if you ignored that, set in bootend.dic in the first boot, which would be every five minutes).
- 
-//*********************Advanced User Info*******************************
-//These text boxes are meant for those who have an interest in expanding or using more complicated functions in their ghost. Also for my own reference in the future since I plan on using this template too, haha. If you have no interest in any of this and just want to keep things as simple as possible, feel free to skip these boxes.
 
-//You CAN link to other pools of dialogue in RandomTalk using envelopes/functions, such as %(teatalk) to pull from a pool of dialogue about tea. Then you'd just add that line in among the other dialogue in here with %(teatalk). However, this vastly lowers the probability of dialogue in that function being called. If teatalk only gets called 1/5 times, and it has 10 pieces of dialogue in there, then you're only getting... uh... god, I'm bad at fractions... 1...50th? a chance that a certain teatalk line will appear. LOOK THE GIST IS THAT THE PROBABILITY GETS LOW. This applies to any kind of dialogue in a conditional. A simpler example would be if you have one piece of normal dialogue, and one piece that's an if check that has four pieces of dialogue in there. You'd end up with a 50% chance to get that normal dialogue, and a 50% chance for ONE of the other four pieces of dialogue... which makes the odds of seeing any specific line in that special dialogue that much lower.
-
-//You can't do things like put OnSystemBoot or something in RandomTalk. You could use \![raise] to pull something though, although I'd be careful about it. More on these kind of things and conditionals in general in the coding page on the walkthrough.
-
-//If you split up RandomTalk with if/else checks, then you can redirect in an If to another function, like... if chargermode == "on" { ChargerChatting } else {normal random talk dialogue}. This would redirect the random dialogue to ChargerChatting instead. You can't just throw a function into RandomTalk directly though, like "dialogue 1" "dialogue 2" OnFunctionname "dialogue 3", that kind of thing. You'll have to split it off into its own if or point to it with an envelope.
-
-//You can do multiple ifs in RandomTalk if required... like an if for if a character is asleep, or if a third character is present, or if they're having a nervous breakdown, or if they're sulking. It depends! You can add a bunch of checks leading to specialized pools if you want. Just make sure you leave some normal dialogue in the last else for RandomTalk (unless you want to redirect that somewhere else with an envelope too... although that seems a bit redundant, honestly.)
-//***********************************************************************
-
-RandomTalk : nonoverlap
+RandomTalk : nonoverlap_pool
 {
-	
+	if codecTimer != ""
+	{
+		"\1\s[38]Hm."
+		
+		"\1\s[38]What? That's ridiculous. Oh, not you, Snake."
+		
+		"\1\s[38]Just static..."
+		
+		"\1\s[38]Nothing on this channel."
+		
+		"\1\s[38]Just the CIA again..."
+		
+		"\1\s[38]Huh."
+		
+		"\1\s[38]Sigh... Another derivative. I'll write it down."
+		
+		"\1\s[38]Well, now these guys are just talking about nothing."
+		
+		"\1\s[38]Hmmmm.... \w8\w8Hm. \w8\w8\w8Well why'd you do a thing like that?\w8\w8\w8...\w8\w8Huh.\0\s[0]Alright, it's killing me. What are you hemming and hawing about?\1\s[38]Oh, nothing that interesting...\0\s[8]\n\n[half]Based on the noises you're making it's something."
+		
+		"\1\s[38]More nothing..."
+	}
+	elseif missionTimer != ""
+	{
+		"\1\s[38]Watch out for that guard around the corner, Snake."
+		
+		"\1\s[38]Alright. Great job, Snake. Put that thumbdrive into the computer, wait for it to install, then pull it back out and get out of there."
+	}
+	else
+	{
 	//OKUAJUB: Alright, here's where the dialogue starts. Basic strands.
 	
 	"\0\s[4]" //Just giving them some times they'll randomly pose instead of talking. Breath a little life in, you know.
@@ -81,7 +98,7 @@ RandomTalk : nonoverlap
 	
 	"\0\s[5]\1\s[15]"
 	
-	"\1\s[14]\0\s[4]"
+	"\1\s[14]\0\s[4]" //FUTURE OKUAJUB:...??? Apparently, I got bored and didn't add any more of these where they both pose?? that's, fine.
 	
 	//Okay. Real dialogue.
 	
@@ -118,7 +135,7 @@ RandomTalk : nonoverlap
 	//That I always put the thing Otacon likes in the first slot (0), so I know it'll always pick something he has a positive preference for when calling that first slot, and he reacts appropriately. It would be weird if he said he liked Metal Gear Ray over Rex for example.
 	{ 
 		_optionPicks = pickAndChoose //This sets up the array to be usable in this dialogue. weirdly, you can't just call the array. don't ask me why it's this way, I don't really know.
-		_option1 = _optionPicks[0] //This sets up the first slot of the array to be callable as a dialogue, like when I might use &(snakeFeels) to display the integer Snake uses for his feelings towards the user.
+		_option1 = _optionPicks[0] //This sets up the first slot of the array to be callable as a dialogue, like when I might use %(snakeFeels) to display the integer Snake uses for his feelings towards the user.
 		_option2 = _optionPicks[1] //Ditto, but for the second slot.
 		--
 		"\1\s[10]Hey, %(username), do you like " //setting this up so Otacon can ask one of two ways the options will present.
@@ -149,6 +166,10 @@ RandomTalk : nonoverlap
 	"New Mexico. It'll be pretty dry, you better remember to stay hydrated, Snake."
 	
 	"Canada, specifically British Columbia. Not too far south of base, huh?"
+	
+	"Arizona. Again? I swear, there's been at least %(RAND(6) + 3) of them already down there. Sheesh. I guess warehouse rent is cheap or something."
+	
+	"New York. Don't go trying to rescue the President or anything, Pliskin.\0\s[6]"
 	--
 	"\e"
 	}
@@ -157,18 +178,21 @@ RandomTalk : nonoverlap
 	
 	//OKUAJUB: Otacon tells Snake about some of those Japanese Animes...
 	
-	"\1\s[18]Snake, have you heard of Danganronpa?\0\s[8]Dan can Ron what?\1\s[15]\n\n[half]\f[italic,true] Danganronpa.\f[italic,default] It's a Japanese video game series about highschoolers murdering each other because of a higher power, a large bear named Monokuma.\0\s[8]\n\n[half]Japanese, huh? Figures.\1\s[17]\n\n[half]Hey! I'm not that predictable!\0\s[5]\w8\e"
-	
 	"\1\s[18]Hey Snake, have I told you about Gundam SEED? \w8 It's the ninth installment of the Mobile Suit Gundam IP, one of my favorites. \n\n[half]Humans have developed two subspecies of themselves. Naturals, who are your ordinary people that reside on Earth, and Coordinators, genetically...\w8 enhanced\w8 humans...\n\w8\w8\w8\0\s[8]\1\s[14] Ah, er... maybe we should watch something else.\e" 
 	
-	"\1\s[18]Have we watched Death Note together, yet, Snake? You get to see what would really happen if someone was given absolute power of judge, jury, and executioner! \n\nLight Yagami, our main character, finds something called a 'Death Note', which kills people when their names are written in it. Pretty gruesome, huh?\0\s[9]...Yeah. Gruesome."
+	"\1\s[18]Have we watched Death Note together, yet, Snake? If you remember, Light finds a book called a 'Death Note', which kills people when their names are written in it. The exaggerated animation is awesome! But it's pretty gruesome, huh?\0\s[9]Yeah. Gruesome."
 	
 	"\1\s[18]Hey Snake, have I told you about Digimon, yet?\0\s[8]Doesn't it have something to do with those peek-at-chus or something?\1\s[15]\n\n[half]Hah! No! That's Pokemon. Digimon are \f[italic,true]digital\f[italic,default] monsters.\0\s[0]\1\s[15] They live in the digital world, and a human with a Digivice can become a Digimon Tamer! Each series deals with a new, traumatic event, and how to deal with it.\w8\w8\0\s[8]\1\s[18]\nYou still don't get it, do you?\1\s[32]\w8\w8\w8\w8\w8 Oh well...\e"
 	
 	"\1\s[18]Hey, Snake. Have you seen JoJo's Bizzare Adventure? That one gets wild! The main draw to the series is the concept of Stands and being a 'stand user'. A Stand is a powerful entity summoned by the user, holding powerful abilities greater than the user themself. \n\n[half]But because these Stands are manifestations of the user's life energy, if another Stand hurts it, you hurt the user, too! Pretty cool, huh?\0\s[9]...I don't get it.\1\s[15]\n\n[half]You'll just have to watch with me! You'll pick it up.\e"
 	
-	//OKUAJUB: Codec Moments, Snake will upload a picture to Otacon, and then they'll have a small conversation regarding it. I should probably make this all one big response dialogue, but, I like it this way!
-
+	"\1\s[18]Snake, do you remember Polar Bear Cafe?\0\s[5]\1\s[15] It's a funny but cute comedy slife of life anime about a panda who visits a cafe run by a polar bear! Other animals visit the cafe too... but Polar Bear's puns are my favorite part, they're best in Japanese. They don't make much sense translated directly."
+	
+	"\1\s[18]Hey Snake, have you watched CardCaptor Sakura yet?\1\s[15]\w8 Oh, what am I talking about... of course you know it! It's a staple of the anime and manga spaces. EVERYBODY should watch it! I think the relationship between Cerberus and Sakura is really cute. Especially because he just wants her to be happy."
+	
+	"\1\s[16]We should watch Konohana Kitan again. I really like Yuzu, she's cute and tries her best working at the hotel. The way the show blends character relationships, plot development and world building is really good too...\0\s[5]Satsuki is a pretty girl, too.\1\s[30]\n\n[half]W-well they're all very pretty, aren't they?"
+	
+	//OKUAJUB: Codec Moments, Snake will "upload" a picture to Otacon, and then they'll have a small conversation regarding it. I should probably make this all one big response dialogue, but... eh.
 	{
 	"\1\s[10]So... Any Codec moments from you, Snake?\n\n[half]Okay, first up...\w8\w8\w8" 
 	--
@@ -187,6 +211,7 @@ RandomTalk : nonoverlap
 	//If you'd like to add your own Codec Moment, Save an image as codecmoment[whatever your image name would be].png, place it in the img folder in Ghost/Master, copy the coding in the line above and paste it, and replace the codecoment.png with codecmoment[whatever your image name would be].png and you should be good to go!
 	
 	//Otacon will tell the user tips about working with a Ukagaka. Short-cuts, small features, etc! These will be here in every version until commented out, or when I convert to YAYA, a flag is flipped. nice and hand-holdy like MGS4 Otacon. "Do you have a gun that can take out those Gekko, Snake?"
+	if beginnermode == "On"
 	{
 	"\1\s[18]Hey, %(username), did you know "
 	--
@@ -206,15 +231,71 @@ RandomTalk : nonoverlap
 	
 	"that we have a built-in calendar? You should check it out sometime! It can be found in Snake's functions menu.  Double click Snake, be careful not to double click his face, and he'll give you some options.\e"
 	
-	"that we can empty your recycle bin for you? Try 'Empty Recycle Bin' it from the 'functions' option in Snake's menu! Double click Snake, be careful not to double click his face, and he'll give you some options.\e"
+	"that we can empty your recycle bin for you? Try 'Empty Recycle Bin' it from the 'functions' option in Snake's menu! Double click Snake, be careful not to double click his face or other hotspots, and he'll give you some options.\e"
 	
 	"that you can change the shape of our balloons? You should try it sometime! It's underneath 'Balloons' in the main menu.\e"
 	
-	"that you can hide us using the 'Iconify' option? It's useful for hiding us temporarily! You should try it. If you want to bring us back from Iconify, on Windows, just hit the '^' symbol on your taskbar, and click the icon that looks like me!\e"
+	"that you can hide us using the 'Iconify' option? It's useful for hiding us temporarily! You should try it. If you want to bring us back from Iconify on Windows, just hit the '^' symbol on your taskbar. That's your system tray! Once you've done that, right-click the icon that looks like me! That'll bring up a menu where you can deselect the Iconify option. It works like minimizing a tab, sort of!\e"
 	
 	"that you can have multiple ghosts out at once? Try using the 'Call Ghost' function in the menu! If you want to dismiss them (or me..), then you can simply hit 'Close' in their menu.\e"
 	
 	"gaming?\f[height,6] ...what?\f[height,default]\e" //har har
+	}
+	
+	{ //Otacon hums or sings to himself.
+		"\1\s[32]"
+		--
+		"\f[size,8]\f[italic,true]♪..."
+		--
+		"not a girl in the whole wide world as beautiful as Julia"
+		"you want a taste of my brain? Okay, it's yours anyway"
+		"blue hair, blue tie, hiding in your Wi-Fi"
+		"hmmmm-mmmmm, Mmmm-mmmm, mm-mm-Mmm-Mmm, Mmm-Mmmmm"
+		"the one called Sailor Moon"
+		"will you braid my hair, after we make love"
+		"you know it's plastic lo-oove"
+		"Digimon, Digital Monsters, Digimon are the Champions"
+		"can we reprogram ourselves, for loving"
+		"can we reprogram ourselves, for life"
+		"can we reporgam ourselves, for living... I don't know, if we can"
+		"wring me out and hang me out to dry"
+		"Oyasumi, O-yasumi, close your eyes and we'll leave this dream"
+		"Mátame, please"
+		"misery loves, misery loves, misery loves you-ou-ou"
+		"suki suki su, fuwa fuwa fu... My Melody"
+		"sending you Forget Me Nots"
+		"sweet little bumblebee, I know you're the one for me"
+		"one, two, three, four, häschen alarm"
+		"Aishite, Aishite, Aishite, motto motto"
+		"she knows she gets away with murder"
+		"would you like to eat with me, a dinner as a family, where we take care of each other's needs? yeah that's not happening"
+		"why do you still believe in me"
+		"guess I'll say thank you for lending me your life"
+		"how about today you try eating someone else for a change"
+		"funny thing, that statement changed today... good thing that I'm forgiving"
+		"all I care to do is sip on beer and chocolate milk"
+		"wearing you like new shoes, thinking that I can't lose"
+		"man in all the pictures, he knows how to please her, you don't even care, even care"
+		"Caipirinha, Caipirinha, woah, yeah!"
+		"ai ai ai, I'm your little butterfly"
+		"I've been searching for a man, all across Japan... just to find, to find my samurai... Someone who is strong, but still a little shy"
+		"I'd like to walk around in your mind someday"
+		"Daisy, Daisy, give me your answer do"
+		"it won't be a stylish marriage... I can't afford a carriage"
+		"I bite at the hand that feeds me, I slap at the face that eats me"
+		"I hope poison ivy grows... in your garden too"
+		"dupatta, dupatta, dupatta, tsum tsum"
+		"the only times I ever see her... is when she's behind me in the mirror"
+		"I'm a lo-tus ea-ter"
+		"rejoice, despite the fact this world will kill you"
+		"why bother... it's gonna hurt me... it's gonna kill when you desert me"
+		"lo-ongtime... sunshi-ine... longtime sunshine upon me"
+		"I'm so sorry that you have to have a body"
+		"then it will fail on you, my dear"
+		"the thoughts that say I deserve to bleed"
+		"I want to take a knife and write a line across my chest"
+		--
+		"...♪\f[size,default]\f[italic,default]"
 	}
 	
 	"\1\s[16]\w8\w8\w8Mhm..\0\s[8]Something on your mind, Otacon?\1\s[16] Yeah. Just remembering a good Saturday night. The time we couldn't find a sub or dub and you translated for us.\0\s[5]\n\n[half]I remember."
@@ -225,6 +306,8 @@ RandomTalk : nonoverlap
 	
 	"\1\s[10]Hm.. I wonder if we can find %(japaneseAnimes) tonight.\e"
 	
+	"\1\s[18]Do you miss hunting, Snake?\0\s[0]Hunting was just a way to get food on the table. I don't hunt for sport.\1\s[10]Fair enough."
+	
 	//Computer related dialogue.
 	
 	"\1\s[18]I kinda like being in a computer. It's surprisingly quiet.\e"
@@ -233,24 +316,44 @@ RandomTalk : nonoverlap
 	
 	"\1\s[18]Hey, there's a little nibble out of this file. Maybe a computer virus took a bite out of it?\e"
 	
+	"\1\s[18]I really hope I can't get malware in here.\e"
+	
+	"\1\s[18]You do run your antivirus often, right %(username)?\e"
+	
+	"\1\s[15]Hey, do you have any games on your computer, %(username)? I like portables like the PSP more than computers, but computers can be really powerful!\e"
+	
 	"\1\s[18]Living inside a screen... I wonder if it hurts my eyes just like looking at one for too long does?\e"
 	
-	"\1\s[16]It gets kind of breezy on the desktop sometimes, actually. I'm glad I brought my jacket.\e"
+	"\1\s[16]It gets kind of breezy on the desktop sometimes, actually. I wonder if its the same outside for you.\e"
+	
+	"\1\s[16]I'm kind of hungry... I miss Snake's cooking, haha. I guess rations are okay for now.\e"
+	
+	"\1\s[18]Are you thirsty at all, Snake?\0\s[8]Hmm, now that you mention it, I don't think I've felt thirsty since we got here.\1\s[18]\n\n[half]Huh. I have to document this weird stuff.\e"
 	
 	"\1\s[18]You know, what year is it, %(username)? %(year)..? I was about to say that seems a long time in the future, but I don't really remember when or where I was..? Guess being in a computer will do that to you.\1\s[19]\f[size,8] But has anybody actually documented what being in a computer does? Huh...\f[size,default]"
 	
 	"\0\s[8]Behind this picture it's just lines of ones and zeroes. What's with this place?\e"
 	
-	"\0\s[9]\f[size,8]I don't like this place...\e"
+	"\0\s[9]\f[size,8]I don't like it here... unnerving.\e"
 	
 	"\0\s[9]Feels like I've been here too long. This place gives me the creeps.\e"
 	
 	"\0\s[8]Where's this wind coming from? Past the edge it's only empty black space.\e"
 	
+	"\0\s[9]The layout of this place is odd. It's like a huge stage, but at the ends it's just... Nothing.\e"
+	
+	"\0\s[9]There's no exits from this place from what I can see. It's unnerving. Feels too confining.\e"
+	
+	"\0\s[9]Hm. Wonder if my nanomachines work here. There could be electronic interference.\e"
+	
+	"\0\s[9]This place is tiny. Feels like a dog in a yard too small.\e"
+	
+	"\0\s[9]If I had a Soliton Radar out here I bet the whole thing would fry."
+	
 	//--If statements
 	//You can put if statements in RandomTalk! They don't even need Else statements, unless you want to keep two sets of statements completely separate - for example, you have one pool of conversations for when there are two characters, and one for if there are three characters. You wouldn't want these to overlap, so you'd put one pool in the if statement and the other in the else. Most of the time though, you won't need an Else statement for these, since they'll mostly only be adding in dialogue if the if statement is true. 
 	
-	if nowshell == "master" //This checks to see what shell they're currently using. You may remember this value being defined back in bootend.dic. If they're in their default shell...
+	if nowshell == "Retro" //This checks to see what shell they're currently using. You may remember this value being defined back in bootend.dic.
 	{
 	//Then these conversations are available! Note the brackets enclosing this set of dialogue.
 	"\0\s[0]Why exactly are you made of little blocks, Otacon?\w8\1\s[10]Well, I'm technically not actually here right now. I'm using a terminal to communicate with you through this avatar!\0\s[8]\n\n[half]\w8\w8 Huh?\1\s[18]\n\n[half]Maybe I should just come here as myself...\e"
@@ -258,11 +361,13 @@ RandomTalk : nonoverlap
 	"\1\s[30]I miss being close to you, Dave, this avatar doesn't do you justice...\0\s[6]\e"
 	}
 	//You can also put in multiple ifs checking for the same thing to vary the responses. In this case, it's checking to see if they're wearing another shell. You don't need to use elseifs for this! Just an if is fine.
-	if nowshell == "Solid Shell"
+	if nowshell == "master"
 	{
 	"\0\s[0]Feels nice to have you here, Otacon.\w8\1\s[30]I feel the same way.\e"
 	
 	"\1\s[16]I like seeing you in person, reminds me of the early days of Philanthropy, off the grid in Alaska, just figuring out how to live...\w8\0\s[5]It's been a long time, since then, huh?\e"
+	
+	"\1\s[18]You know, I feel like something's different about you.\0\s[8]What do you mean?\1\s[37]\n\n[half]I don't know. Some je ne sais quois.\0\s[0]\n\n[half]Huh.\1\s[30]\n\n[half]\f[size,10]Je ne sais iroquois..."
 	}
 	
 	//OKUAJUB: You can also put if checks inside a dialogue, so the dialogue changes depending on some variable.
@@ -273,14 +378,14 @@ RandomTalk : nonoverlap
 		{
 			"\0\s[0]Hm. I don't really know how to feel about it."
 		}
-		if snakeFeelings >= 21 //Here, the ghost will pick one of these dialogues, not all four. Each has a 1/[number of dialogues] chance to be picked, so if there's 4 dialogues, there's 1/4 chance of it being picked.
+		elseif snakeFeelings >= 21 //Here, the ghost will pick one of these dialogues, not all four. Each has a 1/[number of dialogues] chance to be picked, so if there's 4 dialogues, there's 1/4 chance of it being picked.
 		{
 			"\0\s[8]Could be worse."
 			"\0\s[8]Yeah. I guess so."
 			"\0\s[8]Hm. At least %(heshe) treats us alright."
 			"\0\s[8]Mm-mhm.\1\s[10]\n\n[half]Well that's good to hear."
 		}
-		if snakeFeelings <= -21 //Since there's only 1 dialogue here, it has a 1/1 chance of being picked, which is 100% of the time.
+		elseif snakeFeelings <= -21 //Since there's only 1 dialogue here, it has a 1/1 chance of being picked, which is 100% of the time.
 		{
 			"\0\s[8]Hm.\w8.\w8.\w8 No. I don't think so."
 		}
@@ -288,7 +393,7 @@ RandomTalk : nonoverlap
 		"\e" //Closing the dialogue.
 	}
 	
-	//OKUAJUB: Increases the chances of a user who has not clicked Mei Ling's anchor encountering a phrase with her anchor. This is becaues Mei Ling's FAQ can only be accessed by random talk and I don't want it to be too slim, unlike Gray Fox's, which is supposed to be a bit hidden.
+	//OKUAJUB: Increases the chances of a user who has not clicked Mei Ling's anchor encountering a phrase with her anchor. This is because Mei Ling's FAQ can only be accessed by random talk and I don't want it to be too slim, unlike Gray Fox's, which is supposed to be a bit hidden.
 	if clickMeiLing == 0
 	{
 		"\1\s[10]I wonder how \_a[whoMeiLing]Mei Ling\_a is doing...\e"
@@ -296,17 +401,36 @@ RandomTalk : nonoverlap
 	//OKUAJUB: Snake feelings 20+ only dialogue
 	if snakeFeelings >= 20 
 	{
-	"\1\s[14]Snake,\w8 what was Frank like?\0\s[8]\_a[whoJaeger]Jaeger?\_a Best damn soldier I ever knew. He and I were close. We ran a few wargame campaigns on our off time. Would have been ironic if we'd been playing BattleDroids.\1\s[18]\n\n[half]Huh! I never thought you'd be a TTRPG type. You're a mystery.\e" //Okay, maybe Snake and Gray Fox didn't really play wargames canonically. but I like him being a secret nerd, even if its an older generation of nerd...
+		"\1\s[14]Snake,\w8 what was Frank like?\0\s[8]\_a[whoJaeger]Jaeger?\_a Best damn soldier I ever knew. We ran a few wargame campaigns on our off time. Would have been ironic if we'd been playing BattleDroids.\1\s[18]\n\n[half]Huh! I never thought you'd be a TTRPG type. You're a mystery.\e" //Okay, maybe Snake and Gray Fox didn't really play wargames canonically. but I like him being a secret nerd, even if its an older generation of nerd...
+		
+		"\1\s[16]It was funny seeing how many pulp fiction books you had, when I first walked in your cabin. I wandered over to your bookcases and I think you had nearly two shelves full.\0\s[6]I always picked one up when I mushed to town. It became a habit."
+		
+		"\1\s[15]The books you chose to keep on your coffee table spoke a lot, Snake.\0\s[5]Why's that?\1\s[15]\n\n[half]Well, for one thing, the seven different North American Hunting Club compilations made an impression. Especially with the 'Wild Game Cookbook' lying on top.\0\s[0]\n\n[half]I think you know from experience I used that book enough to know it by heart.\1\s[19]\n\n[half]Yeah, and I sure wanted you to give me a break! I could never stomach anything with venison liver in it. Or any kind of liver for that matter. Eugh, just remembering that fried liver with onions and gravy is making my stomach turn.\0\s[5]\n\n[half]It wasn't easy to harbor a picky eater.\1\s[18]\n\n[half]Now, I wouldn't call myself picky..\w4 I think you were the one with an iron stomach."
+		
+		{
+			"\1\s[15]So, feel like hitting me with a book recommendation, Snake?\0\s[6]Mhm. "
+			"\1\s[15]So, any a book recommendations from you, Snake?\0\s[6]Hm.. "
+			"\1\s[15]Hey, Snake?\0\s[6]Mhm?\1\s[15]\n\n[half]Could you tell me about a book you like?\0\s[6]\n\n[half]"
+			--
+			"Alright. You probably know of Kubrick's \f[italic,true]2001\f[italic,default], right?\1\s[10]\n\n[half]Of course, my dad loved that film. Apparently he and my real mom used to watch it together.\0\s[0]\n\n[half]The movie had a book too, we've talked about that before. It's different, though. It was developed at the same time as the movie.\w8\w8\s[6] I think Kubrick's film is good, for what he intended it to be. Nonverbal. But the book, by its very nature, shows the reader much more clearly what its intentions are.\w8\s[0] I appreciate the honesty of the words in a book. Books tell you what is.\1\s[10]\n\n[half]That's why you like Jack London, too, right?\0\s[0]\n\n[half]Right. His style of writing, only presenting how the world exists, with no bias but his own.\w8\w8\s[9]"
+			"White Fang is a personal favorite of mine. It's an inverse of Call of The Wild. It's commonly thought to be the lesser of the pair, however the raw feeling of White Fang speaks to me.\w4\w4\0\s[6] I know you don't particularly enjoy reading serious animal on animal violence, Otacon, but I find it's purpose, in showing the will, the need, to survive, crucial to its impact."
+		}
+		
+		"\1\s[18]You know, I've been thinking about reading more often, but I realized I don't know where to start. I mean, I don't really count manga as reading, unless its for a kids' reading competition, haha.\0\s[6]I could always give you some recommendations.\1\s[15]\n\n[half]\w4You know, you're right, you have a huge collection of books, huh?"
+		
+		"\1\s[16]It was funny seeing how many pulp paperbacks you had, when we first came back to your cabin. I think you had nearly four shelves full.\0\s[6]\n\n[half]I always picked one up when I mushed to town. It became a habit. When they're a buck a piece and keep me busy for a day, it's a pretty good deal."
+		
+		"\0\s[6]I could use a good book."
 	}
 	if snakeFeelings <= -1
 	{
-	"\0\s[0]...\e"
-	
-	"\0\s[0]Hmph.\e"
-	
-	"\0\s[8]...\n\n\f[italic,true]Snake doesn't seem very talkative.\f[italic,default]\e"
-	
-	"\1\s[14]Snake..? Can I ask you about what happened between you and Big Boss?\w8\w8\w8\w8\0\s[9]...Not here. Not now.\1\s[32] Alright, I understand.\e"
+		"\0\s[0]...\e"
+		
+		"\0\s[0]Hmph.\e"
+		
+		"\0\s[8]...\n\n\f[italic,true]Snake doesn't seem very talkative.\f[italic,default]\e"
+		
+		"\1\s[14]Snake..? Can I ask you about what happened between you and Big Boss?\w8\w8\w8\w8\0\s[9]...Not here. Not now.\1\s[32] Alright, I understand.\e"
 	}
 	//OKUAJUB: Otacon feelings 20+ only dialogue
 	if otaconFeelings >= 20
@@ -323,13 +447,15 @@ RandomTalk : nonoverlap
 		
 		"\1\s[10]Don't forget to take care of yourself, %(username)."
 		
-		"\1\s[16]\w8\w8\w8\w8\w8\w8Hah.\0\s[8]\w8\w8Hm?\1\s[16] Just thinking about that time our meetup point was in gay bar. That was different.\0\s[5]\n\n[half]I guess that one was different, huh?"
+		"\1\s[16]\w8\w8\w8\w8\w8\w8\w8Heheh.\0\s[8]\w8\w8Hm?\1\s[16] Just thinking about that time our meetup point was in gay bar. That was different.\0\s[5]\n\n[half]I guess that one was different, huh?"
+		
+		"\1\s[16]All these files strewn about reminds me of how meticulously you take care of your books at home, Snake.\0\s[0]What can I say? When you live alone, words become cherished friends.\1\s[10]\n\n[half]I always liked how I could tell when you really loved a book.\w8 There'd be an immaculate,\w4 perfectly kept hardcover copy... and right next to it, a wellworn, dog-eared pulp paperback copy. It always had this warmth to it I couldn't put to words.\w8\w8"
 	}
 	
 	//This starts some checks for which month it is. Depending on which, it'll have a chance to draw some random dialogue. Remember, these don't just get added to the dialogue pool, each 'if' acts like one line of random dialogue.
 	if month >= 12
 	{
-		"\0\s[0]It's December, Otacon. You have any plans?\w8\1\s[18]Not really... I guess I'll be spending the holiday season with you?\0\s[0]\n\n[half]I've got no god's birthday, I'd prefer the time with you.\e"
+		"\0\s[0]It's December, Otacon. You have any plans?\w8\1\s[18]Not really... I guess I'll be spending the holiday season with you?\0\s[0]\n\n[half] I'd prefer the time with you.\e"
 		
 		"\1\s[10]Brrr! Aren't you cold, Snake? It's freezing out!\w8\0\s[5]The sneaking suit has poly-thermal technology, I could and did survive a blizzard.\1\s[13]\n\n[half]Well, jeez, now I'm kind of jealous.\e"
 		
@@ -425,7 +551,7 @@ RandomTalk : nonoverlap
 	{
 		"\0\s[0]Monday, huh?\e"
 		
-		"\1\s[18]Snake, you're going to have to watch out, today. Garfield has been seen in the area, and \w4\1\s[13]he's got a bad case of the Mondays!\0\s[8]\w8Otacon. \w8Are you serious?\1\s[16]\n\n[half]\f[italic,true]*snrk*\f[italic,false]\e"
+		"\1\s[18]Snake, you're going to have to watch out, today. Garfield has been seen in the area, and \w4\1\s[13]he's got a bad case of the Mondays!\0\s[8]\w8Otacon. \w8Are you serious?\1\s[16]\n\n[half]\f[italic,true]snrk.\f[italic,false]\e"
 	}
 	if weekday == 2
 	{
@@ -443,7 +569,7 @@ RandomTalk : nonoverlap
 	{
 		"\0\s[0]Thursday, huh?\e"
 		
-		"\w8\1\s[15]\b[2]\_b[img\wednesdayasuka.jpg,inline]\w8\w8\0\s[2]How did you do that with your mouth?!\e"
+		"\w8\1\s[15]\_b[img\wednesdayasuka.jpg,inline]\w8\w8\0\s[2]How did you do that with your mouth?!\e"
 	}
 	if weekday == 5
 	{
@@ -466,7 +592,7 @@ RandomTalk : nonoverlap
 	//These ifs check for the time of day as defined in bootend.dic. Do you remember the words used for each chunk of time in GetTimeSlot? These are the same words!
 	if timeslot == "earlymorning"
 	{
-		"\0\s[0]Up bright and early, hm?\w8\1\s[10]I can't believe you used to wake up at 6 AM every day, Snake.\0\s[10]\n\n[half]Sometimes earlier. Survival training was brutal.\e"
+		"\0\s[0]Up bright and early, hm?\w8\1\s[10]I can't believe you used to wake up at 6 AM every day, Snake.\0\s[0]\n\n[half]Sometimes earlier. Survival training was brutal.\e"
 		
 		"\1\s[10]Good morning, %(username).\w8\0\s[0]Mhm.\e"
 		
@@ -522,7 +648,7 @@ RandomTalk : nonoverlap
 	-- //You've probably seen these double dashes before in other .dic files. In this case, these dashes enclose a set of multiple responses. More on double dashes in the coding page on the walkthrough site.
 	"\1\s[15]Sailor Moon! It's a classic, every anime fan should see it at least once. Or twice.\n...Or maybe a couple times more than that."
 	"\1\s[15]Mobile Suit Gundam. Despite our... challenges with large robots, it's still one of my favorites. It came out almost the same year I was born, you know! Anyway..."
-	"\1\s[15]Cowboy Bebop, despite the strange name, the way it protrays life is incredible."
+	"\1\s[15]Cowboy Bebop, the way it protrays life is incredible. Plus, Spike is the coolest! The action scenes are so tense... And oh my gosh, the music! I love those space bounty hunters. What a great show."
 	"\1\s[15]Polar Bear Cafe! It's so cute, Snake. The wolf wants to be a baker..!"
 	"\1\s[18]Blue Exorcist. Now this one is exciting, it's a bit more action focused than my usual picks."
 	"\1\s[18]Evangelion! I know we've dealt with enough robots piloted by kids, but... er, it's still really good."
@@ -541,25 +667,8 @@ RandomTalk : nonoverlap
 	"\e" //Dialogue ends
 	}
 	
-	//"\0\s[0]\f[height,20]These words are really large.\f[height,default]\w8\1\s[10]These words are a normal size. \w8\f[height,6]These words are small.\f[height,default]\e"
-	
-	//You can use other fancier SakuraScript bits in your dialogue if you want to get font effects, although I won't get too much into them here. In this case, \f[height,20] changes the height of the font, in this case to 20 or to 6, and then \f[height,default] changes them back to normal. I touch more on this in the SakuraScript page of the walkthrough.
-	
-	//"\0\s[0]\f[strike,true]These words are struck out.\f[strike,default]\w8\1\s[10]\f[sub,true]These words are a subscript.\f[sub,false] \f[sup,true]These words are a superscript.\f[sup,false] \f[underline,true]These words are underlined.\f[underline,default] \f[bold,true]These words are bold.\f[bold,false] \f[italic,true]These words are italic.\f[italic,false] \f[color,186,146,112]These words are a color.\f[color,default] This tag would return to default.\f[default]\e"
-	
-	//Here's a list of similar tags you may find useful. You can see they function much like <b> or <i> tags in html. You just enclose the piece of text you want to change with them. Note that they start with \f[word,true] to turn it on, then \f[word,false] or \f[word,default] to turn it off. I assume you can tell what the tags do by the text they enclose.
-	//For the \f[color] tag, the three colors listed are the RGB values of the color you want to use for your text. Change them to whatever color you want to use. \f[default] can be an easy way to quickly go back to the default word setting in your balloon after messing with colors and effects a lot.
-	
-	//"\0\s[0]Here's a link to a website. \_a[http://www.website.com/]Right here.\_a\e"
-	
-	//Along the same lines as above, you can use \_a[address] to link to certain things. Note that it ends with \_a to close the link. It's very similar to <a href=address> and </a> in html.
-	
-	//"\0\s[1]\1\s[15]\_sWe are saying this dialogue at the same time.\e" 
-	
-	//This dialogue uses a unique tag, \_s. \_s makes it so both characters will speak the same words at the same time. Try it in Script Input to see how it works. I talk about it a little more on the walkthrough page for scripting.
-	
-	//And so we reach the end of randomtalk! I again reiterate, YOU CAN AND SHOULD WRITE YOUR OWN NEW LINES OF DIALOGUE FOR THIS! I included some random example phrases here for you just to replace the text, but there really aren't that many. You'll want to add more, and doing so is easy! Just copy and paste a line and redo the text. Repeat as many times as you want with as many conversations as you want. You can always expand this section!
-}
+	}
+} //Don't delete this bracket.
 
 
 //Alright, we're done with the random conversations for now, but there are a few other things in aitalk that we'll need to fill out too.
@@ -567,18 +676,6 @@ RandomTalk : nonoverlap
 
 //-OnMinuteChange
 //These are time-related bits of dialogue for your ghost to say. If you're uninterested, you can delete it all except for a line for MikireTalk. So it'd look something like
-
-//OnMinuteChange
-//{
-//HourCheck
-//--
-//if mikireflag == 1
-// 	{
-// 		MikireTalk
-//	}
-//}
-
-//But I think these are kind of neat, so I'd leave them myself.
 
 
 //Keeps track of if an hour has passed. Just ignore this.
@@ -589,15 +686,26 @@ if passmin >= 60
 		passmin = 0
 		passhour = passhour + 1
 		
-		if RAND(10) < 4
+		if beginnerMode == "off"
 		{
-			snakeFeelings++
-			otaconFeelings++
+			if RAND(10) < 4
+			{
+				snakeFeelings++
+				otaconFeelings++
+			}
+			else
+			{
+				snakeFeelings--
+				otaconFeelings--
+			}
 		}
-		else
+		else //Makes it easier to recoup feelings by randomly giving a friendship bonus.
 		{
-			snakeFeelings--
-			otaconFeelings--
+			if RAND(10) < 4
+			{
+				snakeFeelings++
+				otaconFeelings++
+			}
 		}
 	}
 }
@@ -644,15 +752,60 @@ OnMinuteChange //This is what will trigger time-based dialogue for your Ghost.
 
 OnSecondChange
  {
+	
+	//Codec and Missions stuff.
+	
+	if codecTimer == "" || codecTimer == "finished"
+	{
+		//OKUAJUB: nothing happens.
+	}
+	elseif codecTimer == 0
+	{
+		codecTimer = "finished"
+		"\1\s[38]Hey, %(username), I'm done searching the frequencies! Check back in with me soon, okay?\x\e"
+	}
+	else
+	{
+		codecTimer = codecTimer - 1 //Reduces the codec search timer by 1 every second.
+		
+	}
+	
+	if missionTimer == "" || missionTimer == "finished"
+	{
+		//OKUAJUB: nothing happens.
+	}
+	elseif missionTimer == 0
+	{
+		missionTimer = "finished"
+		"\0\s[-1]I'm all done here, Otacon. Be back as soon as possible.\1\s[38]Great, Snake. See you soon."
+	}
+	else
+	{
+		missionTimer = missionTimer - 1 //Reduces the mission timer by 1 every second.
+		
+	}
+	
+	if codecFatigue > 0
+	{
+		codecFatigue = codecFatigue - 1 //Counts down the Codec fatigue timer.
+	}
+	
+	if missionFatigue > 0
+	{
+		missionFatigue = missionFatigue - 1 //ditto
+	}
+	
+	//Non-related code.
 	if passsec == 59
- 		{
+ 	{
 	 	passsec = 1
  		passmin = passmin + 1
-		}
+	}
  	else
- 		{
-	 	passsec = passsec + 1
-		}
+ 	{
+		passsec = passsec + 1
+	}
+	
 	if mikireflag == 0 && reference1 == 1 //Dialogue for putting them off the screen.
 	{
 		"\0\s[0]Hey- What do you think you're doing?!"
@@ -676,7 +829,7 @@ OnSecondChange
  }
 
  //---- MikireTalk ---------------------------------------------------------------------
- //MikireTalk is dialogue for when your main character is off-screen. Like if you dragged Snake over to the side of your monitor until she was partially concealed by it.
+ //MikireTalk is dialogue for when your main character is off-screen. Like if you dragged Snake over to the side of your monitor until he was partially concealed by it.
  
 MikireTalk
  {
@@ -704,18 +857,18 @@ EndMikireTalk
 
 OnSurfaceRestore
  {
- 	//if reference0 == 4 || reference0 == 6 //This is checking what poses they are in. This looks to see if Girl is in pose 4 or pose 6, since she is reference0.
- 	//{
- 	//"\1\s[10]You're in a sad pose.\w8\0\s[0]I'll go back to normal then.\e"
- 	//}
- 	//elseif reference1 == 14 || reference1 == 16 //This is doing the same but for Triangle, since he's reference1. It looks to see if he's in pose 14 or post 16.
- 	//{
- 	//"\0\s[0]You look sad.\w8\1\s[10]I'll go back to normal.\e"
- 	//}
- 	//else
- 	//{
-	"\0\s[0]\1\s[10]\e"
-	//}
+	if codecTimer >= 1
+	{
+		"\0\s[0]\1\s[38]"
+	}
+	elseif missionTimer >= 1 //Codec timer and Mission timer should never be active at the same time, since Snake AND Otacon are involved in the missions.
+	{
+		"\0\s[-1]\1\s[38]"
+	}
+	else
+	{
+		"\0\s[0]\1\s[10]\e"
+	}
  }
 
  

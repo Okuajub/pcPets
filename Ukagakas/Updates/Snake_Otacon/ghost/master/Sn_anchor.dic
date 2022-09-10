@@ -28,11 +28,31 @@ OnTranslate
         else { //event result from ghost
             TOSTR(_talk)
         }
+		if devmode != 1 //Credit to Zi for this code snippet!
+		{
+			_checksurfaces = SPLIT(_talk,"\s[") //Make an array of the current dialogue, with each element starting with a surface call
+			_checksurfaces[0] = IARRAY //Erase the first element since it won't have a surface call
+			foreach _checksurfaces; _element
+			{
+				_surface = TOSTR(SPLIT(_element,"]")[0]) //Split off the rest of this bit of dialogue so that we just have the surface number
+				_isvalid = ASEARCH(_surface,ValidSurfaces)
+				if _isvalid == -1 && TOINT(_surface) >= 0; _talk = REPLACE(_talk,"\s[%(_surface)]","\s[0]") //If it isn't valid, replace it
+			}
+		}
 	}
-	
+OnNotifyShellInfo
+	{
+		ValidSurfaces = SPLIT(reference2,",")
+	}
 	//Some brief explanation about what's going on in those REPLACE lines! Basically, the function looks through the script and looks for a defined word or set of words. In this case, it's "Anchor 1". It then replaces "Anchor 1" with the second set of text, "\_a[anchor1]Anchor 1\_a". \_a if you recall is the dialogue code for linking something, so this is linking the words Anchor 1 to something called anchor1 set up in the next function, OnAnchorSelect.
 	//This is being used to change a word into a link, but you could conceivably use this to replace any text with any other kind of text if you wanted.
 
+
+//This bit of code is what makes menu options that don't start with On direct to Select.options instead. Remove or comment it if you prefer!
+OnChoiceSelect
+{
+	EVAL("Select.%(reference0)")
+}
 	
 //--OnAnchorSelect
 //OnAnchorSelect runs whenever someone clicks one of the links as specified above, or a link that begins with http://.
@@ -65,7 +85,7 @@ OnAnchorSelect
 			}
 			when "rssTip" //RSS Feed Tip
 			{
-				"\1\s[18]You want to install an RSS Feed, huh? Alright, that's pretty simple! Just grab the link to the RSS feed by clicking and dragging, and drop it onto us. After that, we'll take over the rest! Once it's installed you can view RSS Feeds in Snake's right-click menu, under 'Headlines and RSS Feeds'.\e"
+				"\1\s[18]You want to install an RSS Feed, huh? Alright, that's pretty simple! Just grab the link to the RSS feed by clicking and dragging, and drop it onto us. After that, we'll take over the rest! Once it's installed you can view RSS Feeds in Snake's right-click menu, under 'Headlines and RSS Feeds'. You can also set up SSP in the configuration setting to automatically check your headlines for you.\e"
 			}
 			when "specsTip" //System Info tip
 			{
@@ -73,24 +93,180 @@ OnAnchorSelect
 			}
 			when "iconifyTip" //Iconify Tip
 			{
-				"\1\s[10]Oh! Iconify is in Snake's right-click menu. When it's selected, we'll minimize into your taskbar, in 'Hidden Icons'. To get us back, right-click on the icon that looks like me, and then select Iconify again.\0\s[9]It feels pretty weird, though.\e"
+				"\1\s[10]Oh! Iconify is in Snake's right-click menu. When it's selected, we'll minimize into your taskbar, in 'Hidden Icons'. To get us back, right-click on the icon that looks like me, and then select Iconify again.\0\s[9]It feels pretty weird, though.\1\s[10]\n\n[half]Yeah. Anyway. It's called Minimize in some ghosts, too. Keep it in mind if you want to put us away and bring us back out quickly instead of having to close and open us all the time.\e"
 			}
 			when "hitpetTip" // Hitting/Petting Ghosts tip
 			{
-				"\1\s[13]Uh...\w8\w8 While I hope you won't hit me, or Snake for that matter... \1\s[10]\nYou can double click surfaces on us where the mouse pointer will change. Doing this will hit most ghosts. Sometimes this will point something out to them, or whatever their author coded.\nThese same surfaces are used for stroking or petting ghosts, as well! Just 'rub' with your mouse as if you were actually petting them with your own hand.\w8\w8\w8\n\n\1\s[30]If... you want to try it out... I don't mind being petted.\e"
+				"\1\s[13]Uh...\w8\w8 While I hope you won't hit me, or Snake for that matter... \1\s[10]\nYou can double click surfaces on us where the mouse pointer will change. Doing this will hit most ghosts. Sometimes this will point something out to them, or whatever their author coded.\nThese same surfaces are used for stroking or petting ghosts, as well! Just 'rub' with your mouse as if you were actually petting them with your own hand. For us, we have a configuration with multiple modes for punching. Double click Snake's body and pick 'Config Menu', and Snake will explain what each option means. As for petting... \w8\w8\w8\n\n\1\s[30]If... you want to try it out... I don't mind being petted on the top of my head.\e"
 			}
 			//OKUAJUB: Snake's FAQ section.
 			when "whoJaeger" //OKUAJUB: Anchor for Gray Fox
 			{
 				clickJaeger++
-				"\0\s[8]Jaeger? Best damn soldier I ever knew. He and I were close. When he got captured during N312, I knew I had to do something. In my naivety, I thought Big Boss picked me for N313 for that very reason.\1\s[18]\w8\w8...You loved him. Frank.\0\s[4] I'd have done anything to save him."
+				"\0\s[8]Gray Fox. He and I were close. "
+				--
+				if snakeFeelings <= 19
+				{
+					"That's all you need to know."
+				}
+				--
+				if snakeFeelings > 20
+				{
+					"We were in FOXHOUND together. He noticed me when I was a rookie. "
+				}
+				--
+				if snakeFeelings > 30
+				{
+					"Jaeger was the first and only soldier in the unit to achieve the highest code name. 'Fox'. "
+				}
+				--
+				if snakeFeelings > 40
+				{
+					"Gray Fox taking notice of me was surprising. Gave me a big head. "
+				}
+				--
+				if snakeFeelings > 50
+				{
+					"\w8\w8During N312, we recieved he was captured. I knew I had to do something. Back then, I thought Big Boss picked me for N313 for the same reason. I was too green for the operation and Boss knew it. \1\s[18]"
+				}
+				--
+				if snakeFeelings > 60
+				{
+					"\1\s[18]\w8\w8...You loved him. Frank.\0\s[4]\n\nI'd have done anything to save him. "
+				}
+				--
+				if snakeFeelings > 80
+				{
+					"\0\s[0]His loyalty to Big Boss came in conflict with me. We came to blows in Zanzibar, and we fought one last spar.\0\s[6] He was still damn quick...\w8\w8\w8 I thought he didn't make it out of Zanzibar alive. "
+				}
+				--
+				if snakeFeelings > 90
+				{
+					"\0\s[9]When we met again at Shadow Moses, he was unrecognizable. FOXHOUND took his body away from him. Shoved him in an exoskeleton and used him for research on gene therapy. There was no respect for death. "
+				}
+				--
+				if snakeFeelings > 100
+				{
+					"\0\s[0]In the end, his goal was still the same. Despite everything, he wanted one last spar with me. Put things back the way they were intended.\w8\w8\w8 Gray Fox was killed by Liquid Snake. For the final time."
+				}
+				--
+				"\n\n"
 				--
 				if clickJaeger == 0
 				{
-				"\n\nYou've learned about Gray Fox. You can now ask Snake about him at any time in his interaction menu."
-				--
-				"\e"
+					"You've learned about Gray Fox. You can now ask Snake about him at any time in his interaction menu. "
+					--
+					if snakeFeelings < 60
+					{
+						"You have a feeling there's still more to Gray Fox."
+					}
+					--
+					"\e"
 				}
+			}
+			when "whoLiquid"
+			{
+				"\0\s[8]Liquid Snake was the leader of FOXHOUND in 2005. "
+				--
+				if snakeFeelings <= 19
+				{
+					"He was a bit like you, thinking about it."
+				}
+				--
+				if snakeFeelings > 20
+				{
+					"He was considered a terrorist and made a big show out of demanding the body of Big Boss or he would steal \_a[whoRex]Metal Gear REX\_a. "
+				}
+				--
+				if snakeFeelings > 30
+				{
+					"Metal Gear REX was destroyed before his demands could be met. "
+				}
+				--
+				if snakeFeelings > 40
+				{
+					"Liquid and I fought hand-to-hand on top of the remains of Metal Gear REX. He told me if I fell, the height of the drop would kill even me. I knocked him off of REX and made my escape, just in time before an airstrike was supposed to hit the base. "
+				}
+				--
+				if snakeFeelings > 50
+				{
+					"\nHe and I were cloned from Big Boss. Big Boss was the commander of FOXHOUND when I was a rookie, and a folk hero to most of North America. A legendary soldier. "
+				}
+				--
+				if snakeFeelings > 60
+				{
+					"I don't consider Liquid a brother, I didn't know of his existence or our cloning until Shadow Moses. I don't take a lot of importance in blood relations. Maybe it comes from being handed from family to family as a kid. "
+				}
+				--
+				if snakeFeelings > 80
+				{
+					"\0\s[0]After my confrontation with him, Liquid died. He survived the fall, but I had been carrying a virus called FOXDIE which recognized specific people's DNA and killed them by cardiac arrest. FOXDIE was programmed to kill me at a random time in the future, and caught Liquid in the crossfire due to our genetic similarity. "
+				}
+				--
+				if snakeFeelings > 90
+				{
+					"\0\s[0]I don't think about him much anymore. I've come to terms with being a clone, but I didn't know him for long. He's another name on the long list of people who died directly or indirectly because of me."
+				}
+			}
+			when "whoBigBoss"
+			{
+				clickBigBoss++
+				"\0\s[8]Big Boss was the founder and commander of FOXHOUND in the early 1970s and throughout the 1990s. He was a legendary soldier and well-known in America, making the covers of magazines and at least a handful of books. Big name, big title. "
+				--
+				if snakeFeelings <= 19
+				{
+					"Surely you should know this. "
+				}
+				--
+				if snakeFeelings > 20
+				{
+					"\0\s[0]In the 1990s, he secretly developed a large military force known as Outer Heaven occupying Galzburg in South Africa. He also later went on in 1997 to participate in the Mercenary War and managed to scrape together the independence of a province called Zanzibar. "
+				}
+				--
+				if snakeFeelings > 30
+				{
+					"\n\n[half]Outer Heaven was later known to be developing a Metal Gear in 1995. A category of robot which is nuclear armed and bipedal. Zanzibar Land was also found to be building a Metal Gear in its own time too. "
+				}
+				--
+				if snakeFeelings > 40
+				{
+					"\n\n[half]Now, in 1995, Big Boss hadn't been revealed to be behind Outer Heaven yet. He was still the commander of FOXHOUND. As a cover, he sent Gray Fox to Outer Heaven to destroy the Metal Gear. That was Operation Intrude N312. Fox never made it back, so Big Boss sent me. That operation was called Intrude N313. I sucessfully destroyed the Metal Gear. "
+				}
+				--
+				if snakeFeelings > 50
+				{
+					"\n\n[half]Big Boss wasn't particularly happy I'd destroyed his pet project when N313 was supposed to be a suicide mission. He tried to stop me himself,\w8 supposedly anyway. He had a body double of some kind, who I killed fully believing he was Big Boss. "
+				}
+				--
+				if snakeFeelings > 60
+				{
+					"\0\s[8]\n\n[half]I couldn't stand it. Big Boss and I had become somewhat close in FOXHOUND. He taught me CQC- Close Quarters Combat- a fighting technique he had created. He gave me my codename, one I still use. He even told me he was my father. "
+				}
+				--
+				if snakeFeelings > 80
+				{
+					"\0\s[6]\n\n[half]I quit FOXHOUND after that. I was brought back to destroy the Metal Gear in Zanzibar, and I fought Big Boss once more. The real Big Boss. I killed him with my own hands. He burned to death. Slowly and painfully, screaming. Screaming my name. "
+				}
+				--
+				if snakeFeelings > 90
+				{
+					"\n\0\s[8]After that I went to live in Alaska and kept myself black-out drunk as much as possible. They say alcohol is good at drowning out the screaming."
+				}
+			}
+			when "whoN312"
+			{
+				"\0\s[0]Operation Intrude N312. Gray Fox was sent to infiltrate Outer Heaven to neutralize the weapon of mass destruction that was being constructed there. Fox was captured after transmitting us important information regarding Outer Heaven, including the type of weapon. 'Metal Gear'. \_a[whoN313]N313\_a was the follow up operation where I was tasked with completing the original objective: Destroy the Metal Gear."
+			}
+			when "whoN313"
+			{
+				"\0\s[0]Operation Intrude N313 was my first assignment for FOXHOUND, and I had my work cut out for me. It was the follow up mission of \_a[N312]N312\_a. I had to complete what our top member and my friend, Gray Fox, couldn't. Destroy the Metal Gear being developed in Outer Heaven. If you somehow don't know... Metal Gears are bipedal tanks equipped with nukes. "
+				--
+				if clickRex > 0
+				{
+					"You might be familiar with Metal Gear REX. REX was the most developed Metal Gear in 2005. N313 was back in 1995, Metal Gear TX-55 wasn't the same level as REX, but any Metal Gear is a threat to humanity. "
+				}
+				--
+				"\0\s[0] Outer Heaven was destroyed with the Metal Gear. I had been successful, but at a price... I'd had enough of FOXHOUND, anyway. Retiring to Alaska after N313 was right for me."
 			}
 			//OKUABJUB: Otacon's FAQ section
 			when "whoSnake" //Describes Snake. Used in the FAQ
@@ -122,7 +298,6 @@ OnAnchorSelect
 				{
 					"\1\s[12]I'm such a fool... I can't believe I told you about that...\e"
 				} 
-				elseif otaconFeelings
 			}
 			when "whoShadowMoses" //Describes Shadow Moses Island. Used in the FAQ
 			{
@@ -130,7 +305,7 @@ OnAnchorSelect
 				"\1\s[18]Shadow Moses..? The island itself is a-\w4 \f[italic,true]was a\f[italic,default] nuclear weapons disposal facility. Unless you were in the know, that's all it was."
 				--
 				if otaconFeelings >= 10
-				" But it was also used as a facility to develop weapons by ArmsTech, due to how remote it was. The Shadow Moses \f[italic,true]Incident\f[italic,default]... Well, you should ask Snake about that."
+				" But it was also used as a facility to develop weapons by ArmsTech, due to how remote it was. I was signed on to develop the new defense system in REX, but clearly it wasn't what I thought it was... The Shadow Moses \f[italic,true]Incident\f[italic,default]... Well, you should ask Snake about that."
 				--
 				if clickShadowMoses < 2 
 				{
@@ -159,7 +334,7 @@ OnAnchorSelect
 			when "whoRaiden" //Describes Raiden. Used in the FAQ
 			{
 				clickRaiden++
-				"\1\s[18]Huh. Okuajub hasn't implemented this dialogue yet. How'd you get here?\n"
+				"\1\s[18]Huh. Okuajub hasn't implemented this dialogue yet. How'd you get here?"
 				--
 				if clickRaiden < 2
 				{

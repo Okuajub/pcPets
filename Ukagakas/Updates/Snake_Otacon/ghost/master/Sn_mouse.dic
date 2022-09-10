@@ -91,6 +91,17 @@ MouseMoveSakura
 				}
 				//Snake heavily dislikes his face being stroked. Once past a certain negative friendship, he'll stay in an "irritated" pose for a long time, disallowing more touching.
  			}
+			elseif reference4 == "Bust"
+			{
+				if devMode == 0
+				{
+					"\0\s[8]What? Expecting me to get all embarassed like those anime girls Otacon installs? Tsh.\e"
+				}
+				if devMode == 1
+				{
+					"\0\s[1]Cut it out, Okuajub.\w8\w8\w8\0\s[5] Do I have to teach you some manners?"
+				}
+			}
 			
  		}
 	}
@@ -176,7 +187,7 @@ OnMouseDoubleClick
 		{
 		MouseDoubleClickSakura
 		}
-		else
+		elseif reference3 == 1 //should probably change this back to else later
 		{
  		MouseDoubleClickKero
 		}
@@ -203,42 +214,133 @@ MouseDoubleClickSakura
  {
  	if reference4 == "Head" || reference4 == "Face" //here, this is checking to see if the user is double clicking on either the character's head OR their face, which for our purposes means they're hitting the ghost. More about operators at the walkthrough.
 	{
-		if snakeFeelings <= -50
+		if beginnerMode == "Off" && punchConfig == "On" //Checks to see if both beginner mode and punching are Off and On respectively. If true, punch immediately.
 		{
-			"\0\s[3]\w8\0\s[7]Ugh, bastard!\e"
-			snakeFeelings--
+			PunchSnake
 		}
-		elseif snakeFeelings <= -30
+		if punchConfig == "Apologize" //Apology Mode
 		{
-			"\0\s[3]\w8\0\s[8]I wouldn't do that if I were you.\e"
-			snakeFeelings--
-		} elseif snakeFeelings <= -10
-		{
-			"\0\s[3]\w8\0\s[7]What the hell was that for?\e"
+			PunchSnake
+			--
+			PunchApologyCheck
 		}
-		elseif snakeFeelings >= -9
+		if punchConfig == "Confirm"
 		{
-			"\0\s[3]\w8\0\s[7]Hey, I'm on your side!\e"
+			"\f[italic,true]Are you sure you want to punch Snake?\f[italic,default]\n/
+			\![*]\q[Yes,punchConfirmYes]\n/
+			\![*]\q[No,punchConfirmNo]"
 		}
-		elseif snakeFeelings >= 20
+		if beginnerMode == "On" || punchConfig == "Off" //OKUAJUB: If punching is off, or Beginner Mode is on, Snake will take double clicks as pointing at his face/head.
 		{
-			"\0\s[3]\w8\0\s[7]Hey, knock it off!\w8\1\s[15]\f[height,8]Hehe.\f[height,default]\w8\0\s[9]\n\n[half]Shut up.\e"
-			snakeFeelings--
-			otaconFeelings++ //OKUAJUB: Because he thought it was funny, NOT because he likes it. lol
+			if snakeFeelings <= -50
+			{
+				"\0\s[8]It's rude to point. Don't you know that? Stop it."
+				"\0\s[8]Who do you think you're pointing at?"
+			}
+			elseif snakeFeelings <= -30 && snakeFeelings > -50
+			{
+				"\0\s[8]What're you pointing at?"
+			}
+			elseif snakeFeelings > -30 && snakeFeelings < -10
+			{
+				"\0\s[8]Hm?"
+			}
+			elseif snakeFeelings >= -10
+			{
+				"\0\s[8]Pointing at my hair? No matter what they say, I don't dye it. Got it?"
+				"\0\s[8]Why are you so interested in my face? I'm not much to look at.\1\s[30]"
+				"\0\s[8]You got something to say about how I look?"
+				"\0\s[8]What is it?"
+				"\0\s[5]You got a thing for guys with blue eyes?"
+			}
 		}
-
 		
-		
-		//OKUAJUB:Snake hates being hit, but will tolerate it for a little while, without a deduction. At higher friendship he feels a bit betrayed and so it begins to subtract again.
  	}
+	elseif reference4 == "Bust"
+	{
+		if snakeFeelings > -10
+		{
+			"\0\s[8]What? Expecting me to get all embarassed like those anime girls Otacon installs? Tsh."
+			"\0\s[8]Getting friendly, huh? Don't get too excited."
+		}
+		elseif snakeFeelings > 30
+		{
+			if presuffix == "feminine"
+			{
+				"\0\s[6] Sorry, %(username). You're not my type." //okay he's not GAY... 
+			}
+			--
+			"\0\s[6]Look, I know we're not strangers, %(username), but I don't feel that way. Knock it off."
+			"\0\s[5]Grab first, ask questions later kind of guy? Hmm."
+		}
+		elseif snakeFeelings < -50 && presuffix == "feminine"
+		{
+			"\0\s[6]You're just like \f[italic,true]them.\f[italic,false] You want my body and don't care what I need. Get your damn hands off me.\e"
+		}
+		elseif snakeFeelings < -11
+		{
+			"\0\s[8]Keep your hands to yourself, alright?"
+			"\0\s[8]What? Expecting me to get all embarassed like those anime girls Otacon installs? Tsh."
+		}
+	}
 	else
  	{
 		//Otherwise, if the user doubleclicks somewhere else on the character, they will open their menu as detailed in menu.dic.
  		OpenSakuraMenu
 	}
  }
+PunchSnake
+ {	
+		if snakeFeelings <= -50
+		{
 
- 
+			"\0\s[3]\w8\0\s[7]Ugh, bastard!"
+			snakeFeelings--
+		}
+		if snakeFeelings <= -30
+		{
+			"\0\s[3]\w8\0\s[8]I wouldn't do that if I were you."
+			snakeFeelings--
+		} 
+		if snakeFeelings <= -10
+		{
+			"\0\s[3]\w8\0\s[7]What the hell was that for?"
+		}
+		if snakeFeelings >= -9
+		{
+			"\0\s[3]\w8\0\s[7]Hey, I'm on your side!"
+		}
+		if snakeFeelings >= 20 && otaconFeelings >= 20 && snakeApologies < 3
+		{
+			"\0\s[3]\w8\0\s[7]Hey, knock it off!\w8\1\s[15]\f[height,8]snrk.\f[height,default]\w8\0\s[9]\n\n[half]Shut up."
+			snakeFeelings--
+			otaconFeelings++ //OKUAJUB: Because he thought it was funny, NOT because he likes it. lol
+		}
+		//OKUAJUB: Snake hates being hit, but will tolerate it for a little while, without a deduction. At higher friendship he feels a bit betrayed and so it begins to subtract again.
+ }
+PunchApologyCheck //function to check for an apology for Snake during Apology mode.
+ {
+	"\n\n[half]\f[italic,true]Apologize?\f[italic,default]\n/
+	\![*]\q[Yes,punchApologyYesSn]\n/
+	\![*]\q[No,punchApologyNoSn]"
+ }
+Select.punchApologyYesSn //Apologizing
+ {
+	"\f[italic,true]You apologize to Snake for hitting him.\f[italic,default]\n\n[half]\0\s[8]Alright, I'll assume the best. Watch that mouse of yours."
+	snakeFeelings++
+ }
+Select.punchApologyNoSn //Not Apologizing
+ {
+	"\f[italic,true]The moment passes. Snake glares at you."
+ }
+Select.punchConfirmYes //Confirms the user wants to punch Snake during Confirm mode.
+{
+	PunchSnake
+}
+Select.punchConfirmNo //Stops the user from punching Snake during confirm mode.
+{
+	"\0\s[0]\f[italic,true]Nothing happens."
+}
  //---- MouseDoubleClickKero -----------------------------------------------------------
  //This is just the same as MouseDoubleClickSakura above, except for your secondary character. The same principles apply, including how to make your character unhittable.
  
@@ -247,24 +349,59 @@ MouseDoubleClickKero
  {
  	if reference4 == "Face" //Hitting Otacon's face
 	{
-		"\1\s[12]Ouch! That hurt!\w8\0\s[7]Leave him alone.\w8\1\s[11] \n\n[half]Snake..?\e"
-		"\1\s[12]Ow! That hurt, please stop!\0\s[9]\e"
-		"\1\s[12]Ah! Stop hitting me, p-please!\0\s[9]\e"
-		"\1\s[12]hh-! P-please stop. Please...\w8\0\s[7]Stop right now.\w8\1\s[11]Snake...?\e"
-		snakeFeelings += -4
-		otaconFeelings--
+		if punchConfig == "On"
+		{
+			PunchOtacon
+		}
+		elseif punchConfig == "Off"
+		{
+			"\1\s[18]Hey, what are you pointing at?"
+			"\1\s[18]Is my hair ruffled up?"
+		}
+		elseif punchConfig == "Apologize"
+		{
+			PunchOtacon
+			PunchApologyCheckOta
+		}
+		elseif punchConfig == "Confirm"
+		{
+			"\1\s[10]\f[italic,true]Are you sure you want to punch Otacon?\f[italic,default]\n/
+			\![*]\q[Yes,punchConfirmYesOta]\n/
+			\![*]\q[No,punchConfirmNoOta]"
+		}
+		else
+		{
+			"\1\s[18]Now this isn't right."
+		}
 		//OKUAJUB: Otacon's face hitting dialogue. Snake will not tolerate this.
  	}
-	if reference4 == "Head" //Hitting Otacon's head
+	elseif reference4 == "Head" //Hitting Otacon's head
 	{
-		"\1\s[12]Ouch! That hurt!\w8\0\s[7]Leave him alone.\w8\1\s[11] \n\n[half]Snake..?\e"
-		"\1\s[12]Ow! That makes my head hurt, please stop!\0\s[8]\e"
-		"\1\s[12]Ah! Stop hitting me, p-please!\0\s[8]\e"
-		"\1\s[12]P-please stop. Please...\w8\0\s[7]Stop right now.\w8\1\s[11] \n\n[half]Snake...?\e"
-		snakeFeelings += -10
-		otaconFeelings--
-		//OKUAJUB: Otacon's head hitting dialogue. Otacon's hitting dialogue is almost exactly the same. whoops. i think it doesn't really matter much where he's hit, though. he still dislikes it.
-		//OKUAKUB: Snake will be PISSED if you hit Otacon. He can stand himself being hit, but a huge amount of friendship (when the friendship system is engaged) will be docked any time Otacon is hurt, accident or not. Otacon's friendship will go down a very slight amount, but not a lot, as he feels he kind of deserves it.
+		if punchConfig == "On"
+		{
+			PunchOtacon
+		}
+		elseif punchConfig == "Off"
+		{
+			"\1\s[18]Hey, what are you pointing at?"
+			"\1\s[18]Is my hair ruffled up?"
+		}
+		elseif punchConfig == "Apologize"
+		{
+			PunchOtacon
+			PunchApologyCheckOta
+		}
+		elseif punchConfig == "Confirm"
+		{
+			"\1\s[10]\f[italic,true]Are you sure you want to punch Otacon?\f[italic,default]\n/
+			\![*]\q[Yes,punchConfirmYesOta]\n/
+			\![*]\q[No,punchConfirmNoOta]"
+		}
+		else
+		{
+			"\1\s[18]Now this isn't right."
+		}
+		//OKUAKUB: Snake will be PISSED if you hit Otacon. He can stand himself being hit, but a huge amount of friendship will be docked any time Otacon is hurt. Otacon's friendship will go down a very slight amount, but not a lot, as he feels he kind of deserves it.
 		//OKUAJUB: Due to the fact Otacon't hitboxes are a lot larger, I'm thinking of a way where you have consequences but it doesn't feel unfair. I'll probably have his face hit have slightly less of a deduction to compensate.
  	}
 	else //Otherwise if you click anywhere else on Otacon's body
@@ -272,7 +409,72 @@ MouseDoubleClickKero
 		OpenKeroMenu //This will open his menu set up in menu.dic.
 	}
  }
-
+ 
+PunchOtacon
+ {
+	if otaconFeelings <= -20 || snakeFeelings <= -10 //If feels are low enough, Snake will always take the punch.
+	{
+		"\1\s[12]\f[italic,true]As you reel up to hit Otacon, Snake steps in to take the punch.\f[italic,default]"
+		--
+		if snakeFeelings <= -50
+		{
+			"\0\s[7]\n\n[half]Don't fucking touch him. I don't care what problem you have. \f[italic,true]\w8Don't.\f[italic,default]"
+			"\0\s[7]\f[italic,true] He spits some blood on the ground.\n\n[half]\f[italic,default]Asshole."
+		}
+		elseif snakeFeelings == -10
+		{
+			"\0\s[3]\w8\0\s[7]I don't know who the hell you think you are, but you don't hit my partner. Got it?"
+		}
+		elseif snakeFeelings <= -20 && otaconFeelings <= -30
+		{
+			"\f[italic,true]As he does so, Snake shoves Otacon out of your reach.\0\s[3]\w8\1\s[7]\1\s[12]\4\w3\1\s[-1]\0\s[7]\f[italic,default] Get your shit together, User. He's been through enough. Can't you see that?"
+		}
+		else
+		{
+			"\0\s[3]\w8\0\s[7]Don't try that again."
+		}
+	}
+	else //Otacon takes the punch most of the time.
+	{
+		"\1\s[12]Ouch! That hurt!\w8\0\s[7]Leave him alone.\w8\1\s[11] \n\n[half]Snake..?\e"
+		"\1\s[12]Ow! That makes my head hurt, please stop!\0\s[8]\e"
+		"\1\s[12]Ah! Stop hitting me, p-please!\0\s[8]\e"
+		"\1\s[12]P-please stop. Please...\w8\0\s[7]Stop right now.\w8\1\s[11] \n\n[half]Snake...?\e"
+		"\1\s[12]\f[italic,true]As you reel up to hit Otacon, Snake steps in to take the punch.\f[italic,default]\0\s[3]\w3\0\s[7]Don't touch him. I don't care what problem you have.\f[italic,true]\w8Don't.\f[italic,default]"
+		if otaconFeelings < 20
+		{
+			"\1\s[12]Augh! Hh... I guess I kind of deserved that..."
+			"\1\s[12]Ah-! Ow... I did something wrong, didn't I..?"
+		}
+	}
+	snakeFeelings -= 5
+	otaconFeelings--
+ }
+ 
+PunchApologyCheckOta //function to check for an apology for Otacon during Apology mode.
+ {
+	"\n\n[half]\f[italic,true]Apologize?\f[italic,default]\n/
+	\![*]\q[Yes,punchApologyYesOta]\n/
+	\![*]\q[No,punchApologyNoOta]"
+ }
+Select.punchApologyYesOta //Apologizing
+ {
+	"\f[italic,true]You apologize to Otacon.\f[italic,default]\n\n[half]\0\s[8]\1\s[33]Okay.\w8 It's fine."
+	otaconFeelings++
+	snakeFeelings += 4
+ }
+Select.punchApologyNoOta //Not Apologizing
+ {
+	"\1\s[13]\f[italic,true]The moment passes. Snake glares at you. Otacon looks worried."
+ }
+Select.punchConfirmYesOta //Confirms the user wants to punch Otacon during Confirm mode.
+{
+	PunchOtacon
+}
+Select.punchConfirmNoOta //Stops the user from punching Otacon during confirm mode.
+{
+	"\1\s[10]\f[italic,true]Nothing happens."
+}
  //*********************Advanced User Info*******************************
  //There are other mouse related functions you could set up much like the above, such as OnMouseDragStart, OnMouseDragEnd, OnMouseWheel, and others which correspond to various things you can do with your mouse. You can probably guess what those functions do just by their names - OnMouseWheel would be if someone spun their mouse wheel over a certain area, for example. If you're interested in these, I'd recommend doing some reading at the CROW-SSP Encyclopedia to get a better idea of them and settle down for some trial and error learning as you try to put them in.
  //***********************************************************************

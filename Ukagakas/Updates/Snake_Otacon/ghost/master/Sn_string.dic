@@ -26,7 +26,7 @@ On_username
 
 On_homeurl
 {
-	"https://raw.githubusercontent.com/Okuajub/pcPets/master/Ukagakas/Updates/Snake_Otacon"
+	"https://raw.githubusercontent.com/Okuajub/pcPets/master/Ukagakas/Updates/Snake_Otacon/"
 }
 
 
@@ -96,7 +96,7 @@ On_sakura.recommendsites
 
 On_portalrootbutton.caption
  {
-	"More PC Pets"
+	"From The Author"
  }
 
  //---- Websites in the Second Option --------------------------------------------------
@@ -106,7 +106,7 @@ On_sakura.portalsites
  {
  	"Okuajub's PC Pets"
 	--
-	"%ASC(1)https://github.com/Okuajub/pcPets/%ASC(2)"
+	"%ASC(1)https://okuajub.github.io/pcPets/%ASC(2)"
 	--	
 	//You get the idea. You can add more links or take them away as you like following this basic formula.
  }
@@ -152,7 +152,7 @@ On_updatebutton.caption
 
 On_dressuprootbutton.caption
 {
-	"Accessories"
+	"Dress-ups"
 }
 
 //---- Headlines and RSS Feeds ---------------------------------------------------------

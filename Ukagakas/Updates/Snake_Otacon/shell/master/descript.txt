@@ -18,7 +18,7 @@ seriko.use_self_alpha,1
 
 charset,UTF-8
 type,shell
-name,Snake and Otacon - Retro Otacon
+name,Snake and Otacon - Solid Shell
 craftman,Okuajub
 craftmanurl,http://www.deviantart.com/tiefking
 
@@ -92,20 +92,86 @@ menu.sidebar.bitmap.filename,menu_sidebar.png
 
 
 //--Dress-up Code
-//Clothing can be a little complicated, so I'd recommend reading the clothing page on the walkthrough before coming back here. I'll leave a bit of cindysuke's clothing code in here just as an example. If you're going to use these lines, make sure to uncomment them by removing the slashes.
-//As a brief overview, sakura (the main character), has a clothing item called "wings" that's in a section called "back". The second character, kero, has two items, one called "wings" in the "back" section (like sakura) and one called "neko" that's in the "misc" section. What you call these sections and items of clothing is up to you if you're actually doing this. Note the numbers after bindgroup though! We're going to be using them in just a second.
 
-//sakura.bindgroup51.name,back,wings
+sakura.bindgroup31.name,Clothes,Sneaking Suit
+sakura.bindgroup31.default,1
+sakura.bindgroup32.name,Clothes,SEAL Uniform
+
+sakura.bindgroup61.name,Hair,Mullet
+sakura.bindgroup62.name,Hair,Blue Bandanna
+sakura.bindgroup62.default,1
+
+sakura.bindgroup51.name,Accessories,Stubble
+sakura.bindgroup51.default,0
+sakura.bindgroup690.name,Accessories,Headset (Mullet)
+sakura.bindgroup390.name,Inumimify,Dog Ears (Mullet)
+sakura.bindgroup391.name,Inumimify,Dog Ears (Blue Bandanna)
+sakura.bindgroup9.name,Inumimify,Tail
+
+sakura.bindgroup401.name,Cigs,Lucky Striker
 
 //kero.bindgroup55.name,back,wings
-//kero.bindgroup57.name,misc,neko
+kero.bindgroup10.name,Clothes,Tucked Worn T-shirt
+kero.bindgroup10.default,1
+kero.bindgroup11.name,Clothes,Loose Worn T-shirt
+kero.bindgroup12.name,Clothes,Tucked Architect T-shirt
+kero.bindgroup13.name,Clothes,Loose Architect T-shirt
+kero.bindgroup14.name,Clothes,Turtleneck
+
+kero.bindgroup30.name,Misc,Stubble
+
+kero.bindgroup40.name,Hair,Fluffy Hair
+kero.bindgroup40.default,1
+
+kero.bindgroup57.name,Nekomimify,Cat Ears
+kero.bindgroup9.name,Nekomimify,Tail
+
+kero.bindgroup410.name,Glasses,Square Glasses (Green)
+kero.bindgroup420.name,Glasses,Square Glasses (Blue)
+kero.bindgroup420.default,1
+kero.bindgroup430.name,Glasses,Round Glasses (Silver)
 
 
 //Dress-Up Menu Organization
-//This sets up how the clothing appears in the dress-up menu. You can see the main character only has one item, while the second has two split by a dash. Note that it uses the same numbers defined above for each item.
+//This sets up how the clothing appears in the dress-up menu.
+sakura.menuitem0,31
+sakura.menuitem1,32
+sakura.menuitem2,-
+sakura.menuitem3,62
+sakura.menuitem4,61
+sakura.menuitem7,-
+sakura.menuitem8,51
+sakura.menuitem9,690
+sakura.menuitem10,-
+sakura.menuitem11,391
+sakura.menuitem12,390
+sakura.menuitem13,9
+sakura.menuitem14,-
+//sakura.menuitem15,401
 
-//sakura.menuitem0,51
+//kero.menuitem0,55 - this is something I never implemented. you can safely ignore it.
+kero.menuitem0,40
+kero.menuitem1,-
+kero.menuitem2,30
+kero.menuitem3,-
+kero.menuitem4,10
+kero.menuitem5,11
+kero.menuitem6,12
+kero.menuitem7,13
+//kero.menuitem8,14 - Another unimplemented item. I needed to wrap this shell up for my own sanity and this item would have entailed redrawing 19 more frames.
+kero.menuitem9,-
+kero.menuitem10,410
+kero.menuitem11,420
+kero.menuitem12,430
+kero.menuitem13,-
+kero.menuitem14,57
+kero.menuitem15,9
 
-//kero.menuitem0,55
-//kero.menuitem1,-
-//kero.menuitem2,57
+sakura.bindoption0.group,Accessories,multiple
+sakura.bindoption1.group,Hair,mustselect
+sakura.bindoption2.group,Inumimify,multiple
+
+kero.bindoption0.group,Misc,multiple
+kero.bindoption1.group,clothes,mustselect
+kero.bindoption2.group,Hair,mustselect
+kero.bindoption3.group,Nekomimify,multiple

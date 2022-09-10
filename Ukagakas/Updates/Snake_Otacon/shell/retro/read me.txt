@@ -1,0 +1,5 @@
+This is the Retro Otacon shell. It borrows some sprites for Otacon from Metal Gear Solid 2, that you'd see in the Tanker mission.
+Retro Otacon's surfaces are scaled to be the same as Konami's official Otaclock, so 128 pixels tall.
+If this bothers you, however, like you have them both open at the same time, there will be the alternate shell which I re-did from the ground up.
+Because these two don't fall in any particular place in continuity (and break it at times), their outfits are not indicative of how old they are, or where they came from.
+If that bothers you for some reason, you're free to make a personal version which edits out any continuity breaking dialogue, and can contact me on Deviantart if you'd like to work something out about publicly releasing an alternate version.

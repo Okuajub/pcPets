@@ -29,7 +29,7 @@ craftmanurl,https://okuajub.github.io/pcPets/
 //This is coding stuff, don't touch it.
 
 sstp.allowunspecifiedsend,0
-shiori,aya5.dll
+shiori,yaya.dll
 
 
 //This next bit defines what icon your ghost will use in your taskbar. Replace "gt_template.ico" with the icon file you're going to be using.
@@ -40,4 +40,4 @@ icon,oticon.ico
 
 //If you have a special balloon for your ghost, you can set it here with balloon, which will highlight it in the Change Balloon menu so it'll be easier to find.
 
-balloon,OtaClock
+balloon,OtaClock-2

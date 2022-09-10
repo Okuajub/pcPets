@@ -2,12 +2,6 @@
 //This .dic file is primarily concerned with the double-click menus for each of your ghosts. If you don't want to have menus for your characters, you'd just have to delete the OnMouseDoubleClick functions near the end of mouse.dic and then ignore this file, as none of it will be called I believe. Menus can be cool though, since you can put stuff in them and create new functions if you know what you're doing. For example, I've added a lot of games and interactions and little linked icons to my Hunter Smoker ghost to keep track of their feelings and such. Much of that is pretty complicated though (and kind of messy, cough), so I won't go into it here, but I covered some of the concepts in the coding page of the walkthrough, and enterprising ghost makers can study the menu.dic file I set up for Hunter/Smoker and see how I put it together.
 //Anyway, menu.dic also contains the settings for a config menu that will let your user change their name or pronouns if they want, as well as the talk rate of the ghost, all of which are useful things for your ghost to do. So think hard about whether or not you want to skip this file or not.
 
-//The complexity of this file depends on how customized you want your menus. If you just want to leave them as they are, then all you'll have to do is replace dialogue appropriately. You can always add stuff to their menus later if you get the urge. Otherwise, if you have plans in mind, you'll need to study what's going on in here carefully and pay attention to how things are set up! You can do a lot of unique stuff in this file if you're creative.
-
-//Make sure to read the walkthrough (http://www.ashido.com/ukagaka/) for more details about how to properly format ghost dialogue!
-//I will reiterate that you should be editing these in Notepad++, and in particular, you should set the Language to C (or Java I guess) to properly highlight all the text. It will make things A LOT EASIER for you, trust me! It will also help you keep track of your brackets in case you forget some. If you click on a line with a bracket in Notepad++, it should highlight where the other bracket ends, or turn purple if there's no finishing bracket (which you should definitely fix!)
-//It will also highlight my commented lines in green, so you'll know where they are. Any line beginning with // is a commented line that the code will not read. It's just for your reference!
-
 //  __             _        
 // / _\_ __   __ _| | _____ 
 // \ \| '_ \ / _` | |/ / _ \
@@ -15,9 +9,7 @@
 // \__/_| |_|\__,_|_|\_\___|
 //~~~~*Snake's Menu*~~~~~~~~~~~~~~~~~~~~~~~~
 //--OpenSakuraMenu
-//This is a bit of intro dialogue before the main character opens their menu. You can see below that there are three pieces of separate dialogue listed before it goes to MenuRun. The character will randomly choose one of those pieces of dialogue before opening the rest of their menu. You can customize this with individual greetings for the character, such as "Yes, %(username)?" or "Need something, %(username)?" or things like that. Note that none of the lines end with \e!
-//The \b2 tag tells the ghost to use their big balloon for this dialogue. If your menu has a lot of stuff, this'll probably look better than the small one.
-//If you don't want multiple responses before opening the menu, you can delete the dialogue and just leave MenuRun.
+//Things your Sakura will say when opening the menu.
 
 OpenSakuraMenu
 {
@@ -44,23 +36,20 @@ MenuRun
 	if lastTalk != "" //What this does is check to see if the ghost has already said a random bit of dialogue on its own, essentially by seeing if the lastTalk thing is NOT empty (!= means "does not equal").
 	{
 	  "\![*]\q[Repeat Last Dialogue,OnLastTalk]\n\n[half]"
-	  //If the ghost has said something, it will then display this menu option. You can replace "Repeat Last Dialogue" with whatever caption you like, such as "What were you saying?" or "What did you say?" or "Could you repeat that?" or something like that.
-	  
-	  //*********************Advanced User Info*******************************
-	  //These text boxes are meant for those who have an interest in expanding or using more complicated functions in their ghost. Also for my own reference in the future since I plan on using this template too, haha. If you have no interest in any of this and just want to keep things as simple as possible, feel free to skip these boxes.
-	  
-	  //I briefly touched in bootend.dic about \q, but I'll again cover it here. Pay very close attention to how this bit of dialogue is formatted. You'll see it goes \![*]\q[Displayed Name,linkedfunction]. Breaking it down, \![*] puts the balloon's option icon in front of the choice (usually a > or something), \q sets up the choice, Displayed Name which is the text that will display in the ghost's balloon, then linkedfunction, which is what the choice is linked to when the user clicks it. As you go through this file, look at how every menu option is set up, and you will see they all follow this format, give or take a \![*]. If you're going to be adding new options to menus or creating your own functions and such, make sure you follow this format and learn it well. Make sure to read the coding page of the walkthrough.
-	  //***********************************************************************
 	}
 	--
  	"\![*]\q[Talk to me.,OnAiTalk]\n"
 	"\![*]\q[What are you thinking about?,OnAiTalk]\n"
-	
-	//This option will force the ghost to say something from aitalk if the user clicks it. Just replace "Say something" and "Say something 2" with whatever captions you think would be appropriate for such an option. IF you don't want two options for captions, delete one of the lines.
-	//Advanced users, you can add multiple captions for any option you add to a menu you make just like this, as long as you separate it from the other options into its own section with two dashes above and below.
-	-- //OKUAJUB: I added interactSAKURA.
-	"\![*]\q[Interact,interactSAKURA]\n/
-	\![*]\q[Config Menu,configmenu]\n/
+
+	--
+	"\![*]\q[Interact,interactSAKURA]\n"
+	--
+	if snakeFeelings > 20
+	{
+		"\![*]\q[Missions,missionSearch]\n"
+	}
+	--
+	"\![*]\q[Config Menu,configmenu]\n/
 	\![*]\q[Functions,dosomething]\n\n[half]/
  	\![*]\q[Nevermind,CANCEL]\n\n\n[half]%(wd) %(nowhour):%(nowmin) %(ap), %(month)/%(day)/%(year)\e"
 	
@@ -124,7 +113,14 @@ Select.interactSAKURA //Interaction menu for Snake. Gift him things, talk to him
 	\_q\f[italic,true]Give...\f[italic,default]\n/
 	\![*]\q[Cigarettes,giveCigs]\n/
 	\![*]\q[Ration,giveRation]\n/
-	\![*]\q[Ketchup,giveKetch]\n\n[half]"
+	\![*]\q[Ketchup,giveKetch]\n"
+	--
+	if snakeFeelings >= 20
+	{
+		"\![*]\q[A Book,giveBook]\n"
+	}
+	--
+	"\n[half]"
 	--
 	if snakeFeelings <= -50
 	{
@@ -142,17 +138,27 @@ Select.interactSAKURA //Interaction menu for Snake. Gift him things, talk to him
 	"\f[italic,true]Ask...\f[italic,default]\n/
 	\![*]\q[About Shadow Moses,askShadowMosesIncident]\n"
 	--
-	if clickJaeger >= 1 && snakeFeelings > 20
+	if clickShadowMosesIncident > 0
 	{
-	"\![*]\q[About Gray Fox,askJaeger]\n"
+		"\![*]\q[About Liquid Snake,askLiquidSnake]\n"
 	}
 	--
-	//if clickBigBoss >= 1
-	//{
-	//"\![*]\q[About Big Boss,askBigBoss]\n"
-	//}
+	if snakeFeelings > 50 || askLove > 0
+	{
+		"\![*]\q[About Love Life,askLove]\n"
+	}
 	--
-	"\![*]\q[About Otacon,askOtacon]\n/
+	if clickJaeger >= 1
+	{
+	"\![*]\q[About Jaeger,askJaeger]\n"
+	}
+	--
+	if clickBigBoss >= 1
+	{
+	"\![*]\q[About Big Boss,askBigBoss]\n"
+	}
+	--
+	"\![*]\q[About Otacon,askOtacon]\n\n[half]/
 	\![*]\q[Nevermind,BACKTOMENU]\n\n\n/
 	\f[italic,true]Inventory\n/
 	Ketchup %(snakeKetchups)/20\f[italic,default]/
@@ -166,7 +172,7 @@ Select.giveCigs
 	
 	if snakeFeelings <= -50
 	{
-		"\1\s[31]\0\s[8].\w8.\w8.\w8I don't know why I should trust these won't kill me.\w8\w8\w8\nBut okay.\w8\w8\w8\n\n[]\f[italic,true]Snake stares at the pack for a moment, hand slightly reached out, before snatching them up and shoving them in one of his bags, as if they would burn him if held too long. Otacon continues to glare at you. But Snake seems slightly appeased.\e"
+		"\1\s[31]\0\s[8].\w8.\w8.\w8I don't know why I should trust these won't kill me.\w8\w8\w8\nBut okay.\w8\w8\w8\n\n[]\f[italic,true]Snake stares at the pack for a moment, hand slightly reached out, before snatching them up and shoving them in his bags as if they would burn him if held too long. Otacon continues to glare at you. But Snake seems slightly appeased.\e"
 	}
 	elseif snakeFeelings <= -21 && snakeFeelings >= -49
 	{
@@ -178,19 +184,26 @@ Select.giveCigs
 	}
 	elseif snakeFeelings >= 20 && snakeFeelings <= 50
 	{
-		"\0\s[5]Thank you, %(username), you know my favorite brand.\1\s[33]...\0\s[5]\n\n\f[italic,true]This won't please both of them, but Snake seems very satisfied...\e"
+		"\0\s[5]Thanks, %(username), you know my favorite brand. "
+		--
+		"Moslems, huh?"
+		"Hope, hm?"
+		"Lucky Strikers, old school, huh?"
+		"The Boss, hm? Nice quality."
+		--
+		"\1\s[33]...\0\s[5]\n\n\f[italic,true]This won't please both of them, but Snake seems very satisfied...\e"
 	}
 	elseif snakeFeelings >= 51 && otaconFeelings >= -19
 	{
 		"\0\s[5]Thanks, %(username)!\1\s[31]\w8\w8\w8\w8\w8\0\s[4]\n\n[half]\w8\w8\w8Sorry,\w4 Hal.\1\s[14]\w8\w8\w8I just worry about your health, Dave.\w8\w8 You're not invincible.\e"
 	}
-	elseif snakeFeelings >= -20 && snakeFeelings <=20 && otaconFeelings <= -10
+	elseif snakeFeelings >= -20 && snakeFeelings <= 20 && otaconFeelings <= -10
 	{
 		"\0\s[0]Huh. Thanks. I wasn't excpecting that. \1\s[17]%(username)! You know I'm trying to get him to quit! \0\s[5]\n\n[half]Well, I have to get them from somewhere, don't I?\1\s[31]\n\n[half]Ughh. You two are plotting against me.\0\s[5]\n\n\f[italic,true]This won't please both of them, but Snake seems very satisfied...\e"
 	}
 	elseif snakeFeelings >= 51 && otaconFeelings <= -30 && snakeApologies == 0
 	{
-		"\0\s[5]Thanks, %(username)!\1\s[33].\w8\.\w8\.\w8I can't believe you, %(username).\1\s[14]\w8\w8 You too, Dave.\0\s[4]\n\n[half]...Hal. I didn't mean for this to cause a rift between us-\1\s[31]\n\n[half]Well, it has.\w8\w8\1\s[33]\w8\w8\w8 Look. I can't make you quit, David. I'm usually teasing you, anyway-\1\s[14] But you can stop standing with %(username)! You know what %(heshes) done to me.\w8\w8\nYou can make that decision for yourself. I won't bug you about this anymore anyway, Snake."
+		"\0\s[5]Thanks, %(username)!\1\s[33].\w8\.\w8\.\w8I can't believe you, %(username).\1\s[14]\w8\w8 You too, Dave.\0\s[4]\n\n[half]...Hal.\1\s[31]\n\n[half]\w8\w8\1\s[33]\w8\w8\w8 Look. I can't make you quit, David. I'm usually teasing you, anyway-\1\s[14] But you can stop standing with %(username)! You know what %(heshes) done to me.\w8\w8\nYou can make that decision for yourself.\w8\w8 I won't bug you about this anymore anyway, Snake."
 		snakeFeelings -= 10
 		snakeApologies++ //I didn't want to create a new variable and so I'm using Snake apologies. It makes sense Otacon wouldn't say this if Snake had also been mistreated, and it will make Snake harsher to judge the player should they mistreat him in the future.
 	}
@@ -207,6 +220,10 @@ Select.giveRation
 	if snakeKetchups >= 1 && snakeKetchups <= 9
 	{
 		"\0\s[5]Hey, I can use that ketchup on this. Thanks.\e"
+		"\0\s[5]Ketchup mutes the taste a little. Thanks."
+		"\0\s[5]Nice, the ketchup you gave me will work well with the meatloaf can. If I drown it, anyway."
+		"\0\s[5]Ketchup and tuna... I've done worse. It works. Thanks."
+		"\0\s[5]I never liked ketchup with my eggs, but I'll take it with one of these rations. Thanks."
 		snakeKetchups--
 		snakeFeelings += 2
 	}
@@ -215,9 +232,18 @@ Select.giveRation
 		"Jeez, I finally have a use for all that ketchup you gave me.\e"
 		snakeKetchups--
 	}
-	else
-	{
 	"\0\s[8]Uh, thanks? \f[size,8]Do I even need to eat here..?\f[size,default]\e"
+	"\0\s[8]Great. Never liked the taste... It gets you by.\e"
+	"\0\s[8]Tastes like pennies and spam.\e"
+	"\0\s[9]Ugh... This ones beans and fuckers.. ham and lima beans, if you want. All you need to know is it tastes like dog food.\e"
+	"\0\s[0]Reminds me of Shadow Moses. Could use a little ketchup.\e"
+	"\0\s[0]Edible.\w8\w8 Wait a minute, where's the D can? Hsh, I bet you took it.\e"
+	"\0\s[8]Some people would call this food. Where do you get these things, huh? I could have sworn MREs were already the majority of rations.\e"
+	"\0\s[5]Nice, this one's spaghetti and meatballs. One of the least offensive."
+	"\0\s[9]These things have to be left over from Vietnam or something."
+	if snakeFeelings > 40
+	{
+	"\0\s[9]This type of ration came in handy during Zanzibar. Not in the way you'd expect though."
 	}
 	--
 	snakeFeelings++
@@ -251,7 +277,7 @@ Select.giveKetch
 		"Uh, okay."
 		"Where do you get all this stuff from?"
 		"This just isn't right."
-		"Do You have some kind of obsession?"
+		"Do you have some kind of obsession?"
 		".\w2.\w2.\w2Okay."
 		"I guess it's a nice color."
 		"Uh. Otacon, do you have any room for this?\1\s[18]Er... I don't think so. Sorry.\0\s[8]"
@@ -265,7 +291,7 @@ Select.giveKetch
 		"Is this some kind of game to you?"
 		"Do you use this for something?"
 		"\f[italic,true]Snake takes the bottle without saying anything.\f[italic,false]"
-		"I don't think we even have anything but rations to put this on."
+		"I don't think we even have anything but rations to put this on, %(username)."
 		"Aren't you getting tired of this?"
 		"...Do you expect me to do a little song and dance for you?"
 		"I don't need this."
@@ -277,7 +303,7 @@ Select.giveKetch
 		"I already gave some to Otacon. I can't fit any more of this stuff in my pockets."
 		"I don't have any room left."
 		"Come on, don't I have enough already?"
-		"Trying to get a rise out of me, hm?"
+		"Oh, I get it. You're trying to get a rise out of me, huh?"
 		
 		snakeFeelings--
 	}
@@ -288,6 +314,63 @@ Select.giveKetch
 	--
 	"\e"
 }
+
+//---- Snake Books ------------------------------------------------------
+Select.giveBook
+{
+	"\0\s[8]Hm?\n\n[half]\f[italic,true]You hand Snake a book. "
+	--
+	if snakeFeelings >= 20
+	{
+		"It's a soft paperback of "
+		"It's a well-worn second-hand copy of "
+	}
+	if snakeFeelings >= 30
+	{
+		"It's an old library copy of "
+		"It's a thin pulp paper copy of "
+	}
+	if snakeFeelings >= 50
+	{
+		"It's a used hardback copy of "
+	}
+	if snakeFeelings >= 60
+	{
+		"It's a brand new hardback copy of "
+	}
+	--
+	"\f[italic,true]"
+	--
+	if snakeFeelings >= 20
+	{
+		"Warrior Cats: Into the Wild. You reassure him it has lots of fun fight scenes. Snake reads the back cover.\n\n[half]\f[italic,default]Cats?.. I'm more of a dog person.\w8\w8 What the hell. I'll give it a read.\1\s[16]\f[italic,true]You hear Otacon snicker. Clearly he thinks its amusing."
+		"a gay werewolf romance novel. It seems pretty steamy. Snake laughs before pausing to look at you.\f[italic,default]\n\n[half]\0\s[9]... You're serious? Look, you can read all the trashy monster-fucking novels you want, but it isn't exactly gifting material. I'll keep it to humor you."
+		"a non-fiction Navy SEAL biography.\f[italic,default]\n\n[half]What? Are you saying I need to do some homework?\1\s[31]..Well, to be completely fair to %(username)... You did get caught red-handed by Raiden faking it.\0\s[9]\n\n[half]Ghh.."
+		"the Minecraft Redstone Handbook.\f[italic,default]\n\n[half]What is this? I don't know what 'Minecraft' is.\1\s[15]Oh! Snake, hand that one over!\0\s[8]\f[italic,true]\n\n[half]Snake withholds it from Otacon.\f[italic,default]\n\n[half]Explain to me what it is first, brainiac.\1\s[19]\n\n[half]Alright, alright. But only if you're really going to give it to me.\w8\w8 Redstone powers machines and circuitry in Minecraft, a video game. Its pretty much like programming but.. in 3D? Somebody made Pokemon Red in it-\0\s[9]\n\n[half]Alright, you can stop there. I'm sufficiently convinced its nerd stuff. Here.\1\s[16]\f[italic,true]\n\n[half]Otacon looks satisfied with himself and thumbs through the book for a few moments before stuffing it away somewhere."
+		--
+		snakeFeelings += 5
+	}
+	if snakeFeelings >= 30
+	{
+		"a non-fiction book about an investigative reporter's work on the CIA.\f[italic,default]\n\n[half]Hm. I used to work for the CIA you know. Undercover agent. When I was there they were still post-Cold-War peacetime softies.\w8\w8 Can't hurt to revisit old memories."
+		snakeFeelings += 6
+	}
+	if snakeFeelings >= 40
+	{
+		"a fantasy novel about espionage. It feels slightly more his style. He flips through a few pages.\n\n[half]\f[italic,default]Fantasy? Never really been a fan.\n\n[half]\f[italic,true]Apparently not.\f[italic,default]\n\n[half]Hmm.. Looks like it could be exciting. I'll try it.\n\n[half]\f[italic,true]Oh, maybe it's okay?"
+		"a British comedy storybook about the animals who live on the bank of the river Thames.\n\n[half]\f[italic,default]Hey, I read this story as a kid. It's pretty funny. I think the water rat is the most sensible these days. The toad was the funniest, though.\n\n[half]\f[italic,true]That seemed to go over well."
+		--
+		snakeFeelings += 7
+	}
+	if snakeFeelings >= 50
+	{
+		"Jack London's short story Bâtard.\f[italic,default]\n\n[half]\0\s[8]Read this one a lot after leaving the army.\w8\w8\w8\w8\w8 I got over it.\n\n[half]\f[italic,true]Snake stows the thin book carefully into a bag. He doesn't seem unhappy, though."
+		snakeFeelings += 10
+	}
+	--
+	"\e"
+
+}
 //---- Snake Apologies ---------------------------------------------------------
 //Apologizing to Snake. only appears if feelings are lower than 50. This is to help users get back onto a positive track, should they bring his feelings down considerably, but it's not an easy short cut. it's still quite negative. Snake's largest bonus, Cigarettes, would still need to be given to him six times in a row to 'fix' it from this point.
 
@@ -297,7 +380,7 @@ Select.sayApology
 	--
 	if snakeApologies >= 3
 	{
-		"This is the last time. Don't fuck with me again."
+		"This is the last time. Don't fuck with me again. "
 	}
 	--
 	"\w8\w8Make sure your actions speak for your words."
@@ -306,7 +389,16 @@ Select.sayApology
 	--
 	"\n\n\f[italic,true]Snake has forgiven you. Partially.\f[italic,default]\e"
 	snakeFeelings = -30
-	snakeApologies++
+	--
+	if beginnerMode == "On" //if the user somehow activates this function while beginner mode is On, their apologies will be reset.
+	{
+		snakeApologies = 0
+	}
+	else
+	{
+		snakeApologies++
+	}
+	
 }
 //---- Snake FAQ ---------------------------------------------------------
 //Asks Snake about the Shadow Moses Incident. Answer depends on feelings.
@@ -315,13 +407,15 @@ Select.askShadowMosesIncident
 {
 	if snakeFeelings >= 50
 	{
-		"\0\s[9]I was assigned to infiltrate Shadow Moses Island during the Shadow Moses Incident. Otacon and I met on Shadow Moses.\0\s[4] My old unit, FOXHOUND, came under the command of Liquid Snake, another clone of Big Boss, and took over Shadow Moses. They also captured Metal Gear REX, Otacon's project.\0\s[0] I had to kill each of the elite members: Decoy Octopus, Psycho Mantis, Sniper Wolf, Vulcan Raven,\0\s[4] and... Liquid. The other member, Ocelot, escaped with his life. With the help of... an old friend, we managed to destroy REX.\0\s[0] It all came at a heavy price, but I don't regret it.\e"
+		"\0\s[9]I was assigned to infiltrate Shadow Moses Island during the Shadow Moses Incident. Otacon and I met on Shadow Moses.\0\s[4] My old unit, FOXHOUND, came under the command of \_a[whoLiquid]Liquid Snake\_a, another clone of Big Boss, and took over Shadow Moses. They also captured Metal Gear REX, Otacon's project.\0\s[0] I had to kill each of the elite members: Decoy Octopus, Psycho Mantis, Sniper Wolf, Vulcan Raven,\0\s[4] and... Liquid. The other member, Ocelot, escaped with his life. With the help of an old friend, we managed to destroy REX.\0\s[0] It all came at a heavy price, but I don't regret it.\e"
+		clickShadowMosesIncident++
 	}
-	elseif snakeFeelings >= 20 && snakeFeelings <= 30
+	elseif snakeFeelings >= 20 && snakeFeelings <= 49
 	{
-		"\0\s[4]The Shadow Moses Incident was the terrorist take-over of Shadow Moses Island by Liquid Snake.\f[size,8] We're related, in a way.\f[size,default]\0\s[0] He and the rest of the terrorist group, FOXHOUND, captured the base for the Metal Gear inside. Eventually, under the guidance on Colonel Campbell, my former commander, the government was successful in taking them down."
+		"\0\s[4]The Shadow Moses Incident was the terrorist take-over of Shadow Moses Island by \_a[whoLiquid]Liquid Snake\_a.\f[size,8] We're related, in a way.\f[size,default]\0\s[0] He and the rest of the terrorist group, FOXHOUND, captured the base for the Metal Gear inside. Eventually, under the guidance of Colonel Campbell, my former commander, the government was successful in taking them down."
+		clickShadowMosesIncident++
 	}
-	elseif snakeFeelings >= -29 && snakeFeelings <= 20
+	elseif snakeFeelings >= -29 && snakeFeelings < 20
 	{	
 		"\0\s[8]Hmm...\n\n\f[italic,true]Snake huffs, and shifts his eyes side to side. It seems he won't talk about this right now.\f[italic,default]\e"
 	}
@@ -341,12 +435,194 @@ Select.askShadowMosesIncident
 	}
 }
 
+Select.askLiquidSnake
+{
+	"\0\s[8]Liquid Snake was the leader of FOXHOUND in 2005. "
+	--
+	if snakeFeelings <= 19
+	{
+		"He was a bit like you, thinking about it."
+	}
+	--
+	if snakeFeelings > 20
+	{
+		"He was considered a terrorist because he took over Shadow Moses Island by force on Febuary 25th, 205. He made a big show out of demanding the body of Big Boss or he would steal \_a[whoRex]Metal Gear REX\_a, which was being kept on the island. "
+	}
+	--
+	if snakeFeelings > 30
+	{
+		"Metal Gear REX was destroyed before his demands could be met. "
+	}
+	--
+	if snakeFeelings > 40
+	{
+		"\n\n[half]I took down Metal Gear Rex myself. Liquid and I fought hand-to-hand on top of the remains of REX. He told me if I fell, the height of the drop would kill even me. I knocked him off of REX and made my escape, just in time before an airstrike was supposed to hit the base. "
+	}
+	--
+	if snakeFeelings > 50
+	{
+		"\n\n[half]He and I were cloned from Big Boss. Big Boss was the commander of FOXHOUND when I was a rookie, and a folk hero to most of North America. A legendary soldier. "
+	}
+	--
+	if snakeFeelings > 60
+	{
+		"\n\n[half]I don't consider Liquid a brother, I didn't know of his existence or our cloning until Shadow Moses.\w8\w8 I don't take a lot of importance in blood relations. Maybe it comes from being handed from family to family as a kid. "
+	}
+	--
+	if snakeFeelings > 80
+	{
+		"\w8\w8\w8\n\n[half]\0\s[0]After my confrontation with him, Liquid died. He survived the fall, but I had been carrying a virus called FOXDIE which recognized specific people's DNA. Those people were killed by the virus inducing cardiac arrest. FOXDIE was programmed to kill me at a random time in the future. It caught Liquid in the crossfire due to our genetic similarity. "
+	}
+	--
+	if snakeFeelings > 90
+	{
+		"\w8\w8\n\n[half]\0\s[0]I don't think about him much anymore. I've come to terms with being a clone, and I didn't know him for long.\0\s[6] He's another name on the long list of people who died directly or indirectly because of me."
+	}
+}
+
+//Asks Snake about his love life. Most of this is headcanon, because Snake's early life doesn't have a lot known about it.
+Select.askLove
+{
+	if askLove == 0
+	{
+		"\0\s[8]Love life? Are you kidding me?\w8\w8\w8.\w8.\w8 You're not joking? Hmmh. Let me think."
+		askLove = 1
+	}
+	elseif askLove == 1
+	{
+		"\0\s[0]You're serious. Fine. I flirted with a couple girls, dated some for a little while. That's it." 
+		askLove = 2
+	}
+	elseif askLove == 2 && snakeFeelings < 60
+	{
+		"\f[italic,true]Snake narrows his eyes. Seems like now is not the time."
+	}
+	elseif askLove == 2 && snakeFeelings >= 60
+	{
+		"\0\s[0]Used to know this girl. Holly. She invited me to Christmas Dinner, but I didn't stick around. Too young for me, anyway."
+		askLove = 3
+	}
+	elseif askLove == 3 && snakeFeelings < 70
+	{
+		"\0\s[0]\f[italic,true]Snake rolls his eyes and seems annoyed. Seems like now is not the time."
+	}
+	elseif askLove == 3  && snakeFeelings >= 70
+	{
+		"\0\s[6]You're still on this?\w8.\w8.\w8 \nIf you remember Holly, I said she was too young for me. Meryl was also young. Never saw me for who I was. She wanted 'Snake'. Always called me that, no matter how many times I told her she could call me David. Didn't take me long to find out the reason she was so stubborn. She was only eighteen. Being my commander's neice, I thought she was older. I skipped town after her. I don't think girls are worth the trouble anymore."
+		askLove = 4
+	}
+	elseif askLove == 4
+	{
+		"\0\s[0]Mmm. Okay. You're still not satisfied? Otacon already knows, but I'll humor you. \nBack when I first retired, after Outer Heaven, I wasn't what most people call 'stable'. Most veterans experience all kinds of instability after retiring. Me? I slept around. I flirted with anything on two legs that moved and wanted me, even if I wasn't interested. Let girls use me. It numbed the pain while I licked my wounds. Same thing happened after Zanzibar. The only thing that got me to quit was living twenty miles away from anybody alive and drinking myself to death in Alaska. Happy? You got what you asked for. That's it. Don't ask me about it again."
+		askLove = 5
+	}
+	elseif askLove == 5
+	{
+		"\0\s[0]What? I've told you all there is about it. "
+		--
+		if otaconFeelings >= 70
+		{
+			askLove = 6 //I think this is the first time I've put something which permanently diverges, besides limiting Snake's apologies. Feels cool.
+			"\0\s[0]\n\n[half]\f[italic,true]You point out Otacon.\f[italic,false]\n\n[half]\0\s[6]Otacon..?\1\s[30]\w8\w8\w8\w8\0\s[0] Mhmm.\n\n[half]\f[italic,true]Snake looks at you for a moment, as if weighing his options.\w8\w8\w8\f[italic,false]\n\n[half]I watch is back and he watches mine. He's my partner. For us, it means multiple things. One thing that doesn't change is I'll always be there to protect him.\n\n[half]\f[italic,true]\w8\w8You say he's dodging the question.\f[italic,false]\n\n[half]\w8\w8I don't recall you asking one.\1\s[32]\e"
+		}
+		else
+		{
+			askLove = 7
+			"\0\s[8]\n\n[half]\f[italic,true]You ask Snake about Alaska.\f[italic,false]\n\n[half]Mm. That's where I moved after Zanzibar. Nice place called Twin Lakes. I dealt with a lot of thoughts. Memories.\w8\w8 Got a bad habit of drinking to drown out the flashbacks. Otacon helped me drop that one.\1\s[14]\0\s[8] Nearly tore us apart, though.\s[9]\w8\w8\f[size,8] The drinking didn't help with Meryl."
+		}
+	}
+	elseif askLove == 6 || askLove == 7
+	{
+		"\f[italic,true]You've learned all you can about this part of Snake. However, you can go back and listen to what he told you again, if you forgot. Which part would you like to return to?\f[italic,default]\n"
+		--
+		"\q[Flirting,loveFlirting]\n/
+		\q[Holly,loveHolly]\n/
+		\q[Meryl,loveMeryl]\n/
+		\q[Instability,loveInstability]\n"
+		--
+		if askLove == 6
+		{
+			"\q[Otacon,loveOtacon]"
+		}
+		elseif askLove == 7
+		{
+			"\q[Alaska,loveAlaska]"
+		}
+	}
+}
+
+Select.loveFlirting //I'll do these in only two lines so they don't take up a huge amount of space.
+{"\0\s[0]You're serious. Fine. I flirted with a couple girls, dated some for a little while. That's it."}
+Select.loveHolly
+{"\0\s[0]Used to know this girl. Holly. She invited me to Christmas Dinner, but I didn't stick around. Too young for me, anyway."}
+Select.loveMeryl
+{"\0\s[6]You're still on this?\w8.\w8.\w8 \nIf you remember Holly, I said she was too young for me. Meryl was also a young one. Never saw me for who I was. She wanted 'Snake'. Always called me that, no matter how many times I told her she could call me David. Didn't take me long to find out the reason she was so stubborn. She was only eighteen. Being my commander's neice, I thought she was older. I skipped town after her. I don't think girls are worth the trouble anymore."}
+Select.loveInstability
+{"\0\s[0]Mmm. Okay. You're still not satisfied? Otacon already knows, but I'll humor you. \nBack when I first retired, after Outer Heaven, I wasn't what most people call 'stable'. Most veterans experience all kinds of instability after retiring. Me? I slept around. I flirted with anything on two legs that moved and wanted me, even if I wasn't interested. Let girls use me. It numbed the pain while I licked my wounds. Same thing happened after Zanzibar. The only thing that got me to quit was living twenty miles away from anybody alive and drinking myself to death in Alaska. Happy? You got what you asked for. That's it. Don't ask me about it again."}
+Select.loveOtacon
+{"\0\s[0]What? I've told you all there is about it. \n\n[half]\f[italic,true]You point out Otacon.\f[italic,false]\n\n[half]\0\s[6]Otacon..?\1\s[30]\w8\w8\w8\w8\0\s[0] Mhmm.\n\n[half]\f[italic,true]Snake looks at you for a moment, as if weighing his options.\w8\w8\w8\f[italic,false]\n\n[half]He's my partner. For us, it means multiple things. One thing that doesn't change is I'll always be there to protect him.\n\n[half]\f[italic,true]\w8\w8You say he's dodging the question.\f[italic,false]\n\n[half]\w8\w8I don't remember you asking one.\1\s[32]\e"}
+Select.loveAlaska
+{"\0\s[0]What? I've told you all there is about it. \0\s[8]\n\n[half]\f[italic,true]You ask Snake about Alaska.\f[italic,false]\n\n[half]Mm. That's where I moved after Zanzibar. Nice place called Twin Lakes. I dealt with a lot of thoughts. Memories. Got a bad habit of drinking to drown out the flashbacks. Otacon helped me drop that one. Nearly tore us apart, though. The drinking didn't help with Meryl."}
+
 //Asks Snake about Frank Jaeger, Gray Fox.
 Select.askJaeger
 {
 	if snakeFeelings >= 35
 	{
-	"\0\s[8]Jaeger? Best damn soldier I ever knew. He and I were close. When he got captured during N312, I knew I had to do something. In my naivety, I thought Big Boss picked me for N313 for that very reason.\1\s[18]\w8\w8...You loved him. Gray Fox.\0\s[4] I'd have done anything to save him.\e"
+		"\0\s[8]Gray Fox. That was his codename. He and I were close. "
+		if snakeFeelings <= 19
+		{
+			"That's all you need to know."
+		}
+		--
+		if snakeFeelings > 20
+		{
+			"We were in FOXHOUND together. He noticed me when I was a rookie. "
+		}
+		--
+		if snakeFeelings > 30
+		{
+			"Jaeger was the first and only soldier in the unit to achieve the highest code name. 'Fox'. "
+		}
+		--
+		if snakeFeelings > 40
+		{
+			"Gray Fox taking notice of me was surprising. Gave me a big head. "
+		}
+		--
+		if snakeFeelings > 50
+		{
+			"\w8\w8During \_a[whoN312]N312\_a, we recieved he was captured. I knew I had to do something. Back then, I thought Big Boss picked me for \_a[whoN313]N313\_a for the same reason. I was too green for the operation and Boss knew it. \1\s[18]"
+		}
+		--
+		if snakeFeelings > 60
+		{
+			"\1\s[18]\w8\w8...You loved him. Frank.\0\s[4]\n\n[half]I'd have done anything to save him. "
+		}
+		--
+		if snakeFeelings > 80
+		{
+			"\0\s[0]\nHis loyalty to Big Boss came in conflict with me. We came to blows in Zanzibar, and we fought one last spar.\0\s[6] He was still damn quick...\w8\w8\w8 I thought he didn't make it out of Zanzibar alive. "
+		}
+		--
+		if snakeFeelings > 90
+		{
+			"\0\s[9]When we met again at Shadow Moses, he was unrecognizable. FOXHOUND took his body away from him. Shoved him in an exoskeleton, stripped him of his humanity and used his body for research on gene therapy. There was no respect for death. "
+		}
+		--
+		if snakeFeelings > 100
+		{
+			"\0\s[0]In the end, his goal was still the same. Despite everything, he wanted one last spar with me. Put things back the way they were intended.\w8\w8\w8 Gray Fox was killed by Liquid Snake. For the final time."
+		}
+		--
+		"\n\n"
+		--
+		if snakeFeelings < 60
+		{
+			"\f[italic,true]You have a feeling there's still more to Gray Fox."
+		}
+		--
+		"\e"
 	}
 	else
 	{
@@ -357,22 +633,113 @@ Select.askJaeger
 //Asks Snake about Big Boss. Currently unimplemented.
 Select.askBigBoss
 {
-	if snakeFeelings >= 30 
+	"\0\s[0]Big Boss was the founder and commander of FOXHOUND in the early 1970s and throughout the 1990s. He was a legendary soldier and well-known in America, making the covers of magazines and at least a handful of books. Big name, big title. "
+	--
+	if snakeFeelings <= 19
 	{
-	"\0\s[8]I thought Big Boss picked me for N313 for that very reason.\e"
+		"\0\s[8]Surely you should know this. "
 	}
-	elseif snakeFeelings >= 0 && snakeFeelings <= 29
+	--
+	if snakeFeelings > 20
 	{
-		"\0\s[0]bullshitbullshitbullshit replace this dialog i'm silently upset at you"
-	} 
-	else
+		"\0\s[0]In the 1990s, he secretly developed a large military force known as Outer Heaven occupying Galzburg in South Africa. He also later went on in 1997 to participate in the Mercenary War and managed to scrape together the independence of a province called Zanzibar. "
+	}
+	--
+	if snakeFeelings > 30
 	{
-		"\0\s[0]whatever i hate you dad"
+		"\n\n[half]Outer Heaven was later known to be developing a Metal Gear in 1995. A category of robot which is nuclear armed and bipedal. Zanzibar Land was also found to be building a Metal Gear in its own time too. "
+	}
+	--
+	if snakeFeelings > 40
+	{
+		"\n\n[half]Now, in 1995, Big Boss hadn't been revealed to be behind Outer Heaven yet. He was still the commander of FOXHOUND. As a cover, he sent Gray Fox to Outer Heaven to destroy the Metal Gear. That was Operation Intrude N312. Fox never made it back, so Big Boss sent me. That operation was called Intrude N313. I sucessfully destroyed the Metal Gear. "
+	}
+	--
+	if snakeFeelings > 50
+	{
+		"\n\n[half]Big Boss wasn't particularly happy I'd destroyed his pet project when N313 was supposed to be a suicide mission. He tried to stop me himself,\w8 supposedly anyway. He had a body double of some kind, who I killed fully believing he was Big Boss. "
+	}
+	--
+	if snakeFeelings > 60
+	{
+		"\0\s[8]\n\n[half]I couldn't stand it. Big Boss and I had become somewhat close in FOXHOUND. He taught me CQC- Close Quarters Combat- a fighting technique he had created. He gave me my codename, one I still use. He even told me he was my father. "
+	}
+	--
+	if snakeFeelings > 80
+	{
+		"\0\s[6]\n\n[half]I quit FOXHOUND after that. I was brought back to destroy the Metal Gear in Zanzibar, and I fought Big Boss once more. The real Big Boss. I killed him with my own hands. He burned to death. Slowly and painfully, screaming. Screaming my name. "
+	}
+	--
+	if snakeFeelings > 90
+	{
+		"\n\0\s[8]After that I went to live in Alaska and kept myself black-out drunk as much as possible. They say alcohol is good at drowning out the screaming."
 	}
 }
 Select.askOtacon
 {
-	"\0\s[8]Otacon? He's my partner."
+	if snakeFeelings >= 20
+	{
+		"\0\s[8]Otacon, huh? He's my partner, I met him on Shadow Moses. We started an NGO called Philanthropy together with a few others to prevent and destroy derivates of \_a[whoRex]Metal Gear Rex\_a. Otacon gathers all the intel and I do the dirty work. He's white collar. I'm blue collar. Sometimes this gets him into trouble, diggng places he shouldn't be. I do my best to protect him whenever possible. "
+		--
+		if askLove == 6
+		{
+			"We fool around sometimes. He's real shy about it, though. So don't go screaming 'ho yay'. "
+		}
+	}
+	elseif snakeFeelings >= -10 && snakeFeelings < 20
+	{
+		"\0\s[8]Otacon? He's my partner. We work together on a personal project. It's makes us move around a lot. I've seen him geek out about being in here already, so I don't think he minds the extra stop. I'd prefer to get going as soon as possible."
+	}
+	else
+	{
+		"\0\s[8]Who's Otacon? Ask him yourself. He's right here."
+	}
+	--
+	"\n\n[half]\0\s[0]\f[italic,true]You ask him how Otacon is doing.\f[italic,default]\n\n[half]"
+	--
+	if snakeFeelings <= -20
+	{
+		"\0\s[8]Why are you asking me?"
+	}
+	elseif otaconFeelings <= -50
+	{
+		"\0\s[8]\w8.\w8.\w8. Leave him alone. Got it?"
+	}
+	elseif otaconFeelings > -50 && otaconFeelings <= -20
+	{
+		"\0\s[8]He's been rather forgiving with you."
+		--
+		if snakeApologies = 3
+		{
+			" So have I."
+		}
+		--
+		"So don't mess anything else up. Got it?"
+	}
+	elseif otaconFeelings > -20 && otaconFeelings <= 10
+	{
+		"\0\s[8]He's doing fine. Keep it that way."
+	}
+	elseif otaconFeelings > 10 && otaconFeelings <= 20
+	{
+		"\0\s[8]He seems happy. Is that good enough for you?"
+	}
+	elseif otaconFeelings > 20
+	{
+		"\0\s[0]He likes it here. A little cheerier than usual. It's good for him."
+		--
+		if snakeFeelings > 30
+		{
+			"\0\s[9] It gets a little isolated with just him and me. Nastasha and the others just aren't the same. Talking to you seems to have put some life back into him, hm?"
+		}
+		--
+		if snakeFeelings > 50 && otaconFeelings > 60
+		{
+			"\0\s[4]\w8.\w8. He had a hard life, you know. He's done well for himself since."
+		}
+	}
+	--
+	"\e"
 }
 //If someone selects an option linked to BACKTOMENU, it will go back to MenuRun.
 //Advanced users, note that this is formatted as Select.linkedfunction? Remember how it went \q[Displayed Name,linkedfunction] above? When a user clicks an option that doesn't begin with On, they'll be linked to Select.linkedfunction. Pay close attention as we go through and you'll see this in action.
@@ -387,12 +754,6 @@ Select.configmenu
 	{
 		TalkConfig
 	}
-
-//*********************Advanced User Info*******************************
-//Some of you may be wondering why some of these Select.options lead to another function. Why not just put the config menu coding under Select.configmenu, instead of linking to TalkConfig?
-//Basically any function that's preceded with Select. is limited in its complexity and can only be called within its own .dic file in my experience. Why should you care, you ask? Well, if you're going to link to this function any other way, such as linking it in other .dic files or as a page in a menu, it needs to be a stand-alone function so it can be properly called. I'm pretty sure.
-//The basic jist is this; if you're going to reuse whatever it is the option leads to, you should make it its own function. Otherwise, you can leave it in Select.option. As a rule of thumb I'd probably put any complicated stuff in its own function, then use the Select.option to call the full function as you can see above. Simple dialogue responses to a choice can stay as a Select.option though (Like "Do you like going to raves and partying? Yes/No"). Study what stays as a Select.option and what links to another Function as we go through the file.
-//***********************************************************************
 
 //--TalkConfig
 //This menu allows the user to change their name and other information, as well as put in their birthday and change how often the ghost speaks. You can restructure how this looks if you want, but it's perfectly functional as is. You can of course change the dialogue though if you like.
@@ -409,7 +770,11 @@ TalkConfig
 	--
 	"\f[bold,1]Your birthday:\f[bold,0] %(birthdayprint) \f[sup,1](\q[Change it?,TEACHBDAY])\f[sup,0]\n\n"
 	--
-	"\f[bold,1]Talk Rate:\f[bold,0] - every %(talktime) \f[sup,1](\q[Change it,talkinter])\f[sup,0]\n\n"
+	"\f[bold,1]Talk Rate:\f[bold,0] every %(talktime) \f[sup,1](\q[Change it,talkinter])\f[sup,0]\n\n"
+	--
+	"\f[bold,1]Beginner Mode:\f[bold,0] %(beginnerMode) \f[sup,1](\q[Change it,beginnerYN])\f[sup,0]\n\n"
+	--
+	"\f[bold,1]Punch Config:\f[bold,0] %(punchConfig) \f[sup,1](\q[Change it,punchYN])\f[sup,0]\n\n"
 	--		
 		{
 		"\![*]Enable Uninstall? (NOW : %(deleteshitai))\n\q[ON,deleteon] \q[OFF,deleteoff]\n\n[half]\n"
@@ -689,7 +1054,47 @@ Select.TEACHNAME
 		OnTeachName	
 	}
 
-	
+
+Select.beginnerYN //Toggle Beginner Mode
+	{
+		"\0\s[8]Alright, do you want beginner mode on or off? Beginner mode disables and softens some negative repercussions when enabled. When disabled, we may be less forgiving to your actions./
+		\![*]\q[Turn On,beginnerStart]\n/
+		\![*]\q[Turn Off,beginnerEnd]\n"
+		//If you're lost on where beginnerStart and End are, they are in Sn_nameteach.dic.
+	}
+
+Select.punchYN //Toggle Punch Functions
+{
+	"\0\s[8]Punch Config. This enables certain punching modes. / 
+	\nWhen set to On, you'll automatically punch us when you double click areas of interest. /
+	\nWhen set to Off, you won't be able to punch us at all, and simply point when you double click. /
+	\nWhen set to Confirm, you will be asked to confirm the punch before it happens. /
+	\nWhen set to Apologize, you will automatically punch when double clicking, but have the option to apologize. Which will it be?\n/
+	\![*]\q[On,punchOn]\n/
+	\![*]\q[Off,punchOff]\n/
+	\![*]\q[Confirm,punchConfirm]\n/
+	\![*]\q[Apologize,punchApologize]"
+}
+Select.punchOn
+{
+	punchConfig = "On"
+	"\0\s[0]Alright. I'll roll with the punches.\1\s[17]What am I supposed to do?\0\s[8]\n\n[half]I won't let %(username) hurt you.\w8\w8\1\s[14]\n\n[half]Okay. I trust you."
+}
+Select.punchOff
+{
+	punchConfig = "Off"
+	"\0\s[0]Alright. I'll take any double clicks as pointing."
+}
+Select.punchConfirm
+{
+	punchConfig = "Confirm"
+	"\0\s[0]Alright. It will ask you to confirm your punches before actually doing so."
+}
+Select.punchApologize
+{
+	punchConfig = "Apologize"
+	"\0\s[0]Alright. I'll give you a chance to apologize after hitting me.\1\s[17]Me too, even if I hope you don't at all..."
+}
 //If the user selects cancel in a menu. Replace as you like, or just leave them blank.
 Select.CANCEL
 	{
@@ -814,29 +1219,59 @@ OnChoiceTimeout
 
 OpenKeroMenu
  {
-	"\1\s[10]\b[2]"
-	"\1\s[15]\b[2]"
-	"\1\s[16]\b[2]"
-	
+	if codecTimer > 1 || missionTimer > 1 
+	{
+		"\1\s[38]\b[2]"
+	}
+	else
+	{
+		"\1\s[10]\b[2]"
+		"\1\s[15]\b[2]"
+		"\1\s[16]\b[2]"
+	}
 	//You've seen so far that you can set up multiple options for menu introductions. You can also set up multiple poses to match up to multiple dialogue. So for example, when you open Otacon's menu, he may randomly do any of these three poses, and randomly choose from any of the four dialogue options below, before continuing with his menu. Make a close note of the -- dashes breaking these up.
  	--
 	"Hey, %(username)! What do you need?"
  	"What's up, %(username)?"
  	"Hey, %(username)! Let's see... I have a couple options, here."
+	if codecTimer > 1 || missionTimer > 1
+	{
+		"I'm a little busy, sorry. I'll see what I can do. What do you need?"
+	}
  	--
 	"\n\n[half]/
 	\![*]\q[Update,keroupdatecheck]\n/
  	\![*]\q[Bug report,bugreport]\n\n/
-	\![*]\q[Interact,interactKERO1]\n/
-	\![*]\q[FAQ,faq]\n/
-	\![*]\q[Ghost Tips,tips]\n\n/
-	//Dev Testing options begin. I comment these out on release. usually.
-	\![*]\q[Test variable,testvariable]\n/
-	//When you are done with the test variable, aka your ghost is finished or you just don't want it showing up when you publish your ghost beta or whatevs, simply add two // slashes in front of \![*] to comment the line out. In Notepad++, it will turn green. When you want to use it again, erase the two slashes to turn it back to normal.
-	//\![*]\q[View variablesDEVTEST ONLY,viewvariable]\n/
-	//\![*]\q[Change variablesDEVTEST ONLY,changevariable]\n/
-	//\![*]\q[Run SurfacesDEVTEST ONLY,testKEROsurfaces]\n\n/
-	\![*]\q[Nothing,keroCANCEL]/
+	\![*]\q[Interact,interactKERO1]\n"
+	--
+	if otaconFeelings >= 40 && devMode == 1 //Menu to initiate codec search.
+	{
+		"\![*]\q[Codec Search,codecSearch]\n"
+	}
+	--
+	if mk2 == "owned" && devMode == 1 //Menu for bringing items earned through gameplay out.
+	{
+		"\![*]\q[Bring Items,bringClutter]\n"
+	}
+	--
+	if otacoins > 0 && devMode == 1 //Shop for Otacoins
+	{
+		"\![*]\q[Shop,buy]\n"
+	}
+	--
+	"\![*]\q[FAQ,faq]\n/
+	\![*]\q[Ghost Tips,tips]\n\n"
+	--
+	if devMode == 1
+	{
+	//Dev Testing options begin. Only viewable if devMode == 1
+	"\![*]\q[Test variableDEVTEST ONLY,testvariable]\n/
+	\![*]\q[View variablesDEVTEST ONLY,viewvariable]\n/
+	\![*]\q[Change variablesDEVTEST ONLY,changevariable]\n/
+	\![*]\q[Run SurfacesDEVTEST ONLY,testKEROsurfaces]\n\n"
+	}
+	--
+	"\![*]\q[Nothing,keroCANCEL]/
 	\e"
 }
 
@@ -848,10 +1283,22 @@ OpenKeroMenu
 //If you click cancel. Replace dialogue as you want.
 Select.keroCANCEL
 {
-	"\1\s[18]Nothing caught your eye?\e"
-	"\1\s[18]All done?\e"
-	"\1\s[32]Nothing left to do.\e"
-	"\1\s[18]Alright, I'll close the menu then.\e"
+	if codecTimer > 1 || missionTimer > 1
+	{
+		"\1\s[38]"
+		--
+		"Nothing caught your eye?\e"
+		"All done?\e"
+		"Nothing left to do.\e"
+		"Alright, I'll close the menu then.\e"
+	}
+	else
+	{
+		"\1\s[18]Nothing caught your eye?\e"
+		"\1\s[18]All done?\e"
+		"\1\s[32]Nothing left to do.\e"
+		"\1\s[18]Alright, I'll close the menu then.\e"
+	}
 }
 
 
@@ -867,10 +1314,264 @@ Select.keroupdatecheck
 	"\1\s[10]\![updatebymyself]\e"
 }
 
+//   ___          _             __                     _     
+//  / __\___   __| | ___  ___  / _\ ___  __ _ _ __ ___| |__  
+// / /  / _ \ / _` |/ _ \/ __| \ \ / _ \/ _` | '__/ __| '_ \ 
+/// /__| (_) | (_| |  __/ (__  _\ \  __/ (_| | | | (__| | | |
+//\____/\___/ \__,_|\___|\___| \__/\___|\__,_|_|  \___|_| |_|
+//---- Codec Search ---------------------------------------------------------
+//This is a unique feature for Otacon. Codec Search lets the user input an amount of time for Otacon to search for new codec frequencies.
+Select.codecSearch
+{
+	if codecTimer == "" && codecFatigue == 0 //Checks to see if the codec timer is ready to be reset. if codecTimer is blank, it means its ready to recieve information. if codecFatigue is still going, it means Otacon is tired and it needs to reach 0 first.
+	{
+		"\1\s[18]Oh, you want me to search through the codec frequencies? I can do that. How long do you want me to search for? In minutes, please.\n\n[half]\f[italic,true]How long will Otacon search?\![open,inputbox,OnSetCodecTimer,-1]"
+	}
+	elseif codecTimer == "finished"
+	{
+		codecFatigue = (inputTime * 0.5) + RAND(600) + 600 //Sets the fatigue timer, which is the same as half of the inputted minutes (in seconds) plus 0-600 seconds, plus 600 seconds (10 minutes). Max fatigue is 1 hour and 20 minutes, if I remember right.
+		codecTimer = "" //Makes sure codecTimer is ready to recieve new information.
+		"\1\s\[15]Alright! Like I said, I finished up searching. "
+		if inputTime <= 2700 //Less than or 45 Minutes
+		{
+			if RAND(100) > 69 && mk2 != "owned" //nice
+			{
+				"I found some good information on an old connection of mine- I managed to recover some blueprints for a project! It's the MG MK. II. You can ask me to bring it out in my double click menu. Oh, and If you're wondering about which one is the MK. I... Er, don't think about it too hard.\n\n[half]"
+				mk2 = "owned" //Gives the player access to the MK. II
+			}
+			elseif mk3 != "owned" && mk2 == "owned"
+			{
+				"I got some ideas for some improvements to the MK. II while listening to an engineering project's managment meeting.\s[15] Don't worry, no plagarism! Stealing other's concepts is just rude... Anyway. You should be able to bring out the new version of the MK. II in the menu, under the name MK. III!"
+				mk3 = "owned"
+			}
+			else
+			{
+				"\1\s[37]I didn't find anything unique this time. Sorry.\w4\w4\s[15] But I did find some Otacoins!"
+				--
+				if otacoins < 1
+				{
+					"\n\n[half]\f[italic,true]You say you have no idea what that is.\f[italic,default]\n\n[half]\s[18]You don't? Oh, duh! I forgot to tell you. Well, Otacoin isn't a real currency. Not in the monetary economy, anyway. It's not a cryptocurrency, either! (I just thought the name was funny..) Anyway. They're.. bargaining chips of sorts. Information I scrounged up and can be exchanged for real money or goods.\s[15] Don't worry, I'll handle it and be the middleman in those sorts of things!\n\n[half]\f[italic,true]You say it sounds a bit like blackmail.\f[italic,default]\n\n[half]\s[2501]N-No! That's not it at all...\w8\w8\s[16] Sometimes I sell the information to \f[italic,true]o\w2th\w4er\f[italic,default] people... So it's not blackmail, okay?"
+				}
+				--
+				_otacoinPlus += RAND(80) + 20
+				"\n\n[half]\f[italic,true]You Recieved %(_otacoinPlus) Otacoins! "
+				otacoins += _otacoinPlus
+				--
+				"\f[italic,true]You now have %(otacoins) Otacoins."
+			}
+		}
+		elseif inputTime > 2701 && inputTime < 4200 //46 minutes to an hour and 10 minutes
+		{
+			"This is dialogue for when you've searched between 46 minutes and an hour and ten minutes. Wow!"
+			--
+			if otacoins < 1
+			{
+				"\n\n[half]\f[italic,true]You say you have no idea what that is.\f[italic,default]\n\n[half]\s[18]You don't? Oh, duh! I forgot to tell you. Well, Otacoin isn't a real currency. Not in the monetary economy, anyway. It's not a cryptocurrency, either! (I just thought the name was funny..) Anyway. They're.. bargaining chips of sorts. Information I scrounged up and can be exchanged for real money or goods.\s[15] Don't worry, I'll handle it and be the middleman in those sorts of things!\n\n[half]\f[italic,true]You say it sounds a bit like blackmail.\f[italic,default]\n\n[half]\s[2501]N-No! That's not it at all...\w8\w8\s[16] Sometimes I sell the information to \f[italic,true]o\w2th\w4er\f[italic,default] people... So it's not blackmail, okay?"
+			}
+			--
+			_otacoinPlus += RAND(60) + 40
+			"\n\n[half]\f[italic,true]You Recieved %(_otacoinPlus) Otacoins! "
+			otacoins += _otacoinPlus
+			--
+			"You now have %(otacoins) Otacoins."
+			
+		}
+		elseif inputTime >= 4200 && inputTime < 5400 // hour and ten to hour and a half
+		{
+			"This is dialogue for when you searched between an hour and 11 minutes to an hour and a half. Pretty long now, huh!"
+			--
+			if otacoins < 1
+			{
+				"\n\n[half]\f[italic,true]You say you have no idea what that is.\f[italic,default]\n\n[half]\s[18]You don't? Oh, duh! I forgot to tell you. Well, Otacoin isn't a real currency. Not in the monetary economy, anyway. It's not a cryptocurrency, either! (I just thought the name was funny..) Anyway. They're.. bargaining chips of sorts. Information I scrounged up and can be exchanged for real money or goods.\s[15] Don't worry, I'll handle it and be the middleman in those sorts of things!\n\n[half]\f[italic,true]You say it sounds a bit like blackmail.\f[italic,default]\n\n[half]\s[2501]N-No! That's not it at all...\w8\w8\s[16] Sometimes I sell the information to \f[italic,true]o\w2th\w4er\f[italic,default] people... So it's not blackmail, okay?"
+			}
+			--
+			_otacoinPlus += RAND(60) + 80
+			"\n\n[half]\f[italic,true]You Recieved %(_otacoinPlus) Otacoins! "
+			otacoins += _otacoinPlus
+			--
+			"You now have %(otacoins) Otacoins."
+		}
+		else
+		{
+			"\1\s[10]Woah, you searched more than an hour and a half!"
+			--
+			if otacoins < 1
+			{
+				"\n\n[half]\f[italic,true]You say you have no idea what that is.\f[italic,default]\n\n[half]\s[18]You don't? Oh, duh! I forgot to tell you. Well, Otacoin isn't a real currency. Not in the monetary economy, anyway. It's not a cryptocurrency, either! (I just thought the name was funny..) Anyway. They're.. bargaining chips of sorts. Information I scrounged up and can be exchanged for real money or goods.\s[15] Don't worry, I'll handle it and be the middleman in those sorts of things!\n\n[half]\f[italic,true]You say it sounds a bit like blackmail.\f[italic,default]\n\n[half]\s[2501]N-No! That's not it at all...\w8\w8\s[16] Sometimes I sell the information to \f[italic,true]o\w2th\w4er\f[italic,default] people... So it's not blackmail, okay?"
+			}
+			--
+			_otacoinPlus += RAND(60) + 160
+			"\n\n[half]\f[italic,true]You Recieved %(_otacoinPlus) Otacoins! "
+			otacoins += _otacoinPlus
+			--
+			"You now have %(otacoins) Otacoins."
+		}
+		--
+		"\f[italic,default]I'll probably be ready to search again in about %(inputTime / 60) minutes."
+	}
+	elseif codecFatigue >= 1
+	{
+		"\1\s[33]Sorry, %(username). I'm still pretty exhausted from that last task. Do you mind waiting a bit? I think I'll be ready to go again in "
+		--
+		if codecFatigue < 600
+		{
+			"a little bit."
+		}
+		elseif codecFatigue >= 600 && codecFatigue < 1500
+		{
+			"about twenty minutes?"
+		}
+		elseif codecFatigue >= 1500 && codecFatigue <= 2700
+		{
+			"forty-five minutes, maybe."
+		}
+		elseif codecFatigue > 2700 && codecFatigue <= 3200
+		{
+			"maybe an hour?"
+		}
+		else
+		{
+			"an hour or two."
+		}
+	}
+	elseif missionFatigue >= 1
+	{
+		"\1\s[33]Sorry, %(username). I'm still pretty exhausted from that last mission. Do you mind waiting a bit? I think I'll be ready to go again in"
+		-- //I could probably just diverge this in the original one and replace "mission" or "task" with an if check but... it's not worth the effort, haha.
+		if codecFatigue < 600
+		{
+			"a little bit."
+		}
+		elseif codecFatigue >= 600 && codecFatigue < 1500
+		{
+			"about twenty minutes?"
+		}
+		elseif codecFatigue >= 1500 && codecFatigue <= 2700
+		{
+			"forty-five minutes, maybe."
+		}
+		elseif codecFatigue > 2700 && codecFatigue <= 3200
+		{
+			"maybe an hour?"
+		}
+		else
+		{
+			"an hour or two."
+		}
+	}
+	else
+	{
+		if codecTimer > 1
+		{
+			"\1\s[38]Sorry, I'm already working on it! I'll be done in "
+			--
+			if codecTimer < 1800
+			{
+				"less than thirty minutes!"
+			}
+			elseif codecTimer > 1800 && codecTimer <= 3200
+			{
+				"less than an hour. Okay?"
+			}
+			else
+			{
+				"maybe an hour or two?"
+			}
+		}
+	}
+	--
+	"\e"
+}
+OnSetCodecTimer //maybe I should have used something other than "thing".
+{
+	"\1\s[18]\f[italic,true]You tell Otacon %(reference0) minutes sounds right.\f[italic,default]\n\n[half]"
+	--
+	inputTime = reference0 * 60 //Turns the minutes the user inputs into seconds, so that when we set codecTimer later its really simple.
+	
+	if inputTime > 7201
+	{
+		"Sorry, %(username). I can't really search for longer than two hours or so... Manually flipping through all of the frequencies is really tiring. At least thirty minutes should work."
+	}
+	elseif inputTime < 1799
+	{
+		"\1\s[37]I won't really find anything useful in that short of time, sorry. I need probably at least 30 minutes to have a chance to find something interesting? And I can go for about two hours at the longest."
+	}
+	elseif inputTime >= 1800 && inputTime <= 7200
+	{
+		if inputTime == 4140
+		{
+			"nice.\n\n[half]"
+		}
+		--
+		"\1\s[15]Alright! That sounds just fine. I'll get to working on that.\w8\w8\1\s[38]"
+		codecTimer = inputTime
+	}
+	elseif inputTime == 0 || reference0 == ""
+	{
+		inputTime = (RAND(90) + 30) * 60
+		"\1\s[18]Er... I'll just choose myself then. I'll look for %(inputTime / 60) minutes."
+		codecTimer = inputTime
+	}
+	else
+	{
+		"\1\s[18]Sorry, it got kind of garbled there. Could you repeat what you said? Make sure you input it in with just numbers, like '120' for two hours."
+	}
+	--
+	"\e"
+}
+
+//If you want to do a system like this.. please don't do it like me. Learn how to use arrays before you write this kind of spaghetti.
+Select.bringClutter : all
+{
+	"\1\s[10]Okay! I can do that. Which items do you want to bring out?\b2\n\n"
+	if devMode == 0
+	{
+		//display owned
+		if mk2 == "owned"
+		{
+			"\![*]\q[Mk. II,bringMk2]\n"
+		}
+		if mk3 == "owned"
+		{
+			"\![*]\q[Mk. II,bringMk3]\n"
+		}
+	}
+	else //if in Devmode, all are displayed regardless of ownership
+	{
+		"\![*]\q[Mk. II,bringMk2]\n"
+		--
+		"\![*]\q[Mk. II,bringMk3]\n"
+	}
+	"\![*]\q[Nothing,keroCANCEL]"
+}
+
+Select.bringMk2
+{
+	"\1\s[10]Can do. Here you go, little buddy!\p[3]\s[9910]\1\s[15] Have fun!"
+}
+
+Select.bringMk3
+{
+	"\1\s[10]Sure thing. New and improved little buddy, here you come!\p[4]\s[9911]"
+}
+
+//Shop for spending Otacoins
+Select.buy
+{
+	"Alright!"
+}
+
 //---- Otacon's FAQ ---------------------------------------------------------
 Select.faq //OKUAJUB: FAQ, unlocks more answers as you listen.
 { 
-	
+	if codecTimer > 1 || missionTimer > 1
+	{
+		"\1\s[38]"
+		--
+		"Sorry, I can't answer your question right now... Um, can you ask me later? Thanks."
+		"Huh? Oh, darn, I lost my train of thought. What was I..? Um, sorry. I'll be done soon, I think."
+		"Uh... I'll get back to you.. in a second..."
+	}
 	"\1\s[18]\b[2]Got a question for me? Shoot.\n/
 	\![*]\_a[whoSnake]Who's Snake?\_a\n/
 	\![*]\_a[whoHal]Who's Otacon?\_a\n"
@@ -912,39 +1613,62 @@ Select.faq //OKUAJUB: FAQ, unlocks more answers as you listen.
 Select.tips
 {
 	
-	"\1\s[15]\b2Oh, Yeah! Do you have anything specific you want to ask me about?\n"
-	--
-	"\f[italic,true]How do I...\f[italic,default]\n/
-	\![*]\_a[talkingTip]Speed up talking?\_a\n/
-	\![*]\_a[wallpaperTip]Set my wallpaper?\_a\n/
-	\![*]\_a[emailTip]Check my email?\_a\n/
-	\![*]\_a[trashTip]Empty the recycle bin?\_a\n/
-	\![*]\_a[rssTip]Use RSS Feeds?\_a\n/
-	\![*]\_a[specsTip]Find system information?\_a\n/
-	\![*]\_a[iconifyTip]Use Iconfiy?\_a\n/
-	\![*]\_a[hitpetTip]Hit or Pet my ghost?\_a\n/
-	\![*]\q[Nevermind,keroCANCEL]\x\e"
+	if codecTimer > 1 || missionTimer > 1
+	{
+		"\1\s[38]"
+		--
+		"Er, Sorry. I'm still working on this. Can you ask me when I'm done?"
+		"Sorry, %(username). I have to focus for a... second..."
+		"Er, what was that? Sorry, I'm a... little busy..."
+	}
+	else
+	{
+		"\1\s[15]\b2Oh, Yeah! Do you have anything specific you want to ask me about?\n"
+		--
+		"\f[italic,true]How do I...\f[italic,default]\n/
+		\![*]\_a[talkingTip]Speed up talking?\_a\n/
+		\![*]\_a[wallpaperTip]Set my wallpaper?\_a\n/
+		\![*]\_a[emailTip]Check my email?\_a\n/
+		\![*]\_a[trashTip]Empty the recycle bin?\_a\n/
+		\![*]\_a[rssTip]Use RSS Feeds?\_a\n/
+		\![*]\_a[specsTip]Find system information?\_a\n/
+		\![*]\_a[iconifyTip]Use Iconify and minimize the Ghost?\_a\n/
+		\![*]\_a[hitpetTip]Hit or Pet my Ghost?\_a\n/
+		\![*]\q[Nevermind,keroCANCEL]\x\e"
+	}
 }
 
 //---- Otacon's Interaction Menu(s) ---------------------------------------------------------
 Select.interactKERO1
 {
-	"\1\s[18]\b2Huh?\n/
-	\_q\f[italic,true]Give...\f[italic,default]\n/
-	\![*]\q[Cigarettes,giveCigsKERO]\n/
-	\![*]\q[Ration,giveRationKERO]\n/
-	\![*]\q[Ketchup,giveKetchKERO]\n/
-	\![*]\q[Something Else?,giveSomethingKERO]\n"
-	--
-	if otaconFeelings <= -50
+	if codecTimer > 1 || missionTimer > 1
 	{
-		"\![*]\q[An Apology,sayApologyKERO]\n"
-	} 
-	--
-	"\![*]\q[Nevermind,keroCANCEL] \![*]\q[Next Page,interactKERO2]\n\n/
-	\f[italic,true]Inventory\n/
-	Ketchup %(snakeKetchups)/20\f[italic,default]/
-	\e"
+		"\1\s[38]"
+		--
+		"Huh? Oh, sorry. I can't do anything with you right now... I'm still working on this."
+		"...\n...\nOh, did you say something? Sorry, sorry. It's hard for me to hear you..\w4 when I'm... working.. \f[size,8]what was I doing..?\f[size,default]"
+		"What was that? Er, sorry. This takes a lot of focus."
+		"Um, sorry, I can't talk right now."
+	}
+	else
+	{
+		"\1\s[18]\b2Huh?\n/
+		\_q\f[italic,true]Give...\f[italic,default]\n/
+		\![*]\q[Cigarettes,giveCigsKERO]\n/
+		\![*]\q[Ration,giveRationKERO]\n/
+		\![*]\q[Ketchup,giveKetchKERO]\n/
+		\![*]\q[Something Else?,giveSomethingKERO]\n"
+		--
+		if otaconFeelings <= -50
+		{
+			"\![*]\q[An Apology,sayApologyKERO]\n"
+		} 
+		--
+		"\![*]\q[Nevermind,keroCANCEL] \![*]\q[Next Page,interactKERO2]\n\n/
+		\f[italic,true]Inventory\n/
+		Ketchup %(snakeKetchups)/20\f[italic,default]/
+		\e"
+	}
 }
 Select.interactKERO2
 {
@@ -952,6 +1676,8 @@ Select.interactKERO2
 	"\1\s[18]\b2Huh?\n/
 	\_q\f[italic,true]Play...\f[italic,default]\n/
 	\![*]\q[Rock Paper Scissors,playRPS]\n/
+	\![*]\q[Suit Speculation,playSuits]\n/
+	\![*]\q[Higher or Lower?,playHighLow]\n/
 	//\![*]\q[Sticks,playSTICKS]\n/ Still working on this one.
 	\f[italic,true]Say...\f[italic,default]\n/
 	\![*]\q[An insult,sayInsultKERO]\n/
@@ -1009,8 +1735,8 @@ Select.giveCigsKERO
 		--
 		"\f[italic,default]\n\n[half]I'm not sure why you're giving me this.\e"
 		"\f[italic,default]\n\n[half]I don't think I need to tell you I don't want this.\e"
-		"He just sighs.\f[italic,default]\e"
-		"\f[italic,default]\n\n[half]Look, if you need to dump your cigarettes, put them in the trash can. Don't give them to me.\e"
+		" He just sighs.\f[italic,default]\e"
+		"\f[italic,default]\n\n[half]Look, if you need to dump your cigarettes, dispose of them properly. Don't give them to me.\e"
 	}
 	--
 	if snakeFeelings >= 30
@@ -1030,12 +1756,19 @@ Select.giveRationKERO
 		otaconFeelings--
 		"\1\s[14]\f[italic,true] Otacon wrinkles his nose, despite the fact it's unopened.\f[italic,default]"
 		--
-		"\1\s[14]\n\n[half]This stuff tastes like cat food..."
+		{
+			"\1\s[14]\n\n[half]This stuff tastes like cat food..."
+			--
+			if isNeko = 1
+			{
+				" and just because I'm a nekomimi doesn't mean I like it..."
+			}
+		}
 		"\1\s[14]\n\n[half]I'll... save this for later."
-		"\1\s[14]\n\n[half]Er, sorry. I'm a bit of a picky eater."
+		"\1\s[14]\n\n[half]Er, sorry. My stomach is a bit sensitive..."
 		"\1\s[14]\n\n[half]Uhh... Do you want this, Snake..?\0\s[9]"
 	}
-	if snakeKetchups > 1
+	if snakeKetchups >= 1
 	{
 		otaconFeelings += 3
 		snakeKetchups--
@@ -1086,7 +1819,7 @@ Select.giveKetchKERO
 		"\1\s[13]Come on, %(username)! This is getting really weird!"
 		"\1\s[19]Do you have a plan for all this ketchup, even, %(username)?"
 		"\1\s[13]Where are you getting all this stuff..."
-		"\1\s[19]You've got to be getting all this ketchup from somewhere. Let me guess, %(username) your dad works at Heinz? Must be something like that..."
+		"\1\s[19]You've got to be getting all this ketchup from somewhere. Let me guess, %(username), your dad works at Heinz? Must be something like that..."
 		--
 		if isNeko = 1
 		{
@@ -1133,25 +1866,62 @@ OnGiveThingKERO //maybe I should have used something other than "thing".
 	}
 	elseif thing == "turgle" || thing == "turgled" || thing == "turgling"
 	{
-		"\0\s[8]Who turgled?"
+		"\1\s[18]\0\s[8]Who turgled?"
 	}
 	elseif thing == "otacon"
 	{
 		"\1\s[18]\f[italic,true] But nothing comes out.\f[italic,default]\n\n[half]"
 		--
-		"\1\s[18]Hey, I saw that input. Don't try making clones of me, too, now!"
+		"\1\s[18]Hey, I saw that input. Don't try making clones of me too, now!"
 		"\1\s[32]Huh. Imagine if that did work? I don't know if I'd like it."
 	}
-	elseif thing == "snake"
+	elseif thing == "snake" || thing == "twinsnakes"
 	{
 		"\1\s[18]\f[italic,true]The computer thinks for a moment before dropping Otacon a gummy worm.\f[italic,default]\n\n[half]...What? That is... weird."
+		"\1\s[18]\f[italic,true]The computer thinks for a moment before dropping Otacon a sour gummy worm.\f[italic,default]\n\n[half]...What? That is... weird." //if you don't get it, this is a reference to a candy made by Haribo known as "Twin Snakes", I thought it was a funny in-joke.
 	}
 	elseif thing == "solidsnake"
 	{
 		"\1\s[18]\f[italic,true]But nothing comes out.\f[italic,default]\n\n[half]"
 		--
-		"\1\s[18]Huh.\w8\w8\w5\0\s[5]Otacon already \f[italic,true]has\f[italic,default] me. In fact, he's had me many times.\1\s[11]\n\n[half]Snake!!! Oh my god... You-!\w8\1\s[13]\w8\w8\w8\1\s[32]\w8\w8 That was so bad.... You are one of a kind, Snake." //lol
-		"You're not trying to clone him now, too, are you?"
+		if askLove == 6 || (snakeFeelings > 50 && otaconFeelings > 50)
+		{
+			"\1\s[18]Huh.\w8\w8\w5\0\s[5]Otacon already \f[italic,true]has\f[italic,default] me. In fact, he's had me many times.\1\s[11]\n\n[half]Snake!!! Oh my god... You-!\w8\1\s[13]\w8\w8\w8\1\s[32]\w8\w8 That was so bad.... You are one of a kind, Snake." //lol
+		}
+		else
+		{
+			"You're not trying to clone him now, too, are you?"
+		}
+	}
+	elseif thing == "triangle" || thing == "girl"
+	{
+		"\1\s[18]\f[italic,true] The computer spits out "
+		--
+		"a tutorial on how to make an ukagaka.\f[italic,default]\n\n\[half]Now why would I need a thing like that?"
+		"a webcomic strip of a girl and a triangle.\f[italic,default]\n\n[half]Do I know these guys? They feel familiar."
+	}
+	elseif thing == "help" || thing == "newword" || thing == "info" || thing == "words" || thing == "word" || thing == "something"
+	{
+		"\1\s[18]\f[italic,true] The computer spits out a piece of paper with "
+		--
+		"the word Subs."
+		"the word Dubs."
+		"the word Turgle."
+		"the word Triangle."
+		"the word Girl."
+		"the word Snake."
+		--
+		"\1\s[18]\f[italic,default]\n\n[half]Huh. Maybe this is a keyword it knows? It's not \f[italic,true]that\f[italic,default] helpful..."
+	}
+	elseif thing == "testingcheatsenabledtrue" || thing == "password" //haha sims reference
+	{
+		"\1\s[15]Oh! Hey, Okuajub! I'll go ahead and set Development mode to true (1). If you're not... Okuajub... then don't mess anything up, okay? You can turn dev mode off by telling me 'testingcheatsenabled false' or just '12345' if that's too long. If you continue in this mode you might encounter some weird things Okuajub uses during development, or unfinished stuff. Remember, it's '12345' to turn it off again.\e"
+		devMode = 1
+	}
+	elseif thing == "testingcheatsenabledfalse" || thing == "12345"
+	{
+		"\1\s[18]Alright, I've turned devmode back off again. Good luck, %(username)!\e"
+		devMode = 0
 	}
 	else
 	{
@@ -1279,7 +2049,7 @@ Select.paperRPS //Approximately even ratio. You know, I usually only play Paper 
 		_otaconRock
 		--
 		"\1\s[18]Aw, your paper beats my rock.."
-		"\1\s[18]I don't get why paper beats rock... What are rocks good for anyway?\1\s[8]Don't be a sore loser, Otacon.\1\s[19]I'm not!.. Whatever,"
+		"\1\s[18]I don't get why paper beats rock... What are rocks good for anyway?\0\s[8]Don't be a sore loser, Otacon.\1\s[19]\n\n[half]I'm not!.. Whatever,"
 		"\1\s[18]Aw! My rock's... all covered up? Is that how it works?"
 		--
 		"\nCome on, let's \![*]\q[go again,playRPS]!\e"
@@ -1340,6 +2110,171 @@ Select.scissorsRPS //Win ratio slightly in the player's favor.
 	"\e"
 }
 
+//---- Suit Speculation ---------------------------------------------------------
+//Card Suit guessing game based on the campsite games from Animal Crossing. Simple 1/4 chance of winning.
+Select.playSuits
+{
+	"\1\s[15]Alright, %(username)! Are you ready to choose?\n/
+	\![*]\q[Diamonds,DiamondSuits]\n/
+	\![*]\q[Hearts,HeartSuits]\n/
+	\![*]\q[Clubs,ClubSuits]\n/
+	\![*]\q[Spades,SpadeSuits]\n/
+	or do you want me to explain the \![*]\q[rules,RulesSuits]?"
+}
+
+Select.RulesSuits
+{
+	"\1\s[15]Okay! Suits Speculation is pretty simple, actually. I'm going to pull a card, and it could be either part of the Diamond, Heart, Club or Spade suits. Your job is to try and guess which one it will be! You'll do this by calling the suit, and then I'll reveal which one it is. If you guess right, you win! If you didn't, then I win. Easy enough, right?/
+	 Alright, are you ready to \![*]\q[play,playSuits]?"
+}
+
+Select.DiamondSuits
+{
+	if RAND(99) <= 24 //Picks if the player wins. Approximately 25% chance of winning.
+	{
+		"\1\s[15]Look at that, you were right! It's a Diamond."
+	}
+	else
+	{
+		"\1\s[37]Sorry, %(username)! It's Spades."
+		"\1\s[37]Sorry, %(username)! It's Hearts."
+		"\1\s[37]Sorry, %(username)! It's Clubs."
+	}
+	--
+	SuitsPlayAgain //Points to the play again function.
+}
+
+Select.HeartSuits
+{
+	if RAND(99) <= 24
+	{
+		"\1\s[15]Look at that, you were right! It's a Heart."
+	}
+	else
+	{
+		"\1\s[37]Sorry, %(username)! It's Spades."
+		"\1\s[37]Sorry, %(username)! It's a Diamond."
+		"\1\s[37]Sorry, %(username)! It's Clubs."
+	}
+	--
+	SuitsPlayAgain
+}
+
+Select.ClubSuits
+{
+	if RAND(99) <= 24
+	{
+		"\1\s[15]Look at that, you were right! It's a Club."
+	}
+	else
+	{
+		"\1\s[37]Sorry, %(username)! It's Spades."
+		"\1\s[37]Sorry, %(username)! It's a Diamond."
+		"\1\s[37]Sorry, %(username)! It's Hearts."
+	}
+	--
+	SuitsPlayAgain
+}
+
+Select.SpadeSuits
+{
+	if RAND(99) <= 24
+	{
+		"\1\s[15]Look at that, you were right! It's a Spade."
+	}
+	else
+	{
+		"\1\s[37]Sorry, %(username)! It's a Diamond."
+		"\1\s[37]Sorry, %(username)! It's Hearts."
+		"\1\s[37]Sorry, %(username)! It's Clubs."
+	}
+	--
+	SuitsPlayAgain
+}
+
+SuitsPlayAgain
+{
+	otaconFeelings++
+	"\1\s[15] Do you want to \![*]\q[go again,playSuits] or are you \![*]\q[done,quitGame]?"
+}
+//---- Higher or Lower ---------------------------------------------------------
+//
+Select.playHighLow
+{
+	"\1\s[15]Okay! Higher or lower, I like that one. I'll draw a card and you have to guess if the next one I draw will be higher or lower. An ace is the lowest, at one, and the king is the highest at 13.\n Are you ready to \![*]\q[play,playHighlow2]? Or are you \![*]\q[done,quitGame]?"
+}
+
+Select.playHighlow2
+{
+	highLowNum = RAND(12) + 1
+	"\1\s[10]Okay! The first card is...\w8\w8\w8 "
+	--
+	if highLowNum == 1
+	{
+		"an ace! That's a 1."
+	}
+	elseif highLowNum == 11
+	{
+		"a Jack! That's an 11."
+	}
+	elseif highLowNum == 12
+	{
+		"a queen! That's a 12."
+	}
+	elseif highLowNum == 13
+	{
+		"a king! That's a 13."
+	}
+	elseif highLowNum == 8 //Eight specifically because it's the only one besides 11 which needs "an" instead of "a".
+	{
+		"an 8!"
+	}
+	else
+	{
+		"a %(highLowNum)!"
+	}
+	--
+	" So what will it be, \![*]\q[Higher,playHigh] or \![*]\q[Lower,playLow]?"
+}
+
+Select.playHigh
+{
+	_highLowNum2 = RAND(12) + 1
+	if _highLowNum2 == highLowNum
+	{
+		"\1\s[18]Huh! Looks like it's a tie! The next card was %(_highLowNum2). "
+	}
+	elseif _highLowNum2 < highLowNum
+	{
+		"\1\s[15]Haha, sweet! I win! I drew %(_highLowNum2). Thanks for playing, %(username). "
+		otaconFeelings++
+	}
+	elseif _highLowNum2 > highLowNum
+	{
+		"\1\s[14]Aww, it's %(_highLowNum2). You win. Good job guessing! "
+	}
+	--
+	"Do you wanna \![*]\q[go again,playHighlow2] or are you \![*]\q[done,quitGame]?"
+}
+Select.playLow
+{
+	_highLowNum2 = RAND(12) + 1
+	if _highLowNum2 == highLowNum
+	{
+		"\1\s[18]Huh! Looks like it's a tie! The next card was %(_highLowNum2). "
+	}
+	elseif _highLowNum2 > highLowNum
+	{
+		"\1\s[15]Haha, sweet! I win! I drew %(_highLowNum2). Thanks for playing, %(username). "
+		otaconFeelings++
+	}
+	elseif _highLowNum2 < highLowNum
+	{
+		"\1\s[14]Aww, it's %(_highLowNum2). You win. Good job guessing! "
+	}
+	--
+	"Do you wanna \![*]\q[go again,playHighlow2] or are you \![*]\q[done,quitGame]?"
+}
 //---- Sticks ---------------------------------------------------------
 //Redacted for now. I still need to bash it into shape. Removed for space.
 
@@ -1434,14 +2369,14 @@ Select.sayComplimentKERO
 			}
 		elseif nowshell == "Solid Shell"
 			{
-				"\1\s[10]\f[italic,true]You tell Otacon you like his shirt.\f[italic,default]\n\1\s[30]Oh, um... thank you! I got it at Otakon- with a K, not a C- in 1996. it'd probably be considered a collector's thing now, 1996 was only the third Otakon, but I can't bring myself to put it on a shelf. I like it too much."
+				"\1\s[10]\f[italic,true]You tell Otacon you like his shirt.\f[italic,default]\n\1\s[30]Oh, um... thank you!"
 			}
 		}
 		if isNeko = 1
 			{
-				"\1\s[10]\f[italic,true]You tell Otacon you think he's cute as a catboy.\f[italic,default]O-oh! Thanks! I, um, like it too."
+				"\1\s[10]\f[italic,true]You tell Otacon you think he's cute as a catboy.\f[italic,default]\nO-oh! Thanks! I, um, like it too."
 			}
-		"\1\s[10]\f[italic,true]You tell Otacon you like his jacket.\f[italic,default]\n\1\s[30]Oh, this thing? Um... Thank you. It's just something ArmsTech gave me while in Alaska..."
+		"\1\s[10]\f[italic,true]You tell Otacon you like his hair color.\f[italic,default]\n\1\s[30]Oh, thank you."
 	}
 	if otaconFeelings <= -20 //Level 2.
 	{
@@ -1527,8 +2462,8 @@ Select.sayJokeKERO
 		}
 		else
 		{
-			"a fly with no wings.\f[italics,default]\1\s[17]\n\n[half]That's just sad. A fly who can only walk is going to starve to death..."
-			"a fish with no Is.\f[italics,default]\1\s[17]\n\n[half]Now that's just a cruel joke! A fish with no eyes? Who would do such a thing? Poor little fishy."
+			"a fly with no wings.\f[italic,default]\1\s[17]\n\n[half]That's just sad. A fly who can only walk is going to starve to death..."
+			"a fish with no Is.\f[italic,default]\1\s[17]\n\n[half]Now that's just a cruel joke! A fish with no eyes? Who would do such a thing? Poor little fishy."
 			--
 			otaconFeelings += -3
 			"\1\s[10] I don't get why you'd say something like that."
@@ -1548,9 +2483,9 @@ Select.sayJokeKERO
 Select.testvariable
 {
 //Enter your dialogue to test here.
-	"\1\s[18]Testing, attention please! "
+	"\1\s[10]Testing! Attention please!\n"
 	--
-
+	//"\1\s[10]Oh, you want me to bring out the MG MK. II? Sure!\p[3]\s[9910]"
 }
 
 //--Viewing Surfaces------------------------------------
@@ -1561,7 +2496,10 @@ Select.testKEROsurfaces //I know Surfacetest exists but simply cycling through t
 //--Viewing Variables-----------------------------------
 Select.viewvariable
 {
-	"\1\s[18]clickShadowMoses = %(clickShadowMoses)\n/
+	"\1\s[18]codecTimer = %(codecTimer)\n/
+	missionTimer = %(missionTimer)\n/
+	inputTime = %(inputTime)\n/
+	clickShadowMoses = %(clickShadowMoses)\n/
 	clickShadowMosesIncident = %(clickShadowMosesIncident)\n/
 	clickMeiLing = %(clickMeiLing) \n/
 	clickRaiden = %(clickRaiden)\n/
@@ -1577,6 +2515,8 @@ Select.viewvariable
 Select.changevariable
 {
 
+	codecTimer = ""
+	missionTimer = ""
 	clickShadowMoses = 0 //OKUAJUB: Click counting variable for Shadow Moses
 	clickShadowMosesIncident = 0 //OKUAJUB: Click counting variable for Shadow Moses *incident*
 	clickMeiLing = 0 //OKUAJUB: Click counting variable for Mei Ling
@@ -1584,13 +2524,15 @@ Select.changevariable
 	clickJaeger = 0 //OKUAJUB: Click counting variable for Frank Jaeger
 	clickBigBoss = 0 //OKUAJUBL Click counting variable for Big Boss
 	clickRex = 0 //OKUAJUB: Click counting variable for Rex.
-	snakeFeelings = 0 //OKUAJUB: Snake's feelings. its a bit harder to befriend Snake.
+	snakeFeelings = -10 //OKUAJUB: Snake's feelings. its a bit harder to befriend Snake.
 	otaconFeelings = 0 //OKUAJUB: Otacon's feelings. Neutral at first.
 	snakeKetchups = 0 //OKUAJUB: Count of how many ketchup bottles you have given Snake.
 	snakeApologies = 0 //OKUAJUB: How many times you have apologized to Snake.
 	isNeko = 1
 	
 	"\1\s[10]Variables changed. Good luck testing, Okuajub! (Or are you %(username)..?)\n/
+	codecTimer = %(codecTimer)\n/
+	missionTimer = %(missionTimer)\n/
 	clickShadowMoses = %(clickShadowMoses)\n/
 	clickShadowMosesIncident = %(clickShadowMosesIncident)\n/
 	clickMeiLing = %(clickMeiLing) \n/

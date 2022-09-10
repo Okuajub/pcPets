@@ -43,22 +43,38 @@ OnFirstBoot
  	aitalkinterval = 300 //Their default talk rate.
  	birthdayprint = "????" //A temporary value for the user's birthday.
 	talktime = "5 minutes" //How the value aitalkinterval will display in the config menu.
-	deleteshitai = "OFF" //Sets whether or not the user can uninstall the ghost to "OFF". The user can change it later in the config menu (see menu.dic). 
+	deleteshitai = 0 //Sets whether or not the user can uninstall the ghost to "OFF". The user can change it later in the config menu (see menu.dic). Defaults to 0, which is off.
 	nowshell = "master" //This is for a special if check in aitalk.dic to see what shell the ghost is using. You should use the name of your default shell folder here.
 	firstboot = 1 //This marks that this is the first time you've run the ghost. It's so it won't reroute to general name changing dialogue when the user inputs their name.
 	//OKUAJUB: Snake and Otacon specific variables.
-	clickShadowMoses = 0 //OKUAJUB: Click counting variable for Shadow Moses
-	clickShadowMosesIncident = 0 //OKUAJUB: Click counting variable for Shadow Moses *incident*
-	clickMeiLing = 0 //OKUAJUB: Click counting variable for Mei Ling
-	clickRaiden = 0 //OKUAJUB: Click counting variable for Raiden
-	clickJaeger = 0 //OKUAJUB: Click counting variable for Frank Jaeger
-	clickBigBoss = 0 //OKUAJUBL Click counting variable for Big Boss
-	clickRex = 0 //OKUAJUB: Click counting variable for Rex.
-	snakeFeelings = -10 //OKUAJUB: Snake's feelings. its a bit harder to befriend Snake.
-	otaconFeelings = 0 //OKUAJUB: Otacon's feelings. Neutral at first.
-	snakeKetchups = 0 //OKUAJUB: Count of how many ketchup bottles you have given Snake.
-	snakeApologies = 0 //OKUAJUB: How many times you have apologized to Snake.
-	isNeko = 0 //Flag for if Otacon is Nekomimified. Default is 0. 0 means Off. 1 means On.
+	devMode = 0 //Toggle for enabling dev mode, which enables some unstable features. Default 0.
+	beginnerConfig = "" // Configures if the user is a beginner ghost user. Asks in FirstBoot. Defaults to "". Will be set to On or Off in the set up.
+	punchConfig = "on" // Punching configuration. Can be set to "On" which enables default punching mechanics, "Apologize" which enables apologizing for punching, "Confirm" which asks the user if they would like to punch, and "Off" which turns off punching entirely.
+	
+	codecTimer = "" //Timer for Otacon's codec searches. blank at first.
+	missionTimer = "" //Timer for Snake's missions. blank at first.
+	codecFatigue = 0 //Cooldown timer for Codec Search
+	missionFatigue = 0 //Cooldown timer for Missions
+	otacoins = 0 //Tracks currency
+	
+	//okay, hold onto your boots, this is where the achievement/clutter items variables go! (I promise, I tried an array and it did not work how I liked. So.... the messy way we go.) These should all start off blank.
+	mk2 = ""
+	mk3 = ""
+	
+	clickShadowMoses = 0 //Click counting variable for Shadow Moses
+	clickShadowMosesIncident = 0 //Click counting variable for Shadow Moses *incident*
+	clickMeiLing = 0 //Click counting variable for Mei Ling
+	clickRaiden = 0 //Click counting variable for Raiden
+	clickJaeger = 0 //Click counting variable for Frank Jaeger
+	clickBigBoss = 0 //Click counting variable for Big Boss
+	clickRex = 0 //Click counting variable for Rex
+	askLove = 0 //Counts if you've asked Snake about his love life.
+	
+	snakeFeelings = -10 //Snake's feelings. Lightly negative at first.
+	otaconFeelings = 0 //Otacon's feelings. Neutral at first.
+	snakeKetchups = 0 //Count of how many ketchup bottles you have given Snake/Otacon.
+	snakeApologies = 0 //How many times you have apologized to Snake.
+	isNeko = 0 //Flag for if Otacon is Nekomimified (only activatable in the Solid Shell). Default is 0. 0 means Off. 1 means On.
 	
 	if reference0 == 0 //Don't touch this line.
  	{
@@ -67,7 +83,7 @@ OnFirstBoot
 		//In Notepad++ with C language, you'll also notice that this dialogue is black instead of grey. This is because of the use of the backwards slash as mentioned in the advanced section of the SakuraScripting page. Do you see near the bottom where it has \n\n[half]/ with the other slash at the end before the choices are listed? You will want to replace dialogue up that \n\n[half], but do not mess with the choices beyond that unless you know what you're doing.
 		//Always make sure to keep your dialogue in the quotation marks! And remember, you can't use quotation marks IN dialogue either. You can use two single apostrophes instead if you must. And REMEMBER what I said about \![enter,passivemode]! Do NOT delete that tag!
 		
-		"\![enter,passivemode]\0\s[0]This is Snake, Otacon do you read me?\w5 Otacon?\w8\1\s[10]I'm here, Snake!\w8\0\s[0]\n\n[half]Good. Where are we? \w5\1\s[10]\n\n[half]We're currently in a computer, pretty cool, huh? What a time to live! \0\s[8]\n\n[half]Get a grip, Otacon! How the hell is that possible? \w8\1\n\n[half]\s[10]Well, Snake, someone downloaded us onto the computer and installed us. We're a Ghost or 'Ukagaka', in Japanese.\0\s[8]\n\n[half]Ghost, huh? Are we dead?\1\s[15]\n\n[half]Not that kind of ghost! Like a little desktop pet. \0\s[0]\n\n[half]Hmmm.\1\s[19]\n\n[half]...You still don't get it, do you? Er...\1\s[15] anyway, we should get to know our user!\0\s[8]\n\n[half]User?!\1\s[10]\n\n[half]Not that kind of user, Snake. They're just the one in charge of the computer. Hopefully they'll be friendly! \0\s[2]\n\n[half]Hopefully?!\1\s[18]\nAlright,\x\w8\1\c\s[10]How should we refer to you, user?\0\s[8]\n\n[half]/
+		"\![enter,passivemode]\0\s[0]This is Snake, Otacon do you read me?\w5 Otacon?\w8\1\s[10]I'm here, Snake!\w8\0\s[0]\n\n[half]Good. Where are we? \w5\1\s[10]\n\n[half]We're currently in a computer, pretty cool, huh? What a time to live! \0\s[8]\n\n[half]Get a grip, Otacon! How the hell is that possible? \w8\1\n\n[half]\s[10]Well, Snake, someone downloaded us onto the computer and installed us. We're a Ghost or 'Ukagaka', in Japanese.\0\s[8]\n\n[half]Ghost, huh? Are we dead?\1\s[15]\n\n[half]Not that kind of ghost! Like a little desktop pet. \0\s[0]\n\n[half]Hmmm.\1\s[19]\n\n[half]...You still don't get it, do you? Er...\1\s[15] anyway, I'll explain it later. For now, we should get to know our user!\0\s[8]\n\n[half]User?!\1\s[10]\n\n[half]Not that kind of user, Snake. They're just the one in charge of the computer. Hopefully they'll be friendly! \0\s[2]\n\n[half]Hopefully?! Otacon-\1\s[18]\nAlright,\x\w8\1\c\s[10]How should we refer to you, user?\0\s[8]\n\n[half]/
 		\w5\_q\![*]\q[He/Him/His,choicefirsthehim]\n/
 		\![*]\q[She/Her/Hers,choicefirstsheher]\n/
 		\![*]\q[They/Them/Their,choicefirsttheythem]\e"
@@ -267,9 +283,9 @@ normalboottalk
 {
 	if weekday == 5 && hour >= 19 //This checks if the weekday equals five, meaning friday AND (using the && operator) if the hour is past 19. You can change these numbers or values to anything you like! As such you can check any combination of date and day and time for potential boot dialogue. You can also add more elseif checks for other days if you want.
 		{
-			"\0\s[0]Alone on a Friday night?\e"
+			"\0\s[0]Alone on a Friday night?\e God you're pathetic." //This is a reference to the Sonic Meme you're not actually pathetic T_T
 		}
-	elseif RAND(100) < 10 //What this does is choose a random number from 1-100, and then checks if that number is less than 10. If it's less than ten, then this dialogue pieces will occur.
+	elseif RAND(100) < 10 //What this does is choose a random number from 1-100, and then checks if that number is less than 10. If it's less than ten, then one of these dialogue pieces will occur.
 		{
 			"\0\s[0]Kept you waiting, huh?\w8\1\s[10]Well, I think %(username) is the one that kept us waiting.\e"
 		
@@ -285,11 +301,11 @@ normalboottalk
 		
 		"\1\s[14]Gosh, it's so early...\w8\0\s[0]Just like the army.\e"
 		
-		"\1\s[32]\w8\w8\w8\w8\w8\w8\1\s[32]\f[italic,true]*zzz...*\0\s[8]Still asleep, Otacon?"
+		"\1\s[32]\w8\w8\w8\w8\w8\w8\1\s[32]\f[italic,true]zzz...\0\s[8]Still asleep, Otacon?"
 		
-		"\1\s[10]\f[italic,true]*yawn*\f[italic,false] I'm so tired... back in college, this is about the time I'd be going to sleep.\w8\0\s[0]Seriously?\1\s[10] Er, yeah. Powered by coffee and pure nerd. \e"
+		"\1\s[10]\f[italic,true]Yawn...\f[italic,false] I'm so tired... back in college, this is about the time I'd be going to sleep.\w8\0\s[0]Seriously?\1\s[10]\n\n[half]Er, yeah. Powered by coffee and pure nerd. \e"
 		
-		"\0\s[4]\1\s[13]Yikes. That last mission left you in pretty bad shape, Snake.\1\s[18]Is there any more I can do?\0\s[4]You've already done all you can.\1\s[14] Alright. If you need anything.\n\n Er. Morning, %(username).\e"
+		"\0\s[4]\1\s[13]Yikes. That last mission left you in pretty bad shape, Snake.\1\s[18]Is there any more I can do?\0\s[4]You've already done all you can.\1\s[14]\n\n[half]Alright. If you need anything.\n\n Er. Morning, %(username).\e"
 		
 		{"\1\s[15]You did pretty great out there, Snake! Good job "
 		--
@@ -313,7 +329,7 @@ normalboottalk
 		
 		"snapping those pictures."
 		--
-		"\0\s[1]I wouldn't have been able to do it without you.\1\s[30] W-Well the same goes for you!\e"
+		"\0\s[1]I wouldn't have been able to do it without you.\1\s[30]\n\n[half]W-Well the same goes for you!\e"
 		}
 		
 		}
@@ -348,7 +364,7 @@ normalboottalk
 		
 				"snapping those pictures."
 				--
-				"\0\s[1]I wouldn't have been able to do it without you.\1\s[30] W-Well the same goes for you!\e"
+				"\0\s[1]I wouldn't have been able to do it without you.\1\s[30]\n\n[half]W-Well the same goes for you!\e"
 			}
 		}
 		elseif timeslot == "lunch"
@@ -408,36 +424,36 @@ normalboottalk
 	//OKUAJUB: alright, holiday dialogue! or should i say, ''holiday''.
 	if dayslot == "2month 28day" //Shadow Moses day.
 		{
-			"\1\s[18]Today's the day we met, huh, Snake?\0\s[9]Yeah. Shadow Moses.\1\s[10] Well... yeah. That too. But, I prefer to think of you, today.\0\s[4] I wish I could do the same.\e"
+			"\1\s[18]Today's the day we met, huh, Snake?\0\s[9]Yeah. Shadow Moses.\1\s[10]\n\[half]Well... yeah. That too. But, I prefer to think of you, today.\0\s[4]\n\n[half]I wish I could do the same.\e"
 		}
 	elseif dayslot == "4month 30day" //Big Shell.
 		{
-			"\1\s[18]April 30th, the Big Shell incidient, huh?\0\s[9]Yeah.\1\s[14] A lot happened that day.\w8\w8\w8\0\s[4] ...Mhm.\e"
+			"\1\s[18]April 30th, the Big Shell incidient, huh?\0\s[9]Yeah.\1\s[14]A lot happened that day.\w8\w8\w8\0\s[4]\n\n[half]...Mhm.\e"
 		
-			"\1\s[18]Thinking about Raiden, today..?\0\s[4] Yeah. Must have been the worst day of his life."
+			"\1\s[18]Thinking about Raiden, today..?\0\s[4]Yeah. Must have been the worst day of his life."
 		
-			"\0\s[4]\w8\0\s[4]\w8\w8\w8\w8\w8I know you're thinking of her, today.\1\s[14] Hahh... how'd you guess..."
+			"\1\s[17]\0\s[4]\w8\0\s[4]\w8\w8\w8\w8\w8I know you're thinking of her, today.\1\s[14]Hahh... how'd you guess..."
 		}
 	elseif dayslot == "7month 5day" // Sunny's birthday, confirmed in MGS4, July 5th, there's a cake on the table for Sunny. Assumedly, it's her birthday and not one of the others. I personally like to headcanon Otacon as a Februrary baby, but really, he only has a birth year. 
 		{
-			"\1\s[18]Hey, guess whose birthday it is today, Snake?\0\s[9]Well, it's not yours...\1\s[10] It's Sunny's birthday! We ought to do something special, you know.\0\s[0] Maybe we should go back to base and grab something other than eggs to eat.\1\s[10] Hey! She's trying really hard. Maybe you should actually eat them, for her birthday, hm?\e"
+			"\1\s[18]Hey, guess whose birthday it is today, Snake?\0\s[9]Well, it's not yours...\1\s[10]\n\n[half]It's Sunny's birthday! We ought to do something special, you know.\0\s[0]\n\n[half]Maybe we should go back to base and grab something other than eggs to eat.\1\s[10]\n\n[half]Hey! She's trying really hard. Maybe you should actually eat them, for her birthday, you know?\e"
 		}
 	elseif dayslot == "8month 5day" //Tanker Incident.
 		{
-			"\1\s[18]Remembering the Tanker Incident, today?\0\s[9]Yeah. It went worse than I thought it could.\1\s[14] I'm really sorry about that.\0\s[0] I know. I don't blame you. Occupational hazard.\1\s[14] Thanks...\e"
+			"\1\s[18]Remembering the Tanker Incident, today?\0\s[9]Yeah. It went worse than I thought it could.\1\s[14]\n\n[half]I'm really sorry about that.\0\s[0]\n\n[half]I know. I don't blame you. Occupational hazard.\1\s[14]\n\n[half]Thanks...\e"
 		}
 	elseif dayslot == "12month 3day" 
 		{
 			_PSXanniversary = year - 1994
-			if _anniversary == 33 || _anniversary == 43 || _anniversary == 53 //Nobody's gonna be using this in more than thirty years, right? Well, if *you* are, just add another || with 63, or something.
+			if _PSXanniversary == 33 || _PSXanniversary == 43 || _PSXanniversary == 53 //Nobody's gonna be using this in more than thirty years, right? Well, if *you* are, just add another || with 63, or something.
 			{
 				"\1\s[18]Hey, Snake, %(username), did you know today is the day the PlayStation released? It's also its %(_PSXanniversary)rd anniversary! Pretty cool, huh! It was the cutting edge of gaming when it came out!\0\s[2]Who are you, some kind of product placement?!\e"
 			}
-			elseif _anniversary == 31 || _anniversary == 41 || _anniversary == 51
+			elseif _PSXanniversary == 31 || _PSXanniversary == 41 || _PSXanniversary == 51
 			{
 				"\1\s[18]Hey, Snake, %(username), did you know today is the day the PlayStation released? It's also its %(_PSXanniversary)st anniversary! Pretty cool, huh! It was the cutting edge of gaming when it came out!\0\s[2]Who are you, some kind of product placement?!\e"
 			}
-			elseif _anniversary == 32 || _anniversary == 42 || _anniversary == 52
+			elseif _PSXanniversary == 32 || _PSXanniversary == 42 || _PSXanniversary == 52
 			{
 				"\1\s[18]Hey, Snake, %(username), did you know today is the day the PlayStation released? It's also its %(_PSXanniversary)nd anniversary! Pretty cool, huh! It was the cutting edge of gaming when it came out!\0\s[2]Who are you, some kind of product placement?!\e"
 			}
@@ -448,12 +464,12 @@ normalboottalk
 		}	
 	elseif dayslot == "12month 24day" // Christmas Eve/Zanzibar.
 		{
-			"\0\s[4]...\1\s[10]Something on your mind, Snake?\0\s[0] Yeah. Today's the day I infiltrated Zanzibar Land, back in 99.\1\s[14] Oh. I see.\w8 Snake-\0\s[0] It's alright. I don't want to talk about it.\1\s[10] Okay. Thank you for telling me.\e"
+			"\0\s[4]...\1\s[10]Something on your mind, Snake?\0\s[0] Yeah.\w8\w8 Today's the day I infiltrated Zanzibar Land, back in '99.\1\s[14]\n\n[half]Oh. I see.\w8 Snake-\0\s[0]\n\n[half]It's fine. I don't want to talk about it.\1\s[10]\n\n[half]\w8\w8Okay. Thank you for telling me.\e"
 			"\1\s[18]So, Christmas Eve, huh?\0\s[0]Mhmm. You know, my commander believed in Santa Claus. Made a big deal about it every Christmas.\1\s[35]%(laugh)\1\s[15]Hehe! Big Boss? Really? Let me guess, he always waited up the night before for Santa?\0\s[5] I guess it is a little funny looking back on it.\0\s[4] He always seemed a little quiet and refused gifts from us, though, whatever little we had to give.\e"
 		} 
 	elseif dayslot == "12month 25day" //Christmas Day.
 		{
-			"\1\s[18]Christmas day, kind of boring for me.\0\s[9] I'm in the same boat.\1\s[18] Are you enjoying yourself, %(username)?\e"
+			"\1\s[18]Christmas day, kind of boring for me.\0\s[9] I'm in the same boat.\1\s[18]\n\n[half]Are you enjoying yourself, %(username)?\e"
 		}
 }
 
@@ -580,7 +596,7 @@ OnGhostChanging
 	}
  	else //If you're switching to another Ghost.
 	{
-		"\0\s[0]Switching us out for %(reference0), huh?\w8\1\s[10]We'll be working on our own stuff, don't worry.\w8\w8\1\s[14] Call us again soon, though?\0\s[0]\n\n[half]We'll catch up later.\w8\w8\e"
+		"\0\s[0]Switching us out for %(reference0), huh?\w8\1\s[10]We'll be working on our own stuff, don't worry.\w8\w8\1\s[14]Call us again soon, though?\0\s[0]\n\n[half]We'll catch up later.\w8\w8\e"
 		"\0\s[0]%(reference0), huh?\1\s[10]I bet you'll enjoy their company. See you later, %(username)!\e"
 		"\1\s[10]Hey, %(reference0)! Have we met them before?\0\s[10]We'll be on our way.\e"
 		
@@ -605,7 +621,7 @@ OnGhostChanged
 	{
 		
 		{
-			"\1\s[10]Bye, %(reference0), hopefully you get your turn again.\w8\0\s[0]I'll bet Otacon missed you, %(username).\1\s[17] I did not!\w8\w8\w8\w8\1\s[30] Er... maybe "
+			"\1\s[10]Bye, %(reference0), hopefully you get your turn again.\w8\0\s[0]I'll bet Otacon missed you, %(username).\1\s[17]\n\n[half]I did not!\w8\w8\w8\w8\1\s[30] Er... maybe "
 			--
 			"I did."
 			"a little."
@@ -630,15 +646,16 @@ OnShellChanging
  {
 	if reference0 == "Snake and Otacon - Solid Shell" //reference0 in OnShellChanging is the name of the shell you're swapping to. It should be defined in the descript.txt file in your shell folder. If you do have alternate shells, put in the right name here.
 	{
-	"\1\s[10]Hey, you know, I should probably come here as myself.\w8\0\w8\s[8]Huh?\1\s[10]\n\n[half]Er, well. This is just an avatar I'm using to communicate with you, like on the Tanker. Wait just a moment...\1\s[32]\w8\w8\w8\w8\e"
+		"\1\s[10]Hey, you know, I should probably come here as myself.\w8\0\w8\s[8]Huh?\1\s[10]\n\n[half]Er, well. This is just an avatar I'm using to communicate with you, like on the Tanker. Wait just a moment...\1\s[32]\w8\w8\w8\w8\e"
 	}
-		if reference0 == "Snake and Otacon - Retro Otacon"
+	if reference0 == "Snake and Otacon - Retro Otacon"
 	{
-	"\1\s[10]Hm, I'm going to go back to base, Snake.\w8\0\w8\s[8]Something wrong?\1\s[10] Er, well... There are probably some things I should check on.\w8\w8\ Wait just a moment...\w8\w8\w8\w8 I'll miss you.\e"
+		"\1\s[10]Hm, I'm going to go back to base, Snake.\w8\0\w8\s[8]Something wrong?\1\s[10] Er, well... There are probably some things I should check on.\w8\w8\ Wait just a moment...\w8\w8\w8\w8 I'll miss you.\e"
+		isNeko = 0
 	}
 	else //if you don't have any specific dialogue for a specific shell
 	{
-	"\0\s[0]Changing shells, huh?\w8\1\s[10]It'll be a surprise for me, I haven't heard of this shell before.\w8\e"
+		"\0\s[0]Changing shells, huh?\w8\1\s[10]It'll be a surprise for me, I haven't heard of this shell before.\w8\e"
 	}
  }
  
@@ -649,16 +666,17 @@ OnShellChanging
  
 OnShellChanged
  {
- 	if reference0 == "Snake and Otacon - Retro Otacon" 
+ 	if reference0 == "Snake and Otacon - Solid Shell" 
  	{
  		nowshell = "master" //This is the folder name for your shell. Not the same as the above! 
-		
+		isNeko = 0
  		"\0\s[0]\1\s[16]Alright, I'm all settled in again.\0\s[0]What was that you said before you left?\w8\1\s[12]\n\n[half]Ah! Nothing, nothing.\w8\0\s[5]\n\n[half]...Alright.\e"
 		//Replace dialogue as required.
  	}
- 	elseif reference0 == "Snake and Otacon - Solid Shell" //OKUAJUB: haha, you sneaky, you found my future shell plans.
+ 	elseif reference0 == "Snake and Otacon - Retro Otacon"
  	{
- 		nowshell = "Solid Shell"
+ 		nowshell = "Retro"
+		isNeko = 0
 		
  		"\0\s[2]\1\s[10]Ah, much better! Good to be here with you, Snake. Happy to see me?\0\s[8]...\w8That was really weird.\0\s[1] It's good to see you, too, Otacon.\w8\0\s[8] You're not usually on the field.\e"
 		//Replace these bits with whatever you have in mind.
@@ -680,9 +698,69 @@ OnDressupChanged
 {
 if reference0 == 0 //in OnDressupChanged, reference0 refers to the character, therefore this is evaluating which character in question is getting dressed up. 0 is the main character, as you know from the walkthrough by now.
 	{
-	if reference1 == "wings" //This is the name of the clothing item in the descript.txt file, I'm pretty sure.
+	if reference1 == "Stubble" //This is the name of the clothing item in the descript.txt file, I'm pretty sure.
+	{
+		if reference2 == 1 //This checks if you're putting it on.
 		{
-			if reference2 == 1 //This checks if you're putting it on.
+			"\0\s[6]I always hated being clean shaven."
+			"\0\s[6]Keeps the face warm."
+			"\0\s[6]I know you like the stubble more, Otacon, hm?\1\s[30]"
+		}
+		else //when taking it off
+		{
+			"\0\s[6]Close shave. More... 'professsional' this way, hm?"
+			"\0\s[6]You know, I used to always shave before a job."
+			"\0\s[6]So, you like a clean-shaven man, %(username)?"
+		}
+	}
+	elseif reference1 == "Headset (Pliskin)"
+	{
+		if reference2 == 1
+		{
+			"\0\s[5]Something to cover the ears, hm?"
+			"\0\s[0]Not the best for hearing. This headset muffles everything.\1\s[18]Not to mention if you keep them on high volume, you'd hurt your ears."
+			"\0\s[5]This mic doesn't do much. Keeps somebody from thinking you're talking over nanomachines, though."
+			"\0\s[5]Do you read me, Otacon? Over.\1\s[15]Hehe. Roger, I hear you loud and clear. Out."
+		}
+		else
+		{
+			"\0\s[0]I'll put them somewhere safe."
+			"\0\s[0]Don't need these anymore."
+			"\0\s[0]Feels like I can hear again."
+		}
+	}
+	elseif reference1 == "SEAL Uniform"
+	{
+		if reference2 = 1
+		{
+			"\0\s[5]Plenty of inventory space."
+			"\0\s[0]This uniform's a bit tight with the sneaking suit underneath, even without all the polythermal tech layers."
+			"\0\s[5]Keeps me out of trouble, hm?"
+			"\0\s[5]Otacon likes this one, there's no way I'd forget that.\1\s[30]"
+		}
+	}
+	elseif reference1 == "Mullet"
+	{
+		if reference2 = 1
+		{
+			"\0\s[0]Short hair isn't my style, anyway."
+			"\0\s[0]I always cut it short before a mission...\w8 I used to. It was regulation."
+			"\0\s[5]I never liked it short."
+			"\0\s[5]Somebody's got a preference for this.\1\s[30]"
+		}
+	}
+	elseif reference1 == "Blue Bandanna"
+	{
+		if reference2 = 1
+		{
+			"\0\s[0]No infinite ammo, this time."
+			"\0\s[0]It tickles the back of my neck."
+			"\0\s[5]I never liked it short."
+		}
+	}
+	elseif reference1 == "wings" 
+		{
+			if reference2 == 1 
 			{
 			"\0\s[0]I have wings?!\w8\1\s[18]Huh? Maybe crybabimeiri had something to do with this...\e"
 			}
@@ -694,7 +772,8 @@ if reference0 == 0 //in OnDressupChanged, reference0 refers to the character, th
 	}
 else //if reference0 isn't the main character, then it has to be the side character.
 	{
-	if reference1 == "wings" //The name of the item of clothing in the descript.txt file in your shell folder.
+	
+	if reference1 == "Wings" //The name of the item of clothing in the descript.txt file in your shell folder.
 		{
 			if reference2 == 1 //If you put it on
 			{
@@ -705,17 +784,63 @@ else //if reference0 isn't the main character, then it has to be the side charac
 			"\1\s[10]Aw, I guess they went away..\e"
 			}
 		}
-	elseif reference1 == "nekomimify" //As you've seen above, you can use elseifs to expand the list if you have more than one item.
+	elseif reference1 == "Cat Ears" //As you've seen above, you can use elseifs to expand the list if you have more than one item.
 		{
 			if reference2 == 1 //if you're putting it on
 			{
-			"\1\s[15]Nya!\w8\0\s[6]...What?\w8\1\n\n[half]\s[18]\n\n[half]You know, like, nya?\e"
+			"\1\s[15]Nya!\w8\0\s[6]...What?\w8\1\s[18]\n\n[half]You know, like, nya?\e"
 			isNeko = 1
 			}
 			else //when you take it off
 			{
 			"\1\s[14]Aw, that was fun while it lasted..\e"
 			isNeko = 0
+			}
+		}
+	elseif reference1 == "Tail" 
+		{
+			if reference2 == 1 //if you're putting it on
+			{
+			"\1\s[15]Heehee!\w8\0\s[6]...What?\w8\1\s[18]\n\n[half]I have a tail! It kind of tickles, hehe.\e"
+			isNeko = 1
+			}
+			else //when you take it off
+			{
+			"\1\s[14]Aw, that was fun while it lasted..\e"
+			isNeko = 0
+			}
+		}
+	elseif reference1 == "Round Glasses (Silver)"
+		{
+			if reference2 == 1 //If you put it on
+			{
+			"\1\s[10]I used to wear a pair like these during Shadow Moses.\w8\w8 Hmm.\e"
+			}
+			else //When you take it off.
+			{
+			"\1\s[33]I can't really see anything..\0\s[8]It's because your eyes are closed, Otacon.\1\s[17]\n\n[half]Hey! That's not what I meant!\0\s[5]\w8\w8\w8\w8\1\s[31].. You're just pulling my leg, aren't you.\w8\w8\1\s[32] Hm!\e"
+			}
+		}
+	elseif reference1 == "Square Glasses (Green)"
+		{
+			if reference2 == 1 //If you put it on
+			{
+			"\1\s[10]I wore a pair like these during the Big Shell incident.\1\s[14]\w8\w8...\e"
+			}
+			else //When you take it off.
+			{
+			"\1\s[14]...\n\n[half]\f[italic,true]Otacon looks as though he's thinking about something.\e"
+			}
+		}
+	elseif reference1 == "Square Glasses (Blue)"
+		{
+			if reference2 == 1 //If you put it on
+			{
+			"\1\s[32]These glasses remind me of Philanthropy days..\e"
+			}
+			else //When you take it off.
+			{
+			"\1\s[14]I can't see a lot with these off. Makes me feel a little vulnerable.\n\n[half]\f[italic,true]Otacon looks as though he's thinking about something.\e"
 			}
 		}
 	}

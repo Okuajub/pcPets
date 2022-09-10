@@ -13,7 +13,7 @@
 
 OnTeachName	
 {
-	if reference0 == "TEACHNAME" //ignore this
+	if reference0 == "TEACHNAME" //ignore this - OKUAJUB: This is what directs the ghost to say things when the user modifies their name after setting up, rather than the default dialogue.
 		{
 		"\0\s[0]The user wants to change their name. What do you want it to be?\![open,inputbox,OnNameTeach,-1]\e"
 		//This is the bit of dialogue you can rewrite if you want. Note that this line ends with \![open,inputbox,OnNameTeach,-1]. You may recognize this from bootend.dic. Essentially, this will lead to the next function. Make sure you don't delete that tag! The rest you can do whatever with though.
@@ -115,14 +115,18 @@ OnNameTeach
 	{
 		"\0\s[7]I'm not saying that.\1\s[19]Who are you, Tom Sawyer?\![open,inputbox,OnNameTeach,-1]"
 	}
-	elseif reference0 == "tranny" //Inappropriate Name check. Last one.
+	elseif reference0 == "tranny" //Inappropriate Name check.
 	{
 		"\0\s[7]I'm not saying that.\1\s[12]Hey! Rude.\![open,inputbox,OnNameTeach,-1]"
 	}
-	elseif reference0 == "daddy" || reference0 == "master" || reference0 == "mommy" || reference0 == "mistress" || reference0 == "sir" || reference0 == "little one" || reference0 == "littlegirl" || reference0 == "littleboy" || reference0 == "kinkster"
+	elseif reference0 == "daddy" || reference0 == "master" || reference0 == "mommy" || reference0 == "mistress" || reference0 == "sir" || reference0 == "littleone" || reference0 == "littlegirl" || reference0 == "littleboy" || reference0 == "kinkster" //Inappropriate Name check.
 	{
 		"\0\s[8]I'm not calling you that.\1\s[13]Uh... Enter something else....?\![open,inputbox,OnNameTeach,-1]"
 		"\0\s[9]Kinky, huh? You're not for me. Try something else, kid.\![open,inputbox,OnNameTeach,-1]"
+	}
+	elseif reference0 == "Okuajub"
+	{
+		"\0\s[8]Okuajub, huh?"
 	}
 	elseif reference0 == "" //This is if the user doesn't put in a name at all, since that'd also get awkward in dialogue.
 	{
@@ -202,11 +206,56 @@ NameDone
 		firstboot = 0 //this turns the flag off
 		
 		//This dialogue will display the first time the user puts in their name. You might want to add some closing thoughts to the introduction your ghost had in OnFirstBoot, or directions about how to use the ghost, or something like that. It's up to you!
-		"\1\s[10]Thanks for inputting your name, %(username)!\w8\0\s[0]We'll remember it.\e"
+		"\1\s[10]Thanks for inputting your name, %(username)!\w8\0\s[0]We'll remember it./
+		\1\s[18]\n\n[half]Alright, one more thing before we're ready to go, %(username). If you've never used a ghost before, I can set some things up so if you want a more easy-going experience. You can avoid negative friendship values more easily. This will enable things such as: Infinite apologies, no punching, and lessened negative reactions. Do keep in mind, this \f[italic,true]will\f[italic,default] keep you from negative routes. But that might be what you want. Anyway, with my explanation over, would you like to enable this? You can turn it off later.\n/
+		\![*]\q[Yes,beginnerStart]\n/
+		\![*]\q[No,beginnerEnd]" 
+		//OKUAJUB: I've added beginner mode myself.
 	}
 	else
 	{
 	"\0\s[0]%(username), huh? Got it.\e"
 	//Rewrite this as you like. Note the %(username) tag here, as you should be well familiar with by now from the walkthrough and the other .dic files. That will display the name the user just created.
 	}	
+}
+
+Select.beginnerStart
+{
+	beginnerMode = "On" //Enables beginner mode.
+	punchConfig = "Off"
+	snakeApologies = 0 //Resets snakeApologies to 0.
+	
+	if beginnerMode == "" //Checks to see if this is the first time the user has set Beginnermode.
+	{
+		
+		"\1\s[15]Okay! I'll keep it in mind. Snake will, too. Thanks for going through all those introductions, it took a while! But we're ready to go now. Right, %(username)?"
+	}
+	elseif beginnerMode == "On" || beginnerMode == "Off"
+	{
+		"\0\s[0]Beginner Mode has been set to %(beginnerMode). Take it easy."
+	}
+	else //failsafe
+	{
+		"\1\s[18]Hm, things are a little odd, but I'm setting Beginner Mode to On. If you're seeing this, please send in a bug report! You can find our developer's email in my double click menu."
+	}
+	
+}
+
+Select.beginnerEnd
+{
+	beginnerMode = "Off" //this is what it defaults to in first boot, but y'know just in case.
+	punchConfig = "On"
+	
+	if beginnerMode == ""
+	{
+		"\1\s[15]Okay! Good to know. We'll continue as per usual. Thanks for taking the time to get to know us, %(username), and for us to know you!"
+	}
+	elseif beginnerMode == "On" || beginnerMode == "Off"
+	{
+		"\0\s[0]Beginner Mode has been set to Off. Be mindful."
+	}
+	else //failsafe
+	{
+		"\1\s[18]Hm, things are a little odd, but I'm setting Beginner Mode to Off. If you're seeing this, please send in a bug report! You can find our developer's email in my double click menu."
+	}
 }

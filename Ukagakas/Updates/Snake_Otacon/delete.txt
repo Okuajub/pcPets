@@ -1,0 +1,4 @@
+ghost/master/aya5.dll
+ghost/master/aya5.txt
+shell/master/surface2515.png
+shell/master/surface2516.png

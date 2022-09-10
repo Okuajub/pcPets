@@ -82,7 +82,7 @@ OnInstallComplete
 		}
 		elseif reference1 == "Snake and Otacon - Solid Shell" //As in other files, you can use elseif to expand a list like this to include as many shells as you have or think you'll make. See bootend.dic for more details about elseif.
 		{
-		"\s[10]We've installed the Solid Shell.\1\s[15]Sweet! This will let me show up here in person.\e"
+		"\s[10]We've installed the Solid Shell.\1\s[15]Sweet! This shell is the most current look for us. It'll also let me show up as myself in person!\e"
 		//Replace if needed.
 		}
 		else //For any other shell they may install.
@@ -163,7 +163,16 @@ OnVanishSelecting
 
 OnVanishSelected
 {
-	"\0\s[0]Uninstallation, hm? Alright. Otacon, you know what to do.\1\s[33] Yeah, one second...\w8\1\s[14]Bye. I'll miss you, %(username).\w9\w9\e"
+	"\0\s[0]Uninstallation, hm? Alright. Otacon, you know what to do.\1\s[33] Yeah, one second...\w8\1\s[14] "
+	--
+	if otaconFeelings > 20
+	{
+		"Bye. I'll miss you, %(username).\w9\w9\e"
+	}
+	elseif otaconFeelings < -20
+	{
+		"Whew, I'm glad to be out of here..."
+	}
 }
 
 
@@ -189,7 +198,7 @@ OnVanishButtonHold
  
 OnVanished
  {
-	if reference0 == "Raiden and Emma" // OKUAJUB: :) 
+	if reference0 == "Raiden and Emma" // OKUAJUB: :) maybe I'll persue this one day.
 	{
 		"\1\s[13]\0\s[7]You deleted Raiden?!\1\s[13] Oh, god, Emma... Not again...\f[height,6] Why does this always happen to me..?\f[height,default]\e"
 	} 
@@ -223,6 +232,10 @@ OnBIFFBegin
 	"\1\s[18]Alright... let's see if you have any messages.\w8\e"
 	
 	"\1\s[18]Got it, I'll check your inbox...\w8\e"
+	
+	"\1\s[18]I'll connect to the email server.."
+	
+	"\1\s[18]"
  }
 
  
@@ -471,7 +484,7 @@ OnHeadlinesenseFailure
  	}
 	elseif reference0 == "can't analyze" //if they can't read the file for some reason
  	{
-		"It can't be analyzed."
+		"It can't be analyzed. That means I can't read it."
  	}
 	else //other errors
  	{
@@ -610,6 +623,7 @@ OnScreenSaverStart
 OnScreenSaverEnd
  {
 	"\1\s[10]Whew, the screensaver is gone. It always feels so weird when it's on.\0\s[8] Eughugh. I don't like it, either.\e"
+	"\1\s[10]Ah, it went all dark there for a moment. The screensaver freaks me out.\0\s[0]Being plunged into darkness isn't exactly what I'd call a pleasant experience."
 	//Replace with what you want.
  }
 
@@ -655,7 +669,7 @@ OnBatteryLow
  
 OnBatteryCritical
 {
-	"\0\s[0]The laptop's battery is critically low.\1\s[13]You better save your work, or get to a charger soon!\1\s[12] It always goes so dark and cold when the power is off!\e"
+	"\0\s[0]The device's battery is critically low.\1\s[13]You better save your work, or get to a charger soon!\1\s[12] It always goes so dark and cold when the power is off. Brr.\e"
 }
  
 //--OnBatteryNotify--------------------------------------------------------------------
@@ -682,13 +696,13 @@ OnBatteryNotify
  
 OnShellScaling
 {
-	if reference0 == 150 //this number is the percentage that you're scaling the ghost up to. In this case, it's 150%.
+	if reference0 > 150 //this number is the percentage that you're scaling the ghost up to. In this case, it's 150%.
 	{
-		"\1\s[10]We are now 150% our original size!\w8\0\s[0]Bigger, huh? Watch it, I'm pretty tall.\e"
+		"\1\s[10]Ah! Are you sure about this? We're running out of room...\w8\0\s[0]Watch the ceiling, Otacon.\e"
 	}
-		elseif reference0 == 200 //this is 200%
+	elseif reference0 >= 200 //this is 200%
 	{
-		"\1\s[10]Woah, this is getting tight! Is this what it was like in those boxes at Shadow Moses, Snake?\0\s[9] No, it wasn't. Don't remind me.\e"
+		"\1\s[10]Woah, this is getting ridiculous! And ridiculously tight! Is this what it was like in those boxes at Shadow Moses, Snake?\0\s[9] No, it wasn't. Don't remind me.\e"
 	}
 	elseif reference0 == 100 //this is 100%
 	{
@@ -697,5 +711,9 @@ OnShellScaling
 	elseif reference0 == 50 //this is 50%. You can add any percentage that's listed under shell scaling if you want using more elseifs.
 	{
 		"\1\s[10]We are now 50% our original size!\w8\0\s[0]Smaller. Feels weird.\1\s[15] I get feeling small, but this is ridiculous!\e"
+	}
+	elseif reference0 > 50
+	{
+		"\1\s[10]Woah! Jeez, I feel like a bug! You better be careful not to step on me or something..!"
 	}
 }

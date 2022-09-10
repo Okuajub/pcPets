@@ -1,5 +1,5 @@
 ~~*Readme*~~
-Hello! This is the Readme for the Snake and Otacon Ukagaka, created by Okuajub(devart Tiefking), Ver. 1.1.1
+Hello! This is the Readme for the Snake and Otacon Ukagaka, created by Okuajub(devart Tiefking), Ver. 1.2.1
 This is most likely your first installation of this Ghost. If not, thanks for sticking around!
 Release Notes are updated on https://okuajub.github.io/pcPets/ and in changelog.txt. If your version is out of date, be sure to check there for the latest .nar file!
 ~~*Some Information*~~

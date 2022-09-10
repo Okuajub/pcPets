@@ -1,3 +1,23 @@
+V 1.2.1
+(9/10/22)
+- Switched from AYA to YAYA (Thank you, Zi!)
+- Changed up Punching Mechanics
+- Added Punching Config. You can now choose between four modes for punching: Confirm, Apologize, On, and Off
+- Added Beginner Mode to be less intimidating to new Ukagaka users, and help guide them through their new program
+- Added Two New Minigames! Check Otacon's menu
+  - Suit Speculation, a card suit guessing game
+  - Higher or Lower, a number guessing game
+- New and Adjusted interactions for Snake
+  - "Ask About Jaeger" has been entirely reworked
+    - Added information about Operation Intrude inside of "Ask About Jaeger"
+  - Added "Ask About Love Life"
+  - Added "Ask About Liquid Snake"
+  - Added "Ask About Big Boss"
+  - Added "A Book" to gift section
+- Misc. Dialogue additions.
+- Added more Animes Otacon can talk about
+  - Removed the Danganronpa dialogue, it feels a little out of place
+- Replaced default shell to new art, old art can be found as an alternate shell, please note this shell may cause graphical issues with new content
 V 1.1.1
 (12/10/21)
 - Installation Path Changed to "Snake_Otacon" instead of "Snake and Otacon". Previous name was proving to be incompatible with Github.

@@ -27,6 +27,10 @@ negSnakeFeels //OKUAJUB: Snake Feelings go Down
 {
 	snakeFeelings--
 }
+punchConfirmCheck
+{
+	""
+}
 pickAndChoose : nonoverlap //OKUAJUB: Array for Otacon asking the user things. nonoverlap so the user doesn't get too many repeats.
 {
 
@@ -81,6 +85,19 @@ japaneseAnimes
 	"Paranoia Agent"
 	"Perfect Blue"
 	"Alien 9"
+	"Chi's Sweet Home"
+	"Digimon"
+	"Lucky Star"
+	"Ranma"
+	"City Hunter"
+	"Konohana Kitan"
+	"Usagi Drop"
+	"Planetes"
+	"Natsume's Book of Friends"
+	"Kemono Friends"
+	"Flying Witch"
+	"Nichijou"
+
 }
 
 //What can you use this kind of envelope for? You can store tons of random information to keep your ghost's dialogue varied! You can store various cities you like in %(city), musicians you like in %(musicians), places your ghost has been in %(places), food you like in %(food), movies you like in %(movie), fandoms you like in %(fandom), characters you like in %(fandomcharacter), celebrities you like under %(celebrity) or friends of yours in %(friends) or bnfs in %(bnfs), folders on your computer under %(folders), Pokemon you like under %(pokemon), insults under %(insult), swear words under %(swearword) which could potentially be hilarious, just about anything! You can make lists of absolutely anything to use with dialogue for your ghost! This .dic file is only limited by your imagination!
