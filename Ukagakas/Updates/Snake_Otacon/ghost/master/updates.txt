@@ -13,8 +13,6 @@ file,ghost/master/Sn_nameteach.dic709f74959c0b415c2bf25626603701b7size=14402d
 file,ghost/master/Sn_shiori3.dic8fb773e71fd3b9458fe8767aab140655size=35270date=2017-10-18T14:26:36
 file,ghost/master/Sn_string.dicf7992ce895cce5cfce7ad7e62329caccsize=8840date=2022-10-11T10:24:03
 file,ghost/master/Sn_word.dic3b7b1337f7000fd975d090c90498907bsize=9529date=2022-10-11T10:24:03
-file,ghost/master/aya5.dll7737614f08f642a0261a4f81917ed77asize=198144date=2022-12-30T17:56:50
-file,ghost/master/aya5.txte011584bd53b492cd930f4c4f5424b90size=1316date=2022-12-30T17:56:50
 file,ghost/master/descript.txt68ad5330e60bf6c86d3a8cef65781956size=2629date=2022-12-31T16:59:42
 file,ghost/master/gomi.dll51fe9597398db01e684a0f9d52c63242size=13312date=2004-06-01T16:00:04
 file,ghost/master/img/codecmomentdragonmotorcycle.png6c327c4eba041ce99364e08ad862f2c0size=13318date=2022-09-10T16:47:11
