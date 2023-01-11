@@ -50,16 +50,28 @@ OnFirstBoot
 	devMode = 0 //Toggle for enabling dev mode, which enables some unstable features. Default 0.
 	beginnerConfig = "" // Configures if the user is a beginner ghost user. Asks in FirstBoot. Defaults to "". Will be set to On or Off in the set up.
 	punchConfig = "on" // Punching configuration. Can be set to "On" which enables default punching mechanics, "Apologize" which enables apologizing for punching, "Confirm" which asks the user if they would like to punch, and "Off" which turns off punching entirely.
+	soundVolume = 50
 	
 	codecTimer = "" //Timer for Otacon's codec searches. blank at first.
 	missionTimer = "" //Timer for Snake's missions. blank at first.
 	codecFatigue = 0 //Cooldown timer for Codec Search
 	missionFatigue = 0 //Cooldown timer for Missions
 	otacoins = 0 //Tracks currency
+	shopTimeCheck = 0 //Randomizes shop ever hour.
 	
-	//okay, hold onto your boots, this is where the achievement/clutter items variables go! (I promise, I tried an array and it did not work how I liked. So.... the messy way we go.) These should all start off blank.
-	mk2 = ""
-	mk3 = ""
+	owned = IARRAY //Tracks owned items in an array. Personal Notes upcoming:
+	//owned[0] = mk2
+	//owned[1] = mk3
+	//owned[2] = koromon
+	//owned[3] = kaomoji
+	//owned[4] = flipperflop
+	//owned[5] = lewd poster
+	//owned[6] = cat poster
+	//owned[7] = rex plush
+	//owned[8] = ray plush
+	//owned[9] = animes1
+	//owned[12] = donchan
+	//owned[13] = katchan
 	
 	clickShadowMoses = 0 //Click counting variable for Shadow Moses
 	clickShadowMosesIncident = 0 //Click counting variable for Shadow Moses *incident*

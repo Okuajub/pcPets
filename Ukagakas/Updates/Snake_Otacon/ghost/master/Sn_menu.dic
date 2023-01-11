@@ -138,6 +138,16 @@ Select.interactSAKURA //Interaction menu for Snake. Gift him things, talk to him
 	"\f[italic,true]Ask...\f[italic,default]\n/
 	\![*]\q[About Shadow Moses,askShadowMosesIncident]\n"
 	--
+	if otaconFeelings > 30
+	{
+		"\![*]\q[About Manhattan Tanker Incident,askTanker]\n"
+	}
+	--
+	if otaconFeelings > 50
+	{
+		"\![*]\q[About Big Shell Incident,askBigshell]\n"
+	}
+	--
 	if clickShadowMosesIncident > 0
 	{
 		"\![*]\q[About Liquid Snake,askLiquidSnake]\n"
@@ -150,12 +160,12 @@ Select.interactSAKURA //Interaction menu for Snake. Gift him things, talk to him
 	--
 	if clickJaeger >= 1
 	{
-	"\![*]\q[About Jaeger,askJaeger]\n"
+		"\![*]\q[About Jaeger,askJaeger]\n"
 	}
 	--
 	if clickBigBoss >= 1
 	{
-	"\![*]\q[About Big Boss,askBigBoss]\n"
+		"\![*]\q[About Big Boss,askBigBoss]\n"
 	}
 	--
 	"\![*]\q[About Otacon,askOtacon]\n\n[half]/
@@ -346,6 +356,7 @@ Select.giveBook
 		"Warrior Cats: Into the Wild. You reassure him it has lots of fun fight scenes. Snake reads the back cover.\n\n[half]\f[italic,default]Cats?.. I'm more of a dog person.\w8\w8 What the hell. I'll give it a read.\1\s[16]\f[italic,true]You hear Otacon snicker. Clearly he thinks its amusing."
 		"a gay werewolf romance novel. It seems pretty steamy. Snake laughs before pausing to look at you.\f[italic,default]\n\n[half]\0\s[9]... You're serious? Look, you can read all the trashy monster-fucking novels you want, but it isn't exactly gifting material. I'll keep it to humor you."
 		"a non-fiction Navy SEAL biography.\f[italic,default]\n\n[half]What? Are you saying I need to do some homework?\1\s[31]..Well, to be completely fair to %(username)... You did get caught red-handed by Raiden faking it.\0\s[9]\n\n[half]Ghh.."
+		"The Fellowship of the Ring.\f[italic,default]\n\n[half]Lo-ter, huh?\1\s[18]Wait a second, did you just say 'L.O.T.R.' like 'low-ter'?\0\s[8]\n\n[half]Yeah. So?\1\s[19]\n\n[half]\w8\w8...All I can say is:\w8 Why?\0\s[6]\n\n[half]\w8's faster."
 		"the Minecraft Redstone Handbook.\f[italic,default]\n\n[half]What is this? I don't know what 'Minecraft' is.\1\s[15]Oh! Snake, hand that one over!\0\s[8]\f[italic,true]\n\n[half]Snake withholds it from Otacon.\f[italic,default]\n\n[half]Explain to me what it is first, brainiac.\1\s[19]\n\n[half]Alright, alright. But only if you're really going to give it to me.\w8\w8 Redstone powers machines and circuitry in Minecraft, a video game. Its pretty much like programming but.. in 3D? Somebody made Pokemon Red in it-\0\s[9]\n\n[half]Alright, you can stop there. I'm sufficiently convinced its nerd stuff. Here.\1\s[16]\f[italic,true]\n\n[half]Otacon looks satisfied with himself and thumbs through the book for a few moments before stuffing it away somewhere."
 		--
 		snakeFeelings += 5
@@ -353,6 +364,8 @@ Select.giveBook
 	if snakeFeelings >= 30
 	{
 		"a non-fiction book about an investigative reporter's work on the CIA.\f[italic,default]\n\n[half]Hm. I used to work for the CIA you know. Undercover agent. When I was there they were still post-Cold-War peacetime softies.\w8\w8 Can't hurt to revisit old memories."
+		"Call of The Wild by Jack London.\f[italic,default]\n\n[half]London. His relationship with the primal, the fear of it, the obsession with it, is notable...\w8\w8 I'm always ready to read a book of his."
+		--
 		snakeFeelings += 6
 	}
 	if snakeFeelings >= 40
@@ -365,6 +378,9 @@ Select.giveBook
 	if snakeFeelings >= 50
 	{
 		"Jack London's short story Bâtard.\f[italic,default]\n\n[half]\0\s[8]Read this one a lot after leaving the army.\w8\w8\w8\w8\w8 I got over it.\n\n[half]\f[italic,true]Snake stows the thin book carefully into a bag. He doesn't seem unhappy, though."
+		"Do Androids Dream of Electric Sheep.\f[italic,default]\n\n[half]\0\s[8]Hm..\w8\w8\w8 I read this one a lot after I retired from merc work. Not a nostalgia trip. Grounding myself in reality is more like it.\w8\w8 It's a rotating favorite. Good to have a copy here."
+		"I Have No Mouth and I Must Scream.\f[italic,default]\n\n[half]\0\s[0]This one was pretty bleak. Not unwelcome, though. I'm not one of those people who puts up a fuss if a book leaves me feeling depressed.\1\s[18]You know, I think I have the computer game of that one. Want to play it sometime, Snake?\0\s[5]\n\n[half]Sure."
+		--
 		snakeFeelings += 10
 	}
 	--
@@ -630,7 +646,7 @@ Select.askJaeger
 	}
 }
 
-//Asks Snake about Big Boss. Currently unimplemented.
+//Asks Snake about Big Boss.
 Select.askBigBoss
 {
 	"\0\s[0]Big Boss was the founder and commander of FOXHOUND in the early 1970s and throughout the 1990s. He was a legendary soldier and well-known in America, making the covers of magazines and at least a handful of books. Big name, big title. "
@@ -736,11 +752,238 @@ Select.askOtacon
 		if snakeFeelings > 50 && otaconFeelings > 60
 		{
 			"\0\s[4]\w8.\w8. He had a hard life, you know. He's done well for himself since."
+			--
+			if owned[7] != "rexplush"
+			{
+				"\w8\w8\w8\f[italic,true]\n\n[half]For completeing Snake's information on Otacon, you have been given the REX plush. You can find it in Otacon's inventory."
+				owned[7] = "rexplush"
+			}
 		}
 	}
 	--
 	"\e"
 }
+
+Select.askTanker
+{
+	if snakeFeelings < 10
+	{
+		"\0\s[8]According to the media, the Tanker incident is when Solid Snake sank the \f[italic,true]USS Discovery\f[italic,false] in an act of eco-terrorism, but died in the same incident. You can figure out for yourself if that's true"
+	}
+	--
+	if snakeFeelings >= 10
+	{
+		"\0\s[8]The Tanker incident was when the \f[italic,true]USS Discovery\f[italic,false] was sank in the Hudson river. The \f[italic,true]Discovery\f[italic,false] was an oil tanker and presumably would cause an environmental disaster."
+	}
+	--
+	if snakeFeelings > 25
+	{
+		" I was framed for the sinking, but also thought dead. In the aftermath, Philanthropy, Otacon and I's NGO, were considered a terrorist organization. So much for 'recognized, but still fringe'."
+	}
+	--
+	if snakeFeelings > 40
+	{
+		" \0\s[8]Clearly, I survived the sinking. I also didn't sink the tanker myself. The tanker was sunk by the prototype Metal Gear inside breaking the hull. Since there was no oil inside, the oil the Big Shell was construced to clean up did not come from the \f[italic,true]Discovery\f[italic,false]."
+	}
+}
+
+Select.askBigshell
+{
+	if snakeFeelings < 10
+	{
+		"\0\s[8]I wasn't there, so I can't tell you anything about it."
+	}
+	--
+	if snakeFeelings >= 10
+	{
+		"\0\s[0]The Big Shell was a decontamination center built specifically to clean up the oil spilled during the Manhattan Tanker Incident. The Big Shell Incident itself is when the Sons of Liberty, a terrorist organization, took over the Big Shell."
+	}
+	--
+	if snakeFeelings > 40
+	{
+		"\0\s[8] During the incident, I met Raiden. He was a rookie. Kept going on and on about VR training. He's not bad, though. Raiden disarmed bombs, fought and beat members of Dead Cell and destroyed multiple RAYs himself, to mention a few."
+	}
+	--
+	if snakeFeelings > 50
+	{
+		"\0\s[6]\w8\w8 Otacon's sister, Emma, was also on the Big Shell during the incident. She was stabbed by Vamp, a member of Dead Cell, as Raiden shot him.\1\s[33]\0\s[4]\w8\w8\w8\w8\w8\w8\w8\w8 She bled out in Otacon's arms. There was nothing we could do."
+	}
+	--
+	if snakeFeelings > 60
+	{
+		"\0\s[6]\f[italic,true]\n\n[half]Snake goes quiet for a moment and sighs. He seems to be gathering his thoughts.\n\n[half]The Big Shell as a whole was a cover for a test held by an organization known as the Patriots.\0\s[0] It was used to test their ability to manipulate information, and by extension world events.\w8 Otacon and I had a lead on who the Patriots may be, but it was a dead end. Raiden and I split ways. It was time for him to find who he was."
+		--
+		if owned[8] != "rayplush"
+		{
+			"\n\n[half]\f[italic,true]For completing Snake's information on the Big Shell Incident, you have been given the RAY plush. You can find it in Otacon's inventory."
+			owned[8] = "rayplush"
+		}
+	}
+}
+//         _         _               __                     _     
+//   /\/\ (_)___ ___(_) ___  _ __   / _\ ___  __ _ _ __ ___| |__  
+//  /    \| / __/ __| |/ _ \| '_ \  \ \ / _ \/ _` | '__/ __| '_ \ 
+// / /\/\ \ \__ \__ \ | (_) | | | | _\ \  __/ (_| | | | (__| | | |
+// \/    \/_|___/___/_|\___/|_| |_| \__/\___|\__,_|_|  \___|_| |_|
+Select.missionSearch
+{
+	if missionTimer == "" && missionFatigue == 0 //Checks to see if the mission timer is ready to be reset. if missionTimer is blank, it means its ready to recieve information. if missionFatigue is still going, it means Snake is tired and it needs to reach 0 first.
+	{
+		"\0\s[8]I can go out on a mission. I'm sure Otacon has something in mind. How long of a mission are you thinkg of? In minutes."
+		--
+		if owned[5] != "lewdposter" || owned[6] != "catposter"
+		{
+			" I'd suggest around 60 minutes, myself."
+		}
+		--
+		"\n\n[half]\f[italic,true]How long of a mission will Snake go on?\![open,inputbox,OnSetMissionTimer,-1]"
+	}
+	elseif missionTimer == "finished"
+	{
+		missionFatigue = (inputTime * 0.5) + RAND(600) + 600 //Sets the fatigue timer, which is the same as half of the inputted minutes (in seconds) plus 0-600 seconds, plus 600 seconds (10 minutes).
+		missionTimer = "" //Makes sure missionTimer is ready to recieve new information.
+		_randomval = RAND(100)
+		"\0\s[0]I completed the mission. "
+		--
+		if inputTime < 3600 //Less than an hour
+		{
+			"\0\s[8]I got the job done, and that's about it. Otacon and I will go over it in private.\f[italic,true]\n\n[half]It seems Snake feels more comfortable here after returning."
+			snakeFeelings += 8
+			otaconFeelings += 1
+		}
+		elseif inputTime >= 3600 //More than an hour. when there's more items I might add more nuanced timing, but for now I don't need to.
+		{
+			if owned[5] != "lewdposter" && _randomval < 69
+			{
+				"\0\s[8]With the extra time I had, I grabbed this from one of the soldiers.\n\n[half]\f[italic,true]Snake gives you... a.. Lewd Poster... You can find it in Otacon's item menu."
+				owned[5] = "lewdposter"
+			}
+			elseif owned[6] != "catposter" && _randomval > 69
+			{
+				"\0\s[8]With the extra time I had, I grabbed this on the way out from one of the cubicles.\n\n[half]\f[italic,true]Snake gives you a cat poster. You can find it in Otacon's item menu."
+				owned[6] = "catposter"
+			}
+			else
+			{
+				"\0\s[8]There wasn't anything of note for me to bring back for you."
+			}
+		}
+	}
+	elseif missionFatigue >= 1
+	{
+		"\0\s[8]Every soldier needs time to rest. Come back "
+		--
+		if misisonFatigue < 600
+		{
+			"after I have a smoke break."
+		}
+		elseif missionFatigue >= 600 && missionFatigue < 1500
+		{
+			"after twenty minutes or so."
+		}
+		elseif missionFatigue >= 1500 && missionFatigue < 2700
+		{
+			"in fourty."
+		}
+		elseif missionFatigue >= 2700 && missionFatigue <= 3200
+		{
+			"in about an hour."
+		}
+		elseif missionFatigue >= 3200 && missionFatigue <= 7200
+		{
+			"after awhile. Two hours, tops."
+		}
+		else
+		{
+			"in a couple hours."
+		}
+	}
+	elseif codecFatigue >= 1
+	{
+		"\1\s[33]Sorry, %(username). I'm still pretty exhausted from that last mission. Do you mind waiting a bit? I think I'll be ready to go again in"
+		-- //I could probably just diverge this in the original one and replace "mission" or "task" with an if check but... it's not worth the effort, haha.
+		if codecFatigue < 600
+		{
+			"a little bit."
+		}
+		elseif codecFatigue >= 600 && codecFatigue < 1500
+		{
+			"about twenty minutes?"
+		}
+		elseif codecFatigue >= 1500 && codecFatigue <= 2700
+		{
+			"forty-five minutes, maybe."
+		}
+		elseif codecFatigue > 2700 && codecFatigue <= 3200
+		{
+			"maybe an hour?"
+		}
+		else
+		{
+			"an hour or two."
+		}
+	}
+	elseif codecTimer > 1
+	{
+		"\0\s[8]Otacon's already got a job he's doing for you. I need him to be focused when I'm on missions. \1\s[38]Uh, I'll be done in "
+		--
+		if codecTimer < 1800
+		{
+			"less than thirty minutes!"
+		}
+		elseif codecTimer > 1800 && codecTimer <= 3200
+		{
+			"less than an hour. Okay?"
+		}
+		else
+		{
+			"maybe an hour or two?"
+		}
+	}
+	--
+	"\e"
+}
+
+//Sets the mission timer if possible.
+OnSetMissionTimer
+{
+	"\0\s[8]\f[italic,true]You tell Snake %(reference0) minutes sounds right.\f[italic,default]\n\n[half]"
+	--
+	inputTime = reference0 * 60 //Turns the minutes the user inputs into seconds, so that when we set codecTimer later its really simple.
+	
+	if inputTime > 14401 //Greater than 4 hours, in seconds
+	{
+		"I can't go longer than two hours, %(username). Any mission needs to get done fairly quickly, or else. Thirty minutes gives me enough time to get in and out without any fluff. More than that, I might be able to bring something not related to the mission back with me."
+	}
+	elseif inputTime < 1799
+	{
+		"\0\I need at least thirty minutes to get in and out. I can't go any shorter than that."
+	}
+	elseif inputTime >= 1800 && inputTime <= 7200
+	{
+		if inputTime == 4140
+		{
+			"nice.\n\n[half]"
+		}
+		--
+		"\0\s[5]Alright. Let's get moving, there's no time to waste.\0\s[20]\w2\0\s[21]\w2\0\s[22]\w1\0\s[-1]\w8\w8\w8\w8\w8"
+		missionTimer = inputTime
+	}
+	elseif inputTime == 0 || reference0 == ""
+	{
+		inputTime = (RAND(90) + 30) * 60
+		"\0\s[8]Suit yourself. I'll go out for %(inputTime / 60) minutes."
+		missionTimer = inputTime
+	}
+	else
+	{
+		"\0\I didn't catch that. Make sure you tell me strictly numbers, as in '120' for two hours. Got it?"
+	}
+	--
+	"\e"
+}
+
+
 //If someone selects an option linked to BACKTOMENU, it will go back to MenuRun.
 //Advanced users, note that this is formatted as Select.linkedfunction? Remember how it went \q[Displayed Name,linkedfunction] above? When a user clicks an option that doesn't begin with On, they'll be linked to Select.linkedfunction. Pay close attention as we go through and you'll see this in action.
 
@@ -828,13 +1071,6 @@ Select.choiceneither
 	"\0\s[0]They and them, huh? Got it.\e"
 	//and this one.
 }
-
-//Here are some examples of these envelopes in use.
-//"%(heshe) left that there."
-//"%(hisher) work is really cool."
-//"I'll ask %(himher) later."
-//"%(hesshes) really good at it."
-
 
 //These two options toggle whether or not you can delete your ghost. Leave them alone.
 
@@ -1069,7 +1305,8 @@ Select.punchYN //Toggle Punch Functions
 	\nWhen set to On, you'll automatically punch us when you double click areas of interest. /
 	\nWhen set to Off, you won't be able to punch us at all, and simply point when you double click. /
 	\nWhen set to Confirm, you will be asked to confirm the punch before it happens. /
-	\nWhen set to Apologize, you will automatically punch when double clicking, but have the option to apologize. Which will it be?\n/
+	\nWhen set to Apologize, you will automatically punch when double clicking, but have the option to apologize. /
+	\nPunch Config is currently set to %(punchConfig). Which will it be?\n/
 	\![*]\q[On,punchOn]\n/
 	\![*]\q[Off,punchOff]\n/
 	\![*]\q[Confirm,punchConfirm]\n/
@@ -1244,19 +1481,19 @@ OpenKeroMenu
  	\![*]\q[Bug report,bugreport]\n\n/
 	\![*]\q[Interact,interactKERO1]\n"
 	--
-	if otaconFeelings >= 40 && devMode == 1 //Menu to initiate codec search.
+	if otaconFeelings >= 40 //Menu to initiate codec search.
 	{
 		"\![*]\q[Codec Search,codecSearch]\n"
 	}
 	--
-	if mk2 == "owned" && devMode == 1 //Menu for bringing items earned through gameplay out.
+	if owned != "" //Menu for bringing items earned through gameplay out.
 	{
 		"\![*]\q[Bring Items,bringClutter]\n"
 	}
 	--
-	if otacoins > 0 && devMode == 1 //Shop for Otacoins
+	if otacoins > 0 //Shop for Otacoins
 	{
-		"\![*]\q[Shop,buy]\n"
+		"\![*]\q[Shop,OnShop]\n"
 	}
 	--
 	"\![*]\q[FAQ,faq]\n/
@@ -1323,9 +1560,16 @@ Select.keroupdatecheck
 //This is a unique feature for Otacon. Codec Search lets the user input an amount of time for Otacon to search for new codec frequencies.
 Select.codecSearch
 {
-	if codecTimer == "" && codecFatigue == 0 //Checks to see if the codec timer is ready to be reset. if codecTimer is blank, it means its ready to recieve information. if codecFatigue is still going, it means Otacon is tired and it needs to reach 0 first.
+	if codecTimer == "" && codecFatigue == 0 && missionFatigue == 0 && missionTimer == 0 //Checks to see if the codec timer is ready to be reset. if codecTimer is blank, it means its ready to recieve information. if codecFatigue is still going, it means Otacon is tired and it needs to reach 0 first.
 	{
-		"\1\s[18]Oh, you want me to search through the codec frequencies? I can do that. How long do you want me to search for? In minutes, please.\n\n[half]\f[italic,true]How long will Otacon search?\![open,inputbox,OnSetCodecTimer,-1]"
+		"\1\s[18]Oh, you want me to search through the codec frequencies? I can do that. How long do you want me to search for? In minutes, please."
+		--
+		if owned[0] != "mk2" || owned[1] != "mk3"
+		{
+			" I'd suggest around 30 minutes, myself, but I can go longer if you want."
+		}
+		--
+		"\n\n[half]\f[italic,true]How long will Otacon search?\![open,inputbox,OnSetCodecTimer,-1]"
 	}
 	elseif codecTimer == "finished"
 	{
@@ -1334,24 +1578,21 @@ Select.codecSearch
 		"\1\s\[15]Alright! Like I said, I finished up searching. "
 		if inputTime <= 2700 //Less than or 45 Minutes
 		{
-			if RAND(100) > 69 && mk2 != "owned" //nice
+			if RAND(100) > 69 && owned[0] != "mk2" //nice
 			{
-				"I found some good information on an old connection of mine- I managed to recover some blueprints for a project! It's the MG MK. II. You can ask me to bring it out in my double click menu. Oh, and If you're wondering about which one is the MK. I... Er, don't think about it too hard.\n\n[half]"
-				mk2 = "owned" //Gives the player access to the MK. II
+				"I found some good information on an old connection of mine- I managed to recover some blueprints for a project! It's the Metal Gear MK. II. You can ask me to bring it out in my double click menu. Oh, and If you're wondering about which one is the MK. I... Er, don't think about it too hard.\n\n[half]"
+				owned[0] ,= "mk2" //Gives the player access to the MK. II
 			}
-			elseif mk3 != "owned" && mk2 == "owned"
+			elseif owned[1] != "mk3" && owned[0] == "mk2"
 			{
 				"I got some ideas for some improvements to the MK. II while listening to an engineering project's managment meeting.\s[15] Don't worry, no plagarism! Stealing other's concepts is just rude... Anyway. You should be able to bring out the new version of the MK. II in the menu, under the name MK. III!"
-				mk3 = "owned"
+				owned[1] ,= "mk3"
 			}
 			else
 			{
 				"\1\s[37]I didn't find anything unique this time. Sorry.\w4\w4\s[15] But I did find some Otacoins!"
 				--
-				if otacoins < 1
-				{
-					"\n\n[half]\f[italic,true]You say you have no idea what that is.\f[italic,default]\n\n[half]\s[18]You don't? Oh, duh! I forgot to tell you. Well, Otacoin isn't a real currency. Not in the monetary economy, anyway. It's not a cryptocurrency, either! (I just thought the name was funny..) Anyway. They're.. bargaining chips of sorts. Information I scrounged up and can be exchanged for real money or goods.\s[15] Don't worry, I'll handle it and be the middleman in those sorts of things!\n\n[half]\f[italic,true]You say it sounds a bit like blackmail.\f[italic,default]\n\n[half]\s[2501]N-No! That's not it at all...\w8\w8\s[16] Sometimes I sell the information to \f[italic,true]o\w2th\w4er\f[italic,default] people... So it's not blackmail, okay?"
-				}
+				otacoinCheck
 				--
 				_otacoinPlus += RAND(80) + 20
 				"\n\n[half]\f[italic,true]You Recieved %(_otacoinPlus) Otacoins! "
@@ -1362,12 +1603,9 @@ Select.codecSearch
 		}
 		elseif inputTime > 2701 && inputTime < 4200 //46 minutes to an hour and 10 minutes
 		{
-			"This is dialogue for when you've searched between 46 minutes and an hour and ten minutes. Wow!"
+			"I didn't find anything unique this time, but I did gather quite a good amount of information! That should translate into Otacoins well."
 			--
-			if otacoins < 1
-			{
-				"\n\n[half]\f[italic,true]You say you have no idea what that is.\f[italic,default]\n\n[half]\s[18]You don't? Oh, duh! I forgot to tell you. Well, Otacoin isn't a real currency. Not in the monetary economy, anyway. It's not a cryptocurrency, either! (I just thought the name was funny..) Anyway. They're.. bargaining chips of sorts. Information I scrounged up and can be exchanged for real money or goods.\s[15] Don't worry, I'll handle it and be the middleman in those sorts of things!\n\n[half]\f[italic,true]You say it sounds a bit like blackmail.\f[italic,default]\n\n[half]\s[2501]N-No! That's not it at all...\w8\w8\s[16] Sometimes I sell the information to \f[italic,true]o\w2th\w4er\f[italic,default] people... So it's not blackmail, okay?"
-			}
+			otacoinCheck
 			--
 			_otacoinPlus += RAND(60) + 40
 			"\n\n[half]\f[italic,true]You Recieved %(_otacoinPlus) Otacoins! "
@@ -1378,12 +1616,9 @@ Select.codecSearch
 		}
 		elseif inputTime >= 4200 && inputTime < 5400 // hour and ten to hour and a half
 		{
-			"This is dialogue for when you searched between an hour and 11 minutes to an hour and a half. Pretty long now, huh!"
+			"\1\s[10]I found some good bargaining chips to use later. Anyway, that earns you some Otacoins!"
 			--
-			if otacoins < 1
-			{
-				"\n\n[half]\f[italic,true]You say you have no idea what that is.\f[italic,default]\n\n[half]\s[18]You don't? Oh, duh! I forgot to tell you. Well, Otacoin isn't a real currency. Not in the monetary economy, anyway. It's not a cryptocurrency, either! (I just thought the name was funny..) Anyway. They're.. bargaining chips of sorts. Information I scrounged up and can be exchanged for real money or goods.\s[15] Don't worry, I'll handle it and be the middleman in those sorts of things!\n\n[half]\f[italic,true]You say it sounds a bit like blackmail.\f[italic,default]\n\n[half]\s[2501]N-No! That's not it at all...\w8\w8\s[16] Sometimes I sell the information to \f[italic,true]o\w2th\w4er\f[italic,default] people... So it's not blackmail, okay?"
-			}
+			otacoinCheck
 			--
 			_otacoinPlus += RAND(60) + 80
 			"\n\n[half]\f[italic,true]You Recieved %(_otacoinPlus) Otacoins! "
@@ -1393,12 +1628,9 @@ Select.codecSearch
 		}
 		else
 		{
-			"\1\s[10]Woah, you searched more than an hour and a half!"
+			"\1\s[10]That took awhile! I didn't find anything unique, though, sorry.. but I found a lot of good information. That should give you a hefy amount of Otacoins!"
 			--
-			if otacoins < 1
-			{
-				"\n\n[half]\f[italic,true]You say you have no idea what that is.\f[italic,default]\n\n[half]\s[18]You don't? Oh, duh! I forgot to tell you. Well, Otacoin isn't a real currency. Not in the monetary economy, anyway. It's not a cryptocurrency, either! (I just thought the name was funny..) Anyway. They're.. bargaining chips of sorts. Information I scrounged up and can be exchanged for real money or goods.\s[15] Don't worry, I'll handle it and be the middleman in those sorts of things!\n\n[half]\f[italic,true]You say it sounds a bit like blackmail.\f[italic,default]\n\n[half]\s[2501]N-No! That's not it at all...\w8\w8\s[16] Sometimes I sell the information to \f[italic,true]o\w2th\w4er\f[italic,default] people... So it's not blackmail, okay?"
-			}
+			otacoinCheck
 			--
 			_otacoinPlus += RAND(60) + 160
 			"\n\n[half]\f[italic,true]You Recieved %(_otacoinPlus) Otacoins! "
@@ -1438,19 +1670,19 @@ Select.codecSearch
 	{
 		"\1\s[33]Sorry, %(username). I'm still pretty exhausted from that last mission. Do you mind waiting a bit? I think I'll be ready to go again in"
 		-- //I could probably just diverge this in the original one and replace "mission" or "task" with an if check but... it's not worth the effort, haha.
-		if codecFatigue < 600
+		if missionFatigue < 600
 		{
 			"a little bit."
 		}
-		elseif codecFatigue >= 600 && codecFatigue < 1500
+		elseif missionFatigue >= 600 && missionFatigue < 1500
 		{
 			"about twenty minutes?"
 		}
-		elseif codecFatigue >= 1500 && codecFatigue <= 2700
+		elseif missionFatigue >= 1500 && missionFatigue <= 2700
 		{
 			"forty-five minutes, maybe."
 		}
-		elseif codecFatigue > 2700 && codecFatigue <= 3200
+		elseif missionFatigue > 2700 && missionFatigue <= 3200
 		{
 			"maybe an hour?"
 		}
@@ -1459,9 +1691,11 @@ Select.codecSearch
 			"an hour or two."
 		}
 	}
-	else
+	elseif missionTimer >= 1 
 	{
-		if codecTimer > 1
+		"\1\s[38]Sorry, I can't do that right now! I have to focus on the mission."
+	}
+	elseif codecTimer > 1
 		{
 			"\1\s[38]Sorry, I'm already working on it! I'll be done in "
 			--
@@ -1478,10 +1712,21 @@ Select.codecSearch
 				"maybe an hour or two?"
 			}
 		}
+	else
+	{
+		"\1\s[10]What"
 	}
 	--
 	"\e"
 }
+otacoinCheck
+{
+	if otacoins < 1	
+	{
+		"\n\n[half]\f[italic,true]You say you have no idea what that is.\f[italic,default]\n\n[half]\s[18]You don't? Oh, duh! I forgot to tell you. Well, Otacoin isn't a real currency. Not in the monetary economy, anyway. It's not a cryptocurrency, either! (I just thought the name was funny..) Anyway. They're.. bargaining chips of sorts. Information I scrounged up and can be exchanged for real money or goods.\s[15] Don't worry, I'll handle it and be the middleman in those sorts of things!\n\n[half]\f[italic,true]You say it sounds a bit like blackmail.\f[italic,default]\n\n[half]\s[2501]N-No! That's not it at all...\w8\w8\s[16] Sometimes I sell the information to \f[italic,true]o\w2th\w4er\f[italic,default] people... So it's not blackmail, okay?"
+	}
+}
+
 OnSetCodecTimer //maybe I should have used something other than "thing".
 {
 	"\1\s[18]\f[italic,true]You tell Otacon %(reference0) minutes sounds right.\f[italic,default]\n\n[half]"
@@ -1523,42 +1768,251 @@ OnSetCodecTimer //maybe I should have used something other than "thing".
 //If you want to do a system like this.. please don't do it like me. Learn how to use arrays before you write this kind of spaghetti.
 Select.bringClutter : all
 {
-	"\1\s[10]Okay! I can do that. Which items do you want to bring out?\b2\n\n"
-	if devMode == 0
+	if codecTimer > 0 || missionTimer > 0
 	{
-		//display owned
-		if mk2 == "owned"
-		{
-			"\![*]\q[Mk. II,bringMk2]\n"
-		}
-		if mk3 == "owned"
-		{
-			"\![*]\q[Mk. II,bringMk3]\n"
-		}
+		"\1\s[38]Sorry, %(username), I'm a bit... occupied right now.\e"
 	}
-	else //if in Devmode, all are displayed regardless of ownership
+	else
 	{
-		"\![*]\q[Mk. II,bringMk2]\n"
+		"\1\s[10]\b2Okay! I can do that. Which items do you want to bring out?\n\n"
 		--
-		"\![*]\q[Mk. II,bringMk3]\n"
+		CheckItems
+		--
+		"\n\![*]\q[Nothing,keroCANCEL]"
 	}
-	"\![*]\q[Nothing,keroCANCEL]"
 }
 
-Select.bringMk2
+//Displays items the user owns.
+CheckItems
 {
-	"\1\s[10]Can do. Here you go, little buddy!\p[3]\s[9910]\1\s[15] Have fun!"
+	if devMode == 1
+	{
+		"DEVTEST displaying all items...\n"
+		--
+		"\![*]\q[MK. II,OnBringItem,mk2]\n/	
+		\![*]\q[MK. III,OnBringItem,mk3]\n/
+		\![*]\q[Koromon Plush,OnBringItem,koromon]\n/
+		\![*]\q[Kaomoji Plush,OnBringItem,kaomoji]\n/
+		\![*]\q[Flipper Flop Plush,OnBringItem,flipperflop]\n"
+		--
+		"\n"
+	}
+	else
+	{
+		_total = ARRAYSIZE(owned)
+
+		_display = ""
+		for _i = 0; _i < _total; _i++
+		{
+			if owned[_i] == "mk2"
+			{
+				_display += "\![*]\q[MK. II,OnBringItem,mk2]\n"
+			}
+			elseif owned[_i] == "mk3"
+			{
+				_display += "\![*]\q[MK. III,OnBringItem,mk3]\n"
+			}
+			elseif owned[_i] == "koromon"
+			{
+				_display += "\![*]\q[Koromon Plush,OnBringItem,koromon]\n"
+			}
+			elseif owned[_i] == "kaomoji"
+			{
+				_display += "\![*]\q[Kaomoji Plush,OnBringItem,kaomoji]\n"
+			}
+			elseif owned[_i] == "flipperflop"
+			{
+				_display += "\![*]\q[Flipper Flop Plush,OnBringItem,flipperflop]\n"
+			}
+			elseif owned[_i] == "rexplush"
+			{
+				_display += "\![*]\q[REX Plush,OnBringItem,rexplush]\n"
+			}
+			elseif owned[_i] == "rayplush"
+			{
+				_display += "\![*]\q[RAY Plush,OnBringItem,rayplush]\n"
+			}
+			elseif owned[_i] == "lewdposter"
+			{
+				_display += "\![*]\q[Lewd Poster,OnBringItem,lewdposter]\n"
+			}
+			elseif owned[_i] == "catposter"
+			{
+				_display += "\![*]\q[Cat Poster,OnBringItem,catposter]\n"
+			}
+			elseif owned[_i] == "animes1"
+			{
+				_display += "\![*]\q[Anime Lot #1,OnBringItem,animes1]\n"
+			}
+		}
+		--
+		"%(_display)"
+	}
+	
 }
 
-Select.bringMk3
+OnBringItem
 {
-	"\1\s[10]Sure thing. New and improved little buddy, here you come!\p[4]\s[9911]"
+	if reference0 == "mk2"
+	{
+		"\1\s[10]Can do. Here you go, little buddy!\p[3]\s[9910]\n\1\s[15]Have fun!"
+	}
+	elseif reference0 == "mk3"
+	{
+		"\1\s[10]Sure thing. New and improved little buddy, here you come!\p[4]\s[9911]"
+	}
+	elseif reference0 == "koromon"
+	{
+		"\1\s[15]Here you go!\p[5]\s[9916]\1\s[15] Isn't he just adorable?"
+	}
+	elseif reference0 == "kaomoji"
+	{
+		"\1\s[15]Here you go!\p[6]\s[9915]\1\s[15] Isn't he just adorable?"
+	}
+	elseif reference0 == "flipperflop"
+	{
+		"\1\s[15]Here you go!\p[7]\s[9914]\1\s[15] 'Two flipper rolls!', heehee!"
+	}
+	elseif reference0 == "rexplush"
+	{
+		"\1\s[15]Well, isn't this a cute little nuclear equipped tank?\p[8]\s[9912]\1\s[10]\w8\w8 Despite all of it, I still like you, REX."
+	}
+	elseif reference0 == "rayplush"
+	{
+		"\1\s[15]Huh! They really made RAY look cute.\p[9]\s[9913]\1\s[10]\w8\w8 Don't go making REX and RAY fight now, %(username)!"
+	}
+	elseif reference0 == "lewdposter"
+	{
+		"\1\s[18]I'm still not sure why Snake brought this back with him. Or why you want to put it up. But, I guess if you don't have any work to do...\p[10]\s[9917]"
+	}
+	elseif reference0 == "catposter"
+	{
+		
+		"\1\s[12]I always get a little sad when I see these posters. That poor cat!\p[11]\s[9918]\1\s[10] Hang in there, buddy..."
+	}
+	elseif reference0 == "animes1"
+	{
+		"\1\s[15]Sweet!\p[12]\s[9919]\1\s[10] Now I've got plenty to read on my downtime."
+	}
 }
 
 //Shop for spending Otacoins
-Select.buy
+OnShop
 {
-	"Alright!"
+	if codecTimer || missionTimer > 0
+	{
+		"\1\s[38]Sorry, %(username), I can't do that for you right now.."
+	}
+	else
+	{
+		"\1\s[10]\b2Alright! Checking the web really quick, these are what's currently available:\_q\n"
+		--
+		if shopTimeCheck >= 0 && shopTimeCheck < 5
+		{
+			if owned[2] == "koromon"
+			{
+				"\f[strike,true]\![*]Koromon Plush - 2000 Otacoins\f[strike,false]\n" //If already owned, unbuyable and struck through
+			}
+			else
+			{
+				"\![*]\q[Koromon Plush - 2000 Otacoins,OnBuy,koromon,2000]\n" //if buyable, clickable and will forward item name and price through reference0 and reference1 respectively
+			}
+			--
+			if owned[3] == "kaomoji"
+			{
+				"\f[strike,true]\![*]Kaomoji Plush - 2020 Otacoins\f[strike,false]\n"
+			}
+			else
+			{
+				"\![*]\q[Kaomoji Plush - 2020 Otacoins,OnBuy,kaomoji,2020]\n"
+			}
+		}
+		elseif shopTimeCheck >= 5 && shopTimeCheck < 8
+		{
+			if owned[4] == "flipperflop"
+			{
+				"\f[strike,true]\![*]Flipper Flop Plush - 1500 Otacoins\f[strike,false]\n"
+			}
+			else
+			{
+				"\![*]\q[Flipper Flop Plush - 1500 Otacoins,OnBuy,flipperflop,1500]\n"
+			}
+			--
+			if owned[9] == "animes1"
+			{
+				"\f[strike,true]\![*]Anime Lot #1 - 2050 Otacoins\f[strike,false]\n"
+			}
+			else
+			{
+				"\![*]\q[Anime Lot #1 - 2050 Otacoins,OnBuy,animes1,2050]\n"
+			}
+		}
+		elseif shopTimeCheck >= 8
+		{
+			if owned[2] == "koromon"
+			{
+				"\f[strike,true]\![*]Koromon Plush - 2000 Otacoins\f[strike,false]\n"
+			}
+			else
+			{
+				"\![*]\q[Koromon Plush - 2000 Otacoins,OnBuy,koromon,2000]\n"
+			}
+			--
+			if owned[4] == "flipperflop"
+			{
+				"\f[strike,true]\![*]Flipper Flop Plush - 1500 Otacoins\f[strike,false]\n"
+			}
+			else
+			{
+				"\![*]\q[Flipper Flop Plush - 1500 Otacoins,OnBuy,flipperflop,1500]\n"
+			}
+		}
+		else
+		{
+			"\1\s[18]Oh, huh. There's not actually anything in the shop right now. You can check back later.\e"
+		}
+		--
+		"\n\![*]\q[Nevermind,keroCANCEL]\n\f[italic,true]\nYou currently have %(otacoins) Otacoins."
+	}
+}
+
+//Calculates if you have enough Otacoins to purchase your item, then subtracts or 
+OnBuy
+{
+	if reference1 > otacoins
+	{
+		"\1\s[10]OK! I'll get that- Wait a second.. sorry, you don't have enough Otacoins to buy this!\1\s[15] C'mon, %(username), I'm running a business here!"
+	}
+	else
+	{
+		otacoins -= reference1
+		--
+		"\1\s[10]\f[italic,true]"
+		--
+		if reference0 == "koromon"
+		{
+			"\1\You bought the Koromon Plush for %(reference1) Otacoins."
+			owned[2] = "koromon"
+		}
+		if reference0 == "kaomoji"
+		{
+			"\1\You bought the Koromon Plush for %(reference1) Otacoins."
+			owned[3] = "kaomoji"
+		}
+		if reference0 == "flipperflop"
+		{
+			"\1\You bought the Flipper Flop Seal plush for %(reference1) Otacoins."
+			owned[4] = "flipperflop"
+		}
+		if reference0 == "animes1"
+		{
+			"\1\You bought the 1st Anime Lot for %(reference1) Otacoins."
+			owned[9] = "animes1"
+		}
+		--
+		"\nYou now have %(otacoins) Otacoins.\f[italic,false]\n\n[half]\1\s[15]Thanks for your business! You can find your new purchase in the item menu."
+	}
+	
 }
 
 //---- Otacon's FAQ ---------------------------------------------------------
@@ -1572,39 +2026,42 @@ Select.faq //OKUAJUB: FAQ, unlocks more answers as you listen.
 		"Huh? Oh, darn, I lost my train of thought. What was I..? Um, sorry. I'll be done soon, I think."
 		"Uh... I'll get back to you.. in a second..."
 	}
-	"\1\s[18]\b[2]Got a question for me? Shoot.\n/
-	\![*]\_a[whoSnake]Who's Snake?\_a\n/
-	\![*]\_a[whoHal]Who's Otacon?\_a\n"
-	--
-	//'Who" section
-	if clickMeiLing >= 1
+	else
 	{
-		"\![*]\_a[whoMeiLing]Who's Mei Ling?\_a\n"
+		"\1\s[18]\b[2]Got a question for me? Shoot.\n/
+		\![*]\_a[whoSnake]Who's Snake?\_a\n/
+		\![*]\_a[whoHal]Who's Otacon?\_a\n"
+		--
+		//'Who" section
+		if clickMeiLing >= 1
+		{
+			"\![*]\_a[whoMeiLing]Who's Mei Ling?\_a\n"
+		}
+		--
+		if clickRaiden >= 1
+		{
+			"\![*]\_a[whoRaiden]Who's Raiden?\_a\n"
+		}
+		--
+		if otaconFeelings >= 50
+			"\![*]\_a[whoEmma]Who's Emma?\_a\n"
+		--
+		if otaconFeelings >= 80
+			"\![*]\_a[whoJulie]Who's Julie?\_a\n"
+		--
+		//'What' section
+		if clickShadowMoses >= 1 
+		{
+			"\![*]\_a[whoShadowMoses]What's Shadow Moses?\_a\n"
+		}
+		--
+		if clickRex >= 1
+		{
+			"\![*]\_a[whoRex]What's REX?\_a\n"
+		}
+		--
+		"\![*]\q[Nevermind,keroCANCEL]\x\e"
 	}
-	--
-	if clickRaiden >= 1
-	{
-		"\![*]\_a[whoRaiden]Who's Raiden?\_a\n"
-	}
-	--
-	if otaconFeelings >= 50
-		"\![*]\_a[whoEmma]Who's Emma?\_a\n"
-	--
-	if otaconFeelings >= 80
-		"\![*]\_a[whoJulie]Who's Julie?\_a\n"
-	--
-	//'What' section
-	if clickShadowMoses >= 1 
-	{
-		"\![*]\_a[whoShadowMoses]What's Shadow Moses?\_a\n"
-	}
-	--
-	if clickRex >= 1
-	{
-		"\![*]\_a[whoRex]What's REX?\_a\n"
-	}
-	--
-	"\![*]\q[Nevermind,keroCANCEL]\x\e"
 }
 
 //---- Otacon's Usage Tips ---------------------------------------------------------
@@ -2396,6 +2853,8 @@ Select.sayComplimentKERO
 //Kind of random positive or negative boost. Some things go over Otacon's head.
 Select.sayJokeKERO
 {
+	_nekoDressup = _dressup[4]
+	_otakonDressup
 	"\1\s[10]\f[italic,true]You tell Otacon a joke about " //Setting up the start of the joke.
 	--
 	if otaconFeelings > 40 //Adds these joke options to the pool if Otacon's feelings are over 40. Similar level system to compliment.
@@ -2470,7 +2929,32 @@ Select.sayJokeKERO
 		}
 	}
 	--
-	"\e" //Closing up the dialogue.
+	"\eOnNotifyDressup" //Closing up the dialogue, and checking what dressups they are currently wearing.
+}
+
+
+//--OnNotifyDressupInfo
+//Character ID, category name, part name, option, valid / invalid 0, thumbnail path
+//Note that "option" is a comma-separated list of options like "mustselect" and "multiple", which is why we have to split this by C_BYTE1 and not on commas
+//Dressups will be saved in each array as "Category name,Part name"
+
+OnNotifyDressupInfo
+{
+    SakuraDressups = IARRAY
+    KeroDressups = IARRAY
+    
+    foreach reference.raw; _dressup //reference.raw because some bits of this are delimited by C_BYTE1
+    {
+        _dressup = SPLIT(_dressup,C_BYTE1)
+        
+        if _dressup[4] == "1" //If it's on
+        {
+            _to_add = "%(_dressup[1]),%(_dressup[2])" //Category name,Part name
+            
+            if _dressup[0] == "0"; SakuraDressups ,= _to_add
+            else; KeroDressups ,= _to_add
+        }
+    }
 }
 
 //--Test Variables --------------------------------------------------------
@@ -2483,9 +2967,9 @@ Select.sayJokeKERO
 Select.testvariable
 {
 //Enter your dialogue to test here.
-	"\1\s[10]Testing! Attention please!\n"
+	"\1\s[10]Testing! Attention please!"
 	--
-	//"\1\s[10]Oh, you want me to bring out the MG MK. II? Sure!\p[3]\s[9910]"
+	//"\n%(SakuraDressups)\n\n[half]%(KeroDressups)\eOnNotifyDressupInfo"
 }
 
 //--Viewing Surfaces------------------------------------
@@ -2508,6 +2992,7 @@ Select.viewvariable
 	otaconFeelings = %(otaconFeelings)\n/
 	snakeKetchups = %(snakeKetchups)\n/
 	snakeApologies = %(snakeApologies)\n/
+	owned = %(owned)\n/
 	\e"
 }
 //--Changing Variables after First Boot------------------

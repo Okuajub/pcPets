@@ -736,12 +736,79 @@ animation3.pattern1,overlay,2551,600,0,0
 
 //Surfaces for the little objects you can get.
 
+//Metal Gear MK. II
 surface9910
 {
 element0,overlay,surface9910.png,0,0
 }
 
+//Metal Gear MK. III
 surface9911
 {
 element0,overlay,surface9911.png,0,0
+}
+
+//Metal Gear REX plush
+surface9912
+{
+element0,overlay,surface9912.png,0,0
+}
+
+//Metal Gear RAY plush
+surface9913
+{
+element0,overlay,surface9913.png,0,0
+}
+
+//Flipper Flop Seal Plush
+surface9914
+{
+element0,overlay,surface9914.png,0,0
+}
+
+//Kaomoji Plush
+surface9915
+{
+element0,overlay,surface9915.png,0,0
+}
+
+//Koromon Plush
+surface9916
+{
+element0,overlay,surface9916.png,0,0
+}
+
+//Lewd Poster
+surface9917
+{
+element0,overlay,surface9917.png,0,0
+}
+
+//Cat Poster
+surface9918
+{
+element0,overlay,surface9918.png,0,0
+}
+
+//Anime Lot #1
+surface9919
+{
+element0,overlay,surface9919.png,0,0
+}
+
+
+//Donchan plush
+surface9922
+{
+element0,overlay,surface9922.png,0,0
+
+collision0,85,19,171,106,Don
+}
+
+//Katchan plush
+surface9923
+{
+element0,overlay,surface9923.png,0,0
+
+collision0,29,19,115,106,Ka
 }

@@ -174,6 +174,21 @@ MouseMoveKero
  	}
 }
 
+OnMouseClick
+{
+	if reference5 == 0
+	{
+		if reference3 == 14
+		{
+			"\p[14]Don!\![sound,play,ghost\Snake_Otacon\ghost\master\sfx\Don.wav,--volume=%(soundVolume)]"
+		}
+		elseif reference3 == 15
+		{
+			"\p[15]Ka!\![sound,play,ghost\Snake_Otacon\ghost\master\sfx\Katsu.wav,--volume=%(soundVolume)]"
+		}
+	}
+}
+
 //---- OnMouseDoubleClick -------------------------------------------------------
 //This is set up much like OnMouseMove above, except this is checking to see if the user is double clicking on the ghost. You also don't need to touch any of this. 
 //Advanced users adding a third character, the same principles from OnMouseMove apply here as well! Make sure to add an elseif with the right number for your third character.
@@ -190,6 +205,14 @@ OnMouseDoubleClick
 		elseif reference3 == 1 //should probably change this back to else later
 		{
  		MouseDoubleClickKero
+		}
+		elseif reference3 == 14
+		{
+			MouseDoubleClickDon
+		}
+		elseif reference3 == 15
+		{
+			MouseDoubleClickKat
 		}
 	}
  }
@@ -474,6 +497,28 @@ Select.punchConfirmYesOta //Confirms the user wants to punch Otacon during Confi
 Select.punchConfirmNoOta //Stops the user from punching Otacon during confirm mode.
 {
 	"\1\s[10]\f[italic,true]Nothing happens."
+}
+
+MouseDoubleClickDon
+{
+	"\p[14]\f[italic,true]Set the volume for SFX:\![open,inputbox,OnSetSoundVolumeDon,-1]"
+}
+
+MouseDoubleClickKat
+{
+	"\p[15]\f[italic,true]Set the volume for SFX:\![open,inputbox,OnSetSoundVolumeKat,-1]"
+}
+
+OnSetSoundVolumeDon
+{
+	soundVolume = reference0
+	"\p[14]\f[italic,true]Volume set to %(reference0)"
+}
+
+OnSetSoundVolumeKat
+{
+	soundVolume = reference0
+	"\p[15]\f[italic,true]Volume set to %(reference0)"
 }
  //*********************Advanced User Info*******************************
  //There are other mouse related functions you could set up much like the above, such as OnMouseDragStart, OnMouseDragEnd, OnMouseWheel, and others which correspond to various things you can do with your mouse. You can probably guess what those functions do just by their names - OnMouseWheel would be if someone spun their mouse wheel over a certain area, for example. If you're interested in these, I'd recommend doing some reading at the CROW-SSP Encyclopedia to get a better idea of them and settle down for some trial and error learning as you try to put them in.

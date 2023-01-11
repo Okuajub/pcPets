@@ -1,3 +1,22 @@
+V 1.3.1
+(1/10/22)
+- Added Snake Missions to Snake's Menu
+  - Two exclusive items may be brought back by Snake after missions, the Lewd poster and Cat poster
+  - May Award Affection
+- New Interactions for Snake
+  - Added "Ask About Manhattan Tanker Incident"
+  - Added "Ask About Big Shell Incident"
+- Added Codec Search to Otacon's Menu
+  - Two exclusive items may be uncovered in Codec Searches, the Metal Gear MK. II and MK. III
+  - May Award Currency, Otacoins
+- Added Shop
+  - Four items exclusive to the shop, the Koromon Plush, the Kaomoji Plush, the Flipper Flop Plush and Anime Lot #1
+  - Shop will rotate items semi-randomly
+- Added rewards for finishing FAQs
+ - REX Plush is awarded for finishing Snake's FAQ on Otacon
+ - RAY Plush is awarded for finishing Snake's FAQ on Big Shell
+- Misc. Dialogue additions
+- Fixed an issue where the Otaclock balloon would not be favored in the Balloon selection menu
 V 1.2.1
 (9/10/22)
 - Switched from AYA to YAYA (Thank you, Zi!)
@@ -14,7 +33,7 @@ V 1.2.1
   - Added "Ask About Liquid Snake"
   - Added "Ask About Big Boss"
   - Added "A Book" to gift section
-- Misc. Dialogue additions.
+- Misc. Dialogue additions
 - Added more Animes Otacon can talk about
   - Removed the Danganronpa dialogue, it feels a little out of place
 - Replaced default shell to new art, old art can be found as an alternate shell, please note this shell may cause graphical issues with new content
