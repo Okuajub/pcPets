@@ -72,3 +72,44 @@ Select.changevariable
 	isNeko = %(isNeko)\n/
 	\e"
 }
+
+//Initializes variables on update.
+UpdateInitializeVar : all
+{
+    if !ISVAR("strokeLong"); strokeLong = 0    //Tracks continuous stroking.
+	if !ISVAR("currentHighScore"); currentHighScore = 50   //Tracks the current highscore for stroking.
+
+    if !ISVAR("devMode"); devMode = 0 //Toggle for enabling dev mode, which enables some unstable features. Default 0.
+	if !ISVAR("beginnerConfig"); beginnerConfig = "" // Configures if the user is a beginner ghost user. Asks in FirstBoot. Defaults to "". Will be set to On or Off in the set up.
+	if !ISVAR("punchConfig"); punchConfig = "on" // Punching configuration. Can be set to "On" which enables default punching mechanics, "Apologize" which enables apologizing for punching, "Confirm" which asks the user if they would like to punch, and "Off" which turns off punching entirely.
+    if !ISVAR("soundVolume"); soundVolume = 50
+
+	if !ISVAR("codecTimer"); codecTimer = "" //Timer for Otacon's codec searches. blank at first.
+	if !ISVAR("missionTimer"); missionTimer = "" //Timer for Snake's missions. blank at first.
+	if !ISVAR("codecFatigue"); codecFatigue = 0 //Cooldown timer for Codec Search
+	if !ISVAR("missionFatigue"); missionFatigue = 0 //Cooldown timer for Missions
+	if !ISVAR("otacoins"); otacoins = 0 //Tracks currency
+    if !ISVAR("shopTimeCheck"); shopTimeCheck = 0
+
+    if !ISVAR("hasBook"); hasBook = IARRAY //Tracks important books.
+	if !ISVAR("owned"); owned = IARRAY //Tracks owned items in an array. Personal Notes upcoming:
+
+	if !ISVAR("clickShadowMoses"); clickShadowMoses = 0 //Click counting variable for Shadow Moses
+	if !ISVAR("clickShadowMosesIncident"); clickShadowMosesIncident = 0 //Click counting variable for Shadow Moses *incident*
+	if !ISVAR("clickMeiLing"); clickMeiLing = 0 //Click counting variable for Mei Ling
+	if !ISVAR("clickRaiden"); clickRaiden = 0 //Click counting variable for Raiden
+	if !ISVAR("clickJaeger"); clickJaeger = 0 //Click counting variable for Frank Jaeger
+	if !ISVAR("clickBigBoss"); clickBigBoss = 0 //Click counting variable for Big Boss
+	if !ISVAR("clickRex"); clickRex = 0 //Click counting variable for Rex
+	if !ISVAR("askLove"); askLove = 0 //Counts if you've asked Snake about his love life.
+
+	if !ISVAR("snakeFeelings"); snakeFeelings = -10 //Snake's feelings. Lightly negative at first.
+	if !ISVAR("otaconFeelings"); otaconFeelings = 0 //Otacon's feelings. Neutral at first.
+	if !ISVAR("snakeKetchups"); snakeKetchups = 0 //Count of how many ketchup bottles you have given Snake/Otacon.
+	if !ISVAR("snakeApologies"); snakeApologies = 0 //How many times you have apologized to Snake.
+    if !ISVAR("otaconGamesPlayed"); otaconGamesPlayed = 0
+	if !ISVAR("isNeko"); isNeko = 0 //Flag for if Otacon is Nekomimified (only activatable in the Solid Shell). Default is 0. 0 means Off. 1 means On.
+	if !ISVAR("lastPoke"); lastPoke = 0 //Last shell used to poke them with Needle
+
+    ERASEVAR("mk2","mk3") //I added these in 1.2.1 but don't need them anymore as I was able to use the array like I wanted.
+}
