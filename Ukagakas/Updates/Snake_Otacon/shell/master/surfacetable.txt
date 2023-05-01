@@ -5,8 +5,74 @@ charset,UTF-8
 version,1
 option,DisableNoDefineSurfaces
 
-//group, Surprised{
-  //scope,0 //to reference the sakura
-  //,surprised
-//}
-//OKUAJUB: Commented out for future fiddling. this really only affects backend, dev stuff.
+group,__disabled
+{
+  //Talking animation I defined for a cigarette dress-up that never made the cut.
+  1101,sn_talk1
+  1102,sn_talk2
+  //Laugh for Otacon, used to have 3 frames but was simplified. For backwards compatibility I had to keep all three.
+  35,Ot_XD1
+  36,OT_XD2
+  //Empty surfaces. I don't know why they show up... They're not even defined.
+  39,unk
+  40,unk2
+}
+
+group,Sn
+{
+  scope,0 //to reference the sakura
+
+  0,Default
+  1,Embarassed
+  2,Surprise
+  3,Hit
+  4,SadWorry
+  5,Smirk
+  6,Ponder
+  7,Anger
+  8,Hip
+  9,Irritated
+  20,aloha1
+  21,aloha2
+  22,aloha3
+}
+
+group,Ot
+{
+  scope,1 //to reference the kero
+
+  10,Default
+  11,Embarassed
+  12,Worry
+  13,Disgust
+  14,Sad
+  15,Gesture
+  16,Ponder
+  17,Anger
+  18,Huh
+  19,Doubt
+  30,Blush
+  31,Unimpressed
+  32,EyesClose
+  33,ClosedWorried
+  34,Laugh
+  37,Shrug
+  38,Codec
+}
+
+group,Obj
+{
+  //No Scope
+  9910,Mk2
+  9911,Mk3
+  9912,REX
+  9913,RAY
+  9914,Seal
+  9915,Kao
+  9916,Koro
+  9917,Lewdposter
+  9918,Catposter
+  9919,Anime1
+  9922,Don
+  9923,Kat
+}

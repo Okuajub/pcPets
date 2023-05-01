@@ -38,6 +38,8 @@ OnFirstBoot
 	passsec = 0 // These keep track of the time.
  	username         = "USER" //This sets a temporary name for the user. It'll be replaced when they tell the ghost their name.
 	stroke           = 0	// Sets their being-pet state to zero.
+	strokeLong 	     = 0    //Tracks continuous stroking.
+	currentHighScore = 50   //Tracks the current highscore for stroking.
  	teachusername    = 0	// Related to them learning your name.
 	mikireflag       = 0	// Determines behavior at certain points.
  	aitalkinterval = 300 //Their default talk rate.
@@ -46,19 +48,21 @@ OnFirstBoot
 	deleteshitai = 0 //Sets whether or not the user can uninstall the ghost to "OFF". The user can change it later in the config menu (see menu.dic). Defaults to 0, which is off.
 	nowshell = "master" //This is for a special if check in aitalk.dic to see what shell the ghost is using. You should use the name of your default shell folder here.
 	firstboot = 1 //This marks that this is the first time you've run the ghost. It's so it won't reroute to general name changing dialogue when the user inputs their name.
+
 	//OKUAJUB: Snake and Otacon specific variables.
 	devMode = 0 //Toggle for enabling dev mode, which enables some unstable features. Default 0.
 	beginnerConfig = "" // Configures if the user is a beginner ghost user. Asks in FirstBoot. Defaults to "". Will be set to On or Off in the set up.
 	punchConfig = "on" // Punching configuration. Can be set to "On" which enables default punching mechanics, "Apologize" which enables apologizing for punching, "Confirm" which asks the user if they would like to punch, and "Off" which turns off punching entirely.
-	soundVolume = 50
+	soundVolume = 50 //SFX volume.
 	
-	codecTimer = "" //Timer for Otacon's codec searches. blank at first.
-	missionTimer = "" //Timer for Snake's missions. blank at first.
-	codecFatigue = 0 //Cooldown timer for Codec Search
-	missionFatigue = 0 //Cooldown timer for Missions
+	codecTimer = "" //Timer for Otacon's codec searches. blank at first. Counted in seconds, divide by 60 to obtain minutes
+	missionTimer = "" //Timer for Snake's missions. blank at first. Counted in seconds, divide by 60 to obtain minutes
+	codecFatigue = 0 //Cooldown timer for Codec Search. Counted in seconds, divide by 60 to obtain minutes
+	missionFatigue = 0 //Cooldown timer for Missions. Counted in seconds, divide by 60 to obtain minutes
 	otacoins = 0 //Tracks currency
-	shopTimeCheck = 0 //Randomizes shop ever hour.
+	shopTimeCheck = 0 //Randomizes shop every hour.
 	
+	hasBook = IARRAY //Tracks important books.
 	owned = IARRAY //Tracks owned items in an array. Personal Notes upcoming:
 	//owned[0] = mk2
 	//owned[1] = mk3
@@ -70,6 +74,7 @@ OnFirstBoot
 	//owned[7] = rex plush
 	//owned[8] = ray plush
 	//owned[9] = animes1
+	//owned[11] = books1
 	//owned[12] = donchan
 	//owned[13] = katchan
 	
@@ -86,7 +91,9 @@ OnFirstBoot
 	otaconFeelings = 0 //Otacon's feelings. Neutral at first.
 	snakeKetchups = 0 //Count of how many ketchup bottles you have given Snake/Otacon.
 	snakeApologies = 0 //How many times you have apologized to Snake.
+	otaconGamesPlayed = 0 //How many games you've played with Otacon.
 	isNeko = 0 //Flag for if Otacon is Nekomimified (only activatable in the Solid Shell). Default is 0. 0 means Off. 1 means On.
+	lastPoke = 0 //Remembers the shell you last used to poke them with Needle.
 	
 	if reference0 == 0 //Don't touch this line.
  	{
@@ -262,15 +269,16 @@ OnBoot
 	--
 	
 	if dayslot == userbirthday //Now we're getting into the if statements. These check what the date is and, if it's a certain value, displays special dialogue. Here, the if statement is looking at the dayslot value (which we just defined) and evaluating it using the == operator to see if it equals another value, in this case the value "userbirthday". Basically this is checking to see if it's the user's birthday.
-	
-	//*********************Advanced User Info*******************************
-	//If you're checking a value in an if statement, remember! 
-	//= will define a value, so if you put blah = 90, it will change blah to 90.
-	//== will check the value in an if statement, so if you put blah == 90, it will check if blah equals 90.
-	//This tripped me up at first, so keep it in mind!
-	//***********************************************************************
 	{
-				"\0\s[0]Hm, It's %(bornmonthprint) %(borndayprint). That's your birthday, right, %(username)?\w8\1\s[15]Happy birthday, %(username)! I hope today is special.\e" 
+		"\0\s[0]Hm, %(bornmonthprint) %(borndayprint). That's your birthday, huh?\w8\1\s[15]Happy birthday, %(username)! I hope today is special.\e" 
+	}
+	elseif codecTimer > 0 && codecTimer != "finished"
+	{
+		"%(codecboottalk)"
+	}
+	elseif missionTimer > 0 && missionTimer != "finished"
+	{
+		"%(missionboottalk)"
 	}
 	else
 	{
@@ -278,6 +286,21 @@ OnBoot
 	}
 }
 
+codecboottalk
+{
+	"\0\s[0]\1\s[38]...\w8\w8Oh,\w6 hey, %(username). I'm still working on browsing the codec frequencies.\e"
+
+	"\0\s[0]\1\s[38]...\w8\w8Hm..\w6\0\s[0]Don't mind him. He's quiet when he's focused.\e"
+
+	"\0\s[0]\1\s[38]Hey, %(username).\1\s[38]\w8\w8\w8\w8...\w8\w8\0\s[8]Otacon.\1\s[38]What? Oh! Sorry, %(username). Are you doing alright?\e"
+}
+
+missionboottalk
+{
+	"\0\s[-1]\1\s[38]Alright, Snake. Keep going.\w8Oh, um, hey %(username)!"
+
+	"\0\s[-1]\1\s[38]...\w8Hey %(username)- Sorry, I'm still watching over Snake's mission."
+}
 
 //--normalboottalk
 
@@ -309,51 +332,52 @@ normalboottalk
 		
 		if timeslot == "earlymorning" //The following dialogue will be called if they are booted during the time specified in GetTimeSlot (in this case, the hour being more than/equal to 5 but less than/equal to 8). Remember, you can add as many lines of dialogue here as you want, or take away as many as you want! Replace the dialogue here with what you see fit.
 		{
-		"\0\s[0]Rise and shine, Otacon, %(username).\w8\1\s[10]Gosh, don't get me started, Snake.\e"
-		
-		"\1\s[14]Gosh, it's so early...\w8\0\s[0]Just like the army.\e"
-		
-		"\1\s[32]\w8\w8\w8\w8\w8\w8\1\s[32]\f[italic,true]zzz...\0\s[8]Still asleep, Otacon?"
-		
-		"\1\s[10]\f[italic,true]Yawn...\f[italic,false] I'm so tired... back in college, this is about the time I'd be going to sleep.\w8\0\s[0]Seriously?\1\s[10]\n\n[half]Er, yeah. Powered by coffee and pure nerd. \e"
-		
-		"\0\s[4]\1\s[13]Yikes. That last mission left you in pretty bad shape, Snake.\1\s[18]Is there any more I can do?\0\s[4]You've already done all you can.\1\s[14]\n\n[half]Alright. If you need anything.\n\n Er. Morning, %(username).\e"
-		
-		{"\1\s[15]You did pretty great out there, Snake! Good job "
-		--
-		"replacing that hard drive."
-		
-		"taking out those guards."
-		
-		"getting out unnoticed."
-		
-		"staying out of the camera sights."
-		
-		"escaping uninjured."
-		
-		"leaving so quick."
-		
-		"grabbing that intel."
-		
-		"stealing that thumbdrive."
-		
-		"destroying the copy-cat."
-		
-		"snapping those pictures."
-		--
-		"\0\s[1]I wouldn't have been able to do it without you.\1\s[30]\n\n[half]W-Well the same goes for you!\e"
-		}
+			"\0\s[0]Rise and shine, Otacon, %(username).\w8\1\s[10]Gosh, don't get me started, Snake.\e"
+			
+			"\1\s[14]Gosh, it's so early...\w8\0\s[0]Just like the army.\e"
+			
+			"\1\s[32]\w8\w8\w8\w8\w8\w8\1\s[32]%(ItalicsHush)zzz...\0\s[8]Still asleep, Otacon?"
+			
+			"\1\s[10]\f[italic,true]Yawn...\f[italic,false] I'm so tired... back in college, this is about the time I'd be going to sleep.\w8\0\s[0]Seriously?\1\s[10]\n\n[half]Er, yeah. Powered by coffee and pure nerd. \e"
+			
+			"\0\s[4]\1\s[13]Yikes. That last mission left you in pretty bad shape, Snake.\1\s[18]Is there any more I can do?\0\s[4]You've already done all you can.\1\s[14]\n\n[half]Alright. If you need anything.\n\n Er. Morning, %(username).\e"
+
+			{
+				"\1\s[15]You did pretty great out there, Snake! Good job "
+				--
+				"replacing that hard drive."
+				
+				"taking out those guards."
+				
+				"getting out unnoticed."
+				
+				"staying out of the camera sights."
+				
+				"escaping uninjured."
+				
+				"leaving so quick."
+				
+				"grabbing that intel."
+				
+				"stealing that thumbdrive."
+				
+				"destroying the copy-cat."
+				
+				"snapping those pictures."
+				--
+				"\0\s[1]I wouldn't have been able to do it without you.\1\s[30]\n\n[half]W-Well the same goes for you!\e"
+			}
 		
 		}
 		elseif timeslot == "morning"
 		{
-		"\0\s[0]Morning.\e"
-		
-		"\1\s[10]Good morning, %(username).\e"
-		
-		"\0\s[4]\1\s[13]Yikes. That last mission left you in pretty bad shape, Snake.\1\s[18]Is there any more I can do?\0\s[4]You've already done all you can.\1\s[14] Alright. If you need anything.\n\n Er. Morning, %(username).\e"
-		
-		{
+			"\0\s[0]Morning.\e"
+			
+			"\1\s[10]Good morning, %(username).\e"
+			
+			"\0\s[4]\1\s[13]Yikes. That last mission left you in pretty bad shape, Snake.\1\s[18]Is there any more I can do?\0\s[4]You've already done all you can.\1\s[14] Alright. If you need anything.\n\n Er. Morning, %(username).\e"
+			
+			{
 				"\1\s[15]You did pretty great out there, Snake! Good job "
 				--
 				"replacing that hard drive."
@@ -378,6 +402,7 @@ normalboottalk
 				--
 				"\0\s[1]I wouldn't have been able to do it without you.\1\s[30]\n\n[half]W-Well the same goes for you!\e"
 			}
+
 		}
 		elseif timeslot == "lunch"
 		{
@@ -498,58 +523,81 @@ normalboottalk
 
 OnClose
  {
-	if passmin >= 5 || passhour > 0	//This checks to see if you've had them open for at least five minutes.
+	
+	if OtaconIsBusy
+	{
+		if (missionTimer > 0 && missionTimer != "finished")
 		{
-			if RAND(100) < 40 //see above about the random number generator
-			{
-				"\0\s[0]See you later.\w8\1\s[10]Bye, %(username)!\w8\w8"
-			}
-			else
-			{
+			"\0\s[-1]\1\s[38]"
+		}
+		if (codecTimer > 0 && codecTimer != "finished")
+		{
+			"\0\s[0]\1\s[38]"
+		}
+		--
+		"\1\s[38]Oh. I guess we'll catch up with you later, %(username)."
+
+		if (missionTimer > 0 && missionTimer != "finished")
+		{
+			"\0\s[-1]\1\s[38]Hold on, Snake, I've got to move-- Bye, %(username)."
+		}
+		if (codecTimer > 0 && codecTimer != "finished")
+		{
+			"\0\s[0]\1\s[38]...\w8\w8\w8\0\s[0]I don't think he heard you.\w8 I'll tell him you said 'bye'."
+		}
+	}
+	elseif passmin >= 5 || passhour > 0	//This checks to see if you've had them open for at least five minutes.
+	{
+		if RAND(100) < 40 //see above about the random number generator
+		{
+			"\0\s[0]See you later.\w8\1\s[10]Bye, %(username)!\w8\w8"
+		}
+		else
+		{
+			"\0\s[8]See you on the other side.\e"
+
 			if timeslot == "earlymorning"
-				{
-					"\1\s[10]Going back to bed?\w8\0\s[0]Sleep is important.\w8"
-					
-					"\0\s[0]Too early for you, hm?\w8\1\s[32]Me too...\w8\w8"
-				}
-			elseif timeslot == "morning"
- 				{
- 					"\0\s[0]See you later.\w8\w8"
- 				}
- 			elseif timeslot == "lunch"
- 				{
- 					"\0\s[0]Taking a break?\w8\1\s[10]See you soon!\w8"
- 				}
- 			elseif timeslot == "afternoon"
- 				{
- 					"\0\s[0]We'll catch up with you, later.\w8\1\s[10]Mhm!\w8"
-					
- 					"\1\s[10]See you, %(username)!\w8"
- 				}
-  			elseif timeslot == "evening"
- 				{
- 					"\0\s[0]Don't forget to get a bite to eat, if you haven't.\w8\1\s[10]See you later!\w8"
-						
- 					"\1\s[10]We'll see you later, make sure you get dinner!\w8"
- 				}
-			elseif timeslot == "latenight"
-			 	{	
-					"\0\s[0]Going to bed, huh?\w8\1\s[10]I hope so, it's pretty late!\w8"
-						
-					"\1\s[10]Tired, %(username)? We'll be fine, go ahead and sleep!\w8"
- 				}
-			else //like above, this is the midnight time slot since it's the last one left. 0-5 A.M.
- 				{
-					"\0\s[0]Going to bed, huh?\w8\1\s[10]I hope so, it's pretty late!\w8"
-						
-					"\1\s[10]Tired, %(username)? We'll be fine, go ahead and sleep!\w8"
-				}
-			}
+			{
+				"\1\s[10]Going back to bed?\w8\0\s[0]Sleep is important.\w8"
 				
- 		}
- 		
- 		
- 	else //This dialogue is for if they haven't been open for at least five minutes.
+				"\0\s[0]Too early for you, hm?\w8\1\s[32]Me too...\w8\w8"
+			}
+			elseif timeslot == "morning"
+			{
+				"\0\s[0]See you later.\w8\w8"
+			}
+			elseif timeslot == "lunch"
+			{
+				"\0\s[0]Taking a break?\w8\1\s[10]See you soon!\w8"
+			}
+			elseif timeslot == "afternoon"
+			{
+				"\0\s[0]We'll catch up with you, later.\w8\1\s[10]Mhm!\w8"
+				
+				"\1\s[10]See you, %(username)!\w8"
+			}
+			elseif timeslot == "evening"
+			{
+				"\0\s[0]Don't forget to get a bite to eat, if you haven't.\w8\1\s[10]See you later!\w8"
+					
+				"\1\s[10]We'll see you later, make sure you get dinner!\w8"
+			}
+			elseif timeslot == "latenight"
+			{	
+				"\0\s[0]Going to bed, huh?\w8\1\s[10]I hope so, it's pretty late!\w8"
+					
+				"\1\s[10]Tired, %(username)? We'll be fine, go ahead and sleep!\w8"
+			}
+			else //like above, this is the midnight time slot since it's the last one left. 0-5 A.M.
+			{
+				"\0\s[0]Going to bed, huh?\w8\1\s[10]I hope so, it's pretty late!\w8"
+					
+				"\1\s[10]Tired, %(username)? We'll be fine, go ahead and sleep!\w8"
+			}
+		}
+			
+	}
+ 	else //This dialogue is for if they haven't been open for at least five minutes and were not busy.
  	{
  		"\0\s[0]Saying goodbye so soon?\1\s[14] Bye.\w8\w8"
 		
@@ -570,11 +618,32 @@ OnClose
 
 OnWindowStateRestore
  {
-	"\0\s[0]\1\s[12]I feel like I just got shoved in a locker...\w8\0\s[5]At least you didn't piss yourself this time.\1\s[17]\n\n[half]Hey! That's a low blow, Snake.\e"
-	"\0\s[0]\1\s[12]Being minimized feels so weird...\w8\0\s[8]You have that one right.\e"
-	"\1\s[10]\0\s[9]Getting squished down into a 'Task Bar' isn't exactly a hiding place I was expecting.\1\s[18]I've seen you fit in smaller."
-	"\0\s[0]\1\s[18]Gosh, they make those trays pretty tight now, huh?"
-	"\0\s[0]\1\s[15]Unminimized! Feels good to be out again."
+	if OtaconIsBusy
+	{
+		if (missionTimer > 0 && missionTimer != "finished")
+		{
+			"\0\s[-1]\1\s[38]"
+		}
+		--
+		"\1\s[38]Eughgh, doing that while on the radio is disorienting."
+
+		if (missionTimer > 0 && missionTimer != "finished")
+		{
+			"\0\s[-1]\1\s[38]Woah, sorry, Snake. Give me a second... I got vertigo from being unminimized."
+		}
+		elseif (codecTimer > 0 && codecTimer != "finished")
+		{
+			"\0\s[0]\1\s[38]My head feels dizzy.."
+		}
+	}
+	else
+	{
+		"\0\s[0]\1\s[12]I feel like I just got shoved in a locker...\w8\0\s[5]At least you didn't piss yourself this time.\1\s[17]\n\n[half]Hey! That's a low blow, Snake.\e"
+		"\0\s[0]\1\s[12]Being minimized feels so weird...\w8\0\s[8]You have that one right.\e"
+		"\1\s[10]\0\s[9]Getting squished down into a 'Task Bar' isn't exactly a hiding place I was expecting.\1\s[18]I've seen you fit in smaller."
+		"\0\s[0]\1\s[18]Gosh, they make those trays pretty tight now, huh?"
+		"\0\s[0]\1\s[15]Unminimized! Feels good to be out again."
+	}
 }
 
 
@@ -623,36 +692,75 @@ OnGhostChanging
 
 OnGhostChanged
 {
-	"\0\s[0]\1\s[10]" //this sets up their default poses
-	--
-	if reference0 == "Snake" //As above, this should be the name of your ghost as in install.txt or descript.txt.
+	if OtaconIsBusy // If they're busy..
 	{
-		"\1\s[10]Finished reloading. How's it now?\e"
-	}
-	else //If you're switching to them from another ghost...
-	{
-		
+		if (missionTimer > 0 && missionTimer != "finished")
 		{
-			"\1\s[10]Bye, %(reference0), hopefully you get your turn again.\w8\0\s[0]I'll bet Otacon missed you, %(username).\1\s[17]\n\n[half]I did not!\w8\w8\w8\w8\1\s[30] Er... maybe "
-			--
-			"I did."
-			"a little."
-			"just a bit."
-			--
-			"\0\s[5]\e"
+			"\0\s[-1]\1\s[38]" //this sets up their default poses
 		}
-		"\1\s[15]Nice to see you again, %(username)! How was your time with %(reference0)?\e"
-		//Again, %(reference0) in this function is the name of the ghost in question. As above, replace these two lines of dialogue what what'd be appropriate for your ghost.
+		else
+		{
+			"\0\s[0]\1\s[38]"
+		}
+		--
+		if reference0 == "Snake" //As above, this should be the name of your ghost as in install.txt or descript.txt.
+		{
+			"\1\s[38]Finished reloading. How's it now?\e"
+		}
+		else //If you're switching to them from another ghost...
+		{
+			if (missionTimer > 0 && missionTimer != "finished")
+			{
+				_snakeTimer = TOINT(missionTimer/60)
+				"\0\s[-1]\1\s[38]Bye, %(reference0), hopefully you get your turn again."
+				"\0\s[-1]\1\s[38]See you later, %(reference0). Snake's out on a mission right now. He'll be back in %(_snakeTimer) minutes."
+			}
+			elseif (codecTimer > 0 && codecTimer != "finished")
+			{
+				"\1\s[38]\0\s[0]See you, %(reference0)."
+			}
+			else //This, theoretically, shouldn't happen. But you never know.
+			{
+				"\1\s[38]Bye, %(reference0), hopefully you get your turn again. And be free of bugs too!"
+			}
+		}
+	}
+	else //If they're not busy..
+	{
+		"\0\s[0]\1\s[10]"
+		--
+		if reference0 == "Snake" //As above, this should be the name of your ghost as in install.txt or descript.txt.
+		{
+			"\1\s[18]Finished reloading. How's it now?\e"
+		}
+		else //If you're switching to them from another ghost...
+		{
+			if otaconFeelings > 30
+			{
+				"\1\s[16]How's it going out there, %(username)? Life treating you well?"
+				{
+					"\1\s[14]Bye, %(reference0), hopefully you get your turn again.\w8\s[10]\0\s[5]I'll bet Otacon missed you, %(username).\1\s[17]\n\n[half]I did not!\w8\w8\w8\w8\1\s[30] Er... maybe "
+					--
+					"I did."
+					"a little."
+					"just a bit."
+					--
+					"\0\s[5]\e"
+				}
+				"\1\s[15]Nice to see you again, %(username)! How was your time with %(reference0)?\e"
+			}
+			//Again, %(reference0) in this function is the name of the ghost in question.
+		}
 	}
 }
 
 
 //--OnShellChanging
 
-//OKUAJUB: This is planned dialogue for shell switching, to the Octopus variant. You won't see this normally, until that shell is released, but you could cheat by swapping in some other ghost's shell with the descript changed.
+//OKUAJUB: This is planned dialogue for shell switching, to the Octopus variant. (FUTURE OKUAJUB: I ended up calling the 'Octopus' shell the 'Solid' shell instead. I think I'm funny.) You could trick it by swapping in some other ghost's shell with the descript changed.
 //OKUAJUB: If you go changing these, don't forget to set up their base poses.
 
-//This will run when you change your ghost's shell. If you don't have any other shells for your ghost, you can safely ignore this but don't delete it, you might as well keep it just in case. I probably won't add a different shell to this template because shells are a lot of work ugh, but for the sake of argument, let's pretend I did.
+//This will run when you change your ghost's shell. If you don't have any other shells for your ghost, you can safely ignore this but don't delete it, you might as well keep it just in case.
 
 OnShellChanging
  {
@@ -841,7 +949,7 @@ else //if reference0 isn't the main character, then it has to be the side charac
 			}
 			else //When you take it off.
 			{
-			"\1\s[14]...\n\n[half]\f[italic,true]Otacon looks as though he's thinking about something.\e"
+			"\1\s[14]...\n\n[half]%(ItalicsHush)Otacon looks as though he's thinking about something.\e"
 			}
 		}
 	elseif reference1 == "Square Glasses (Blue)"
@@ -852,7 +960,7 @@ else //if reference0 isn't the main character, then it has to be the side charac
 			}
 			else //When you take it off.
 			{
-			"\1\s[14]I can't see a lot with these off. Makes me feel a little vulnerable.\n\n[half]\f[italic,true]Otacon looks as though he's thinking about something.\e"
+			"\1\s[14]I can't see a lot with these off. Makes me feel a little vulnerable.\n\n[half]%(ItalicsHush)Otacon looks as though he's thinking about something.\e"
 			}
 		}
 	}

@@ -286,7 +286,7 @@ OnAnchorSelect
 				--
 					if clickRex < 2 
 					{
-						"\1\s[18]\n\n\f[italic,true]You've learned about Metal Gear REX. You can now ask Otacon about it at any time in the FAQ."
+						"\1\s[18]\n\n%(ItalicsHush)You've learned about Metal Gear REX. You can now ask Otacon about it at any time in the FAQ."
 					}
 				--
 				"\e"
@@ -309,7 +309,7 @@ OnAnchorSelect
 				--
 				if clickShadowMoses < 2 
 				{
-					"\1\s[18]\n\n\f[italic,true]You've learned about Shadow Moses. You can now ask Otacon about it at any time in the FAQ."
+					"\1\s[18]\n\n%(ItalicsHush)You've learned about Shadow Moses. You can now ask Otacon about it at any time in the FAQ."
 				}
 				--
 				"\e"
@@ -321,7 +321,7 @@ OnAnchorSelect
 				--
 				if clickMeiLing < 2 
 				{
-					"\1\s[18]\n\n\f[italic,true]You've learned about Mei Ling. You can now ask Otacon about her at any time in the FAQ."
+					"\1\s[18]\n\n%(ItalicsHush)You've learned about Mei Ling. You can now ask Otacon about her at any time in the FAQ."
 				}
 				--
 				if clickMeiLing > 99
@@ -338,7 +338,7 @@ OnAnchorSelect
 				--
 				if clickRaiden < 2
 				{
-					"\1\s[18]\n\n\f[italic,true]You've learned about Raiden. You can now ask Otacon about him at any time in the FAQ."
+					"\1\s[18]\n\n%(ItalicsHush)You've learned about Raiden. You can now ask Otacon about him at any time in the FAQ."
 				}
 				--
 				"\e"
@@ -349,7 +349,7 @@ OnAnchorSelect
 			}
 			when "whoJulie" //Describes Julie. only unlocked at high friendships. Used in the FAQ.
 			{
-				"\0\s[8]\1\s[18]\w8\w8J\w1u\w1l\w1i\w1e..?\1\s[14] I-I'm not sure where you heard that name but.. she's my dad's wife. Second wife, actually.\1\s[19] She was very friendly with me as a teenager. She really appreciated the way I took care of E.E.- like I was Emma's dad. Unlike her husband, my dad, who always seemed busy with work. Her words, not mine.\w8\w8\w8\1\s[14]\n\n[half]She... we had an affair. I was so lonely-\n\n\0\s[8]\f[italic,true]Snake clears his throat.\f[italic,default]\1\s[14]\f[italic,true]Hal takes a deep breath, steadying himself.\f[italic,default]\n\n[half]I was only fifteen at the time, when she started coming onto me. My dad found out about it when I was seventeen, and drowned himself in the pool, dragging E.E. with him. Maybe it was some sort of last punishment. \n\n[half]I don't know. I ran away the day after. Julie tried to keep in contact but I couldn't even stand to look at her name for a while after.\1\s[10]\n\n I'm sorry. That's probably more than you asked for.\e"
+				"\0\s[8]\1\s[18]\w8\w8J\w1u\w1l\w1i\w1e..?\1\s[14] I-I'm not sure where you heard that name but.. she's my dad's wife. Second wife, actually.\1\s[19] She was very friendly with me as a teenager. She really appreciated the way I took care of E.E.- like I was Emma's dad. Unlike her husband, my dad, who always seemed busy with work. Her words, not mine.\w8\w8\w8\1\s[14]\n\n[half]She... we had an affair. I was so lonely-\n\n\0\s[8]%(ItalicsHush)Snake clears his throat.\f[italic,default]\1\s[14]%(ItalicsHush)Hal takes a deep breath, steadying himself.\f[italic,default]\1\s[14]\n\n[half]I was only fifteen at the time, when she started coming onto me. My dad found out about it when I was seventeen, and drowned himself in the pool, dragging E.E. with him. Maybe it was some sort of last punishment. \n\n[half]I don't know. I ran away the day after. Julie tried to keep in contact but I couldn't even stand to look at her name for a while after.\1\s[10]\n\n I'm sorry. That's probably more than you asked for.\e"
 			}
 			when "option1"
 			{

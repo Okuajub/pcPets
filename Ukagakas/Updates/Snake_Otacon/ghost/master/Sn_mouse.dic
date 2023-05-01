@@ -125,8 +125,8 @@ MouseMoveKero
 			stroke = 0
 			if reference4 == "Face" //Strokes Otacon's face.
  			{
-				"\1\s[11]Hhh- why are you touching me like that?\0\s[8]\f[italic,true]Snake glares at you.\f[italic,default]\e"
-				"\1\s[11]Wh-what are you doing?\0\s[8]\f[italic,true]Snake glares at you.\f[italic,default]\e"
+				"\1\s[11]Hhh- why are you touching me like that?\0\s[8]%(ItalicsHush)Snake glares at you.\f[italic,default]\e"
+				"\1\s[11]Wh-what are you doing?\0\s[8]%(ItalicsHush)Snake glares at you.\f[italic,default]\e"
 				"\1\s[11]Ah.. Hh-.\0\s[8]\_q\ Stop doing that. He doesn't like it.\e"
 				snakeFeelings--
 				//adds negative friendship with Snake when Otacon is Stroked. Otacon freezes, no deduction, Snake dislikes Otacon's face being stroked.
@@ -135,14 +135,14 @@ MouseMoveKero
 			{
 				if otaconFeelings <= -50
 				{
-					"\1\s[12]\f[italic,true]Otacon tolerates the touch for a moment before tearing himself away. As he was going to say something, his voice cracks and he thinks better of it, turns away and shuffles towards Snake.\f[italic,default]\5\0\s[8]\1\s[14]\n\n\f[size,10]S-Snake, I think I want to leave.\0\s[9]\f[size,10]\w8\w8\w8I know. \n\w8We'll figure it out.\e"
+					"\1\s[12]%(ItalicsHush)Otacon tolerates the touch for a moment before tearing himself away. As he was going to say something, his voice cracks and he thinks better of it, turns away and shuffles towards Snake.\f[italic,default]\5\0\s[8]\1\s[14]\n\n\f[size,10]S-Snake, I think I want to leave.\0\s[9]\f[size,10]\w8\w8\w8I know. \n\w8We'll figure it out.\e"
 					otaconFeelings--
 					snakeFeelings--
 				}
 				if otaconFeelings <= -40
 				{
-					"\1\s[12]\f[italic,true]Otacon flinches away from you with a quiet gasp for air, the whites of his eyes flicking away from you.\f[italic,false]\0\s[8]\f[italic,true]Snake gives you the side-eye.\f[italic,default]\e"
-					"\1\s[12]\f[italic,true]Otacon pulls away from the touch, and his chest heaves as though the action took his breath.\f[italic,default]\0\s[7]Damn it, give him a break, %(username).\e"
+					"\1\s[12]%(ItalicsHush)Otacon flinches away from you with a quiet gasp for air, the whites of his eyes flicking away from you.\f[italic,false]\0\s[8]%(ItalicsHush)Snake gives you the side-eye.\f[italic,default]\e"
+					"\1\s[12]%(ItalicsHush)Otacon pulls away from the touch, and his chest heaves as though the action took his breath.\f[italic,default]\0\s[7]Damn it, give him a break, %(username).\e"
 					otaconFeelings--
 				}
 				if otaconFeelings <= -11
@@ -174,18 +174,33 @@ MouseMoveKero
  	}
 }
 
+//---- OnMouseClick -------------------------------------------------------
+//Simple system for playing sound effects on mouse click.
+
 OnMouseClick
 {
+	nonoverlap_pool : {
 	if reference5 == 0
 	{
-		if reference3 == 14
+		if reference3 == 3 || reference3 == 4 //Both of these objects play the same effects. Uses reference3 to use the correct character. == 3 is mk2, == 4 is mk3
 		{
-			"\p[14]Don!\![sound,play,ghost\Snake_Otacon\ghost\master\sfx\Don.wav,--volume=%(soundVolume)]"
+			"\p[%(reference3)]\![sound,play,ghost\Snake_Otacon\ghost\master\sfx\otacon_05_nice.mp3,--volume=%(soundVolume)]N\w2i\w2c\w2e!"
+			"\p[%(reference3)]\![sound,play,ghost\Snake_Otacon\ghost\master\sfx\otacon_07_its_me.mp3,--volume=%(soundVolume)]It's \w3me!"
+			"\p[%(reference3)]\![sound,play,ghost\Snake_Otacon\ghost\master\sfx\otacon_19_otaku_too.mp3,--volume=%(soundVolume)]Are you an \w2otaku, \w4too?"
 		}
-		elseif reference3 == 15
+		if reference3 == 14 //Don-chan's SFX
 		{
-			"\p[15]Ka!\![sound,play,ghost\Snake_Otacon\ghost\master\sfx\Katsu.wav,--volume=%(soundVolume)]"
+			"\p[14]\![sound,play,ghost\Snake_Otacon\ghost\master\sfx\Don.wav,--volume=%(soundVolume)]Don!"
+			"\p[14]\![sound,play,ghost\Snake_Otacon\ghost\master\sfx\fullcombo_Don.wav,--volume=%(soundVolume)]Fu\w2ll\w6 Combo!!"
+			"\p[14]\![sound,play,ghost\Snake_Otacon\ghost\master\sfx\clear1_Don.wav,--volume=%(soundVolume)]Clear!\w6 Full\w2 Combo, Da\w2-don!"
 		}
+		if reference3 == 15 //Katsu-chan's SFX
+		{
+			"\p[15]\![sound,play,ghost\Snake_Otacon\ghost\master\sfx\Kat.wav,--volume=%(soundVolume)]Ka!"
+			"\p[15]\![sound,play,ghost\Snake_Otacon\ghost\master\sfx\fullcombo_Kat.wav,--volume=%(soundVolume)]Fu\w2ll\w6 Combo!!"
+			"\p[15]\![sound,play,ghost\Snake_Otacon\ghost\master\sfx\clear1_Kat.wav,--volume=%(soundVolume)]Clear!\w6 Full\w2 Combo, Da\w2-don!"
+		}
+	}
 	}
 }
 
@@ -198,21 +213,15 @@ OnMouseDoubleClick
 	//---- like with the OnMouseMove function above, this determines who the user is clicking on.
 	if reference5 == 0 //checks which button is being used for the click
 	{
-	 	if reference3 == 0 //if the character is 0, aka your main character
+	 	case reference3 //What character we're double clicking
 		{
-		MouseDoubleClickSakura
-		}
-		elseif reference3 == 1 //should probably change this back to else later
-		{
- 		MouseDoubleClickKero
-		}
-		elseif reference3 == 14
-		{
-			MouseDoubleClickDon
-		}
-		elseif reference3 == 15
-		{
-			MouseDoubleClickKat
+			when 0; MouseDoubleClickSakura //Main
+			when 1; MouseDoubleClickKero //Secondary
+			when 5-13; "\p[%(reference3)]\s[-1]" //Tertiary, makes them disappear.
+			when 3; "\![raise,OnDoubleClickSFX,mk2]" //Special, Raises the first SFX config event with the correct object as the reference.
+			when 4; "\![raise,OnDoubleClickSFX,mk3]" //Special
+			when 14; "\![raise,OnDoubleClickSFX,don]" //Special
+			when 15; "\![raise,OnDoubleClickSFX,kat]" //Special
 		}
 	}
  }
@@ -235,30 +244,36 @@ OnMouseDoubleClick
  
 MouseDoubleClickSakura
  {
- 	if reference4 == "Head" || reference4 == "Face" //here, this is checking to see if the user is double clicking on either the character's head OR their face, which for our purposes means they're hitting the ghost. More about operators at the walkthrough.
+ 	
+	if reference4 == "Head" || reference4 == "Face" //here, this is checking to see if the user is double clicking on either the character's head OR their face, which for our purposes means they're hitting the ghost. More about operators at the walkthrough.
 	{
-		if beginnerMode == "Off" && punchConfig == "On" //Checks to see if both beginner mode and punching are Off and On respectively. If true, punch immediately.
+		if OtaconIsBusy
+		{
+			"\0\s[8]Don't try anything funny."
+		}
+		elseif beginnerMode == "Off" && punchConfig == "On" //Checks to see if both beginner mode and punching are Off and On respectively. If true, punch immediately.
 		{
 			PunchSnake
 		}
-		if punchConfig == "Apologize" //Apology Mode
+		elseif punchConfig == "Apologize" //Apology Mode
 		{
 			PunchSnake
 			--
 			PunchApologyCheck
 		}
-		if punchConfig == "Confirm"
+		elseif punchConfig == "Confirm"
 		{
-			"\f[italic,true]Are you sure you want to punch Snake?\f[italic,default]\n/
+			"%(ItalicsHush)Are you sure you want to punch Snake?\f[italic,default]\n/
 			\![*]\q[Yes,punchConfirmYes]\n/
 			\![*]\q[No,punchConfirmNo]"
 		}
-		if beginnerMode == "On" || punchConfig == "Off" //OKUAJUB: If punching is off, or Beginner Mode is on, Snake will take double clicks as pointing at his face/head.
+		elseif beginnerMode == "On" || punchConfig == "Off" //OKUAJUB: If punching is off, or Beginner Mode is on, Snake will take double clicks as pointing at his face/head.
 		{
 			if snakeFeelings <= -50
 			{
 				"\0\s[8]It's rude to point. Don't you know that? Stop it."
 				"\0\s[8]Who do you think you're pointing at?"
+				"\0\s[8]What do you think you're doing?"
 			}
 			elseif snakeFeelings <= -30 && snakeFeelings > -50
 			{
@@ -281,6 +296,7 @@ MouseDoubleClickSakura
  	}
 	elseif reference4 == "Bust"
 	{
+		
 		if snakeFeelings > -10
 		{
 			"\0\s[8]What? Expecting me to get all embarassed like those anime girls Otacon installs? Tsh."
@@ -317,7 +333,17 @@ PunchSnake
 		if snakeFeelings <= -50
 		{
 
-			"\0\s[3]\w8\0\s[7]Ugh, bastard!"
+			"\0\s[3]Gah,\w8\0\s[7] "
+			--
+			if presuffix == "feminine"
+			{
+				"you hit hard,\w3 for a woman!" // T_T Sorry...
+			}
+			else
+			{
+				"bastard!"
+				"son of a..!"
+			}
 			snakeFeelings--
 		}
 		if snakeFeelings <= -30
@@ -341,29 +367,7 @@ PunchSnake
 		}
 		//OKUAJUB: Snake hates being hit, but will tolerate it for a little while, without a deduction. At higher friendship he feels a bit betrayed and so it begins to subtract again.
  }
-PunchApologyCheck //function to check for an apology for Snake during Apology mode.
- {
-	"\n\n[half]\f[italic,true]Apologize?\f[italic,default]\n/
-	\![*]\q[Yes,punchApologyYesSn]\n/
-	\![*]\q[No,punchApologyNoSn]"
- }
-Select.punchApologyYesSn //Apologizing
- {
-	"\f[italic,true]You apologize to Snake for hitting him.\f[italic,default]\n\n[half]\0\s[8]Alright, I'll assume the best. Watch that mouse of yours."
-	snakeFeelings++
- }
-Select.punchApologyNoSn //Not Apologizing
- {
-	"\f[italic,true]The moment passes. Snake glares at you."
- }
-Select.punchConfirmYes //Confirms the user wants to punch Snake during Confirm mode.
-{
-	PunchSnake
-}
-Select.punchConfirmNo //Stops the user from punching Snake during confirm mode.
-{
-	"\0\s[0]\f[italic,true]Nothing happens."
-}
+
  //---- MouseDoubleClickKero -----------------------------------------------------------
  //This is just the same as MouseDoubleClickSakura above, except for your secondary character. The same principles apply, including how to make your character unhittable.
  
@@ -372,10 +376,8 @@ MouseDoubleClickKero
  {
  	if reference4 == "Face" //Hitting Otacon's face
 	{
-		if punchConfig == "On"
-		{
-			PunchOtacon
-		}
+		if OtaconIsBusy; "\1\s[38]Hey, what's the big idea? Stop messing with me while I'm working!"
+		elseif punchConfig == "On"; PunchOtacon
 		elseif punchConfig == "Off"
 		{
 			"\1\s[18]Hey, what are you pointing at?"
@@ -388,19 +390,17 @@ MouseDoubleClickKero
 		}
 		elseif punchConfig == "Confirm"
 		{
-			"\1\s[10]\f[italic,true]Are you sure you want to punch Otacon?\f[italic,default]\n/
+			"\1\s[10]%(ItalicsHush)Are you sure you want to punch Otacon?\f[italic,default]\n/
 			\![*]\q[Yes,punchConfirmYesOta]\n/
 			\![*]\q[No,punchConfirmNoOta]"
 		}
-		else
-		{
-			"\1\s[18]Now this isn't right."
-		}
+		else; "\1\s[18]Now this isn't right." //Failsafe
 		//OKUAJUB: Otacon's face hitting dialogue. Snake will not tolerate this.
  	}
 	elseif reference4 == "Head" //Hitting Otacon's head
 	{
-		if punchConfig == "On"
+		if OtaconIsBusy; "\1\s[38]Hey, what's the big idea? Stop messing with me while I'm working!"
+		elseif punchConfig == "On"; 
 		{
 			PunchOtacon
 		}
@@ -416,14 +416,11 @@ MouseDoubleClickKero
 		}
 		elseif punchConfig == "Confirm"
 		{
-			"\1\s[10]\f[italic,true]Are you sure you want to punch Otacon?\f[italic,default]\n/
+			"\1\s[10]%(ItalicsHush)Are you sure you want to punch Otacon?\f[italic,default]\n/
 			\![*]\q[Yes,punchConfirmYesOta]\n/
 			\![*]\q[No,punchConfirmNoOta]"
 		}
-		else
-		{
-			"\1\s[18]Now this isn't right."
-		}
+		else; "\1\s[18]Now this isn't right."
 		//OKUAKUB: Snake will be PISSED if you hit Otacon. He can stand himself being hit, but a huge amount of friendship will be docked any time Otacon is hurt. Otacon's friendship will go down a very slight amount, but not a lot, as he feels he kind of deserves it.
 		//OKUAJUB: Due to the fact Otacon't hitboxes are a lot larger, I'm thinking of a way where you have consequences but it doesn't feel unfair. I'll probably have his face hit have slightly less of a deduction to compensate.
  	}
@@ -437,12 +434,12 @@ PunchOtacon
  {
 	if otaconFeelings <= -20 || snakeFeelings <= -10 //If feels are low enough, Snake will always take the punch.
 	{
-		"\1\s[12]\f[italic,true]As you reel up to hit Otacon, Snake steps in to take the punch.\f[italic,default]"
+		"\1\s[12]%(ItalicsHush)As you reel up to hit Otacon, Snake steps in to take the punch.\f[italic,default]"
 		--
 		if snakeFeelings <= -50
 		{
 			"\0\s[7]\n\n[half]Don't fucking touch him. I don't care what problem you have. \f[italic,true]\w8Don't.\f[italic,default]"
-			"\0\s[7]\f[italic,true] He spits some blood on the ground.\n\n[half]\f[italic,default]Asshole."
+			"\0\s[7]%(ItalicsHush) He spits some blood on the ground.\n\n[half]\0\s[7]\f[italic,default]Asshole."
 		}
 		elseif snakeFeelings == -10
 		{
@@ -450,12 +447,9 @@ PunchOtacon
 		}
 		elseif snakeFeelings <= -20 && otaconFeelings <= -30
 		{
-			"\f[italic,true]As he does so, Snake shoves Otacon out of your reach.\0\s[3]\w8\1\s[7]\1\s[12]\4\w3\1\s[-1]\0\s[7]\f[italic,default] Get your shit together, User. He's been through enough. Can't you see that?"
+			"%(ItalicsHush)As he does so, Snake shoves Otacon out of your reach.\0\s[3]\w8\1\s[7]\1\s[12]\4\w3\1\s[-1]\0\s[7]\f[italic,default] Get your shit together, 'User'. He's been through enough. Can't you see that?"
 		}
-		else
-		{
-			"\0\s[3]\w8\0\s[7]Don't try that again."
-		}
+		else; "\0\s[3]\w8\0\s[7]Don't try that again."
 	}
 	else //Otacon takes the punch most of the time.
 	{
@@ -463,7 +457,7 @@ PunchOtacon
 		"\1\s[12]Ow! That makes my head hurt, please stop!\0\s[8]\e"
 		"\1\s[12]Ah! Stop hitting me, p-please!\0\s[8]\e"
 		"\1\s[12]P-please stop. Please...\w8\0\s[7]Stop right now.\w8\1\s[11] \n\n[half]Snake...?\e"
-		"\1\s[12]\f[italic,true]As you reel up to hit Otacon, Snake steps in to take the punch.\f[italic,default]\0\s[3]\w3\0\s[7]Don't touch him. I don't care what problem you have.\f[italic,true]\w8Don't.\f[italic,default]"
+		"\1\s[12]%(ItalicsHush)As you reel up to hit Otacon, Snake steps in to take the punch.\f[italic,default]\0\s[3]\w3\0\s[7]Don't touch him. I don't care what problem you have.\f[italic,true]\w8Don't.\f[italic,default]"
 		if otaconFeelings < 20
 		{
 			"\1\s[12]Augh! Hh... I guess I kind of deserved that..."
@@ -473,22 +467,49 @@ PunchOtacon
 	snakeFeelings -= 5
 	otaconFeelings--
  }
- 
-PunchApologyCheckOta //function to check for an apology for Otacon during Apology mode.
+
+ //Here's some of the functions that get called above. I prefer to stick all of these types of things together because you can usually infer what they do by their name.
+ //If I need to adjust multiple of them at once, it's also easier to access.
+
+ PunchApologyCheck : all //function to check for an apology for Snake during Apology mode.
  {
-	"\n\n[half]\f[italic,true]Apologize?\f[italic,default]\n/
-	\![*]\q[Yes,punchApologyYesOta]\n/
-	\![*]\q[No,punchApologyNoOta]"
+	"\n\n[half]%(ItalicsHush)Apologize?\f[italic,default]\n"
+	"\![*]\q[Yes,punchApologyYesSn]\n"
+	"\![*]\q[No,punchApologyNoSn]"
+ }
+Select.punchApologyYesSn //Apologizing
+ {
+	"%(ItalicsHush)You apologize to Snake for hitting him.\f[italic,default]\n\n[half]\0\s[8]Alright, I'll assume the best. Watch that mouse of yours."
+	snakeFeelings++
+ }
+Select.punchApologyNoSn //Not Apologizing
+ {
+	"%(ItalicsHush)The moment passes. Snake glares at you."
+ }
+Select.punchConfirmYes //Confirms the user wants to punch Snake during Confirm mode.
+{
+	PunchSnake
+}
+Select.punchConfirmNo //Stops the user from punching Snake during confirm mode.
+{
+	"\0\s[0]%(ItalicsHush)Nothing happens."
+}
+ 
+PunchApologyCheckOta : all //function to check for an apology for Otacon during Apology mode.
+ {
+	"\n\n[half]%(ItalicsHush)Apologize?\f[italic,default]\n"
+	"\![*]\q[Yes,punchApologyYesOta]\n"
+	"\![*]\q[No,punchApologyNoOta]"
  }
 Select.punchApologyYesOta //Apologizing
  {
-	"\f[italic,true]You apologize to Otacon.\f[italic,default]\n\n[half]\0\s[8]\1\s[33]Okay.\w8 It's fine."
+	"%(ItalicsHush)You apologize to Otacon.\f[italic,default]\n\n[half]\0\s[8]\w8\1\s[33]Okay.\w8 It's fine."
 	otaconFeelings++
 	snakeFeelings += 4
  }
 Select.punchApologyNoOta //Not Apologizing
  {
-	"\1\s[13]\f[italic,true]The moment passes. Snake glares at you. Otacon looks worried."
+	"\1\s[13]%(ItalicsHush)The moment passes.\w6 Snake glares at you.\w6 Otacon looks worried."
  }
 Select.punchConfirmYesOta //Confirms the user wants to punch Otacon during Confirm mode.
 {
@@ -496,30 +517,153 @@ Select.punchConfirmYesOta //Confirms the user wants to punch Otacon during Confi
 }
 Select.punchConfirmNoOta //Stops the user from punching Otacon during confirm mode.
 {
-	"\1\s[10]\f[italic,true]Nothing happens."
+	"\1\s[10]%(ItalicsHush)Nothing happens."
 }
 
-MouseDoubleClickDon
+//SFX Object Controls
+
+OnDoubleClickSFX : all //First event of the volume config.
 {
-	"\p[14]\f[italic,true]Set the volume for SFX:\![open,inputbox,OnSetSoundVolumeDon,-1]"
+	//reference0 = which object raised the event.
+	case reference0 // Checks which object raised the event and selects the appropriate object to 'speak'.
+	{
+		when 'mk2'; "\p[3]"
+		when 'mk3'; "\p[4]"
+		when 'don'; "\p[14]"
+		when 'kat'; "\p[15]"
+	}
+	"\f[italic,true]Set the volume for SFX:\![open,inputbox,OnSetSoundVolume,-1,--reference=%(reference0)]" //To avoid repetition, this has been pulled out of the brackets. Also sends the object name to the next function.
 }
 
-MouseDoubleClickKat
+OnSetSoundVolume //Sets the volume config.
 {
-	"\p[15]\f[italic,true]Set the volume for SFX:\![open,inputbox,OnSetSoundVolumeKat,-1]"
-}
-
-OnSetSoundVolumeDon
-{
+	void ValidSoundTest(&reference0)
 	soundVolume = reference0
-	"\p[14]\f[italic,true]Volume set to %(reference0)"
+	case reference2
+	{
+		when 'mk2'; "\p[3]\f[italic,true]Volume set to %(reference0)."
+		when 'mk3'; "\p[4]\f[italic,true]Volume set to %(reference0)."
+		when 'don'; "\p[14]\f[italic,true]Volume set to %(reference0)."
+		when 'kat'; "\p[15]\f[italic,true]Volume set to %(reference0)."
+	}
+	
 }
 
-OnSetSoundVolumeKat
+ValidSoundTest
 {
-	soundVolume = reference0
-	"\p[15]\f[italic,true]Volume set to %(reference0)"
+	if GETTYPE(_argv[0]) != 1 //If the first argument is not an integer..
+	{
+		_argv[0] = TOINT(_argv[0]) //Force it to become an integer. It will become 0 if it is invalid.
+	}
+	else
+	{
+		_argv[0] //If it is an integer, leave it alone.
+	}
 }
- //*********************Advanced User Info*******************************
- //There are other mouse related functions you could set up much like the above, such as OnMouseDragStart, OnMouseDragEnd, OnMouseWheel, and others which correspond to various things you can do with your mouse. You can probably guess what those functions do just by their names - OnMouseWheel would be if someone spun their mouse wheel over a certain area, for example. If you're interested in these, I'd recommend doing some reading at the CROW-SSP Encyclopedia to get a better idea of them and settle down for some trial and error learning as you try to put them in.
- //***********************************************************************
+
+OnMouseGesture
+{
+	if reference0 == 14 || reference0 == 15
+	{
+		stroke++
+		if stroke > 5
+		{
+			"\p[%(reference0)]\![sound,play,ghost\Snake_Otacon\ghost\master\sfx\Don.wav,--volume=%(soundVolume)]"
+			stroke = 0
+			strokeLong += 1
+		}
+		elseif reference5 == "end"
+		{
+			"\p[%(reference0)]Final Drum Count!! %(strokeLong)!!\w8\![sound,play,ghost\Snake_Otacon\ghost\master\sfx\fullcombo_Don.wav,--volume=%(soundVolume)]\nFu\w2ll\w6 Combo!!"
+			--
+			if strokeLong > currentHighScore && owned[13] != 'katchan'
+			{
+				"\p[%(reference0)]\n\n[half]%(ItalicsHush)For beating the high score, you've won a Katsu-chan plush. It can be found in Otacon's item menu."
+				owned[13] = katchan
+			}
+			--
+			if strokeLong <= currentHighScore
+			{
+				"\p[%(reference0)]\n\n[half]%(ItalicsHush)The current highscore is %(currentHighScore)."
+			}
+			elseif strokeLong > currentHighScore
+			{
+				"\p[%(reference0)]\n\n[half]%(ItalicsHush)The last highscore was %(currentHighScore). It is now %(strokeLong)."
+				currentHighScore = strokeLong
+			}
+			
+			strokeLong = 0
+		}
+	}
+}
+
+OnNeedlePoke //Credit to Zi for the original basis of this code, although it's practically entirely different now.
+{
+	if reference0 == 0 //Sakura
+	{
+		if reference1 == "Syringe"
+		{
+			"\0\s[2]Hey! Get that thing away from me!\1\s[18]What, are you afraid of needles, Snake?\0\s[1]\n\n[half]N-No.\w8\w8\s[9]\f[size,9]  Hmhmm.. Damn shots..."
+		}
+		elseif reference1 == "Tiny Pokey Pixels"
+		{
+			"\0\s[0]What, you think you can hurt me with that tiny thing?\1\s[10]Hey, be nice, Snake! It's kind of cute, you know."
+		}
+		elseif reference1 == "Close-Up View"
+		{
+			if lastPoke == "Tiny Pokey Pixels"
+			{
+				"\0\s[2]Holy-!!\1\s[13]Woah! Looks like you made %(username) mad by insulting Needle.. Watch out!!"
+				"\0\s[2]What the hell-!!\1\s[13]Ow! Snake, you better apologize about what you said to the little needle earlier, or else!\0\s[2]\n\n[half]Alright, alright! I see your \f[italic,true]point\f[italic,false] now! Don't hurt me with it."
+			}
+			else
+			{
+				"\0\s[2]What the-?!\1\s[13]Woah! Now that's a huge Needle!\0\s[2]\n\n[half]That thing can really do some damage!"
+				"\0\s[2]What the-?!\1\s[13]I know you can use a larger needle for embroidery, but this is overkill!"
+			}
+		}
+		else
+		{
+			"\0\s[2]Ksh-! What's the big idea?!"
+			"\0\s[2]Augh! Hey-?!"
+			"\0\s[2]Ow! What the-?!"
+		}
+	}
+	elseif reference0 == 1 //Kero
+	{
+		if reference1 == "Tiny Pokey Pixels"
+		{
+			"\1\s[13]Ow! Hey, I know it's small but it still hurts!\0\s[0]What, that tiny thing hurt you?\1\s[31]\n\n[half]You know, if you let a splinter stay too long it gets infected, right?\0\s[0]\n\n[half]Point taken."
+		}
+		elseif reference1 == "Close-up View"
+		{
+			if lastPoke == "Tiny Pokey Pixels"
+			{
+				"\1\s[13]Augh-! Ow, what was that for?!\w8 I \f[italic,true]much\f[italic,false] prefer the little one you had earlier!"
+			}
+			else
+			{
+				"\1\s[13]Ow-!! C'mon, why are you poking me with that huge thing?! I could get hurt!\0\s[9]Watch where you point that thing, %(username)."
+			}
+		}
+		else
+		{
+			"\1\s[13]Ow! Hey, stop it!\0\s[9]"
+			"\1\s[13]Ow! Hey! What was that for?\0\s[9]"	
+			"\1\s[13]Ah! That hurts, %(username)!\0\s[9]"
+		}
+	}
+	elseif reference0 == 14 //Don-chan Plush
+	{
+		"\p[14]\![sound,play,ghost\Snake_Otacon\ghost\master\sfx\fullcombo_Don.wav,--volume=%(soundVolume)]Fu\w2ll\w6 Combo!!"
+	}
+	elseif reference0 == 15 //Katsu-chan Plush
+	{
+		"\p[15]\![sound,play,ghost\Snake_Otacon\ghost\master\sfx\fullcombo_Kat.wav,--volume=%(soundVolume)]Fu\w2ll\w6 Combo!!"
+	}
+	else //Other
+	{
+		"\p[%(reference0)]\f[italic,true]You poke it with Needle, but nothing seems to happen.\1\s[18]Why are you poking around, %(username)?"
+	}
+	lastPoke = reference1
+}

@@ -1,0 +1,276 @@
+//--Development Tools --------------------------------------------------------
+//These are various functions that I use to test the Ghost. There may also be unfinished functions or other experiments in here.
+//The test functions used to live in Sn_menu.dic, however that file is the largest of all of my files and I need to access them frequently. So now they have their very own file!
+//This is left in for any curious users (like you!) and should not affect normal play.
+
+//Test variable, insert whatever you would like to test it.
+Select.testvariable
+{
+//Enter your dialogue to test here.
+	"\1\s[10]Testing! Attention please!\nCurrent amount of dialogues available is %(OUTPUTNUM('RandomTalk'))\n"
+}
+
+//--Viewing Surfaces------------------------------------
+Select.testKEROsurfaces //Tests all of the Kero's surfaces in sequence.
+{
+	"\1\s[10]\w8\w8\w8\s[11]\w8\w8\w8\s[12]\w8\w8\w8\s[13]\w8\w8\w8\s[14]\w8\w8\w8\s[15]\w8\w8\w8\s[16]\w8\w8\w8\s[17]\w8\w8\w8\s[18]\w8\w8\w8\s[19]\w8\w8\w8\s[30]\w8\w8\w8\s[31]\w8\w8\w8\s[32]\w8\w8\w8\s[33]\e"
+}
+
+//--Viewing Variables-----------------------------------
+Select.viewvariable
+{
+	"\1\s[18]codecTimer = %(codecTimer)\n/
+	missionTimer = %(missionTimer)\n/
+	inputTime = %(inputTime)\n/
+	clickShadowMoses = %(clickShadowMoses)\n/
+	clickShadowMosesIncident = %(clickShadowMosesIncident)\n/
+	clickMeiLing = %(clickMeiLing) \n/
+	clickRaiden = %(clickRaiden)\n/
+	clickRex = %(clickRex)\n/
+	snakeFeelings = %(snakeFeelings)\n/
+	otaconFeelings = %(otaconFeelings)\n/
+	snakeKetchups = %(snakeKetchups)\n/
+	snakeApologies = %(snakeApologies)\n/
+	owned = %(owned)\n/
+	\e"
+}
+
+//--Changing Variables after First Boot------------------
+//OKUAJUB: This is a testing variable I've added so I can test variables without having to manually reset them using OnFirstBoot from bootend.dic - Accessed from Otacon's menu.
+Select.changevariable
+{
+
+	codecTimer = ""
+	missionTimer = ""
+	clickShadowMoses = 0 //OKUAJUB: Click counting variable for Shadow Moses
+	clickShadowMosesIncident = 0 //OKUAJUB: Click counting variable for Shadow Moses *incident*
+	clickMeiLing = 0 //OKUAJUB: Click counting variable for Mei Ling
+	clickRaiden = 0 //OKUAJUB: Click counting variable for Raiden
+	clickJaeger = 0 //OKUAJUB: Click counting variable for Frank Jaeger
+	clickBigBoss = 0 //OKUAJUBL Click counting variable for Big Boss
+	clickRex = 0 //OKUAJUB: Click counting variable for Rex.
+	snakeFeelings = -10 //OKUAJUB: Snake's feelings. its a bit harder to befriend Snake.
+	otaconFeelings = 0 //OKUAJUB: Otacon's feelings. Neutral at first.
+	snakeKetchups = 0 //OKUAJUB: Count of how many ketchup bottles you have given Snake.
+	snakeApologies = 0 //OKUAJUB: How many times you have apologized to Snake.
+	isNeko = 1
+	
+	"\1\s[10]Variables changed. Good luck testing, Okuajub! (Or are you %(username)..?)\n/
+	codecTimer = %(codecTimer)\n/
+	missionTimer = %(missionTimer)\n/
+	clickShadowMoses = %(clickShadowMoses)\n/
+	clickShadowMosesIncident = %(clickShadowMosesIncident)\n/
+	clickMeiLing = %(clickMeiLing) \n/
+	clickRaiden = %(clickRaiden)\n/
+	clickJaeger = %(clickJaeger)\n/
+	clickBigBoss = %(clickBigBoss)\n/
+	clickRex = %(clickRex)\n/
+	snakeFeelings = %(snakeFeelings)\n/
+	otaconFeelings = %(otaconFeelings)\n/
+	snakeKetchups = %(snakeKetchups)\n/
+	snakeApologies = %(snakeApologies)\n/
+	isNeko = %(isNeko)\n/
+	\e"
+}
+
+DefaultVarList : array
+{
+    "lastTalk"
+	"passhour"
+	"passmin"
+	"passsec"
+ 	"username"
+	"stroke"
+	"strokeLong"
+    "currentHighScore"
+ 	"teachusername"
+	"mikireflag"
+ 	"aitalkinterval"
+ 	"birthdayprint"
+	"talktime"
+	"deleteshitai"
+	"nowshell"
+	"firstboot"
+
+	"devMode"
+	"beginnerConfig"
+	"punchConfig"
+	"soundVolume"
+	
+	"codecTimer"
+	"missionTimer"
+	"codecFatigue"
+	"missionFatigue"
+	"otacoins"
+	"shopTimeCheck"
+	
+	"hasBook"
+	"owned"
+
+	"clickShadowMoses"
+	"clickShadowMosesIncident"
+	"clickMeiLing"
+	"clickRaiden"
+	"clickJaeger"
+	"clickBigBoss"
+	"clickRex"
+	"askLove"
+	
+	"snakeFeelings"
+	"otaconFeelings"
+	"snakeKetchups"
+	"snakeApologies"
+    "otaconGamesPlayed"
+	"isNeko"
+}
+
+UpdateInitializeVar : all
+{
+    if !ISVAR("strokeLong"); strokeLong = 0    //Tracks continuous stroking.
+	if !ISVAR("currentHighScore"); currentHighScore = 50   //Tracks the current highscore for stroking.
+
+    if !ISVAR("devMode"); devMode = 0 //Toggle for enabling dev mode, which enables some unstable features. Default 0.
+	if !ISVAR("beginnerConfig"); beginnerConfig = "" // Configures if the user is a beginner ghost user. Asks in FirstBoot. Defaults to "". Will be set to On or Off in the set up.
+	if !ISVAR("punchConfig"); punchConfig = "on" // Punching configuration. Can be set to "On" which enables default punching mechanics, "Apologize" which enables apologizing for punching, "Confirm" which asks the user if they would like to punch, and "Off" which turns off punching entirely.
+    if !ISVAR("soundVolume"); soundVolume = 50
+
+	if !ISVAR("codecTimer"); codecTimer = "" //Timer for Otacon's codec searches. blank at first.
+	if !ISVAR("missionTimer"); missionTimer = "" //Timer for Snake's missions. blank at first.
+	if !ISVAR("codecFatigue"); codecFatigue = 0 //Cooldown timer for Codec Search
+	if !ISVAR("missionFatigue"); missionFatigue = 0 //Cooldown timer for Missions
+	if !ISVAR("otacoins"); otacoins = 0 //Tracks currency
+    if !ISVAR("shopTimeCheck"); shopTimeCheck = 0
+
+    if !ISVAR("hasBook"); hasBook = IARRAY //Tracks important books.
+	if !ISVAR("owned"); owned = IARRAY //Tracks owned items in an array. Personal Notes upcoming:
+
+	if !ISVAR("clickShadowMoses"); clickShadowMoses = 0 //Click counting variable for Shadow Moses
+	if !ISVAR("clickShadowMosesIncident"); clickShadowMosesIncident = 0 //Click counting variable for Shadow Moses *incident*
+	if !ISVAR("clickMeiLing"); clickMeiLing = 0 //Click counting variable for Mei Ling
+	if !ISVAR("clickRaiden"); clickRaiden = 0 //Click counting variable for Raiden
+	if !ISVAR("clickJaeger"); clickJaeger = 0 //Click counting variable for Frank Jaeger
+	if !ISVAR("clickBigBoss"); clickBigBoss = 0 //Click counting variable for Big Boss
+	if !ISVAR("clickRex"); clickRex = 0 //Click counting variable for Rex
+	if !ISVAR("askLove"); askLove = 0 //Counts if you've asked Snake about his love life.
+
+	if !ISVAR("snakeFeelings"); snakeFeelings = -10 //Snake's feelings. Lightly negative at first.
+	if !ISVAR("otaconFeelings"); otaconFeelings = 0 //Otacon's feelings. Neutral at first.
+	if !ISVAR("snakeKetchups"); snakeKetchups = 0 //Count of how many ketchup bottles you have given Snake/Otacon.
+	if !ISVAR("snakeApologies"); snakeApologies = 0 //How many times you have apologized to Snake.
+    if !ISVAR("otaconGamesPlayed"); otaconGamesPlayed = 0
+	if !ISVAR("isNeko"); isNeko = 0 //Flag for if Otacon is Nekomimified (only activatable in the Solid Shell). Default is 0. 0 means Off. 1 means On.
+	if !ISVAR("lastPoke"); lastPoke = 0 //Last shell used to poke them with Needle
+
+    ERASEVAR("mk2","mk3") //I added these in 1.2.1 but don't need them anymore as I was able to use the array like I wanted.
+}
+
+DevtestRPS : all
+{
+    "Are you playing against Snake or Otacon?"
+    "\![*]\q[Snake,SnakeRPS]"
+    "\![*]\q[Otacon,OtaconRPS]"
+}
+
+//ROCK PAPER SCISSORS REWORK
+
+//Otacon - Simple AI, only rewards games with friendship
+//EASY - 1 game, Otacon plays paper 60% of the time.
+//MEDIUM - 3 games, Otacon plays paper first 60% of the time. If he loses, he will swap to scissors 70% of the time. If he loses on scissors, he will play paper next 100% of the time.
+//HARD - 5 games, Otacon plays paper 70% of the time twice, then switches to scissors 70% of the time. Will play rock sometimes.
+
+//Snake - More difficult AI, earn a trophy or some kind of funny item for catching him cheating?
+//VERY HARD - 7 games, Snake will play a random move first, then have a high chance of playing Copycat and copying the players last move.
+//EXTREME - 9 games, Snake will play Copycat until Round 6, where he will switch to basing his moves off of your statistics (if you play Rock often, he will choose paper, and so on)
+//IMPOSSIBLE - 11 games, Snake plays as 'Extreme' until he is one round away from being unable to win. 
+//After which point, he will cheat (Player's move is always inputted first, so he will simply play the opposite). He should either win, or tie with the player at Round 10.
+//On Round 11, Snake will attempt to cheat to win, but if the user punches him before he throws ("Snake hesitates a moment before throwing.") they'll catch him in the act and 'win'.
+
+
+
+OtaconRPS : all
+{
+    "\![*]\q[Easy,RPSsetup,easy]"
+    "\![*]\q[Medium,RPSsetup,medium]"
+    "\![*]\q[Hard,RPSsetup,hard]"
+}
+
+SnakeRPS : all
+{
+    "\![*]\q[Very Hard,RPSsetup,vHard]"
+    "\![*]\q[Extreme,RPSsetup,extreme]"
+    "\![*]\q[Impossible,RPSsetup,cheat]"
+}
+
+RPSsetup
+{
+    RPSmemory = IARRAY
+    difficulty = reference0
+}
+
+PlayGameRPS
+{
+
+    //Difficulty sets number of rounds
+    //if difficulty = "Impossible"; rounds = 11 and so on.
+   RPSarray = ("0","1","2") //0 = rock, 1 = paper, 2 = scissors
+   RPSwin = ("0,2","1,0","2,1")
+   
+    _playerChoice = ""
+    _opponentChoice = _strategy
+    _winState = "%(_playerChoice),%(_opponentChoice)"
+    
+    for _i = 0; _i < _rounds; _i++
+    {
+        //Move request
+        JudgeRPS
+    }
+    
+    RPSmemory ,= _playerChoice
+}
+
+JudgeRPS
+{
+    if _playerChoice == _opponentChoice
+    {
+        _game = "draw"
+    }
+    elseif ASEARCH(_winState,_RPSwin)
+    {
+        _game = "win"
+    }
+    else
+    {
+        _game = "lose"
+    }
+}
+
+CopyCatRPS
+{
+    _lastPlayerChoice = ARRAYSIZE(RPSmemory) - 1
+    _opponentChoice = RPSmemory[_lastPlayerChoice]
+}
+
+Sum
+{
+    _argv[0] + _argv[1]
+}
+
+//What information do I need to execute every game of RPS?
+//How many rounds, Player's choice each round, what strategy opponent will play each round...
+
+//Strategy decision
+//arguments: 0 = difficulty, 1 = current round
+// difficulty decides first, then the round number. e.g.
+// if _argv[0] == "easy"; scissors 60%
+// if _argv[0] == "impossible"; if round == 6 && wins > 3; cheat
+
+ImpossibleRPS
+{
+    //Snake starts Rock
+    //If he loses, he plays randomly.
+    //If he wins, he'll copy the player's last move most of the time
+    //Round 2-5
+    //Copycat or Random
+    //Round 7-10, cheats if he's losing. If he's winning, normal strategy.
+    //Round 11 should be a tiebreaker. Snake will attempt to cheat to win, but if the user punches him they'll catch him in the act and 'win'.
+}

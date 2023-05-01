@@ -21,10 +21,12 @@ dic, Sn_bootend.dic
 dic, Sn_mouse.dic			
 dic, Sn_etc.dic			
 dic, Sn_menu.dic
+dic, Sn_codecmissions.dic
 dic, Sn_word.dic
 dic, Sn_commu.dic
 dic, Sn_nameteach.dic
 dic, Sn_anchor.dic
+dic, Sn_devtest.dic
 
 //---- Log Location -------------------------------------------------------------------------
 //I'm not entirely sure what this does, but basically don't touch it.

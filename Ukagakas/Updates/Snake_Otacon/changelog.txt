@@ -1,3 +1,16 @@
+V 1.3.2
+(4/10/23)
+- Attempted a fix for rare dialogue exceptions changing to the wrong surfaces when using Codec Search or Missions
+  - Due to rarity these states are difficult to test. Please report any instances you see, with the respective script log if possible. Thank you!
+- Cleaned up code in various places
+ - Due to changing the backend, please let me know if anything breaks or acts unusually. Thank you!
+- Added 3 new items
+ - Book Lot #1 can now be unlocked by gifting Snake books
+ - Don-chan plush can now be unlocked by playing games with Otacon
+ - Katsu-chan plush can be unlocked by beating the Drum hit score.
+- Added reaction to OnNeedlePoke
+- Disabled talking animations during narration.
+
 V 1.3.1
 (1/10/22)
 - Added Snake Missions to Snake's Menu
@@ -16,7 +29,7 @@ V 1.3.1
  - REX Plush is awarded for finishing Snake's FAQ on Otacon
  - RAY Plush is awarded for finishing Snake's FAQ on Big Shell
 - Misc. Dialogue additions
-- Fixed an issue where the Otaclock balloon would not be favored in the Balloon selection menu
+- Fixed an issue where the latest Otaclock balloon would not be favored in the Balloon selection menu
 V 1.2.1
 (9/10/22)
 - Switched from AYA to YAYA (Thank you, Zi!)
@@ -56,7 +69,7 @@ V 1.1.1
   - Otacon can now randomly ask your opinions on things. Answer and gain a small friendship boost.
   - Otacon's FAQ has additional questions. Unlock new questions by gaining friendship and encountering keywords in dialogue.
 - Added New aitalk Dialogue and made revisions. 
-  - Certain dialogues now have new prerequisites that must be met.
+  - Certain dialogues now have new prerequisites that must be met
 - Improved Snake surface1507 (Angry)
 - Patched minor typos, word choices, and errors.
 - Added cheat buttons for friendship variables. When in focus, press F7 to reset their friendships to 0, press F8 to decrease their friendship towards you by 1, press F9 to increase their friendship towards you by 1.

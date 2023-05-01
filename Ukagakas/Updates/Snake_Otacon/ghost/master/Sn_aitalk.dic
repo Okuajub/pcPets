@@ -40,7 +40,7 @@ OnAiTalk
 
 RandomTalk : nonoverlap_pool
 {
-	if codecTimer > 0 //Dialogue that plays during codec searches.
+	if codecTimer > 0 && codecTimer != "finished" //Dialogue that plays during codec searches.
 	{
 		"\1\s[38]Hm."
 		
@@ -71,15 +71,31 @@ RandomTalk : nonoverlap_pool
 		"\1\s[38]M-hm."
 		
 		"\1\s[38]Ugh.. does one of these guys have a cold? He keeps coughing into my ear..."
+
+		"\0\s[0]...\w8\w8\w8So, %(username).\w8\w8.\w3.\w3 How's the weather?"
+
+		"\0\s[0]..."
+		
+		"\0\s[0]...%(snakeGrunt)."
+
+		if snakeFeelings >= 10
+		{
+			"\0\s[0]..Do anything lately, %(username)?"
+
+			"\0\s[0]So.. %(snakeGrunt).. You play video games\w7 or\w4 something.\w4.\w4.\w4 right?"
+
+			"\0\s[0]Hoping Otacon will find something, %(username)?"
+		}
+		
 	}
-	elseif missionTimer > 0 //Dialogue that plays during missions.
+	elseif missionTimer > 0 && missionTimer != "finished" //Dialogue that plays during missions.
 	{
 		{
-			"\1\s[38]\f[italic,true]Otacon lets out a couple of unsteady sighs. He seems a little flustered.\f[italic,default]\n\w8.\w8\.\w8.\w8\n\n[half]W-what? No, I'm not breathing heavier than usual!\w8\w8\w8\n\n[half]My pulse isn't up.\w8 And it's \f[italic,true]not\f[italic,default] the sneaking suit.\w8\w8 Although.. no,\w8 no way.\w8 Ugh you're distracting me. Focus on the mission!\w8\w8\w8\w8\w8\n\n[half]I am not one to talk! \f[italic,true]Otacon huffs, flushed from his conversation with Snake.\f[italic,default] Get back to work already, \f[italic,true]legendary soldier, Solid Snake\f[italic,default]. We can talk about that when you get home safe."
+			"\1\s[38]%(ItalicsHush)Otacon lets out a couple of unsteady sighs. He seems a little flustered.\1\s[38]\f[italic,default]\n\w8.\w8\.\w8.\w8\n\n[half]W-what? No, I'm not breathing heavier than usual!\w8\w8\w8\n\n[half]My pulse isn't up.\w8 And it's \f[italic,true]not\f[italic,default] the sneaking suit.\w8\w8 Although.. no,\w8 no way.\w8 Ugh you're distracting me. Focus on the mission!\w8\w8\w8\w8\w8\n\n[half]I am not one to talk! %(ItalicsHush)Otacon huffs, flushed from his conversation with Snake.\1\s[38]\f[italic,default] Get back to work already, \f[italic,true]legendary soldier, Solid Snake\f[italic,default]. We can talk about that when you get home safe."
 			
 			"\1\s[38]Snake, what are you..?\w8\w8 On the mission-?! I-\w8\w8 I'll.. turn off the connection for a couple minutes..."
 			
-			"\1\s[38]Snake, what do you think you're doing?\w8\w8 \n\n[half]N-no! I don't want to.. Well yes, I think your bod..-?! Damn it.. %(username) is-!\w8\w8 \n\n[half]Yes I know they can't hear you, but they can hear and \f[italic,true]see\f[italic,default] me!\w8\w8 I- You- %(hesshes)-..!\w8 \f[italic,true]Huff\f[italic,default]. Try and focus on the mission, Snake!"
+			"\1\s[38]Snake, what do you think you're doing?\w8\w8 \n\n[half]N-no! I don't want to.. Well yes, I think your bod..-?! Damn it.. %(username) is-!\w8\w8 \n\n[half]Yes I know they can't hear you, but they can hear and \f[italic,true]see\f[italic,default] me!\w8\w8 I- You- %(hesshes)-..!\w8 %(ItalicsHush)Huff\f[italic,default]\1\s[38]. Try and focus on the mission, Snake!"
 			
 			"\1\s[38]Try to stay focused, Snake. Yes, I know my 'voice is distracting' but try not to hole up in a locker for awhile, alright? I'm not entertaining that today."
 		}
@@ -92,7 +108,7 @@ RandomTalk : nonoverlap_pool
 		
 		"\1\s[38]You're entering an area where communications will go out, so be careful, Snake. I won't be able to contact you. Your Soliton Radar will go out, too, so keep your guard ready."
 		
-		"\1\s[38]\f[italic,true]Snrk\f[italic,default]. C'mon, focus on the mission, O.K.?"
+		"\1\s[38]%(ItalicsHush)Snrk\f[italic,default]\1\s[38]. C'mon, focus on the mission, O.K.?"
 		
 		"\1\s[38]I'm receiving the photos now... Well that's not good. Not the photos, what's.. in the photos. The photos themselves are good enough. Go on and get out of there, Snake."
 		
@@ -123,6 +139,14 @@ RandomTalk : nonoverlap_pool
 		"\1\s[38]Alright, all clear."
 		
 		"\1\s[38]Snake?\w8\w8Snaaaake?\w8\w7SNAAAAAAAAKE-! Oh, sorry! I.. thought you were a goner."
+
+		"\1\s[38]..."
+
+		"\1\s[38].\w8.\w8."
+
+		"\1\s[38]...\w8\w8\w8\w8 ...."
+
+		"\1\s[38]..."
 	}
 	else
 	{
@@ -179,32 +203,16 @@ RandomTalk : nonoverlap_pool
 	"\1\s[10]How's it going, Snake?\w8\0\s[0]I could use a smoke.\1\s[18]\n\n[half]Hey! You know that's bad for your lungs.\0\s[5]\e"
 	
 	"\0\s[0]What's next, Otacon?\1\s[10] It's really up to you, Snake. We have enough leads to go after a couple Metal Gears, but we also have little enough to relax here for a while.\0\s[5]\n\n[half]I think I like the idea of being with you for a little while longer.\1\s[30]\n\n[half]M-Me too."
-
-	//Added 12/30/2022
 	
 	"\1\s[18]You know, next time we go to Colorado, we need to stop by the Taiko machines there! There's only so many in the US, but playing on the arcade version is a whole different beast to playing at home.\0\s[8]Maybe you should get some practice in before we go. You still choke after every big combo.\1\s[10]\n\n[half]I'd like to see you try, then!\0\s[5]\n\n[half]Don't put out challenges you don't expect me to take.\1\s[31]"
 
-	"\1\s[15]Round 1 is the best of all the arcade chains in the US.\0\s[5]Now where is this sudden revelation coming from?\1\s[18]\n\n[half]Just thinking about it. I mean, they have UFO machines that aren't total scams, dazzling coin pusher games, and awesome prizes!\0\s[8]\n\n[half]\w8And it has nothing to do with the fact they have that blue-haired anime girl game, right?\1\s[17]\w8Of course not!\w8\s[19] And her name is Hatsune Miku, if it matters to you.\0\s[5]"
-
-	"\1\s[18]I wish I'd brought my PSP. It's imported from Japan, but that doesn't matter since I homebrewed it anyway."
-
-	"\1\s[18]Hey, %(username), do you like rhythm games? I play a lot of Project DIVA and Taiko no Tatsujin, myself. Really, I'm a sucker for any cute mascot character!"
-
 	"\1\s[18]I wish they'd brought Toro Inoue over here to the west. He's the mascot for the Playstation brand in Japan, and he's adorable!"
-
-	"\1\s[15]Hey, %(username), we should play Monster Hunter sometime! I'm into P3rd, but I can be flexible. I can use my Heavy Bowgun to provide some support- bang, bang, you're healed! Hee hee."
-
-	"\1\s[10]Do you have any pets? I never really had any, although my sister used to beg for budgies, haha. I'm a dog person, myself."
-
-	"\1\s[10]Do you play any MMOs? I saw that one called Warframe and I wanted to get into it, but it seemed intimidating. Most MMOs do pose that as a challenge..."
 
 	"\1\s[10]I'm really craving some cup ramen, right now.. rations are barely edible, even with ketchup."
 
-	"\1\s[10]It'd be nice if I'd brought my phone.\w8 Then I could play Snake or something\0\s[6]\1\s[18].\w8.\w8 hey, wait a second, Snake,\w8 huh."
+	"\1\s[10]It'd be nice if I'd brought my phone.\w8 Then I could play Snake or something.\0\s[6]\w8\w8\1\s[18].\w8.\w8 Hey, wait a second. Snake...\w8 \f[italic,true]S\w3n\w3a\w3k\w3e...\f[italic,default]\w8 Huh!"
 
-	"\1\s[10]You know, I'm not really sure who ended up winning the console wars. All I know is that SEGA lost..\w8 What kind of a war is one between video game consoles, anyway? It's not like they can walk around."
-
-	"\1\s[10]I wonder what kind of Digimon I'd have as a partner if I was in the Digital World.\w8 What kind would you have?\w8\w8\s[18] Hey, you know, we \f[italic,true]are\f[italic,default] digital right now, aren't we? Where are the Digimon? What a rip-off!"
+	"\1\s[10]You know, I'm not even really sure who ended up winning the console wars. All I know is that SEGA lost..\w8 You know, what kind of a war is one between video game consoles, anyway? It's not like they can walk around and fight each other.\0\s[8]Otacon..."
 
 	//OKUAJUB: Okay, this one's fun. sorry for all the waits but I wanted to make it seem like he really went somewhere. (I should find a way to do this more easily..)
 	
@@ -228,7 +236,7 @@ RandomTalk : nonoverlap_pool
 		}
 		else //51 times out of 100, this next line will play.
 		{
-		"\_a[option2]%(_option2)\_a or \_a[option1]%(_option1)\_a" //Okay, so here, I'm basically saying "Otacon, say option2 and link to option2's reaction (found in Sn_anchor.dic) and say option1 and link to option1's reaction when Otacon says this". 
+		"\_a[option2]%(_option2)\_a or \_a[option1]%(_option1)\_a" //Okay, so here, I'm basically teeling it "Otacon, say option2 and link to option2's reaction (found in Sn_anchor.dic) and say option1 and link to option1's reaction when Otacon says this". 
 		} //the \_a is called an anchor, and it will highlight in the balloon's "link" color, like a link on a webpage. the user can click this "link" and they'll be taken to the "option1" or "option2" anchor dialogue respectively.
 		--
 		" better?\w6\w6\w6\w6\w6\w6\w6\w6\w6\w6\e" //Gives the user time to react by waiting 60 miliseconds, and then closes up the dialoge (where it can then automatically time out as with all other dialogues).
@@ -292,7 +300,7 @@ RandomTalk : nonoverlap_pool
 	//\0\s[0]\_b[img\codecmoments.png,inline] Commented out, coding for future Codec Moments. makes it easier to reproduce quickly.
 	//If you'd like to add your own Codec Moment, Save an image as codecmoment[whatever your image name would be].png, place it in the img folder in Ghost/Master, copy the coding in the line above and paste it, and replace the codecoment.png with codecmoment[whatever your image name would be].png and you should be good to go!
 	
-	//Otacon will tell the user tips about working with a Ukagaka. Short-cuts, small features, etc! These will be here in every version until commented out, or when I convert to YAYA, a flag is flipped. nice and hand-holdy like MGS4 Otacon. "Do you have a gun that can take out those Gekko, Snake?"
+	//Otacon will tell the user tips about working with a Ukagaka. Short-cuts, small features, etc! nice and hand-holdy like MGS4 Otacon. "Do you have a gun that can take out those Gekko, Snake?"
 	if beginnermode == "On"
 	{
 	"\1\s[18]Hey, %(username), did you know "
@@ -440,18 +448,24 @@ RandomTalk : nonoverlap_pool
 	if nowshell == "Retro" //This checks to see what shell they're currently using. You may remember this value being defined back in bootend.dic.
 	{
 	//Then these conversations are available! Note the brackets enclosing this set of dialogue.
-	"\0\s[0]Why exactly are you made of little blocks, Otacon?\w8\1\s[10]Well, I'm technically not actually here right now. I'm using a terminal to communicate with you through this avatar!\0\s[8]\n\n[half]\w8\w8 Huh?\1\s[18]\n\n[half]Maybe I should just come here as myself...\e"
-	
-	"\1\s[30]I miss being close to you, Dave, this avatar doesn't do you justice...\0\s[6]\e"
+		"\0\s[0]Why exactly are you made of little blocks, Otacon?\w8\1\s[10]Well, I'm technically not actually here right now. I'm using a terminal to communicate with you through this avatar!\0\s[8]\n\n[half]\w8\w8 Huh?\1\s[18]\n\n[half]Maybe I should just come here as myself...\e"
+		
+		"\1\s[30]I miss being close to you, Dave, this avatar doesn't do you justice...\0\s[6]\e"
 	}
 	//You can also put in multiple ifs checking for the same thing to vary the responses. In this case, it's checking to see if they're wearing another shell. You don't need to use elseifs for this! Just an if is fine.
 	if nowshell == "master"
 	{
-	"\0\s[0]Feels nice to have you here, Otacon.\w8\1\s[30]I feel the same way.\e"
-	
-	"\1\s[16]I like seeing you in person, reminds me of the early days of Philanthropy, off the grid in Alaska, just figuring out how to live...\w8\0\s[5]It's been a long time, since then, huh?\e"
-	
-	"\1\s[18]You know, I feel like something's different about you.\0\s[8]What do you mean?\1\s[37]\n\n[half]I don't know. Some je ne sais quois.\0\s[0]\n\n[half]Huh.\1\s[30]\n\n[half]\f[size,10]Je ne sais iroquois..."
+		"\0\s[0]Feels nice to have you here, Otacon.\w8\1\s[30]I feel the same way.\e"
+		
+		"\1\s[16]I like seeing you in person, reminds me of the early days of Philanthropy, off the grid in Alaska, just figuring out how to live...\w8\0\s[5]It's been a long time, since then, huh?\e"
+		
+		"\1\s[18]You know, I feel like something's different about you.\0\s[8]What do you mean?\1\s[37]\n\n[half]I don't know. Some je ne sais quois.\0\s[0]\n\n[half]Huh.\1\s[30]\n\n[half]\f[size,10]Je ne sais iroquois..."
+	}
+
+	//OKUAJUB: Increases the chances of a user who has not clicked Mei Ling's anchor encountering a phrase with her anchor. This is because Mei Ling's FAQ can only be accessed by random talk and I don't want it to be too slim, unlike Gray Fox's, which is supposed to be a bit hidden.
+	if clickMeiLing == 0
+	{
+		"\1\s[10]I wonder how \_a[whoMeiLing]Mei Ling\_a is doing...\e"
 	}
 	
 	//OKUAJUB: You can also put if checks inside a dialogue, so the dialogue changes depending on some variable.
@@ -477,11 +491,6 @@ RandomTalk : nonoverlap_pool
 		"\e" //Closing the dialogue.
 	}
 	
-	//OKUAJUB: Increases the chances of a user who has not clicked Mei Ling's anchor encountering a phrase with her anchor. This is because Mei Ling's FAQ can only be accessed by random talk and I don't want it to be too slim, unlike Gray Fox's, which is supposed to be a bit hidden.
-	if clickMeiLing == 0
-	{
-		"\1\s[10]I wonder how \_a[whoMeiLing]Mei Ling\_a is doing...\e"
-	}
 	//OKUAJUB: Snake feelings 20+ only dialogue
 	if snakeFeelings >= 20 
 	{
@@ -497,14 +506,30 @@ RandomTalk : nonoverlap_pool
 			"\1\s[15]Hey, Snake?\0\s[6]Mhm?\1\s[15]\n\n[half]Could you tell me about a book you like?\0\s[6]\n\n[half]"
 			--
 			"Alright. You probably know of Kubrick's \f[italic,true]2001\f[italic,default], right?\1\s[10]\n\n[half]Of course, my dad loved that film. Apparently he and my real mom used to watch it together.\0\s[0]\n\n[half]The movie had a book too, we've talked about that before. It's different, though. It was developed at the same time as the movie.\w8\w8\s[6] I think Kubrick's film is good, for what he intended it to be. Nonverbal. But the book, by its very nature, shows the reader much more clearly what its intentions are.\w8\s[0] I appreciate the honesty of the words in a book. Books tell you what is.\1\s[10]\n\n[half]That's why you like Jack London, too, right?\0\s[0]\n\n[half]Right. His style of writing, only presenting how the world exists, with no bias but his own.\w8\w8\s[9]"
-			"White Fang is a personal favorite of mine. It's an inverse of Call of The Wild. It's commonly thought to be the lesser of the pair, however the raw feeling of White Fang speaks to me.\w4\w4\0\s[6] I know you don't particularly enjoy reading serious animal on animal violence, Otacon, but I find it's purpose, in showing the will, the need, to survive, crucial to its impact."
+			"White Fang is a personal favorite of mine. It's an inverse of Call of The Wild. It's commonly thought to be the lesser of the pair, however the raw feeling of White Fang speaks to me.\w4\w4\0\s[6] I know you don't particularly enjoy reading serious animal on animal violence, Otacon. But I find it's purpose, in showing the will, the need, to survive, crucial to its impact."
 		}
 		
 		"\1\s[18]You know, I've been thinking about reading more often, but I realized I don't know where to start. I mean, I don't really count manga as reading, unless its for a kids' reading competition, haha.\0\s[6]I could always give you some recommendations.\1\s[15]\n\n[half]\w4You know, you're right, you have a huge collection of books, huh?"
 		
-		"\1\s[16]It was funny seeing how many pulp paperbacks you had, when we first came back to your cabin. I think you had nearly four shelves full.\0\s[6]\n\n[half]I always picked one up when I mushed to town. It became a habit. When they're a buck a piece and keep me busy for a day, it's a pretty good deal."
+		"\1\s[16]It was funny seeing how many pulp paperbacks you had, when we first came back to your cabin. I think you had nearly four shelves full.\0\s[6]I always picked one up when I mushed to town. It became a habit. When they're a buck a piece and keep me busy for a day, it's a pretty good deal."
 		
 		"\0\s[6]I could use a good book."
+	}
+	if snakeFeelings >= 50
+	{
+		"\1\s[16]Hm....\w8\w8 I want to watch Berserk '97 with you, again, Snake.\w8 You know, you remind me of Guts sometimes.\0\s[0]Guts, huh?\1\s[18]\n\n[half]Yeah. When we first met, you did have a violent streak at times. But, the more we got to know each other, I saw you really cared about people.\0\s[6]\n\n[half]Hm. \w8What does that make you? An elf?\1\s[16]\n\n[half]Hahah. Sure, Dave."
+
+		"\0\s[6]\w8\w8\w8\w8...\w8I miss the dogs.\1\s[14]"
+
+		"\0\s[6]Wonder if I can make the Iditarod next year."
+
+		"\0\s[6]What are you best at, %(username)?\w8\w8\w8\w8 Hm.. I always thought of myself best used for killing.\w8 But now I'm not so sure."
+
+		"\0\s[0]Do you think that people are bound by destiny, %(username)?\s[6]\w8 There's always possibility for change in yourself, you know."
+
+		"\0\s[6]\w8\w8...\w8\w8Nightmares will always haunt me.\w8 At least they lessened up when Otacon's been closer."
+
+		"\0\s[6]...Has anyone close to you ever died, %(username)?\w6\s[9] No, you don't need to answer that.\w8\w8\s[0] We always pass down the memory of them to others. Remember that."
 	}
 	if snakeFeelings <= -1
 	{
@@ -512,9 +537,9 @@ RandomTalk : nonoverlap_pool
 		
 		"\0\s[0]Hmph.\e"
 		
-		"\0\s[8]...\n\n\f[italic,true]Snake doesn't seem very talkative.\f[italic,default]\e"
+		"\0\s[8]...\n\n%(ItalicsHush)Snake doesn't seem very talkative.\f[italic,default]\e"
 		
-		"\1\s[14]Snake..? Can I ask you about what happened between you and Big Boss?\w8\w8\w8\w8\0\s[9]...Not here. Not now.\1\s[32] Alright, I understand.\e"
+		"\1\s[14]Snake..? Can I ask you about.. some of the stuff that happened to you in 1990s?\w8\w8\w8\w8\0\s[9]...Not here. Not now.\1\s[32]\n\n[half]Alright, I can see why.\e"
 	}
 	//OKUAJUB: Otacon feelings 20+ only dialogue
 	if otaconFeelings >= 20
@@ -534,201 +559,29 @@ RandomTalk : nonoverlap_pool
 		"\1\s[16]\w8\w8\w8\w8\w8\w8\w8Heheh.\0\s[8]\w8\w8Hm?\1\s[16] Just thinking about that time our meetup point was in a gay bar. That was different.\0\s[5]\n\n[half]I guess that one was different, huh?"
 		
 		"\1\s[16]All these files strewn about reminds me of how meticulously you take care of your books at home, Snake.\0\s[0]What can I say? When you live alone, words become cherished friends.\1\s[10]\n\n[half]I always liked how I could tell when you really loved a book.\w8 There'd be an immaculate,\w4 perfectly kept hardcover copy... and right next to it, a wellworn, dog-eared pulp paperback copy. It always had this warmth to it I couldn't put to words.\w8\w8"
+
+		"\1\s[18]You know, next time we go to Colorado, we need to stop by the Taiko machines there! There's only so many in the US, but playing on the arcade version is a whole different beast to playing at home.\0\s[8]Maybe you should get some practice in before we go. You still choke after every big combo.\1\s[10]\n\n[half]I'd like to see you try, then!\0\s[5]\n\n[half]Don't put out challenges you don't expect me to take.\1\s[31]"
+
+		"\1\s[15]Round 1 is the best of all the arcade chains in the US.\0\s[5]Now where is this sudden revelation coming from?\1\s[18]\n\n[half]Just thinking about it. I mean, they have UFO machines that aren't total scams, dazzling coin pusher games, and awesome prizes!\0\s[8]\n\n[half]\w8And it has nothing to do with the fact they have that blue-haired anime girl game, right?\1\s[17]\n\n[half]\w8Of course not!\w8\s[19] And her name is Hatsune Miku, if it matters to you.\0\s[5]"
 	}
-	
-	//This starts some checks for which month it is. Depending on which, it'll have a chance to draw some random dialogue. Remember, these don't just get added to the dialogue pool, each 'if' acts like one line of random dialogue.
-	if month >= 12
+	if otaconFeelings >= 30
 	{
-		"\0\s[0]It's December, Otacon. You have any plans?\w8\1\s[18]Not really... I guess I'll be spending the holiday season with you?\0\s[0]\n\n[half] I'd prefer the time with you.\e"
-		
-		"\1\s[10]Brrr! Aren't you cold, Snake? It's freezing out!\w8\0\s[5]The sneaking suit has poly-thermal technology, I could and did survive a blizzard.\1\s[13]\n\n[half]Well, jeez, now I'm kind of jealous.\e"
-		
-		"\0\s[0]Are you cold, Otacon?\w8\1\s[10]Hah, umm... Now that you mention it, yes.\0\s[0]\n\n[half]Come closer, then, if you'd like.\1\s[30]\n\n[half]A-Alright!\w8\5\w8\w8\w8 ...Thank you, Dave.\0\s[0]\w8\w8\w8\n\n[half]Any time, Hal.\e"
+		"\1\s[10]Do you have any pets? I never really had any, although my sister used to beg for budgies, haha. I'm a dog person, myself."
+
+		"\1\s[10]Do you play any MMOs? I saw that one called Warframe and I wanted to get into it, but it seemed intimidating. Most MMOs do pose that as a challenge..."
 	}
-	
-	//So you can use these to check for any number of situations. I think this feature is really neat, so I'm going to set up some quick default responses for the months, days, and time of day. If you don't want to do these, you can just delete this whole set of ifs down to the //--Double Envelopes section below.
-	//You can also nest ifs within these, so you could check if it was the 25 of April in the morning for example. You can also add or take away dialogue from these as you like, so if you want to have five dialogue options for April or one for January, you can totally do that.
-	//OKAUJUB: Otacon bitches a lot about the weather, the code chunk.
-	//FUTURE OKUAJUB: I forgot I added that comment, oh my god, haha
-	
-	if month == 1
+	if otaconFeelings >= 50
 	{
-		"\0\s[0]Are you cold, Otacon?\w8\1\s[10]Hah, umm... Now that you mention it, yes.\0\s[0]\n\n[half]Come closer, then, if you'd like.\1\s[30]\n\n[half]A-Alright!\w8\5\w8\w8\w8 ...Thank you, Dave.\0\s[0]\w8\w8\w8\n\n[half]Any time, Hal.\e"
-		
-		"\0\s[5]It's a good thing this sneaking suit was designed for the cold. I'd be freezing.\w8\1\s[10]Yeah, I should huddle up next to you, I'm still just in my jacket!\e"
-		
-		"\0\s[0]Winter can be rough in Alaska.\1\s[18]I guessed that. How so?\0\s[0]\n\n[half]Most of the animals stop coming out. Less of them in the snares. Hunting season is also over, so no big game.\1\s[18]\n\n[half]So, food is the main issue?\0\s[0]\n\n[half]One of them."
+		"\1\s[18]I wish I'd brought my PSP. It's imported from Japan, but that doesn't matter since I homebrewed it anyway."
+
+		"\1\s[18]Hey, %(username), do you like rhythm games? I play a lot of Project DIVA and Taiko no Tatsujin, myself. Really, I'm a sucker for any cute mascot character!"
+
+		"\1\s[15]Hey, %(username), we should play Monster Hunter sometime! I'm into P3rd, but I can be flexible. I can use my Heavy Bowgun to provide some support- bang, bang, you're healed! Hee hee."
 	}
-	if month == 2
-	{
-		"\0\s[0]February. That's the month we first met, Otacon.\w8\1\s[10]Yeah, it's been a long time since then, huh?\e"
-		
-		"\0\s[5]It's a good thing this sneaking suit was designed for the cold. I'd be freezing.\w8\1\s[10]Yeah, I should huddle up next to you, I'm still just in my jacket!\e"
-		
-		"\0\s[0]Are you cold, Otacon?\w8\1\s[10]Hah, umm... Now that you mention it, yes.\0\s[0]\n\n[half]Come closer, then, if you'd like.\1\s[30]\n\n[half]A-Alright!\w8\5\w8\w8\w8 ...Thank you, Dave.\0\s[0]\n\n[half]\w8\w8\w8\nAny time, Hal.\e"
-	}
-	if month == 3
-	{
-		"\0\s[0]It's March, huh?\w8\1\s[10]Yeah, we're not too far from being into the full swing of spring.\e"
-		
-		"\0\s[0]Finally warming up a little. Does that suit you better, Otacon?\w8\1\s[10]Still way too cold for me. You should let me borrow that suit of yours for a while.\0\s[5]\n\n[half]You'll have to get it off me first. Or would you prefer it on?\1\s[11]\n\n[half]S-Snake! Not in front of %(username)!\e"
-	}
-	if month == 4
-	{
-		"\0\s[0]It's April, Otacon.\w8\1\s[10]Yeah... I think we're thinking the same thing.\e"
-		
-		"\0\s[0]Have you heard anything from Raiden, recently, Otacon? I'd think he'd be taking it hard this month.\w8\1\s[14]I've not heard anything from him for a while, sorry...\0\s[8]\e"
-		
-		"\1\s[18]Snake, have you thought of going to updog this year?\w8\0\s[8]What's updog?\w8\w8\w8\w8\w8%(laugh)\0\s[1]\n\n[half]....It's always April 1st for you, isn't it?\1\s[15]\n\n[half]Hahahaha! The look on your face. That was great.\e"
-	}
-	if month == 5
-	{
-		"\1\s[10]Hey, you know, it's May this month, that's the birth month of this Ukagaka!\0\s[8]How do you give birth to a program?\1\s[30]\n\n[half]Uhhh... You don't wanna know.\e"
-		
-		"\0\s[0]May this month, huh?\w8\1\s[10]Yep, it's finally getting warm for a change..\e"
-	}
-	if month == 6
-	{
-		"\1\s[14]Father's day this month.\0\s[9]\w8\w8\w8\w8\w8I don't want to think about it."
-		
-		"\0\s[0]Eugh, I'm sweltering.\w8\1\s[10]Finally, the temperature playing field levels out a little.\e"
-	}
-	if month == 7
-	{
-		"\0\s[0]Eugh, I'm sweltering.\w8\1\s[10]Finally, the temperature playing field levels out a little.\e"
-		
-		"\0\s[0]It's Sunny's birthday this month.\w8\1\s[10]Yeah, July 5th, kind of fitting for someone raised by such... Patriotic people.\0\s[8]\n\n[half]I'll have to think of something to do for her.\e"
-		
-		"\0\s[0]Do you celebrate the fourth of July, Otacon?\w8\1\s[10]Er, not really, no.\0\s[0]\n\n[half]Me neither, we probably have pretty similar reasoning.\e"
-	}
-	if month == 8
-	{
-		"\0\s[0]Eugh, I'm sweltering.\w8\1\s[10]Finally, the temperature playing field levels out a little.\e"
-		
-		"\0\s[0]Otacon, have you gotten any new leads on Metal Gears lately?\w8\1\s[10]Yeah, actually. There's one I'd bet on pretty handily.\0\s[8]\n\n[half]Who is it from?\1\s[30]\n\n[half]Err...\w8\w8 I hacked it out of the Pentagon myself, and I think it's our next stop.\0\s[9]\n\n[half]\w8 Really.\w8\0\s[0]\nAlright then. Good to know.\e"
-		
-		"\1\s[14]\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\0\s[4]...You're thinking about her, aren't you? Emma.\w8\w8\w8\w8\w8\1\s[14]Yeah... Can we talk about something else, please?\0\s[0]\n\n[half]Otacon-\1\s[14]\n\n[half]Please, Dave.\0\s[4]\e"
-		
-		"\1\s[14]\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\ It's my dad's birthday this month.\0\s[4]...\w8\w8\w8\w8\w8\1\s[14]\n\n[half]Yeah...\w8\0\s[4]\n\n[half]It wasn't your fault, you know.\w8\w8\w8\w8\1\s[14]\n\n[half]Maybe.\e"
-	}
-	if month == 9
-	{
-		"\0\s[0]September, huh?\w8\1\s[10]The chill is back in the air, again.\e"
-		
-		"\0\s[0]Otacon, does anything actually happen in September?\w8\1\s[10]Well, Rosh Hashanah is generally in September, that's the Jewish New Year.\1\s[37] My dad was secular, though, so I couldn't tell you much more about it.\0\s[8]\n\n[half]Hm. That's interesting.\e"
-	}
-	if month == 10
-	{
-		"\0\s[0]Any plans for Halloween, Otacon?\w8\1\s[10]It's been a long time since I've had any. I was thinking of dressing up in a lazy Gundam costume, but we don't exactly get many visitors.\e"
-		
-		"\1\s[18]So, have you thought of anything for Halloween, Snake? Any costume you have in mind?\0\s[8]\w8\w8...I haven't thought of that in a long time. Hnnmm...\1\s[15]\n\n[half]Well if you can't think of anything, I'm sure I could think of some \f[italic,true]fun\f[italic,false] costumes.\w8\w8\0\s[2]\cHuh?\w4\1\s[11]\n\n[half]Hey! Don't look at me like \f[italic,true]that.\f[italic,default]\0\s[8]\1\s[11] I meant something like a matching costume set!\1\s[19]\w8\w8\w8 You know, like, Ash and Pikachu or something...\0\s[9]\c\f[italic,true]Otacon...\f[italic,default]\e"
-		
-		"\0\s[0]Boo.\w8\1\s[12]Augh! Don't scare me like that! How did that even work?!\e"
-	}
-	if month == 11
-	{
-		"\0\s[0]November, huh?\w8\1\s[10]It's getting cold!\e"
-		
-		"\0\s[0]Thanksgiving's this month.\w8\1\s[10]Yeah, it's a nice time to pick up all the clearance items they didn't sell.\e"
-	}
-	
-	//These ifs check what day of the week it is.
-	if weekday == 1
-	{
-		"\0\s[0]Monday, huh?\e"
-		
-		"\1\s[18]Snake, you're going to have to watch out, today. Garfield has been seen in the area, and \w4\1\s[13]he's got a bad case of the Mondays!\0\s[8]\w8Otacon. \w8Are you serious?\1\s[16]\n\n[half]\f[italic,true]snrk.\f[italic,false]\e"
-	}
-	if weekday == 2
-	{
-		"\0\s[0]Tuesday, huh?\e"
-		
-		"\0\s[0]Tuesday.\w8\1\s[10]You don't sound very enthused.\0\s[8]\n\n[half]What is there to say about it?\1\s[18]\n\n[half]Huh. I guess you're right.\e"
-	}
-	if weekday == 3
-	{
-		"\0\s[0]Wednesday, huh?\e"
-		
-		"\0\s[0]Middle of the week now, Wednesday.\w8\1\s[10]Hump day!\n\w8\1\s[18]...I never got that saying. \w5What do camels' humps have to do with Wednesday?\0\s[8]\n\n[half]I really don't think that means what you think it means, Otacon.\e"
-	}
-	if weekday == 4
-	{
-		"\0\s[0]Thursday, huh?\e"
-		
-		"\w8\1\s[15]\_b[img\wednesdayasuka.jpg,inline]\w8\w8\0\s[2]How did you do that with your mouth?!\e"
-	}
-	if weekday == 5
-	{
-		"\0\s[0]Friday, huh?\e"
-		
-		"\1\s[10]Weekend is coming up.\w8\0\s[0]No rest for the wicked, though. We'll always have plenty to do.\1\s[17]\n\n[half]Hey! You're not wicked, and neither am I.\0\s[9]\n\n[half]It's a figure of speech, Otacon.\1\s[30]\n\n[half]...oh.\e"
-	}
-	if weekday == 6
-	{
-		"\0\s[0]Saturday, huh?\e"
-		
-		"\1\s[15]It's Anime Night tonight, I love it when Saturday rolls around!\w8\0\s[0]It's nice to spend time with you. One of my favorite days.\e"
-	}
-	if weekday == 7
-	{
-		"\0\s[0]Sunday, huh?\e"
-		
-		"\0\s[0]Sunday, the day of rest.\w8\1\s[10]'No rest for the wicked' though, hm!\0\s[8]\n\n[half]No wonder Emma named her parrot after you, huh?\w5\1\s[14]\n\n[half]Hey.\w8\w8\w8\0\s[4]\n\n[half]Sorry.\e"
-	}
-	//These ifs check for the time of day as defined in bootend.dic. Do you remember the words used for each chunk of time in GetTimeSlot? These are the same words!
-	if timeslot == "earlymorning"
-	{
-		"\0\s[0]Up bright and early, hm?\w8\1\s[10]I can't believe you used to wake up at 6 AM every day, Snake.\0\s[0]\n\n[half]Sometimes earlier. Survival training was brutal.\e"
-		
-		"\1\s[10]Good morning, %(username).\w8\0\s[0]Mhm.\e"
-		
-		"\1\s[31]\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\1\s[32]\w8\w8\w8\w8\w8\w8\1\s[32]\f[italic,true]zzz...\f[italic,false]\1\s[32]\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\1\s[33]\f[height,6]\n\n[half]Julie...? s-stop..\f[height,default]\0\s[8]\w8\w8\w8\1\s[33]\f[height,6] hhuh..? where are you... why.. no, stop..!\f[height,default]\0\s[2]Otacon! Wake up!\1\s[12]\cAh! Who's touching me, what's happening?!\0\s[4]\n\n[half]It's okay, it's me. David. No one is touching you.\1\s[14]\n\n[half]Oh, thank god...\e"
-	}
-	if timeslot == "morning"
-	{
-		"\0\s[0]Had some kit yet? If you feel hungry, it's best to eat.\w8\1\s[10]Yeah, take care of yourself, %(username).\e"
-		
-		"\1\s[31]\0\s[0]Morning.\w8\1\s[31]\f[italic,true]Yawn...\f[italic,false]\e"
-		
-		"\1\s[10]Good morning, %(username).\w8\0\s[0]Mhm.\e"
-		
-		"\1\s[31]\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\1\s[32]\w8\w8\w8\w8\w8\w8\1\s[32]\f[italic,true]zzz...\f[italic,false]\1\s[32]\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\1\s[33]\f[height,6]\n\n[half]Julie...? s-stop..\f[height,default]\0\s[8]\w8\w8\w8\1\s[33]\f[height,6] hhuh..? where are you... why.. no, stop..!\f[height,default]\0\s[2]Otacon! Wake up!\1\s[12]\cAh! Who's touching me, what's happening?!\0\s[4]\n\n[half]It's okay, it's me. David. No one is touching you.\1\s[14]\n\n[half]Oh, thank god...\e"
-	}
-	if timeslot == "lunch"
-	{
-		"\0\s[0]Had a meal yet? If you feel hungry, it's best to eat.\w8\1\s[10]Yeah, take care of yourself, %(username).\e"
-	}
-	if timeslot == "afternoon"
-	{
-		"\1\s[32]Afternoons always make me sleepy...\e"
-		
-		"\0\s[0]Afternoon, %(username).\w8\1\s[10]Have anything fun to do?\e"
-	}
-	if timeslot == "evening"
-	{
-		"\0\s[0]Had a meal yet? If you feel hungry, it's best to eat.\w8\1\s[10]Yeah, take care of yourself, %(username).\e"
-		
-		"\0\s[0]Feeling tired yet, %(username)?\w8\1\s[10]If it's getting dark, you might consider using a blue light filter. It's really better on the eyes!\0\s[5]\n\n[half]You say that, and yet I find you hunched over at 0200 with the brightness on one hundred.\1\s[17]\n\n[half]Hey\w4.\w4.\w4!\w8\1\s[19] I'm allowed to be a hypocrite...\e"
-	}
-	if timeslot == "latenight"
-	{
-		"\1\s[10]Still up, %(username)?\w8\1\s[18] I don't want to be a nag, but sleep is important. Have you considered saving your work and going to bed?\e"
-		
-		"\0\s[0]Every good soldier needs to get enough sleep. Master Miller made sure I knew that. Make sure you have enough time to get at least eight hours, %(username).\e"
-		
-		"\1\s[10]Have you thought about going to bed soon, %(username)? It's getting kind of late...\e"
-	}
-	if timeslot == "midnight"
-	{
-		"\1\s[10]Aren't you ever tired, Snake?\w8\0\s[0]No.\1\s[19]\n\n[half]You've \w4got\w4 to be kidding.\0\s[18]\n\n[half]I do get tired, Otacon. Did you seriously think I don't?\1\s[17]\n\n[half]N-No! You're a super soldier, what am I supposed to expect?\1\s[30]\0\s[10]\n\n[half]Master Miller trained me to always be alert. That's why it seems like I don't get tired.\1\s[19]\n\n[half]Lucky you.\e"
-		
-		"\0\s[0]Your time of night, huh, Otacon?\w8\1\s[10]Yep, this is my favorite time to gather intel, or just anything, really. Probably the otaku in me.\e"
-	}
-		
+
 	//--Multiple Responses
-	//If you've poked around menu.dic or string.dic or read the walkthrough (OKUAJUB: or read pretty much any of my code before this), you may have seen me touch on setting multiple options for any one given bit of dialogue. This kind of dialogue follows much the same format.
-	
-	{ //Again, note the brackets around these unique bits of dialogue. Dialogue that's more complicated than just a single line of "dialogue/more dialogue/more dialogue/end" usually needs to be put in brackets like this. 
+
+	{ //Note the brackets around these unique bits of dialogue. Dialogue that's more complicated than just a single line of "dialogue/more dialogue/more dialogue/end" usually needs to be put in brackets like this. 
 	"\0\s[0]Otacon, what anime are we going to watch next?\w8"
 	//Note this does not end with \e either, since the dialogue isn't done yet.
 	-- //You've probably seen these double dashes before in other .dic files. In this case, these dashes enclose a set of multiple responses. More on double dashes in the coding page on the walkthrough site.
@@ -737,7 +590,7 @@ RandomTalk : nonoverlap_pool
 	"\1\s[15]Cowboy Bebop, the way it protrays life is incredible. Plus, Spike is the coolest! The action scenes are so tense... And oh my gosh, the music! I love those space bounty hunters. What a great show."
 	"\1\s[15]Polar Bear Cafe! It's so cute, Snake. The wolf wants to be a baker..!"
 	"\1\s[18]Blue Exorcist. Now this one is exciting, it's a bit more action focused than my usual picks."
-	"\1\s[18]Evangelion! I know we've dealt with enough robots piloted by kids, but... er, it's still really good."
+	"\1\s[18]Evangelion! I know we've dealt with enough giant robots, even if not piloted by kids, but... er, it's still really good."
 	//As you can see here, there are six potential replies Otacon might have to Snake's question. Each time this dialogue is called, he will randomly select one response from these six.
 	-- //The closing set of dashes for his dialogue options.
 	"\w8\0\s[0]\n\n[half]" //Now we're going back to Snake to set up for his multiple responses in return. This line of tags mostly just sets up for what he will say. Like above, you can see his pose is set in here with \s[0], so he'll have the same pose for each response, and the consistent spacing with \n\n[half].
@@ -746,6 +599,7 @@ RandomTalk : nonoverlap_pool
 	"Sounds good to me."
 	"That one's pretty good."
 	"Huh, have we watched it before? It sounds familiar."
+	"%(snakeGrunt)."
 	"I don't remember seeing that one. At least we won't be watching My Melody for the sixtieth time.\1\s[17]\n\n[half]Hey! ...that's one of my favorites.\0\s[5]\n\n[half]I know. I don't mind."
 	//Following the same pattern as above, Snake will randomly reply with one of these bits of dialogue. Note that these responses are also randomly chosen, so it may go Otacon says response one, Snake says response three, or Otacon says response four, Snake says response two, or so on and so forth. So make sure the exchange will still make sense regardless of what either of them might say.
 	//OKUAJUB: Zar didn't mention this, but like I did here with the final dialog to pull, you can switch back and forth between characters in each response. It functions almost exactly like normal dialogue, only it pulls the start and end from diferent pools.
@@ -753,12 +607,238 @@ RandomTalk : nonoverlap_pool
 	"\e" //Dialogue ends
 	}
 	
+	//This starts some checks for which month it is. Depending on which, it'll have a chance to draw some random dialogue.
+	//OKUAJUB: Using case/when here for readability.
+	//OKAUJUB: Otacon bitches a lot about the weather, the code chunk.
+	//FUTURE OKUAJUB: I forgot I added that comment, oh my god, haha
+	 
+	case month
+	{
+		when 1
+		{
+			"\0\s[0]Are you cold, Otacon?\w8\1\s[10]Hah, umm... Now that you mention it, yes.\0\s[0]\n\n[half]Come closer, then, if you'd like.\1\s[30]\n\n[half]A-Alright!\w8\5\w8\w8\w8 ...Thank you, Dave.\0\s[0]\w8\w8\w8\n\n[half]Any time, Hal.\e"
+		
+			"\0\s[5]It's a good thing this sneaking suit was designed for the cold. I'd be freezing.\w8\1\s[10]Yeah, I should huddle up next to you, I'm still just in my jacket!\e"
+		
+			"\0\s[0]Winter can be rough in Alaska.\1\s[18]I guessed that. How so?\0\s[0]\n\n[half]Most of the animals stop coming out. Less of them in the snares. Hunting season is also over, so no big game.\1\s[18]\n\n[half]So, food is the main issue?\0\s[0]\n\n[half]One of them."
+		}
+		when 2
+		{
+			"\0\s[0]February. That's the month we first met, Otacon.\w8\1\s[10]Yeah, it's been a long time since then, huh?\e"
+		
+			"\0\s[5]It's a good thing this sneaking suit was designed for the cold. I'd be freezing.\w8\1\s[10]Yeah, I should huddle up next to you, I'm still just in my jacket!\e"
+		
+			"\0\s[0]Are you cold, Otacon?\w8\1\s[10]Hah, umm... Now that you mention it, yes.\0\s[0]\n\n[half]Come closer, then, if you'd like.\1\s[30]\n\n[half]A-Alright!\w8\5\w8\w8\w8 ...Thank you, Dave.\0\s[0]\n\n[half]\w8\w8\w8\nAny time, Hal.\e"
+		}
+		when 3
+		{
+			"\0\s[0]It's March, huh?\w8\1\s[10]Yeah, we're not too far from being into the full swing of spring.\e"
+		
+			"\0\s[0]Finally warming up a little. Does that suit you better, Otacon?\w8\1\s[10]Still way too cold for me. You should let me borrow that suit of yours for a while.\0\s[5]\n\n[half]You'll have to get it off me first. Or would you prefer it on?\1\s[11]\n\n[half]S-Snake! Not in front of %(username)!\e"
+
+			"\1\s[16]March into April...\e"
+		}
+		when 4
+		{
+			"\0\s[0]It's April, Otacon.\w8\1\s[10]Yeah... I think we're thinking the same thing.\e"
+		
+			"\0\s[0]Have you heard anything from Raiden, recently, Otacon? I'd think he'd be taking it hard this month.\w8\1\s[14]I've not heard anything from him for a while, sorry...\0\s[8]\e"
+		
+			"\1\s[18]Snake, have you thought of going to updog this year?\w8\0\s[8]What's updog?\w8\w8\w8\w8\w8%(laugh)\0\s[1]\n\n[half]....It's always April 1st for you, isn't it?\1\s[15]\n\n[half]Hahahaha! The look on your face. That was great.\e"
+		}
+		when 5
+		{
+			"\1\s[10]Hey, you know, it's May this month, that's the birth month of this Ukagaka!\0\s[8]How do you give birth to a program?\1\s[30]\n\n[half]Uhhh... You don't wanna know.\e"
+		
+			"\0\s[0]May this month, huh?\w8\1\s[10]Yep, it's finally getting warm for a change..\e"
+		}
+		when 6
+		{
+			"\1\s[14]Father's day this month.\0\s[9]\w8\w8\w8\w8\w8I don't want to think about it."
+		
+			"\0\s[0]Eugh, I'm sweltering.\w8\1\s[10]Finally, the temperature playing field levels out a little.\e"
+
+			"\1\s[16]I always think about the 'Hedgehog's Dilemma' at this time of year. Because of the cicadas."
+		}
+		when 7
+		{
+			"\0\s[0]Eugh, I'm sweltering.\w8\1\s[10]Finally, the temperature playing field levels out a little.\e"
+		
+			"\0\s[0]It's Sunny's birthday this month.\w8\1\s[10]Yeah, July 5th, kind of fitting for someone raised by such... Patriotic people.\0\s[8]\n\n[half]I'll have to think of something to do for her.\e"
+		
+			"\0\s[0]Do you celebrate the fourth of July, Otacon?\w8\1\s[10]Er, not really, no.\0\s[0]\n\n[half]Me neither, we probably have pretty similar reasoning.\e"
+			
+		}
+		when 8
+		{
+			"\0\s[0]Eugh, I'm sweltering.\w8\1\s[10]Finally, the temperature playing field levels out a little.\e"
+		
+			"\0\s[0]Otacon, have you gotten any new leads on Metal Gears lately?\w8\1\s[10]Yeah, actually. There's one I'd bet on pretty handily.\0\s[8]\n\n[half]Who is it from?\1\s[30]\n\n[half]Err...\w8\w8 I hacked it out of the Pentagon myself, and I think it's our next stop.\0\s[9]\n\n[half]\w8 Really.\w8\0\s[0]\nAlright then. Good to know.\e"
+		
+			"\1\s[14]\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\0\s[4]...You're thinking about her, aren't you? Emma.\w8\w8\w8\w8\w8\1\s[14]Yeah... Can we talk about something else, please?\0\s[0]\n\n[half]Otacon-\1\s[14]\n\n[half]Please, Dave.\0\s[4]\e"
+		
+			"\1\s[14]\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\ It's my dad's birthday this month.\0\s[4]...\w8\w8\w8\w8\w8\1\s[14]\n\n[half]Yeah...\w8\0\s[4]\n\n[half]It wasn't your fault, you know.\w8\w8\w8\w8\1\s[14]\n\n[half]Maybe.\e"
+		}
+		when 9
+		{
+			"\0\s[0]September, huh?\w8\1\s[10]The chill is back in the air, again.\e"
+		
+			"\0\s[0]Otacon, does anything actually happen in September?\w8\1\s[10]Well, Rosh Hashanah is generally in September, that's the Jewish New Year.\1\s[37] My dad was secular, though, so I couldn't tell you much more about it.\0\s[8]\n\n[half]Hm. That's interesting.\e"
+
+			"\1\s[16]Hahaha, I remember being so excited to torrent Evangelion: 1.0 when it came out. I wore out my ancient bootlegged fansub of the original series from the time I heard news of it to the release. I was hot on all the new scene sites popping up, and torrenting was way better than IRC!.. As long as there were other people seeding... which was always hit or miss unless you wanted to watch, oh, I don't know.. Naruto or Bleach or something. It's so strange to think about, these days."
+		}
+		when 10
+		{
+			"\0\s[0]Any plans for Halloween, Otacon?\w8\1\s[10]It's been a long time since I've had any. I was thinking of dressing up in a lazy Gundam costume, but we don't exactly get many visitors.\e"
+		
+			"\1\s[18]So, have you thought of anything for Halloween, Snake? Any costume you have in mind?\0\s[8]\w8\w8...I haven't thought of that in a long time. Hnnmm...\1\s[15]\n\n[half]Well if you can't think of anything, I'm sure I could think of some \f[italic,true]fun\f[italic,false] costumes.\w8\w8\0\s[2]\cHuh?\w4\1\s[11]\n\n[half]Hey! Don't look at me like \f[italic,true]that.\f[italic,default]\0\s[8]\1\s[11] I meant something like a matching costume set!\1\s[19]\w8\w8\w8 You know, like, Ash and Pikachu or something...\0\s[9]\c\f[italic,true]Otacon...\f[italic,default]\e"
+		
+			"\0\s[0]Boo.\w8\1\s[12]Augh! Don't scare me like that! How did that even work?!\e"
+		}
+		when 11
+		{
+			"\0\s[0]November, huh?\w8\1\s[10]It's getting cold!\e"
+		
+			"\0\s[0]Thanksgiving's this month.\w8\1\s[10]Yeah, it's a nice time to pick up all the clearance items they didn't sell.\e"
+		}
+		when 12
+		{
+			"\0\s[0]It's December, Otacon. You have any plans?\w8\1\s[18]Not really... I guess I'll be spending the holiday season with you?\0\s[0]\n\n[half] I'd prefer the time with you.\e"
+		
+			"\1\s[10]Brrr! Aren't you cold, Snake? It's freezing out!\w8\0\s[5]The sneaking suit has poly-thermal technology, I could and did survive a blizzard.\1\s[13]\n\n[half]Well, jeez, now I'm kind of jealous.\e"
+		
+			"\0\s[0]Are you cold, Otacon?\w8\1\s[10]Hah, umm... Now that you mention it, yes.\0\s[0]\n\n[half]Come closer, then, if you'd like.\1\s[30]\n\n[half]A-Alright!\w8\5\w8\w8\w8 ...Thank you, Dave.\0\s[0]\w8\w8\w8\n\n[half]Any time, Hal.\e"
+		}
+
 	}
-} //Don't delete this bracket.
+	
+	//These ifs check what day of the week it is.
+	case weekday
+	{
+		when 1
+		{
+			"\0\s[0]Monday, huh?\e"
+			
+			"\1\s[18]Snake, you're going to have to watch out, today. Garfield has been seen in the area, and \w4\1\s[13]he's got a bad case of the Mondays!\0\s[8]\w8Otacon. \w8Are you serious?\1\s[16]\n\n[half]%(ItalicsHush)snrk.\f[italic,false]\e"
+		}
+		when 2
+		{
+			"\0\s[0]Tuesday, huh?\e"
+			
+			"\0\s[0]Tuesday.\w8\1\s[10]You don't sound very enthused.\0\s[8]\n\n[half]What is there to say about it?\1\s[18]\n\n[half]Huh. I guess you're right.\e"
+		}
+		when 3
+		{
+			"\0\s[0]Wednesday, huh?\e"
+			
+			"\0\s[0]Middle of the week now, Wednesday.\w8\1\s[10]Hump day!\n\w8\1\s[18]...I never got that saying. \w5What do camels' humps have to do with Wednesday?\0\s[8]\n\n[half]I really don't think that means what you think it means, Otacon.\e"
+		}
+		when 4
+		{
+			"\0\s[0]Thursday, huh?\e"
+			
+			"\w8\1\s[15]\_b[img\wednesdayasuka.jpg,inline]\w8\w8\0\s[2]How did you do that with your mouth?!\e"
+		}
+		when 5
+		{
+			"\0\s[0]Friday, huh?\e"
+			
+			"\1\s[10]Weekend is coming up.\w8\0\s[0]No rest for the wicked, though. We'll always have plenty to do.\1\s[17]\n\n[half]Hey! You're not wicked, and neither am I.\0\s[9]\n\n[half]It's a figure of speech, Otacon.\1\s[30]\n\n[half]...oh.\e"
+		}
+		when 6
+		{
+			"\0\s[0]Saturday, huh?\e"
+			
+			"\1\s[15]It's Anime Night tonight, I love it when Saturday rolls around!\w8\0\s[0]It's nice to spend time with you. One of my favorite days.\e"
+		}
+		when 7
+		{
+			"\0\s[0]Sunday, huh?\e"
+			
+			"\0\s[0]Sunday, the day of rest.\w8\1\s[10]'No rest for the wicked' though, hm!\0\s[8]\n\n[half]No wonder Emma named her parrot after you, huh?\w5\1\s[14]\n\n[half]Hey.\w8\w8\w8\0\s[4]\n\n[half]Sorry.\e"
+		}
+	}
+	
+	//These ifs check for the time of day as defined in bootend.dic. Do you remember the words used for each chunk of time in GetTimeSlot? These are the same words!
+	case timeslot
+	{
+		when "earlymorning"
+		{
+			"\0\s[0]Up bright and early, hm?\w8\1\s[10]I can't believe you used to wake up at 6 AM every day, Snake.\0\s[0]\n\n[half]Sometimes earlier. Survival training was brutal.\e"
+			
+			"\1\s[10]Good morning, %(username).\w8\0\s[0]Mhm.\e"
+			
+			"\1\s[31]\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\1\s[32]\w8\w8\w8\w8\w8\w8\1\s[32]\f[italic,true]zzz...\f[italic,false]\1\s[32]\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\1\s[33]\f[height,6]\n\n[half]Julie...? s-stop..\f[height,default]\0\s[8]\w8\w8\w8\1\s[33]\f[height,6] hhuh..? where are you... why.. no, stop..!\f[height,default]\0\s[2]Otacon! Wake up!\1\s[12]\cAh! Who's touching me, what's happening?!\0\s[4]\n\n[half]It's okay, it's me. David. No one is touching you.\1\s[14]\n\n[half]Oh, thank god...\e"
+		}
+		when "morning"
+		{
+			"\0\s[0]Had some kit yet? If you feel hungry, it's best to eat.\w8\1\s[10]Yeah, take care of yourself, %(username).\e"
+			
+			"\1\s[31]\0\s[0]Morning.\w8\1\s[31]\f[italic,true]Yawn...\f[italic,false]\e"
+			
+			"\1\s[10]Good morning, %(username).\w8\0\s[0]Mhm.\e"
+			
+			"\1\s[31]\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\1\s[32]\w8\w8\w8\w8\w8\w8\1\s[32]\f[italic,true]zzz...\f[italic,false]\1\s[32]\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8\1\s[33]\f[height,6]\n\n[half]Julie...? s-stop..\f[height,default]\0\s[8]\w8\w8\w8\1\s[33]\f[height,6] hhuh..? where are you... why.. no, stop..!\f[height,default]\0\s[2]Otacon! Wake up!\1\s[12]\cAh! Who's touching me, what's happening?!\0\s[4]\n\n[half]It's okay, it's me. David. No one is touching you.\1\s[14]\n\n[half]Oh, thank god...\e"
+		}
+		when "lunch"
+		{
+			"\0\s[0]Had a meal yet? If you feel hungry, it's best to eat.\w8\1\s[10]Yeah, take care of yourself, %(username).\e"
+		}
+		when "afternoon"
+		{
+			"\1\s[32]Afternoons always make me sleepy...\e"
+			
+			"\0\s[0]Afternoon, %(username).\w8\1\s[10]Have anything fun to do?\e"
+		}
+		when "evening"
+		{
+			"\0\s[0]Had a meal yet? If you feel hungry, it's best to eat.\w8\1\s[10]Yeah, take care of yourself, %(username).\e"
+			
+			"\0\s[0]Feeling tired yet, %(username)?\w8\1\s[10]If it's getting dark, you might consider using a blue light filter. It's really better on the eyes!\0\s[5]\n\n[half]You say that, and yet I find you hunched over at 0200 with the brightness on one hundred.\1\s[17]\n\n[half]Hey\w4.\w4.\w4!\w8\1\s[19] I'm allowed to be a hypocrite...\e"
+		}
+		when "latenight"
+		{
+			"\1\s[10]Still up, %(username)?\w8\1\s[18] I don't want to be a nag, but sleep is important. Have you considered saving your work and going to bed?\e"
+			
+			"\0\s[0]Every good soldier needs to get enough sleep. Master Miller made sure I knew that. Make sure you have enough time to get at least eight hours, %(username).\e"
+			
+			"\1\s[10]Have you thought about going to bed soon, %(username)? It's getting kind of late...\e"
+		}
+		when "midnight"
+		{
+			"\1\s[10]Aren't you ever tired, Snake?\w8\0\s[0]No.\1\s[19]\n\n[half]You've \w4got\w4 to be kidding.\0\s[18]\n\n[half]I do get tired, Otacon. Did you seriously think I don't?\1\s[17]\n\n[half]N-No! You're a super soldier, what am I supposed to expect?\1\s[30]\0\s[10]\n\n[half]Master Miller trained me to always be alert. That's why it seems like I don't get tired.\1\s[19]\n\n[half]Lucky you.\e"
+			
+			"\0\s[0]Your time of night, huh, Otacon?\w8\1\s[10]Yep, this is my favorite time to gather intel, or just anything, really. Probably the otaku in me.\e"
+		}
+	}
+	
+	}//Don't delete this bracket. It closes the else statement.
+} //Don't delete this bracket. It closes the random talk.
 
+//CHAINS
+//Pay careful attention to the CHAIN text and double brackets for these. Chain name, opening Double brackets, CHAIN, dialogue, closing double brackets, CHAIN. Copy-paste to be safe.
+//Start chains with \e:chain=name. End with \e:chain=end.
 
-//Alright, we're done with the random conversations for now, but there are a few other things in aitalk that we'll need to fill out too.
+achain
+{{CHAIN
+	//NOT RANDOM, said in order.
 
+	//Start
+	"\0\s[0]Here is the second part of the chain.\w8\1\s[10]Will there be more?\e"
+	
+	//Middle
+	"\0\s[0]This is the third part of chained dialogue.\1\w8\s[10]This will lead to a fourth part.\e"
+	
+	//End
+	"\0\s[0]This is the fourth piece of chained dialogue.\1\w8\s[10]This is the end.\e:chain=end"
+}}CHAIN
+
+anotherchain
+{{CHAIN
+	"\0\s[0]This is the second example of chained dialogue.\1\w8\s[10]This will only have two parts.\e"
+	
+	"\0\s[0]This is the last piece of the second example of chained dialogue\1\w8\s[10]This will end here.\e:chain=end"
+}}CHAIN
 
 //-OnMinuteChange
 //These are time-related bits of dialogue for your ghost to say. If you're uninterested, you can delete it all except for a line for MikireTalk. So it'd look something like
@@ -803,7 +883,7 @@ OnMinuteChange //This is what will trigger time-based dialogue for your Ghost.
  {
 	HourCheck //checks to see if an hour has passed, ignore it
 	--
-	if missionTimer >= 1 || codecTimer >= 1
+	if SnakeIsGone
 	{
 		if minute == 0 //These ifs will check what time it is. Here, it's seeing if the minute equals zero...
 		{
@@ -869,38 +949,28 @@ OnSecondChange
 	
 	//Codec and Missions stuff.
 	
-	if codecTimer == "" || codecTimer == "finished"
+	if OtaconIsBusy && codecTimer != ""
 	{
-		//OKUAJUB: nothing happens.
+		codecTimer = codecTimer - 1  //Reduces the timer by 1 every second.
 	}
 	elseif codecTimer == 0
 	{
 		codecTimer = "finished"
 		"\1\s[38]Hey, %(username), I'm done searching the frequencies! Check back in with me soon, okay?\x\e"
 	}
-	else
+	if SnakeIsGone && missionTimer != ""
 	{
-		codecTimer = codecTimer - 1 //Reduces the codec search timer by 1 every second.
-		
-	}
-	
-	if missionTimer == "" || missionTimer == "finished"
-	{
-		//OKUAJUB: nothing happens.
+		missionTimer = missionTimer - 1  //Reduces the mission timer by 1 every second.
 	}
 	elseif missionTimer == 0
 	{
 		missionTimer = "finished"
 		"\0\s[-1]I'm all done here, Otacon. Be back as soon as possible.\1\s[38]Great, Snake. See you soon."
 	}
-	else
-	{
-		missionTimer = missionTimer - 1 //Reduces the mission timer by 1 every second.
-	}
 	
 	if codecFatigue > 0
 	{
-		codecFatigue = codecFatigue - 1 //Counts down the Codec fatigue timer.
+		codecFatigue = codecFatigue - 1 //Counts down the Codec fatigue timer. Stops at 0.
 	}
 	
 	if missionFatigue > 0
@@ -932,9 +1002,10 @@ OnSecondChange
 	mikireflag = reference1 //reference1 is if the ghost is offscreen or not
 	if reference2 == 1
 	{
- 		//This dialogue is for when the two characters are overlapping each other. If you don't want your characters to care, you can just leave this blank.
+ 		//This dialogue is for when the two characters are overlapping each other.
+		//OKUAJUB: This was annoying so I commented it out, lol. Maybe I'll add it to the config.
 		
- 		"\0\s[0]Hal, I don't mind being close, but %(username) can't see both of us well.\w8\1\s[19]Huh, isn't your resolution %screenwidthx%screenheight, %(username)? We should have enough room... I'll move over.\1\s[18]\4\e"
+ 		//"\0\s[0]Hal, I don't mind being close, but %(username) can't see both of us well.\w8\1\s[19]Huh, isn't your resolution %screenwidthx%screenheight, %(username)? We should have enough room... I'll move over.\1\s[18]\4\e"
 		
 		//You can see here the use of two envelopes, screenwidth and screenheight, to tell the user their resolution. Oddly, they are not in parentheses. I'm not sure why this is, but they don't display right otherwise. An odd quirk with these two envelopes.
 		//Note also how Otacon moves away at the end of the dialogue. This is due to the \4 tag. That will make any one character move away from the other if they are able. I talked about this tag and its counterpart tag \5 in the SakuraScript page on the walkthrough.
@@ -970,15 +1041,15 @@ EndMikireTalk
 
 OnSurfaceRestore
  {
-	if codecTimer > 0 && codecTimer != "finished" //Codec timer and Mission timer should never be active at the same time, since Snake AND Otacon are involved in the missions.
+	if codecTimer > 0 && codecTimer != "finished" //Snake is present.
 	{
 		"\0\s[0]\1\s[38]"
 	}
-	elseif missionTimer > 0 && missionTimer != "finished"
+	elseif SnakeIsGone //Snake is not present.
 	{
 		"\0\s[-1]\1\s[38]"
 	}
-	else
+	else //Default
 	{
 		"\0\s[0]\1\s[10]\e"
 	}

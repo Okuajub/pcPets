@@ -19,21 +19,46 @@ OnFileDrop2
 	{
 		when ".jpg", ".jpeg", ".bmp", ".png" //These are the formats your ghost will recognize as image files to set as the background.
 		{
-			Wallpaperfile = reference0
-			
-			"\1\s[10]Would you like me to set this as your wallpaper? It's %(_filename)%(_fileext).\w8\1\s[10]I can set it a couple different ways. Which way  would you like it?\n\n[half]/
-			\![*]\q[Centered,SetWallpaper_0]\n/
-			\![*]\q[Tiled,SetWallpaper_1]\n/
-			\![*]\q[Stretched,SetWallpaper_2]\n\n[half]/
-			\![*]\q[No thanks,SetWallpaper_Cancel]\e"
+			if OtaconIsBusy
+			{
+				"\1\s[38]Sorry, %(username), I'm a bit busy right now.. Can I set your wallpaper later?\e"
+			}
+			else
+			{
+				Wallpaperfile = reference0
+				
+				"\1\s[10]"
+				--
+				"Would you like me to set this as your wallpaper? It's %(_filename)%(_fileext).\w8\1\s[10]I can set it a couple different ways. Which way would you like it?\n\n[half]/
+				\![*]\q[Centered,SetWallpaper_0]\n/
+				\![*]\q[Tiled,SetWallpaper_1]\n/
+				\![*]\q[Stretched,SetWallpaper_2]\n\n[half]/
+				\![*]\q[No thanks,SetWallpaper_Cancel]\e"
+			}
 		}
 		when ".mid", ".wav", ".mp3", ".wma", ".au" //Other file formats you might want to give your ghost a specific response to.
 		{
-			"\1\s[10]%(_filename)%(_fileext) is an audio file. Sorry, I'm not a flele, I can't play music.\0\s[0]You'd make a cute idol singer, though.\1\s[11] Pff, hey!\e"
+			if OtaconIsBusy
+			{
+				"\1\s[38]%(_filename)%(_fileext) is an audio file. Sorry, I'm not a flele, I can't play music.\e"
+			}
+			else
+			{
+				"\1\s[10]%(_filename)%(_fileext) is an audio file. Sorry, I'm not a flele, I can't play music.\0\s[0]You'd make a cute idol singer, though.\1\s[11] Pff, hey!\e"
+			}
 		}
 		others //Any other file format. As a note here, if you drop something ghost-related on them that does not have an install.txt, then they won't install it and will just say this response. If you are testing your balloon or nar files and you get this response instead of a proper installation, you should check and make sure you have an install.txt in the file!
 		{
-			"\1\s[10]This is %(_filename)%(_fileext). Sorry, I can't do anything with this.\e"
+			if OtaconIsBusy
+			{
+				"\1\s[38]"
+			}
+			else
+			{
+				"\1\s[10]"
+			}
+			--
+			"This is %(_filename)%(_fileext). Sorry, I can't do anything with this.\e"
 		}
 	}
 }
@@ -63,7 +88,14 @@ Select.SetWallpaper_Cancel
  
 OnInstallBegin
  {
-	"\0\s[0]Installing something new, huh?\w8\1\s[10]This .zip or .nar contains an install.txt file, I'll get it set up!\e"
+	if OtaconIsBusy
+	{
+		"\1\s[38]Looks like this .zip or .nar contains an install.txt file. I'll get it set up for you...\e"
+	}
+	else
+	{
+		"\0\s[0]Installing something new, huh?\w8\1\s[10]This .zip or .nar contains an install.txt file, I'll get it set up!\e"
+	}
  }
 
  //---- OnInstallComplete -------------------------------------------------------
@@ -75,44 +107,88 @@ OnInstallComplete
  	--
 	if reference0 == "shell" //This is checking to see if what you installed is classified as a shell in the install.txt. Remember the line in install.txt that said type,ghost or type,shell? This is why that line is important, that's what tells the program what it's installing like so.
  	{	
-		if reference1 == "Octopus" //This is the name of your shell as you defined in descript.txt in the shell folder.
+		if reference1 == "Snake and Otacon - Solid Shell" //This is the name of your shell as you defined in descript.txt in the shell folder.
 		{
-		"\s[10]We've installed the Octopus shell.\1\s[18]Hey... Okuajub never finished that one. How'd you get it?\e"
-		//Replace if needed.
-		}
-		elseif reference1 == "Snake and Otacon - Solid Shell" //As in other files, you can use elseif to expand a list like this to include as many shells as you have or think you'll make. See bootend.dic for more details about elseif.
-		{
-		"\s[10]We've installed the Solid Shell.\1\s[15]Sweet! This shell is the most current look for us. It'll also let me show up as myself in person!\e"
-		//Replace if needed.
+			if OtaconIsBusy
+			{
+				"\s[38]We've installed the Solid Shell.\1\s[15] Sweet! This shell is the most current look for us. It'll also let me show up as myself in person!\e"
+			}
+			else
+			{
+				"\s[10]We've installed the Solid Shell.\1\s[15] Sweet! This shell is the most current look for us. It'll also let me show up as myself in person!\e"
+			}
+			//Replace if needed.
 		}
 		else //For any other shell they may install.
 		{
-		"\s[10]We've installed a new shell.\w8\1\s[10]It's called  %(reference1), just so you know.\n\n\1\s[18]Okuajub didn't make this one, is it for another ghost?\e"
-		//%(reference1) here would be the name of the shell they installed. Replace if needed.
+			if OtaconIsBusy
+			{
+				"\s[38]We've installed a new shell. \w8It's called  %(reference1), just so you know. \n\nOkuajub didn't make this one, is it for another ghost?\e"
+			}
+			else
+			{
+				"\s[10]We've installed a new shell. \w8\1\s[10]It's called  %(reference1), just so you know. \n\n\1\s[18]Okuajub didn't make this one, is it for another ghost?\e"
+			}
+			//%(reference1) here would be the name of the shell they installed. Replace if needed.
 		}
  	}
 	elseif reference0 == "ghost" //if the type of the file they're installing is a ghost.
  	{
-		"\0\s[0]We've installed a new Ghost.\w8\1\s[10]It's called %(reference1).\e"
+		if OtaconIsBusy
+		{
+			"\1\s[38]All up and running. Welcome, %(reference1)!"
+		}
+		else
+		{
+			"\0\s[0]New Ghost, huh?\w8\1\s[10]All up and running. Welcome, %(reference1)!\e"
+		}
 		//Reference1 here would be the name of the ghost. Replace as needed.
  	}
 	elseif reference0 == "balloon" //if the type of file is a balloon
  	{
-		"\0\s[0]We've installed a new balloon.\w8\1\s[10]It's called %(reference1).\e"
+		if OtaconIsBusy
+		{
+			"\1\s[38]Alright, the balloon is set up. \w8\1\s[38]It's called %(reference1).\e"
+		}
+		else
+		{
+			"\0\s[0]We've installed a new balloon.\w8\1\s[10]It's called %(reference1).\e"
+		}
 		//Reference1 here would be the name of the balloon. Replace as needed.
  	}
 	elseif reference0 == "plugin" //if the type of file is a plug-in, like a saori of some kind.
  	{
-		"\0\s[0]We've installed a plug-in.\w8\1\s[10]It's called %(reference1).\e"
+		if OtaconIsBusy
+		{
+			"\1\s[38]Alright, the plug-in is set up. \w8\1\s[38]It's called %(reference1).\e"
+		}
+		else
+		{
+			"\0\s[0]We've installed a new plug-in.\w8\1\s[10]It's called %(reference1).\e"
+		}
 		//Reference1 here would be the name of the plug-in. Replace as needed.
  	}
 	elseif reference0 == "calendar skin" //if the type of file is a calendar skin
 	{
-		"\0\s[0]We've installed a calendar skin.\w8\1\s[10]It's called %(reference1)."
+		if OtaconIsBusy
+		{
+			"\1\s[38]Alright, the calendar skin is installed. \w8\1\s[38]It's called %(reference1).\e"
+		}
+		else
+		{
+			"\0\s[0]We've installed a new balloon.\w8\1\s[10]It's called %(reference1).\e"
+		}
 	}
 	else //for any other file they'd install
 	{
-		"\s[10]We installed %(reference1)."
+		if OtaconIsBusy
+		{
+			"\1\s[38]Alright, %(reference1) has been set up!\e"
+		}
+		else
+		{
+			"\s[10]We installed %(reference1)."
+		}
 	}
 }
 
@@ -121,17 +197,33 @@ OnInstallComplete
 
 OnInstallFailure
  {
-	"\1\s[18]Huh, the installation failed.\n\n[half]\w5 \0\s[8] Why?1\s[18]" //this first bit of dialogue begins the explanation of what happened. You can replace this with an appropriate intro statement.
-	--
-	if reference0 == "unsupported" //These if statements determine how it happened to finish the piece of dialogue. This checks if the reason it failed is because it was unsupported.
+	if OtaconIsBusy
 	{
-	"This file is unsupported.\1\s[37] Sorry, %(username), I can't install this.\e"
-	//Replace with whatever dialogue for an unsupported file you may come up with.
-	}	
-	elseif reference0 == "extraction" //This checks if the file didn't extract properly.
+		"\1\s[38]Huh, the installation failed...\n\n[half]\w5" //this first bit of dialogue begins the explanation of what happened. You can replace this with an appropriate intro statement.
+		--
+		if reference0 == "unsupported" //These if statements determine how it happened to finish the piece of dialogue. This checks if the reason it failed is because it was unsupported.
+		{
+		"This file is unsupported.\1\s[38] Sorry, %(username), I can't install this.\e"
+		//Replace with whatever dialogue for an unsupported file you may come up with.
+		}	
+		elseif reference0 == "extraction" //This checks if the file didn't extract properly.
+		{
+		"The file couldn't be extracted properly. \1\s[38]Sorry, %(username).\e"
+		//See above but for a failed extraction.
+		}
+	}
+	else
 	{
-	"The file couldn't be extracted properly. \1\s[37]Sorry, %(username).\e"
-	//See above but for a failed extraction.
+		"\1\s[18]Huh, the installation failed.\n\n[half]\w5 \0\s[8] Why?1\s[18]" 
+		--
+		if reference0 == "unsupported"
+		{
+		"This file is unsupported.\1\s[37] Sorry, %(username), I can't install this.\e"
+		}	
+		elseif reference0 == "extraction"
+		{
+		"The file couldn't be extracted properly. \1\s[37]Sorry, %(username).\e"
+		}
 	}
  }
  
@@ -140,8 +232,14 @@ OnInstallFailure
  
 OnInstallRefuse
  {
-	"\1\s[37]We can't use this. The install refused. \w4It may be for %(reference0) instead?\e"
-	
+	if OtaconIsBusy
+	{
+		"\1\s[38]We can't use this. The install refused. \w4It may be for %(reference0) instead?\e"
+	}
+	else
+	{
+		"\1\s[37]We can't use this. The install refused. \w4It may be for %(reference0) instead?\e"
+	}
 	//reference0 in this function refers to the ghost this file is associated with, probably the name of the ghost listed in its install.txt file. You would see this if you dropped a shell made for a different ghost on your current ghost, for example. They can't install a shell for themselves they can't use, right? Anyway, replace this with what you wish, you can use the reference0 envelope or not if you want.
  }
 
@@ -155,7 +253,15 @@ OnInstallRefuse
 
 OnVanishSelecting
 {
-	"\1\s[10]Hey, thinking of uninstalling?\w8\0\s[8]Be careful about what you click here, hm?\1\s[18] Make sure that you really want to uninstall, the entire ghost will be deleted!\e"
+	if OtaconIsBusy
+	{
+		"\1\s[38]Wait a second, I'm not sure if you uninstall now that we'll be stable if you ever reinstall. You should wait for our task to finish and then try."
+	}
+	else
+	{
+		"\1\s[10]Hey, thinking of uninstalling?\w8\0\s[8]Be careful about what you click here, hm?\1\s[18] Make sure that you really want to uninstall, the entire ghost will be deleted!\e"
+	}
+	
 }
 
 //OnVanishSelected
@@ -198,13 +304,18 @@ OnVanishButtonHold
  
 OnVanished
  {
-	if reference0 == "Raiden and Emma" // OKUAJUB: :) maybe I'll persue this one day.
+
+	if OtaconIsBusy
 	{
-		"\1\s[13]\0\s[7]You deleted Raiden?!\1\s[13] Oh, god, Emma... Not again...\f[height,6] Why does this always happen to me..?\f[height,default]\e"
-	} 
-	else
+		"\1\s[38]Mm.. %(reference0). Maybe they'll be okay.\w8\w8...."
+		--
+		if missionTimer > 0 && missionTimer != "finished"
+		{
+			"I hope Snake makes it back.\e"
+		}
+	}
 	{
-	"\0\s[0]\1\s[10]Hey, looks like you just uninstalled %(reference0). Maybe they'll be okay.\w8\0\s[0]Harsh.\e"
+		"\0\s[0]\1\s[10]Hey, looks like you just uninstalled %(reference0). Maybe they'll be okay.\w8\0\s[6]Just another person, committed only to memory.\e"
 	}
 	
 	//reference0 here is the name of the other ghost.
@@ -229,13 +340,21 @@ OnVanished
  
 OnBIFFBegin
  {
-	"\1\s[18]Alright... let's see if you have any messages.\w8\e"
+	if OtaconIsBusy
+	{
+		"\1\s[38]"
+	}
+	else
+	{
+		"\1\s[18]"
+	}
+	--
+	"Alright... let's see if you have any messages.\w8\e"
 	
-	"\1\s[18]Got it, I'll check your inbox...\w8\e"
+	"Got it, I'll check your inbox...\w8\e"
 	
-	"\1\s[18]I'll connect to the email server.."
+	"I'll connect to the email server.."
 	
-	"\1\s[18]"
  }
 
  
@@ -244,26 +363,57 @@ OnBIFFBegin
  
 OnBIFFComplete
  {
+	if OtaconIsBusy
+	{
+		"\1\s[38]"
+	}
+	else
+	{
+		"\1\s[10]"
+	}
+	--
 	if reference0 == 0 //If you have no new mail.
  	{
- 		"\1\s[37]There is no new mail. Sorry.\e"
+ 		if codecTimer == "" || missionTimer == ""
+		{
+			"\1\s[37]"
+		}
+		--
+		"There is no new mail. Sorry.\e"
 	}
 	elseif reference0 == 1 //If you have one new email.
  	{
- 		"\1\s[10]There is one new email. Must be pretty important to be the only one, huh?\e"
+		if codecTimer == "" || missionTimer == ""
+		{
+			"\1\s[10]"
+		}
+		--
+ 		"There is one new email. Must be pretty important to be the only one, huh?\e"
 	}
 	elseif reference0 > 1 && reference0 < 11 //If you have more than one email but less than eleven.
 	{
-		"\1\s[10]There's %(reference0) emails. You keep it pretty tidy, huh?\e"
+		if codecTimer == "" || missionTimer == ""
+		{
+			"\1\s[10]"
+		}
+		--
+		"There's %(reference0) emails. You keep it pretty tidy, huh?\e"
 		//reference0 here stores the amount of new email it finds.
 	}
 	elseif reference0 > 100 //If there are over one hundred new emails.
 	{
-		"\1\s[10]There are %(reference0) emails unread. Jeez, this is like Snake's inbox with how many spam lists he signs up to accidentally.\w8\0\s[9]How was I supposed to know those weird pop-ups would email me every day?\e"
+		if OtaconIsBusy
+		{
+			"\1\s[38]There are %(reference0) emails unread. Jeez, this is like Snake's inbox with how many spam lists he signs up to accidentally."
+		}
+		else
+		{
+			"\1\s[10]There are %(reference0) emails unread. Jeez, this is like Snake's inbox with how many spam lists he signs up to accidentally.\w8\0\s[9]How was I supposed to know those weird pop-ups would email me every day?\e"
+		}
 	}
  	else //For any other number of emails.
 	{
-		"\1\s[10]There's %(reference0) emails.\e"
+		"\1There's %(reference0) emails.\e"
  	}
 }
 
@@ -272,23 +422,52 @@ OnBIFFComplete
  
 OnBIFFFailure
  {
+	if OtaconIsBusy
+	{
+		"\1\s[38]"
+	}
+	else
+	{
+		"\1"
+	}
+	--
 	if reference0 == "timeout" //If the connection times out.
  	{
- 		"\1\s[37]The connection timed out. Sorry.\e"
+		if codecTimer == "" || missionTimer == ""
+		{
+			"\1\s[37]"
+		}
+		--
+ 		"The connection timed out. Sorry.\e"
 	}
- 	elseif reference0 == "kick" //If the account blocks the ghost from accessing it. I think gmail may do this at first to try and protect your account from unapproved applications using it. It gives you the option to change the setting in the warning email they send you about it.
+ 	elseif reference0 == "kick" //If the account blocks the ghost from accessing it.
 	{
-		"\1\s[18]Weird, I can't access the account. I could try and hack in but... maybe try checking some settings on your end, first, %(username)?\e"
+		if codecTimer == "" || missionTimer == ""
+		{
+			"\1\s[18]"
+		}
+		--
+		"Weird, I can't access the account. I could try and hack in but... maybe try checking some settings on your end, first, %(username)?\e"
  	}
 	elseif reference0 == "defect" //If the information put into the POP menu is wrong.
  	{
- 		"\1\s[37]Huh. I can't get in. The email account wasn't set up properly. I can't access it until you fix it, sorry. \w8\1\s[18]It can be reset at the POP menu, though. I'll open it up for you.\w8\![open,configurationdialog]\e"
+		if codecTimer == "" || missionTimer == ""
+		{
+			"\1\s[37]"
+		}
+		--
+ 		"Huh. I can't get in. The email account wasn't set up properly. I can't access it until you fix it, sorry. \w8\1\s[18]It can be reset at the POP menu, though. I'll open it up for you.\w8\![open,configurationdialog]\e"
 		
 		//Note that this ends with \![open,configurationdialog]. This will open up the preferences menu I described above automatically. More on \! functions in the walkthrough. You can delete the \! tag here if you want to.
 	}
  	else //if there's some other kind of error.
 	{
-		"\1\s[37]I can't connect with the account.\w8\1\s[18]The error it returned is '%(reference[0])'. Sorry, %(username).\e"
+		if codecTimer == "" || missionTimer == ""
+		{
+			"\1\s[37]"
+		}
+		--
+		"I can't connect with the account.\w8\1\s[18]The error it returned is '%(reference[0])'. Sorry, %(username).\e"
 		
 		//reference0 here stores the error message the email server would have given the ghost, hopefully.
  	}
@@ -306,7 +485,14 @@ OnBIFFFailure
  
 OnUpdateBegin
  {
-	"\1\s[10]I'll start the update process, I gotta find some files on the web, wait just a second...\w8\1\s[32]\w8\e"
+	if OtaconIsBusy
+	{
+		"\1\s[38]Just so you know, because I'm working on this while updating, things might get a little unstable... If you run into any issues, make a bug report from my menu, OK?"
+	}
+	else
+	{
+		"\1\s[16]I'll start the update process, I gotta find some files on the web, wait just a second...\w8\1\s[32]\w8\e"
+	}
  }
 
  //---- OnUpdateReady ---------------------------------------------------------
@@ -316,7 +502,14 @@ OnUpdateReady
  {
 	reference0++ //makes sure it starts at 1 instead of 0
 	
-    "\1\s[15]I found %(reference0) new files. Nice!\w8\e"
+	if OtaconIsBusy
+	{
+		"\1\s[38]I found %(reference0) new files. Let's hope I don't get any bugs, right? Trying to get rid of lice when it went through my school as a kid was lousy enough!\w8\e"
+	}
+	else
+	{
+		"\1\s[15]I found %(reference0) new files. Nice!\w8\e"
+	}
 	
 	//reference0 here storing the number of new files. You don't have to use it if you don't want to.
  }
@@ -327,16 +520,36 @@ OnUpdateReady
 
 OnUpdateComplete
  {
-	if reference0 == "none" //if the ghost had nothing to update with
- 	{
- 		"\1\s[18]Huh, no new files. Are you sure it needs to be updated?\e"
-		
-		"\1\s[37]I can't find any new files to update with. Sorry.\e"
-	}
- 	else //if the ghost has updated successfully
+	
+	UpdateInitializeVar
+
+	if OtaconIsBusy
 	{
-		"\1\s[15]Nice! Update successful! Enjoy the new features.\e"
- 	}
+		if reference0 == "none" //if the ghost had nothing to update with
+		{
+			"\1\s[38]Huh, no new files. Are you sure anything needs to be updated?\e"
+			
+			"\1\s[38]I can't find any new files to update with. Sorry.\e"
+		}
+		else //if the ghost has updated successfully
+		{
+			"\1\s[38]Alright, update successful! Enjoy the new features.\e"
+		}
+	}
+	else
+	{
+		if reference0 == "none" //if the ghost had nothing to update with
+		{
+			"\1\s[18]Huh, no new files. Are you sure it needs to be updated?\e"
+			
+			"\1\s[37]I can't find any new files to update with. Sorry.\e"
+		}
+		else //if the ghost has updated successfully
+		{
+			"\1\s[15]Nice! Update successful! Enjoy the new features.\e"
+		}
+	}
+	
 }
 
  //---- OnUpdateFailure -------------------------------------------------------------
@@ -344,17 +557,35 @@ OnUpdateComplete
  
 OnUpdateFailure
  {
-	if reference0 == "timeout" //if the connection times out
- 	{
- 		"\1\s[37]The update connection has timed out. Sorry.\e"
-	}
- 	elseif reference0 == "md5 miss" //This is the final message displayed when you've run into an md5 error below at some point.
+	if OtaconIsBusy
 	{
-		"\1\s[37]The MD5 hash of the files don't match. Sorry.\e"
- 	}
-	else //for other errors
- 	{
- 		"\1\s[37]The update couldn't be completed. Sorry.\w8\0\s[0]The error is '%(reference0)'.\e"
+		if reference0 == "timeout" //if the connection times out
+		{
+			"\1\s[38]The update connection has timed out. Sorry.\e"
+		}
+		elseif reference0 == "md5 miss" //This is the final message displayed when you've run into an md5 error below at some point.
+		{
+			"\1\s[38]The MD5 hash of the files don't match. Sorry.\e"
+		}
+		else //for other errors
+		{
+			"\1\s[38]The update couldn't be completed. Sorry.\w8\0\s[0]The error is '%(reference0)'.\e"
+		}
+	}
+	else
+	{
+		if reference0 == "timeout" //if the connection times out
+		{
+			"\1\s[37]The update connection has timed out. Sorry.\e"
+		}
+		elseif reference0 == "md5 miss" //This is the final message displayed when you've run into an md5 error below at some point.
+		{
+			"\1\s[37]The MD5 hash of the files didn't match. Sorry.\e"
+		}
+		else //for other errors
+		{
+			"\1\s[37]The update couldn't be completed. Sorry.\w8\0\s[0]The error is '%(reference0)'.\e"
+		}
 	}
  }
 
@@ -371,37 +602,17 @@ OnUpdate.OnDownloadBegin
  	}
  	else //for files not specified above
  	{
-	""
-	
-	""
+		""
 	}
  }
 
  //---- OnUpdate.OnMD5CompareBegin ---------------------------------------------------
  //This checks the hash value of the files in the directory and the files listed in updates.dau, I believe. It will do this for every file the user downloads, so I again remind you of my warning above! For every file they download, they will have to go through three sets of unique dialogue, and it can get old fast. Not to mention it slows things down a lot. Again, I would recommend keeping this very brief, if not just replacing it with "..." or "" instead.
  
-OnUpdate.OnMD5CompareBegin
- {
-	"\1\s[10]Checking the MD5 value...\e"
- }
-
- //---- OnUpdate.OnMD5CompareComplete --------------------------------------------------
- //After they've checked the MD5 value and it matches. See above about the length of this message.
- 
-OnUpdate.OnMD5CompareComplete
- {
-	"\0\s[0]MD5 checks out.\1\s[15] Nice!\e"
-}
-
- //---- OnUpdate.OnMD5CompareFailure ---------------------------------------------------
- //If the MD5 values don't match, meaning if the file is missing or damaged or incomplete in some way. If you follow my Network Update directions carefully, this shouldn't come up very often, but don't be surprised if you run into it every now and then by forgetting a file here or there.
- 
-OnUpdate.OnMD5CompareFailure
- {
-	"\0\s[0]The MD5 values don't match.\1\s[18] Huh.\w8\e"
- }
-
- 
+//OnUpdate.OnMD5CompareBegin
+ //{
+	// I found out this slows the update process a LOT. I highly suggest against adding this event into your ghost. I've deleted the other MD5 events and am only keeping this one as a warning.
+ //}
  
  //**** Headlines and RSS Feeds *********************************************************
  //This section has to do with the RSS feeds option on your ghost. If you drag and drop a url on them, they'll add it to a list you can access via the right-click menu, and they'll tell you the last set of updates for the site. This works best with RSS feeds I think, but you can experiment with other sites to see how it works.
@@ -413,29 +624,57 @@ OnUpdate.OnMD5CompareFailure
  
 OnHeadlinesenseBegin
  {
-	"\0\s[0]%(reference0), huh? Got it.\e"
+	if OtaconIsBusy
+	{
+		"\1\s[38]I'll go ahead and get the headlines from %(reference0) for you.\e"
+	}
+	else
+	{
+		"\0\s[0]%(reference0), huh? Got it.\e"
+	}
  }
 
  //---- OnHeadlinesense.OnFind --------------------------------------------------------
- //This actually displays the feed. My set-up for it is pretty simple but gets the job done, it just has the name of the feed, a line space, then a list of links. You shouldn't have to edit any of these and I probably wouldn't honestly.
- 
+ //This actually displays the feed. My set-up for it is pretty simple but gets the job done, it just has the name of the feed, a line space, then a list of links. You shouldn't have to edit any of these and I probably wouldn't honestly. (FUTURE OKUAJUB: Aha, that's where you're wrong... because I set up a needlessly complicated system for myself!) 
+
 OnHeadlinesense.OnFind
 {
 	//----  What page You're on
  	if reference2 == "First" || reference2 == "First and Last"
 	{
  		//---- First page
-		"\0\b2\s[0]%(reference0):"
+		if OtaconIsBusy
+		{
+			"\1\s[38]\b2%(reference0):"
+		}
+		else
+		{
+			"\0\b2\s[0]%(reference0):"
+		}
  	}
 	elseif reference2 == "Next"
  	{
 		//---- Second page
- 		"\0\b2\s[0]%(reference0):"
+ 		if OtaconIsBusy
+		{
+			"\1\s[38]\b2%(reference0):"
+		}
+		else
+		{
+			"\0\b2\s[0]%(reference0):"
+		}
 	}
  	elseif reference2 == "Last"
 	{
  		//---- Last page
-		"\0\b2\s[0]%(reference0):"
+		if OtaconIsBusy
+		{
+			"\1\s[38]\b2%(reference0):"
+		}
+		else
+		{
+			"\0\b2\s[0]%(reference0):"
+		}
  	}
 	--
  	//---- Headlines
@@ -458,8 +697,14 @@ OnHeadlinesense.OnFind
 
 Select.Headline_Cancel
 {
-	"\0\s[0]All done?\e"
-	//Actually I take that back, you can change this line of dialogue here for when you're done looking at a headline to something else if you want.
+	if OtaconIsBusy
+	{
+		"\1\s[38]Alright, I'll close the headlines then."
+	}
+	else
+	{
+		"\0\s[0]All done?\e"
+	}
 }
 
  //---- OnHeadlinesenseComplete -------------------------------------------------------
@@ -467,7 +712,14 @@ Select.Headline_Cancel
  
 OnHeadlinesenseComplete
  {
-	"\0\s[0]No update. %(reference0).\e"
+	if OtaconIsBusy
+	{
+		"\1\s[38]No update. %(reference0).\e"
+	}
+	else
+	{
+		"\0\s[0]No update. %(reference0).\e"
+	}
 	//reference0 here supposedly always stores the value no update? Again this isn't hugely clear from what I can see. Anyway, this dialogue has never come up for me while using a ghost, so perhaps someone else who runs into it can offer more clarity. For now, you can leave it as is, or write up something else in here if you like.
  }
 
@@ -476,23 +728,46 @@ OnHeadlinesenseComplete
  
 OnHeadlinesenseFailure
   {
-	"\0\s[0]The feed can't updated.\w8\1\s[10]That's weird. Why not?\w8\0\s[0]\n\n[half]" //This sets up an exchange between the two characters. The final part of the exchange continues below in the if statements.
- 	--
-	if reference0 == "can't download" //if they can't download the rss feed for some reason
- 	{
-		"It can't be downloaded."
- 	}
-	elseif reference0 == "can't analyze" //if they can't read the file for some reason
- 	{
-		"It can't be analyzed. That means I can't read it."
- 	}
-	else //other errors
- 	{
-		"I don't know.\1\s[19] Very helpful, Snake.\0\s[18] Well do you have anything better?\1\s[30] Er....\w8\w8 no."
- 	}
-	--
- 	"\e" //And here is the final /e, so you don't need to include it in the if statements above. Another one of the very rare cases this occurs.
-}
+	if OtaconIsBusy
+	{
+		"\1\s[38]Huh. The feed can't be updated.\w8\1\s[10]That's weird... Why not..\w8\n\n[half] "
+		--
+		if reference0 == "can't download" //if they can't download the rss feed for some reason
+		{
+			"Aha. It can't be downloaded."
+		}
+		elseif reference0 == "can't analyze" //if they can't read the file for some reason
+		{
+			"Aha. It can't be analyzed. That means I can't read it."
+		}
+		else //other errors
+		{
+			"This is awkward. I have no idea why it broke. Sorry?"
+		}
+		--
+		"\e" //And here is the final /e, so you don't need to include it in the if statements above. Another one of the very rare cases this occurs.
+	}
+	else
+	{
+		"\0\s[0]The feed can't be updated.\w8\1\s[10]That's weird. Why not?\w8\0\s[0]\n\n[half]" //This sets up an exchange between the two characters. The final part of the exchange continues below in the if statements.
+		--
+		if reference0 == "can't download" //if they can't download the rss feed for some reason
+		{
+			"It can't be downloaded."
+		}
+		elseif reference0 == "can't analyze" //if they can't read the file for some reason
+		{
+			"It can't be analyzed. That means I can't read it."
+		}
+		else //other errors
+		{
+			"I don't know.\1\s[19] Very helpful, Snake.\0\s[18] Well do you have anything better?\1\s[30] Er....\w8\w8 no."
+		}
+		--
+		"\e"
+		}
+	}
+	
 
 
 //**** Ghost Creation and Updating ******************************************************
@@ -505,7 +780,16 @@ OnHeadlinesenseFailure
  
 OnUpdatedataCreating
  {
-	"\1\s[10]Creating the updates2.dau file...\e"
+	if OtaconIsBusy
+	{
+		"\1\s[38]"
+	}
+	else
+	{
+		"\1\s[18]"
+	}
+	--
+	"Creating the updates2.dau file...\e"
  }
 
  //---- OnUpdatedataCreated -------------------------------------------------------------
@@ -513,7 +797,14 @@ OnUpdatedataCreating
  
 OnUpdatedataCreated
  {
-	"\0\s[0]Successfully created updates2.dau. What the hell does that mean?\e"
+	if OtaconIsBusy
+	{
+		"\1\s[38]Successfully created updates2.dau. Good luck, %(username)."
+	}
+	else
+	{
+		"\0\s[0]Successfully created updates2.dau. What the hell does that mean?\e"
+	}
  }
 
  //---- OnNarCreating ------------------------------------------------------------------
@@ -521,7 +812,16 @@ OnUpdatedataCreated
  
 OnNarCreating
  {
-	"\1\s[10]Got it, I'll start creating the .nar file..\e"
+	if OtaconIsBusy
+	{
+		"\1\s[38]"
+	}
+	else
+	{
+		"\1\s[18]"
+	}
+	--
+	"Got it, I'll start creating the .nar file..\e"
  }
 
  //---- OnNarCreated -------------------------------------------------------------------
@@ -529,7 +829,14 @@ OnNarCreating
  
 OnNarCreated
  {
-	"\0\s[0]Successfully created '%(reference0)'. Huh?\1\s[18] There's a good chance you can find it in ssp\ghost, %(username).\e"
+	if OtaconIsBusy
+	{
+		"\1\s[38]Successfully created '%(reference0)'.\1\s[38] There's a good chance you can find it in ssp\ghost, %(username).\e"
+	}
+	else
+	{
+		"\0\s[0]Successfully created '%(reference0)'. Huh?\1\s[18] There's a good chance you can find it in ssp\ghost, %(username).\e"
+	}
 	//reference0 here will be the filename of the nar you just created. It should drop the nar in the folder where all your ghosts are listed, ssp\ghost\.
  }
 
@@ -544,7 +851,14 @@ OnNarCreated
  
 OnSNTPBegin
  {
-	"\0\s[0]Check the time, will you, Otacon?\w9\1\s[10]Yeah! Alright, We're connecting to %(reference0).\e"
+	if OtaconIsBusy
+	{
+		"\1\s[38]Oh, sure, I can check the time. Alright, We're connecting to %(reference0).\e"
+	}
+	else
+	{
+		"\0\s[0]Check the time, will you, Otacon?\w9\1\s[10]Yeah! Alright, We're connecting to %(reference0).\e"
+	}
 	//%(reference0) here is the site they'll be using to check your clock. I wouldn't worry too much about what the site is or where it's defined, it should be accurate. Replace the dialogue with what you need, you don't have to use reference0 if you don't want to.
  }
 
@@ -554,20 +868,44 @@ OnSNTPBegin
  
 OnSNTPCompare
  {
+	if OtaconIsBusy
+	{
+		"\1\s[38]"
+	}
+	else
+	{
+		"\0\s[0]"
+	}
+	--	
  	"Retrieved Time: %reference1[1]/%reference1[2]/%reference1[0] %reference1[3]:%reference1[4]:%reference1[5]\w2\n/
 	Your Time: %reference2[1]/%reference2[2]/%reference2[0] %reference2[3]:%reference2[4]:%reference2[5]\w2\n/
  	\n"
 	--
- 	if reference3 == 0 //if your clock is already accurate.
+	if OtaconIsBusy
 	{
- 		"\0\s[0]The clock's accurate, Otacon. \1\s[15]Nice!\e" //replace this with whatever message you like.
+		if reference3 == 0 //if your clock is already accurate.
+		{
+			"\1\s[38]Looks like it doesn't need to be fixed. That makes that easy.\e" //replace this with whatever message you like.
+		}
+		else //if your clock doesn't match
+		{
+			"\1\s[38]Mm. The clock doesn't match.\w6\nWould you like me to fix it really quick, %(username)?\n\n[half]/
+			\![*]\q[Fix it,OnSNTPEXECUTE]\n/
+			\![*]\q[Leave it alone,OnSNTPCANCEL]\e"
+		}
 	}
- 	else //if your clock doesn't match
+	else
 	{
-	//you can redo this top line up to the \n\n[half] part, but leave the \q options alone.
- 		"\0\s[0]The clock doesn't match.\w6\nShould I fix it?\n\n[half]/
-		\![*]\q[Fix it,OnSNTPEXECUTE]\n/
- 		\![*]\q[Leave it alone,OnSNTPCANCEL]\e"
+		if reference3 == 0 //if your clock is already accurate.
+		{
+			"\0\s[0]The clock's accurate, Otacon. \1\s[15]Nice!\e" //replace this with whatever message you like.
+		}
+		else //if your clock doesn't match
+		{
+			"\0\s[0]The clock doesn't match.\w6\nShould I fix it?\n\n[half]/
+			\![*]\q[Fix it,OnSNTPEXECUTE]\n/
+			\![*]\q[Leave it alone,OnSNTPCANCEL]\e"
+		}
 	}
  }
 
@@ -576,7 +914,15 @@ OnSNTPCompare
  
 OnSNTPEXECUTE
  {
-	"\0\s[0]The clock's been fixed.\1\s[15]Nice!\6\e"
+	if OtaconIsBusy
+	{
+		"\1\s[38]Alright, I set it to the correct time for you.\e"
+	}
+	else
+	{
+		"\0\s[0]The clock's been fixed.\1\s[15]Nice!\6\e"
+	}
+	
  }
 
  //----　OnSNTPCANCEL ------------------------------------------------------------------
@@ -584,7 +930,16 @@ OnSNTPEXECUTE
  
 OnSNTPCANCEL
  {
-	"\0\s[0]Leaving it as it is, huh? Just don't be late.\e"
+	if OtaconIsBusy
+	{
+		"\1\s[38]You don't want me to..? Alright... suit yourself.\e"
+	}
+	else
+	{
+		"\0\s[0]Leaving it as it is, huh? Just don't be late.\e"
+		"\0\s[0]Leaving it as it is, huh? Just don't be late.\1\s[10]You're one to talk, keeping people waiting all the time.\e"
+	}
+	
  }
 
  //----　OnSNTPFailure ------------------------------------------------------------------
@@ -592,7 +947,15 @@ OnSNTPCANCEL
  
 OnSNTPFailure
  {
-	"\0\s[0]The clock wasn't changed. What happened, Otacon?\w8\1\s[18]Something went wrong?\1\s[37] Sorry, I can't tell exactly what it was.\e"
+	if OtaconIsBusy
+	{
+		"\1\s[38]Wait a sec. Sorry, something went wrong. For some reason, I can't change the clock. I don't know what, though.\e"
+	}
+	else
+	{
+		"\0\s[0]The clock wasn't changed. What happened, Otacon?\w8\1\s[18]Something went wrong?\1\s[37] Sorry, I can't tell exactly what it was.\e"
+	}
+	
  }
 
 
@@ -613,7 +976,14 @@ OnDisplayChange
  
 OnScreenSaverStart
  {
-	"\1\s[13]The screensaver is starting!\w7Wiggle your mouse!\e"
+	if OtaconIsBusy
+	{
+		"\1\s[38]Hey! The screensaver is starting! I can't work in the dark!\e"
+	}
+	else
+	{
+		"\1\s[13]The screensaver is starting!\w7Wiggle your mouse!\e"
+	}
 	//Replace with what you want.
  }
 
@@ -622,9 +992,19 @@ OnScreenSaverStart
  
 OnScreenSaverEnd
  {
-	"\1\s[10]Whew, the screensaver is gone. It always feels so weird when it's on.\0\s[8] Eughugh. I don't like it, either.\e"
-	"\1\s[10]Ah, it went all dark there for a moment. The screensaver freaks me out.\0\s[0]Being plunged into darkness isn't exactly what I'd call a pleasant experience."
-	//Replace with what you want.
+	if (codecTimer > 0 && codecTimer != "finished")
+	{
+		"\1\s[38]Hey! The screensaver is starting! I can't work in the dark!\e"
+	}
+	elseif  (missionTimer > 0 && missionTimer != "finished")
+	{
+		"\1\s[38]Snake, Snake can you hear me? Oh, great. I'm always a little worried when the screensaver goes off I'll lose contact.\e"
+	}
+	else
+	{
+		"\1\s[10]Whew, the screensaver is gone. It always feels so weird when it's on.\0\s[8] Eughugh. I don't like it, either.\e"
+		"\1\s[10]Ah, it went all dark there for a moment. The screensaver freaks me out.\0\s[0]Being plunged into darkness isn't exactly what I'd call a pleasant experience."
+	}
  }
 
 
@@ -633,7 +1013,14 @@ OnScreenSaverEnd
  
 OnApplicationBoot
  {
-	"\1\s[10]%(reference0) just started. I hope it goes well!\e"
+	if OtaconIsBusy
+	{
+		"\1\s[38]%(reference0) just started. I hope it goes well!\e"
+	}
+	else
+	{
+		"\1\s[10]%(reference0) just started. I hope it goes well!\e"
+	}
  }
 
  //---- OnApplicationClose --------------------------------------------------------------
@@ -641,7 +1028,15 @@ OnApplicationBoot
  
 OnApplicationClose
  {
-	"\10\s[10]%(reference0) has closed, don't tax your computer with too many programs!\e"
+	if OtaconIsBusy
+	{
+		"\1\s[38]%(reference0) has closed, don't tax your computer with too many programs!\e"
+	}
+	else
+	{
+		"\1\s[10]%(reference0) has closed, don't tax your computer with too many programs!\e"
+	}
+	
  }
 
  //---- OnApplicationFileOpen ----------------------------------------------------------
@@ -649,10 +1044,15 @@ OnApplicationClose
  
 OnApplicationFileOpen
  {
-	"\0\s[0]Opening %(reference1).\e"
+	if OtaconIsBusy
+	{
+		"\1\s[38]Opening %(reference1).\e"
+	}
+	else
+	{
+		"\0\s[0]Opening %(reference1).\e"
+	}
  }
-
-
 
 
  //---- OnBatteryLow -----------------------------------------------------------------
@@ -660,7 +1060,15 @@ OnApplicationFileOpen
  
 OnBatteryLow
  {
-	"\1\s[10]The laptop's battery is low. \w8\0\s[0]There's %(reference0) power left, huh?\1\s[18] You better plug it in, soon, you might lose any progress you haven't saved.\e"
+	if OtaconIsBusy
+	{
+		"\1\s[38]The device's battery is low. \w8There's about %(reference0) battery left.\1\s[38] You better plug it in, soon, you might lose any progress you haven't saved.\e"
+	}
+	else
+	{
+		"\1\s[10]The device's battery is low. \w8\0\s[0]There's %(reference0) power left, huh?\1\s[18] You better plug it in, soon, you might lose any progress you haven't saved.\e"
+	}
+	
 	//reference0 here is the amount of battery power. Replace as you like.
  }
  
@@ -669,7 +1077,15 @@ OnBatteryLow
  
 OnBatteryCritical
 {
-	"\0\s[0]The device's battery is critically low.\1\s[13]You better save your work, or get to a charger soon!\1\s[12] It always goes so dark and cold when the power is off. Brr.\e"
+	if OtaconIsBusy
+	{
+		"\1\s[38]The device's battery is critically low! \1\s[38]You should close our program before the battery dies, I don't want you to lose your progress. Oh, and don't forget to save your work!\e"
+	}
+	else
+	{
+		"\0\s[0]The device's battery is critically low.\1\s[13]You better save your work, or get to a charger soon!\1\s[12] It always goes so dark and cold when the power is off. Brr.\e"
+	}
+	
 }
  
 //--OnBatteryNotify--------------------------------------------------------------------
@@ -696,24 +1112,32 @@ OnBatteryNotify
  
 OnShellScaling
 {
-	if reference0 > 150 //this number is the percentage that you're scaling the ghost up to. In this case, it's 150%.
+	if OtaconIsBusy
 	{
-		"\1\s[10]Ah! Are you sure about this? We're running out of room...\w8\0\s[0]Watch the ceiling, Otacon.\e"
+		"\1\s[38]Woah, that felt weird."
 	}
-	elseif reference0 >= 200 //this is 200%
+	else
 	{
-		"\1\s[10]Woah, this is getting ridiculous! And ridiculously tight! Is this what it was like in those boxes at Shadow Moses, Snake?\0\s[9] No, it wasn't. Don't remind me.\e"
+		if reference0 > 150 //this number is the percentage that you're scaling the ghost up to. In this case, it's 150%.
+		{
+			"\1\s[10]Ah! Are you sure about this? We're running out of room...\w8\0\s[0]Watch the ceiling, Otacon.\e"
+		}
+		elseif reference0 >= 200 //this is 200%
+		{
+			"\1\s[10]Woah, this is getting ridiculous! And ridiculously tight! Is this what it was like in those boxes at Shadow Moses, Snake?\0\s[9] No, it wasn't. Don't remind me.\e"
+		}
+		elseif reference0 == 100 //this is 100%
+		{
+			"\1\s[10]We're normal sized, now. Whew.\e"
+		}
+		elseif reference0 == 50 //this is 50%. You can add any percentage that's listed under shell scaling if you want using more elseifs.
+		{
+			"\1\s[10]We are now 50% our original size!\w8\0\s[0]Smaller. Feels weird.\1\s[15] I get feeling small, but this is ridiculous!\e"
+		}
+		elseif reference0 > 50
+		{
+			"\1\s[10]Woah! Jeez, I feel like a bug! You better be careful not to step on me or something..!"
+		}
 	}
-	elseif reference0 == 100 //this is 100%
-	{
-		"\1\s[10]We're normal sized, now. Whew.\e"
-	}
-	elseif reference0 == 50 //this is 50%. You can add any percentage that's listed under shell scaling if you want using more elseifs.
-	{
-		"\1\s[10]We are now 50% our original size!\w8\0\s[0]Smaller. Feels weird.\1\s[15] I get feeling small, but this is ridiculous!\e"
-	}
-	elseif reference0 > 50
-	{
-		"\1\s[10]Woah! Jeez, I feel like a bug! You better be careful not to step on me or something..!"
-	}
+
 }

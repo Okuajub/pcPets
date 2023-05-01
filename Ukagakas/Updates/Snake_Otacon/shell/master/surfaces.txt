@@ -311,6 +311,10 @@ animation300.pattern1,overlay,-1,100,0,0
 animation400.interval,never
 animation400.pattern0,overlay,1102,140,0,0
 animation400.pattern1,overlay,-1,100,0,0
+
+//Stop talking interval
+animation0.interval,never
+animation0.pattern0,stop,100
 }
 
 surface1101
@@ -377,6 +381,9 @@ animation24.interval,never
 animation24.pattern0,overlay,2102,140,0,0
 animation24.pattern1,overlay,-1,100,0,0
 
+//Also his stop talking animation.
+animation1.interval,never
+animation1.pattern0,stop,21
 }
 
 //And that's it for Otacon's default pose!
@@ -411,6 +418,7 @@ animation420.pattern1,bind,4100,0,0,0
 //Round Glasses
 animation430.interval,bind
 animation430.pattern0,bind,4130,0,0,0
+
 }
 //Side Character Embarrassed pose
 surface11
@@ -638,7 +646,7 @@ animation13.interval,bind
 animation13.pattern0,bind,3533,0,0,0
 }
 //Side Character's laughing poses. 34-36. %(laugh) will play Otacon's laughing animation for the current selected character, e.g. \1\s[35]%(laugh)
-//honestly not sure what to do for this in the solid shell, as animating it will be much harder.
+//Doesn't animate in the Solid Shell. Found a workaround on the ghost side, not a problem.
 surface34{
 element1,overlay,surface10.png,0,0
 
@@ -796,6 +804,10 @@ surface9919
 element0,overlay,surface9919.png,0,0
 }
 
+surface9921 //Book Lot #1
+{
+element0,overlay,surface9921.png,0,0
+}
 
 //Donchan plush
 surface9922

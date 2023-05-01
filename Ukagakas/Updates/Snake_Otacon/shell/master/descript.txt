@@ -158,7 +158,7 @@ kero.menuitem4,10
 kero.menuitem5,11
 kero.menuitem6,12
 kero.menuitem7,13
-//kero.menuitem8,14 - Another unimplemented item. I needed to wrap this shell up for my own sanity and this item would have entailed redrawing 19 more frames.
+//kero.menuitem8,14 - Another unimplemented item. I needed to wrap this shell up for my own sanity and this item would have entailed redrawing 19 more frames. Maybe another day.
 kero.menuitem9,-
 kero.menuitem10,410
 kero.menuitem11,420

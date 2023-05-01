@@ -44,50 +44,28 @@ On_recommendrootbutton.caption
 
 On_sakura.recommendsites
  {
-	"Ghost Template Walkthrough"
+	"Ukagaka Dream Team Wiki"
 	--
-	//This first line is the name that will display in the menu for your site. In this case, it would display "Ghost Template Walkthrough".
-	"%ASC(1)http://www.ashido.com/ukagaka/%ASC(2)"
+	//This first line is the name that will display in the menu for your site. In this case, it would display "Ukagaka Dream Team Wiki".
+	"%ASC(1)https://ukagakadreamteam.com/wiki/home%ASC(2)"
 	--
 	//And this is the site that it would link to. Note that a website address begins with %ASC(1) and ends with %ASC(2). Don't forget these!
-	
-	"Okuajub's Tumblr"
+	"Okuajub's Repository"
 	--
-	"%ASC(1)https://catboy-otacon.tumblr.com%ASC(2)"
+	"%ASC(1)https://github.com/Okuajub/pcPets/tree/main/Ukagakas/%ASC(2)"
 	--
-	
 	"Konami Holdings Corporation"
 	--
 	"%ASC(1)https://www.konami.com/%ASC(2)"
 	--
-	
 	"OtaClock App Archive"
 	--
 	"%ASC(1)https://web.archive.org/web/20150130201810/http://www.konami.jp/kojima_pro/english/dl/item_ota.html%ASC(2)"
 	--
-	
 	"SSP"
 	--
 	"%ASC(1)http://ssp.shillest.net/%ASC(2)"
 	--
-	
-	"Crow + SSP Reference (J)"
-	--
-	"%ASC(1)http://crow.aqrs.jp/reference/all/index.html%ASC(2)"
-	--
-	
-	"Ghost Documentation (J)"
-	--
-	"%ASC(1)http://usada.sakura.vg/contents/specification.html%ASC(2)"
-	--
-	
-	"Disc-2 (J)"
-	--
-	"%ASC(1)http://disc2.s56.xrea.com/%ASC(2)"
-	
-	"UKADOC Project Wiki (J)"
-	--
-	"%ASC(1)http://ssp.shillest.net/ukadoc/manual/index.html/%ASC(2)"
 	//You don't have to space these out like this between sites, but I thought it'd make it a bit easier to read.
  }
  
@@ -104,9 +82,9 @@ On_portalrootbutton.caption
  
 On_sakura.portalsites
  {
- 	"Okuajub's PC Pets"
+ 	"Okuajub's Netspace"
 	--
-	"%ASC(1)https://okuajub.github.io/pcPets/%ASC(2)"
+	"%ASC(1)https://okuajub-netspace.neocities.org%ASC(2)"
 	--	
 	//You get the idea. You can add more links or take them away as you like following this basic formula.
  }
@@ -131,7 +109,7 @@ On_kero.recommendsites
 	--
 	"My Japanese Animes!"
 	--
-	"%ASC(1)https://piracy.moe/(2)"
+	"%ASC(1)https://reddit.com/r/animepiracy(2)"
 	--
 	"Miku Miku! (Anamanaguchi)"
 	--

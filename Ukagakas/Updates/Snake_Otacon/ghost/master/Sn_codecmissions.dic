@@ -1,0 +1,388 @@
+//-- Codec Search and Missions --------------------------------------------------------
+//These functions relate to the Codec Search and Missions the user can send Otacon and Snake to do.
+//They used to live in Sn_menu.dic, however they caused extreme bloat in that file and having them live in their own .dic made absolutely the most sense. 
+//Especially as the Codec Search and Missions systems are based on one another.
+
+//         _         _               __                     _     
+//   /\/\ (_)___ ___(_) ___  _ __   / _\ ___  __ _ _ __ ___| |__  
+//  /    \| / __/ __| |/ _ \| '_ \  \ \ / _ \/ _` | '__/ __| '_ \ 
+// / /\/\ \ \__ \__ \ | (_) | | | | _\ \  __/ (_| | | | (__| | | |
+// \/    \/_|___/___/_|\___/|_| |_| \__/\___|\__,_|_|  \___|_| |_|
+//This is a unique feature for Snake. Missions let the user input an amount of time for Snake to go off on a mission.
+//Rewards certain items, and friendship.
+Select.missionSearch
+{
+	if missionTimer == "" && missionFatigue < 1 && codecFatigue < 1 //Checks to see if the mission timer is ready to be reset. if missionTimer is blank, it means its ready to recieve information. if missionFatigue is still going, it means Snake is tired and it needs to reach 0 first.
+	{
+		"\0\s[8]I can go out on a mission. I'm sure Otacon has something in mind. How long of a mission are you thinkg of? In minutes."
+		--
+		if owned[5] != "lewdposter" || owned[6] != "catposter"
+		{
+			" I'd suggest around 60 minutes, myself."
+		}
+		--
+		"\n\n[half]%(ItalicsHush)How long of a mission will Snake go on?\![open,inputbox,OnSetMissionTimer,-1]"
+	}
+	elseif missionTimer == "finished"
+	{
+		missionFatigue = (inputTime * 0.5) + RAND(600) + 600 //Sets the fatigue timer, which is the same as half of the inputted minutes (in seconds) plus 0-600 seconds, plus 600 seconds (10 minutes).
+		missionTimer = "" //Makes sure missionTimer is ready to recieve new information.
+		_randomval = RAND(100)
+		"\0\s[0]I completed the mission. "
+		--
+		if inputTime < 3600 //Less than an hour
+		{
+			"\0\s[8]I got the job done, and that's about it. Otacon and I will go over it in private.%(ItalicsHush)\n\n[half]It seems Snake feels more comfortable here after returning."
+			snakeFeelings += 8
+			otaconFeelings += 1
+		}
+		elseif inputTime >= 3600 //More than an hour. when there's more items I might add more nuanced timing, but for now I don't need to.
+		{
+			if owned[5] != "lewdposter" && _randomval < 69
+			{
+				"\0\s[8]With the extra time I had, I grabbed this from one of the soldiers.\n\n[half]%(ItalicsHush)Snake gives you... a.. Lewd Poster... You can find it in Otacon's item menu."
+				owned[5] = "lewdposter"
+			}
+			elseif owned[6] != "catposter" && _randomval > 69
+			{
+				"\0\s[8]With the extra time I had, I grabbed this on the way out from one of the cubicles.\n\n[half]%(ItalicsHush)Snake gives you a cat poster. You can find it in Otacon's item menu."
+				owned[6] = "catposter"
+			}
+			else
+			{
+				"\0\s[8]There wasn't anything of note for me to bring back for you."
+			}
+		}
+	}
+	elseif missionFatigue >= 1
+	{
+		"\0\s[8]Every soldier needs time to rest. Come back "
+		--
+		if misisonFatigue < 600
+		{
+			"after I have a smoke break."
+		}
+		elseif missionFatigue >= 600 && missionFatigue < 1500
+		{
+			"after twenty minutes or so."
+		}
+		elseif missionFatigue >= 1500 && missionFatigue < 2700
+		{
+			"in fourty."
+		}
+		elseif missionFatigue >= 2700 && missionFatigue <= 3200
+		{
+			"in about an hour."
+		}
+		elseif missionFatigue >= 3200 && missionFatigue <= 7200
+		{
+			"after awhile. Two hours, tops."
+		}
+		else
+		{
+			"in a couple hours."
+		}
+	}
+	elseif codecFatigue >= 1
+	{
+		"\1\s[33]Sorry, %(username). I'm still pretty exhausted from that last mission. Do you mind waiting a bit? I think I'll be ready to go again in "
+		-- //I could probably just diverge this in the original one and replace "mission" or "task" with an if check but... it's not worth the effort, haha.
+		if codecFatigue < 600
+		{
+			"a little bit."
+		}
+		elseif codecFatigue >= 600 && codecFatigue < 1500
+		{
+			"about twenty minutes?"
+		}
+		elseif codecFatigue >= 1500 && codecFatigue <= 2700
+		{
+			"forty-five minutes, maybe."
+		}
+		elseif codecFatigue > 2700 && codecFatigue <= 3200
+		{
+			"maybe an hour?"
+		}
+		else
+		{
+			"an hour or two."
+		}
+	}
+	elseif codecTimer > 1
+	{
+		"\0\s[8]Otacon's already got a job he's doing for you. I need him to be focused when I'm on missions. \1\s[38]Uh, I'll be done in "
+		--
+		if codecTimer < 1800
+		{
+			"less than thirty minutes!"
+		}
+		elseif codecTimer > 1800 && codecTimer <= 3200
+		{
+			"less than an hour. Okay?"
+		}
+		else
+		{
+			"maybe an hour or two?"
+		}
+	}
+	--
+	"\e"
+}
+
+//Sets the mission timer if possible.
+OnSetMissionTimer
+{
+	"\0\s[8]%(ItalicsHush)You tell Snake %(reference0) minutes sounds right.\f[italic,default]\n\n[half]\0\s[0]"
+	--
+	inputTime = reference0 * 60 //Turns the minutes the user inputs into seconds, so that when we set codecTimer later its really simple.
+	
+	if inputTime > 14401 //Greater than 4 hours, in seconds
+	{
+		"I can't go longer than two hours, %(username). Any mission needs to get done fairly quickly, or else. Thirty minutes gives me enough time to get in and out without any fluff. More than that, I might be able to bring something not related to the mission back with me."
+	}
+	elseif inputTime < 1799
+	{
+		"I need at least thirty minutes to get in and out. I can't go any shorter than that."
+	}
+	elseif inputTime >= 1800 && inputTime <= 7200
+	{
+		if inputTime == 4140
+		{
+			"nice.\n\n[half]"
+		}
+		--
+		"\0\s[5]Alright. Let's get moving, there's no time to waste.\1\s[38]\0\s[20]\w2\0\s[21]\w2\0\s[22]\w1\0\s[-1]\w8\w8\w8\w8\w8"
+		missionTimer = inputTime
+	}
+	elseif inputTime == 0 || reference0 == ""
+	{
+		inputTime = (RAND(90) + 30) * 60
+		"\0\s[8]Suit yourself. I'll go out for %(inputTime / 60) minutes."
+		missionTimer = inputTime
+	}
+	else
+	{
+		"\0\I didn't catch that. Make sure you tell me strictly numbers, as in '120' for two hours. Got it?"
+	}
+	--
+	"\e"
+}
+
+
+
+//   ___          _             __                     _     
+//  / __\___   __| | ___  ___  / _\ ___  __ _ _ __ ___| |__  
+// / /  / _ \ / _` |/ _ \/ __| \ \ / _ \/ _` | '__/ __| '_ \ 
+/// /__| (_) | (_| |  __/ (__  _\ \  __/ (_| | | | (__| | | |
+//\____/\___/ \__,_|\___|\___| \__/\___|\__,_|_|  \___|_| |_|
+//---- Codec Search ---------------------------------------------------------
+//This is a unique feature for Otacon. Codec Search lets the user input an amount of time for Otacon to search for new codec frequencies.
+//Rewards the user with unique items, and currency for the shop.
+Select.codecSearch
+{
+	if codecTimer == "" && codecFatigue < 1 && missionFatigue == 0 && missionTimer < 1 //Checks to see if the codec timer is ready to be reset. if codecTimer is blank, it means its ready to recieve information. if codecFatigue is still going, it means Otacon is tired and it needs to reach 0 first.
+	{
+		"\1\s[18]Oh, you want me to search through the codec frequencies? I can do that. How long do you want me to search for? In minutes, please."
+		--
+		if owned[0] != "mk2" || owned[1] != "mk3"
+		{
+			" I'd suggest around 30 minutes, myself, but I can go longer if you want."
+		}
+		--
+		"\n\n[half]%(ItalicsHush)How long will Otacon search?\![open,inputbox,OnSetCodecTimer,-1]"
+	}
+	elseif codecTimer == "finished"
+	{
+		codecFatigue = (inputTime * 0.5) + RAND(600) + 600 //Sets the fatigue timer, which is the same as half of the inputted minutes (in seconds) plus 0-600 seconds, plus 600 seconds (10 minutes). Max fatigue is 1 hour and 20 minutes, if I remember right.
+		codecTimer = "" //Makes sure codecTimer is ready to recieve new information.
+		"\1\s\[15]Alright! Like I said, I finished up searching. "
+		if inputTime <= 2700 //Less than or 45 Minutes
+		{
+			if RAND(100) > 69 && owned[0] != "mk2" //nice
+			{
+				"I found some good information on an old connection of mine- I managed to recover some blueprints for a project! It's the Metal Gear MK. II. You can ask me to bring it out in my double click menu. Oh, and If you're wondering about which one is the MK. I... Er, don't think about it too hard.\n\n[half]"
+				owned[0] ,= "mk2" //Gives the player access to the MK. II
+			}
+			elseif owned[1] != "mk3" && owned[0] == "mk2"
+			{
+				"I got some ideas for some improvements to the MK. II while listening to an engineering project's managment meeting.\s[15] Don't worry, no plagarism! Stealing other's concepts is just rude... Anyway. You should be able to bring out the new version of the MK. II in the menu, under the name MK. III!"
+				owned[1] ,= "mk3"
+			}
+			else
+			{
+				"\1\s[37]I didn't find anything unique this time. Sorry.\w4\w4\s[15] But I did find some Otacoins!"
+				--
+				otacoinCheck
+				--
+				_otacoinPlus += RAND(80) + 20
+				"\n\n[half]%(ItalicsHush)You Recieved %(_otacoinPlus) Otacoins! "
+				otacoins += _otacoinPlus
+				--
+				"You now have %(otacoins) Otacoins."
+			}
+		}
+		elseif inputTime > 2701 && inputTime < 4200 //46 minutes to an hour and 10 minutes
+		{
+			"I didn't find anything unique this time, but I did gather quite a good amount of information! That should translate into Otacoins well."
+			--
+			otacoinCheck
+			--
+			_otacoinPlus += RAND(60) + 40
+			"\n\n[half]%(ItalicsHush)You Recieved %(_otacoinPlus) Otacoins! "
+			otacoins += _otacoinPlus
+			--
+			"You now have %(otacoins) Otacoins."
+			
+		}
+		elseif inputTime >= 4200 && inputTime < 5400 // hour and ten to hour and a half
+		{
+			"\1\s[10]I found some good bargaining chips to use later. Anyway, that earns you some Otacoins!"
+			--
+			otacoinCheck
+			--
+			_otacoinPlus += RAND(60) + 80
+			"\n\n[half]%(ItalicsHush)You Recieved %(_otacoinPlus) Otacoins! "
+			otacoins += _otacoinPlus
+			--
+			"You now have %(otacoins) Otacoins."
+		}
+		else
+		{
+			"\1\s[10]That took awhile! I didn't find anything unique, though, sorry.. but I found a lot of good information. That should give you a hefy amount of Otacoins!"
+			--
+			otacoinCheck
+			--
+			_otacoinPlus += RAND(60) + 160
+			"\n\n[half]%(ItalicsHush)You Recieved %(_otacoinPlus) Otacoins! "
+			otacoins += _otacoinPlus
+			--
+			"You now have %(otacoins) Otacoins."
+		}
+		--
+		"\n\n[half]\f[italic,default]I'll probably be ready to search again in about %(inputTime / 60) minutes."
+	}
+	elseif codecFatigue >= 1
+	{
+		"\1\s[33]Sorry, %(username). I'm still pretty exhausted from that last task. Do you mind waiting a bit? I think I'll be ready to go again in "
+		--
+		if codecFatigue < 600
+		{
+			"a little bit."
+		}
+		elseif codecFatigue >= 600 && codecFatigue < 1500
+		{
+			"about twenty minutes?"
+		}
+		elseif codecFatigue >= 1500 && codecFatigue <= 2700
+		{
+			"forty-five minutes, maybe."
+		}
+		elseif codecFatigue > 2700 && codecFatigue <= 3200
+		{
+			"maybe an hour?"
+		}
+		else
+		{
+			"an hour or two."
+		}
+	}
+	elseif missionFatigue >= 1
+	{
+		"\1\s[33]Sorry, %(username). I'm still pretty exhausted from that last mission. Do you mind waiting a bit? I think I'll be ready to go again in "
+		-- //I could probably just diverge this in the original one and replace "mission" or "task" with an if check but... it's not worth the effort, haha.
+		if missionFatigue < 600
+		{
+			"a little bit."
+		}
+		elseif missionFatigue >= 600 && missionFatigue < 1500
+		{
+			"about twenty minutes?"
+		}
+		elseif missionFatigue >= 1500 && missionFatigue <= 2700
+		{
+			"forty-five minutes, maybe."
+		}
+		elseif missionFatigue > 2700 && missionFatigue <= 3200
+		{
+			"maybe an hour?"
+		}
+		else
+		{
+			"an hour or two."
+		}
+	}
+	elseif missionTimer >= 1 
+	{
+		"\1\s[38]Sorry, I can't do that right now! I have to focus on the mission."
+	}
+	elseif codecTimer > 1
+		{
+			"\1\s[38]Sorry, I'm already working on it! I'll be done in "
+			--
+			if codecTimer < 1800
+			{
+				"less than thirty minutes!"
+			}
+			elseif codecTimer > 1800 && codecTimer <= 3200
+			{
+				"less than an hour. Okay?"
+			}
+			else
+			{
+				"maybe an hour or two?"
+			}
+		}
+	else
+	{
+		"\1\s[10]Something's buggy.\n\n[half]"
+		--
+		"%(codecTimer) codecTimer\n%(missionTimer) missionTimer\n %(codecFatigue) codecFatigue\n %(missionFatigue) missionFatigue"
+	}
+	--
+	"\e"
+}
+otacoinCheck
+{
+	if otacoins < 1	
+	{
+		"\n\n[half]%(ItalicsHush)You say you have no idea what that is.\f[italic,default]\n\n[half]\s[18]You don't? Oh, duh! I forgot to tell you. Well, Otacoin isn't a real currency. Not in the monetary economy, anyway. It's not a cryptocurrency, either! (I just thought the name was funny..) Anyway. They're.. bargaining chips of sorts. Information I scrounged up and can be exchanged for real money or goods.\s[15] Don't worry, I'll handle it and be the middleman in those sorts of things!\n\n[half]%(ItalicsHush)You say it sounds a bit like blackmail.\f[italic,default]\n\n[half]\s[12]N-No! That's not it at all...\w8\w8\s[16] Sometimes I sell the information to \f[italic,true]o\w2th\w4er\f[italic,default] people... So it's not blackmail, okay?"
+	}
+}
+
+OnSetCodecTimer //maybe I should have used something other than "thing".
+{
+	"\1\s[18]%(ItalicsHush)You tell Otacon %(reference0) minutes sounds right.\f[italic,default]\n\n[half]\1\s[18]"
+	--
+	inputTime = reference0 * 60 //Turns the minutes the user inputs into seconds, so that when we set codecTimer later its really simple.
+	
+	if inputTime > 7201
+	{
+		"Sorry, %(username). I can't really search for longer than two hours or so... Manually flipping through all of the frequencies is really tiring. At least thirty minutes should work."
+	}
+	elseif inputTime < 1799
+	{
+		"\1\s[37]I won't really find anything useful in that short of time, sorry. I need probably at least 30 minutes to have a chance to find something interesting? And I can go for about two hours at the longest."
+	}
+	elseif inputTime >= 1800 && inputTime <= 7200
+	{
+		if inputTime == 4140
+		{
+			"nice.\n\n[half]"
+		}
+		--
+		"\1\s[15]Alright! That sounds just fine. I'll get to working on that.\w8\w8\1\s[38]"
+		codecTimer = inputTime
+	}
+	elseif inputTime == 0 || reference0 == ""
+	{
+		inputTime = (RAND(90) + 30) * 60
+		"\1\s[18]Er... I'll just choose myself then. I'll look for %(inputTime / 60) minutes."
+		codecTimer = inputTime
+	}
+	else
+	{
+		"\1\s[18]Sorry, it got kind of garbled there. Could you repeat what you said? Make sure you input it in with just numbers, like '120' for two hours."
+	}
+	--
+	"\e"
+}
