@@ -1,0 +1,26 @@
+#--
+# Kawarirc.kis
+#-- 
+
+=kis
+
+# dictionary base framework
+#load dict-base.txt;
+load dict\event.txt;
+load dict\resource.txt;
+load dict\functions.txt;
+
+# script (ghost dependent)
+load dict\ghost-talk.txt;
+
+# standard dictionary
+#load dict-standard.txt;
+#load dict-dms.txt; 
+
+# Log error/behavior information and basic event information.
+loglevel error warning info baseevents;
+
+# Record in kawari.log file.
+logfile kawari.log;
+
+=end

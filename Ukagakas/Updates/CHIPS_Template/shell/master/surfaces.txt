@@ -1,0 +1,104 @@
+version,1
+
+//---------------------------Surfaces.txt--------------------------
+//This is the coding for the appearance of your Ghost.
+
+//--The Sakura (Main Character)
+//
+
+//surface0 is the default pose. It will have the most animations, usually, but to make this easy to use I have only included two: Blinking and talking. If you don't understand the code, please read it carefully and look at the files in the shell\master folder.
+
+surface0
+{
+
+//--Collisions
+//Collisions are what allow the user to touch and prod and interact with the Ghost's shell. They're coordinates describing a box on the Ghost and a name for that box. When the user does certain actions within that box (such as clicking, using the scrollwheel), the program will send that information to the Ghost and they'll respond accordingly.
+//Here, the Sakura has two collisions: Head and Face. You can name these whatever you want, and make as many of them as you want, but you will have to change the code in the Ghost to match!
+
+collision0,178,57,267,84,Head
+collision1,181,83,263,143,Face
+
+//This puts down the base image, which is surface0.
+element0,overlay,surface0.png,0,0
+
+//--Blinking animation
+//Because this is the first animation, I will explain it.
+//The first line tells the program what this is. To translate from code to plain language: 'animation10' "The 10th animation". "which has an interval of", "randomly choose every second", "with a 1 in 4 chance to play".
+//If that does not make sense, that is OK. This shell is designed to have the images replaced. Just change the collisions above and replace the images and it will be alright.
+//The next line is saying: "The 10th animation". "First image is", "Overlaid and clipped to the character", "it is surface1002", "it will be held for 50 miliseconds", "0 offset on the X", "0 offset on the Y". 
+//With that information, you should be able to infer what the other 2 patterns are.
+
+animation10.interval,random,4
+animation10.pattern0,overlayfast,1002,50,0,0
+animation10.pattern1,overlayfast,1001,100,0,0
+animation10.pattern2,overlay,-1,30,0,0
+
+//--Talking Animation
+
+animation1.interval,talk,4
+animation1.pattern0,alternativestart,[2.3.4]
+
+animation2.interval,never
+animation2.pattern0,overlay,1102,100,0,0
+animation2.pattern1,overlay,1101,130,0,0
+animation2.pattern2,overlay,-1,100,0,0
+
+animation3.interval,never
+animation3.pattern0,overlay,1101,140,0,0
+animation3.pattern1,overlay,-1,100,0,0
+
+animation4.interval,never
+animation4.pattern0,overlay,1102,140,0,0
+animation4.pattern1,overlay,-1,100,0,0
+}
+
+//--The Side Character's poses------------------
+
+surface10
+{
+collision0,121,89,168,132,Face
+collision1,113,69,172,94,Head
+
+
+element0,overlay,surface10.png,0,0
+
+//Blinking
+animation10.interval,random,4
+animation10.pattern0,overlayfast,2002,50,0,0
+animation10.pattern1,overlayfast,2001,100,0,0
+animation10.pattern2,overlay,-1,30,0,0
+
+animation20.interval,talk,4
+animation20.pattern0,alternativestart,[21.22.23]
+
+animation21.interval,never
+animation21.pattern0,overlay,1202,100,0,0
+animation21.pattern1,overlay,1201,130,0,0
+animation21.pattern2,overlay,-1,100,0,0
+
+animation22.interval,never
+animation22.pattern0,overlay,1201,140,0,0
+animation22.pattern1,overlay,-1,100,0,0
+
+animation23.interval,never
+animation23.pattern0,overlay,1202,140,0,0
+animation23.pattern1,overlay,-1,100,0,0
+
+//Talking
+
+animation11.interval,talk,4
+animation11.pattern0,alternativestart,[12.13.14]
+
+animation12.interval,never
+animation12.pattern0,overlay,1202,100,0,0
+animation12.pattern1,overlay,1201,130,0,0
+animation12.pattern2,overlay,-1,100,0,0
+
+animation13.interval,never
+animation13.pattern0,overlay,1201,140,0,0
+animation13.pattern1,overlay,-1,100,0,0
+
+animation14.interval,never
+animation14.pattern0,overlay,1202,140,0,0
+animation14.pattern1,overlay,-1,100,0,0
+}
