@@ -1,8 +1,8 @@
 charset,UTF-8
 type,ghost
-name,kawari-test
-sakura.name,CHIPtest
-kero.name,none
+name,CHIPS Template
+sakura.name,Sentinel
+kero.name,CHIPtest
 craftman,Okuajub
 craftmanurl,Okuajub
 homeurl,https://okuajub-netspace.neocities.org/

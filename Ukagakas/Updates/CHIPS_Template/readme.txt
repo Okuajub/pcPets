@@ -1,1 +1,1 @@
-Hi! This is the CHIPtest and Sentinel (CHIPS) Kawari Template. You'll replace the text here with a description of your Ghost. If you'd like to see instructions on how to use this template, please refer to the Template Readme.
+Hi! This is the CHIPtest and Sentinel (CHIPS) Kawari Template. You'll go ahead and replace the text here with a description of your Ghost!

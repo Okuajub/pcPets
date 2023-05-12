@@ -44,7 +44,7 @@ shiori.logo.y,256
 
 
 //Menu Font Color
-//Like it says, this is the font color for the right-click SSP menu. r g b stand for red blue green, adjust the values to get the color you want. This'll probably take some trial and error.
+//This is the font color for the right-click SSP menu. r g b stand for red blue green, adjust the values to get the color you want. This'll probably take some trial and error.
 
 menu.background.font.color.r,0
 menu.background.font.color.g,0
@@ -62,9 +62,9 @@ menu.foreground.font.color.b,255
 //Menu Greyed Out Font Color
 //For options that aren't selectable for some reason.
 
-menu.disable.font.color.r,222
-menu.disable.font.color.g,222
-menu.disable.font.color.b,222
+menu.disable.font.color.r,150
+menu.disable.font.color.g,150
+menu.disable.font.color.b,150
 
 
 //Menu Separate Color
@@ -84,8 +84,7 @@ menu.sidebar.alignment,bottom
 
 
 //Menu Background Image Location
-//The location of the files you want to use for your background images. You'd be replacing menu_background.png with whatever the name is for your background image, and so on. If you've just saved images over mine, you won't have to adjust this at all I think.
-
+//These are the background images for the menu. I put in a bone patterned background, both to show you can make the background whatever size you'd like. Just be aware that images larger than the menu gets cropped, and smaller than the menu SSP will fill the extra space with a solid color. You can change the filenames here if you'd like. If you don't, just replace mine with yours. I suggest at least changing the bone background to something else.
 menu.background.bitmap.filename,menu_background.png
 menu.foreground.bitmap.filename,menu_foreground.png
 menu.sidebar.bitmap.filename,menu_sidebar.png

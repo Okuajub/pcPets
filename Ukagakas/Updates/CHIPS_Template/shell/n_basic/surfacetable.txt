@@ -16,15 +16,6 @@ group,Saku
 scope,0
 
 0,Default
-1,Embarassed
-2,Shocked
-3,Worried
-4,Sad
-5,Happy
-6,Content
-7,Angry
-8,Thinking
-9,Bored
 }
 
 //You can set multiple groups if you'd like.
@@ -34,15 +25,6 @@ group,Kero
 scope,1
 
 10,Default
-11,Embarassed
-12,Shocked
-13,Worried
-14,Sad
-15,Happy
-16,Content
-17,Angry
-18,Thinking
-19,Bored
 }
 
 //You can also disable certain surfaces from appearing by using the disabled group.
