@@ -1,0 +1,12 @@
+charset,UTF-8
+type,ghost
+name,Nanika Atsume
+sakura.name,Cricket
+kero.name,Kitties
+craftman,Okuajub
+craftmanurl,Okuajub
+homeurl,https://okuajub-netspace.neocities.org/
+shiori,shiori.dll
+icon,icon.ico
+readme.charset,UTF-8
+balloon,Star Cloud - Blue

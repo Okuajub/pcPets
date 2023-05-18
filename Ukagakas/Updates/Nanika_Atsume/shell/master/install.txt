@@ -1,0 +1,4 @@
+charset,Shift_JIS
+type,shell
+name,LIFE PARTNER (‚É‚á‚ñ‚±)
+directory,kero_cat

@@ -1,0 +1,6 @@
+charset,UTF-8
+type,ghost
+
+name,Nanika Atsume
+directory,Nanika_Atsume
+balloon.directory,star_cloud_atsume

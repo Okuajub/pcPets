@@ -1,0 +1,1545 @@
+#==============================================================================
+#
+# �u�ؘa���v�C�x���g�����p�ȈՃX�N���v�g(Kawari Easy Event Programmed Script)
+#  ���ʁi�ėp�j�T�u���[�`���Q
+#
+# �j�d�d�o�r����   �F����܁�������
+# OpenKEEPS����    : �n�������j�d�d�o�r�v���W�F�N�g�`�[��
+# OpenKEEPS�y�[�W  : http://keeps.sourceforge.jp
+# Version2.0 alpha1 2002.09.25 22:30��
+# Version2.0 alpha2 2002.09.27 22:07��
+# Version2.0 alpha3 2002.09.28 20:07��
+# Version2.0 alpha4 2002.09.28 22:06��
+# Version2.0 alpha5 2002.09.30 21:45��
+# Version2.0 beta1  2002.10.07 00:03��
+# Version2.0 beta2  2002.10.12 00:30��
+# Version2.0 RC1    2002.10.31 23:00��
+# Version2.0 RC2    2002.11.10 22:00��
+# Version2.0 RC3    2002.11.25 00:00��
+# Version2.0        2002.12.01 00:00��
+# Version2.1.0      2003.01.03 12:00��
+# Version2.1.1      2003.01.26 23:00��
+# Version2.1.2      2003.03.03 23:00��
+# Version2.2        2003.04.01 00:00��
+# Version2.2.1      2003.04.14 22:00��
+# Version2.2.2      2003.05.01 18:00��
+# Version2.2.3      2003.05.18 00:00��
+# Version2.2.4      2003.06.16 23:00��
+# Version2.2.5      2003.07.31 00:00��
+# Version2.3.0 snapshot0309211444 2003.09.21 15:00��
+# Version3.0.0      2004.06.06 00:00��
+# Version3.0.1      2004.06.10 21:00��
+# Version3.0.4      2004.06.27 11:00��
+# Version3.0.5      2004.07.03 11:30��
+# Version3.0.6      2004.07.10 13:30��
+# Version3.0.7      2004.07.18 22:30��
+# Version3.0.9      2004.08.08 18:45��
+# Version3.1.0      2004.09.12 14:00��
+# Version3.1.1      2004.09.19 23:00��
+# Version3.1.2      2004.09.26 23:15��
+# Version3.1.3      2004.10.16 16:15��
+# Version3.1.4      2004.10.30 22:45��
+# Version3.1.5      2004.11.13 20:30��
+# Version3.1.9      2005.01.10 22:30��
+# Version3.1.10     2005.01.15 16:30��
+# Version3.3.0a6    2005.10.17 00:00��
+# Version3.3.0a7    2005.10.30 22:00��
+# Version3.3.0a8    2005.11.06 17:30��
+#
+#==============================================================================
+# ����ΏہF�u�ؘa���vPhase 8.2.2 �y�я�ʌ݊���
+#           �u�����v�i���u�f���v�jMATERIA period 583 �ȏ�
+#           CROW�ASSP�Aninix�A�U�ь�ł̓�����l��
+#==============================================================================
+
+
+# �f�o�b�O�p�֐��Q=============================================================
+# �udebugger on�v�������ꍇ�A�����̋@�\���L���ɂȂ�
+
+#KPdate �c�c�c�c �f�o�b�O�pdate�R�}���h���b�p�[(������date�R�}���h�Ɠ���)
+#SetNowtime �c�c KPdate�p�́u���ݎ����v�ݒ�(��1����:1970/1/1 0:00:00����̕b��)
+#ResetNowtime �c �u���ݎ����v�̐ݒ������
+#IncNowtime �c�c �u���ݎ����v��1�b�i�߂�
+#DecNowtime �c�c �u���ݎ����v��1�b�߂�
+
+# �ی�Ώۊ֐��ł��邱�Ƃ�錾
+kp.FunctionToProtect : KPdate
+kp.FunctionToProtect.debug : date, SetNowtime, ResetNowtime
+kp.FunctionToProtect.debug :  IncNowtime, DecNowtime
+
+=kis
+if $[ ${System.Debugger} == "on" ] $(
+	function KPdate $(
+		.date
+			$[ $@arg[1] || "%y/%m/%d %H:%M:%S" ]
+			$[ $@arg[2] || $(GetInteger System.Nowtime) || $(.date %s) ];
+	);
+	.eval "$(function date "$(function KPdate)")";
+	function SetNowtime $(
+		.setstr System.Nowtime $(NonNegative $@arg[1]);
+		.logprint "SetNowtime : "$(.date "%y/%m/%d %H:%M:%S" ${System.Nowtime})"("${System.Nowtime}")";
+;
+	);
+	function ResetNowtime $(
+		.clear System.Nowtime;
+		.logprint "ResetNowtime : "$(.date "%y/%m/%d %H:%M:%S")"("$(.date %s)")";
+	);
+	function IncNowtime $(
+		SecureInc System.Nowtime;
+		.logprint "IncNowtime : "$(.date "%y/%m/%d %H:%M:%S" ${System.Nowtime})"("${System.Nowtime}")";
+	);
+	function DecNowtime $(
+		SecureDec System.Nowtime 1 0;
+		.logprint "DecNowtime : "$(.date "%y/%m/%d %H:%M:%S" ${System.Nowtime})"("${System.Nowtime}")";
+	);
+	.move kp.FunctionToProtect.debug kp.FunctionToProtect;
+	# OnSecondChange�ŁA�����I�Ɂu���ݎ����v��i�߂�
+	.push event2.OnSecondChange "$(if $(.size System.Nowtime) $(IncNowtime))";
+) else $(
+	function KPdate $(.clear @arg[0] ; .xargs @arg .date);
+	.clear kp.FunctionToProtect.debug;
+);
+=end
+
+#==============================================================================
+
+
+#�e�펞�Ԍv��==================================================================
+
+#����2001�N1��1�����猻�݂܂ł̂܂ł̌o�ߕ��� (MinCalc)------------------------
+
+=kis
+function DayCalc $(
+	.setstr @year $[ $(KPdate %y) - 2001 ];
+	return $[ 
+		${@year} * 365
+		+ ${@year} / 4
+		- ${@year} / 100
+		+ ${@year} / 400
+		+ $(KPdate %J)
+	];
+);
+function MinCalc $[ $(DayCalc) * 1440 + $(KPdate %k) * 60 + $(KPdate %N) ];
+=end
+
+#�S�[�X�g������S�����Ă��鎞��[�P��:��](ghosttime.now)------------------------
+ghosttime.now : $[ ${time.iconize} + ${time.desktop} ]
+
+#�S�[�X�g������S�����Ă��鎞��[�P��:��](worktime.ghost)-----------------------
+worktime.ghost : $[ ${ghosttime.now} / 60 ]
+
+#�S�[�X�g������܂ŒS���������Ԃ̍��v(ghosttime.total)-------------------------
+ghosttime.total : $[ ${time.iconize.total} + ${time.desktop.total} ]
+
+# �ی�ΏۃG���g���ł��邱�Ƃ�錾
+kp.EntryToProtect : ghosttime.now,worktime.ghost,ghosttime.total
+
+# �ی�Ώۊ֐��ł��邱�Ƃ�錾
+kp.FunctionToProtect : DayCalc,MinCalc
+
+#==============================================================================
+
+
+##���ԑѐݒ� (HourZone)========================================================
+
+=kis
+# timezone���ꕔ�C�x���g�łقڕK���]������邱�Ƃ�_�����U���΍�ŁA
+# timezone�G���g���Ɋ֐����̂��ړ��������writeprotect����悤�ύX�B
+# �I�[�o�[�w�b�h�͏\���������ƍl������B
+# ����ɔ���HourZone��L���������B�]���݊��̂��߂Ɋ֐��Ƃ��Ă͎c���B
+function HourZone $(NULL);
+=end
+
+timezone : $(ModifierSearch kp.timezone $(KPdate %k))
+
+# �ی�ΏۃG���g���ł��邱�Ƃ�錾
+kp.EntryToProtect : timezone
+
+# �ی�Ώۊ֐��ł��邱�Ƃ�錾
+kp.FunctionToProtect : HourZone
+
+#==============================================================================
+
+
+#�Z�[�u�A�o�b�N�A�b�v���[�`��(SaveData,Backup)=================================
+
+#�Z�[�u(SaveData)--------------------------------------------------------------
+#�I�����ɕۑ������G���g��
+
+=kis
+function SaveData $(
+	.xargs kp.datasaveparam .save ${kp.savefile};
+	GetifExist kp.callback.OnSave;
+);
+=end
+
+#���̎��_�Ŋ��Ƀ��[�U�ݒ��datasaveparam���ݒ肳��Ă���̂ŁA��������ޔ�
+#Ver.3.0.0�ڍs�ɔ����C��(04/6/10 ���Ɓ[)
+#�����ŕۑ������G���g�����ukp.datasaveparam�v�ɕύX�������߁A���̏����s�v
+#Ver3.3.0 alpha7(2005/10/27 ���Ɓ[)
+#=kis
+#.move datasaveparam kp.temp.datasaveparam;
+#=end
+
+kp.datasaveparam (
+	sw.mikire , sw.kasanari , sw.randomtalk , sw.talkworktime ,
+	interval ,
+	closemode ,
+	FlagMode , OverrideMode , username , worktime , freeze ,
+	count.boot , count.delete ,
+	endtime , endday ,
+	time.desktop.total , time.iconize.total ,
+	time.desktop.before , time.iconize.before ,
+	mode , food , foodTimeOut ,
+	SnowballName , ToonyName , FirestarName , RomeoName , GrayName , GreystripeName ,
+	RandomCat , CurrentCat , CurrentCat2
+)
+
+#�o�b�N�A�b�v(Backup)----------------------------------------------------------
+#�l�b�g���[�N�X�V���̃o�b�N�A�b�v
+
+=kis
+function Backup $(
+	.xargs kp.databackupparam .save ${kp.savefile};
+	GetifExist kp.callback.OnBackup;
+);
+=end
+
+#���̎��_�Ŋ��Ƀ��[�U�ݒ��databackupparam���ݒ肳��Ă���̂ŁA��������ޔ�
+#Ver.3.0.0�ڍs�ɔ����C��(04/6/10 ���Ɓ[)
+#�����ŕۑ������G���g�����ukp.databackupparam�v�ɕύX�������߁A���̏����s�v
+#Ver3.3.0 alpha7(2005/10/27 ���Ɓ[)
+#=kis
+#.move databackupparam kp.temp.databackupparam;
+#.move dataclearparam kp.temp.dataclearparam;
+#=end
+
+#���̎��_�ł́Akp.databackupparam��kp.dataclearparam�͓������e�Ŗ��Ȃ�
+kp.databackupparam , kp.dataclearparam (
+	UpdateFileTotal ,
+	flagdisplay ,
+	DisplayDpp , DisplayWidth , DisplayHeight ,
+	AppliName , AppliMaker , AppliVersion ,
+	AppliCopyright , AppliURL , AppliFile
+)
+
+#datasaveparam�Ƃ̋��ʕ������R�s�[ (02/10/30 ���Ɓ[ �R�s�[����^�C�~���O�ύX)
+#Ver3.0.0�ڍs�ɔ����A���[�U�ݒ�ɍŌ�ɒǉ�����ݒ��ǉ�(04/06/10 ���Ɓ[)
+#�����ŕۑ������G���g����ύX�������߁A�������e��ύX
+#Ver3.3.0 alpha7(2005/10/27 ���Ɓ[)
+System.Callback.OnLoad : $(
+	# �Z�[�u���ƃo�b�N�A�b�v���̋��ʃf�[�^�𓯂������ɂ��ăR�s�[
+	.move kp.databackupparam @temp;
+	.copy kp.datasaveparam kp.databackupparam;
+	.copy @temp kp.databackupparam;
+
+	# ���[�U�ݒ�̃f�[�^���R�s�[
+	.copy datasaveparam kp.datasaveparam;
+	.move datasaveparam kp.databackupparam;
+	.move databackupparam kp.databackupparam;
+	.move dataclearparam kp.dataclearparam;
+
+	# �Z�[�u���e�̏d����r��
+	ToUnique kp.datasaveparam;
+	ToUnique kp.databackupparam;
+)
+
+# datasaveparam�̓��e�́Adatabackupparam�ɂ��̂܂܂����Ă悢(�ʒu�Â��I��)
+# �Z�[�u�p�����[�^�̏d���͕|��(�Z�[�u�f�[�^�̔����A�s�m�����ɂȂ���)
+# datasaveparam��databackupparam�́A�����G���g�������Q�d�ɓo�^����Ă͂Ȃ�Ȃ�
+# 
+
+#�o�b�N�A�b�v�p�f�[�^�̃N���A(ClearData)---------------------------------------
+#SSP�̃S�[�X�g�L���b�V���Ή��p
+
+=kis
+function ClearData $(
+	# ����N�����ɂ͊m���ɏ����������p�����[�^������
+	foreach @i kp.dataclearparam $(.clear ${@i});
+);
+=end
+
+# �ی�Ώۊ֐��ł��邱�Ƃ�錾
+kp.FunctionToProtect : SaveData,Backup,ClearData
+
+#==============================================================================
+
+
+#�G���g���̃��j�[�N��(ToUnique)================================================
+#�G���g�����̒P����d���̂Ȃ���Ԃ���B
+#�d�������P��́A�Y��������̂��̂�������B�G���g���Ăяo�������܂�ł��Ă��B
+
+=kis
+# ��1����: �G���g����
+# �߂�l:  �Ȃ�
+function ToUnique $(
+	if $[ $(.size @arg) != 2 ] $(return);
+	if $[ $(.size $@arg[1]) == 0 ] $(return);
+
+	.setstr @i 0;
+	while $[ ${@i} < ( $(.size $@arg[1]) - 1 ) ] $(
+		.setstr @pos $(.rfind $@arg[1] $(.getcode $@arg[1][${@i}]));
+		if $[ ${@pos} != ${@i} ] $(
+			.clear $@arg[1][${@pos}];
+		) else $(
+			.inc @i;
+		);
+	);
+);
+=end
+
+# �ی�Ώۊ֐��ł��邱�Ƃ�錾
+kp.FunctionToProtect : ToUnique
+
+#==============================================================================
+
+
+#���݂���G���g���Ȃ��get(GetifExist)=========================================
+#�P�Ȃ�get�ƂقƂ�Ǔ������삾���A��G���g�����Ă�ł��G���[��f���Ȃ�
+#���O�t�@�C����OpenKEEPS���G���[���o���Ȃ����߂̊֐�
+=kis
+function GetifExist $(if $(.size $@arg[1]) $(.get $@arg[1]));
+=end
+
+# �ی�Ώۊ֐��ł��邱�Ƃ�錾
+kp.FunctionToProtect : GetifExist
+
+#==============================================================================
+
+
+#0�ɂ�錅����(FillZero)=======================================================
+
+=kis
+# ��1����: �E�l��0�𖄂߂�ׂ�����
+# ��2����: ����
+function FillZero $(
+	if $[ $(.size @arg) != 3 ] $(return);
+	return $(loop $[ $@arg[2] - $(.length $@arg[1]) ] "0")$@arg[1];
+);
+=end
+
+# �ی�Ώۊ֐��ł��邱�Ƃ�錾
+kp.FunctionToProtect : FillZero
+
+#==============================================================================
+
+
+#������̑O��̋󔒂���菜��(TrimSpace)=======================================
+
+=kis
+# ��1����: �󔒂���菜���ׂ�������
+# �߂�l:  �󔒂���菜����������
+# ���l:    ���p�X�y�[�X�ƃ^�u����菜��
+function TrimSpace $(
+	if $[ $(.size @arg) != 2 ] $(return);
+	.setstr @l $(.length $@arg[1]);
+	if $[ ! ${@l} ] $(return);
+	.setstr @b 0;
+	while $[ " 	" =~ $(.char_at $@arg[1] ${@b}) && ${@b} < ${@l} ] $(.inc @b);
+	if $[ ${@b} == ${@l} ] $(return);
+	.setstr @e $[ ${@l} - 1 ];
+	while $[ " 	" =~ $(.char_at $@arg[1] ${@e}) && ${@e} >= ${@b} ] $(.dec @e);
+	return $(.substr $@arg[1] ${@b} $[ ${@e} - ${@b} + 1 ]);
+);
+=end
+
+# �ی�Ώۊ֐��ł��邱�Ƃ�錾
+kp.FunctionToProtect : TrimSpace
+
+#==============================================================================
+
+
+#�_�u���N�H�[�g���������������(DeleteQuote)===================================
+#��1����: �_�u���N�H�[�g�ŃN�H�[�g���ꂽ������
+=kis
+function DeleteQuote $(
+	if $[ $(.size @arg) != 2 ] $(return);
+
+	.setstr @len $(.length $@arg[1]);
+	.setstr @i 0;
+	while $[ ${@i} < ${@len} ] $(
+		.setstr @c $(.char_at $@arg[1] ${@i});
+		.inc @i;
+		if $[ ${@c} != "\"" && ${@c} != "\\" ] $(
+			.pushstr @stream ${@c};
+			continue;
+		) else if $[ ${@c} == "\\" ] $(
+			.setstr @c2 $(.char_at $@arg[1] ${@i});
+			.pushstr @stream $(if $[ ${@c2} != "\"" ] "\\")${@c2};
+			.inc @i;
+			continue;
+		);
+	);
+	return $(.join @stream);
+);
+=end
+
+# �ی�Ώۊ֐��ł��邱�Ƃ�錾
+kp.FunctionToProtect : DeleteQuote
+
+#==============================================================================
+
+
+#�o�C�g���w��ŕ�����������擾����(SubstrBytes)===============================
+
+=kis
+.clear kp.ascii;
+.setstr @i 32;
+while $[ ${@i} < 127 ] $(pushstr kp.ascii $(chr ${@i});inc @i);
+
+# ��1����: �Ώە�����
+# ��2����: �o�C�g��
+# �߂�l:  �Ώە������擪����w��o�C�g�������؂���������(�����Ɋۂ߂�)
+function SubstrBytes $(
+	if $[ $(.size @arg) != 3 ] $(return);
+	.setstr @lmax $(NonNegative $@arg[2]);
+
+	.setstr @l 0;
+	loop $(.length $@arg[1]) $(
+		.setstr @i ${-1};
+		.inc @l;
+		if $[ $(.find kp.ascii $(.char_at $@arg[1] ${@i})) < 0 ] $(.inc @l);
+		if $[ ${@l} >= ${@lmax} ] $(break);
+	);
+	return $(.substr $@arg[1] 0 $[ ${@i} +1 ]);
+);
+=end
+
+# �ی�Ώۊ֐��ł��邱�Ƃ�錾
+kp.FunctionToProtect : SubstrBytes
+
+#==============================================================================
+
+#�L���������[�`���Q(StringNormalize�AStringStrongNormalize)====================
+#
+#���̃��[�`���́A�G���g�����Ɏg���Ȃ��������������܂��i�j�h�r�œ��ʂȕ����Ƃ���
+#�g���Ă�����̂�����ׂɌ듮��̌����ƂȂ�j
+
+# $(StringNormalize <STRING>)
+# $(StringStrongNormalize <STRING>)
+
+#��������镶��(StringNormalize)
+#�S�p�X�y�[�X�A���p�X�y�[�X�A
+#�S�Ĕ��p�́u\"!#$%&'()*+,-./:;<=>?@[]^_`{|}~�v
+
+#��������镶��(StringStrongNormalize)
+#�S�p�X�y�[�X�A���p�X�y�[�X�A
+#�S�p���p��킸�u\"!#$%&'()*+,-./:;<=>?@[]^_`{|}~�v
+
+#�u������镶��(����)
+#�S�p�p���召�����p�啶���˔��p������
+#�S�p���������[�}�����@�@�˔��p����
+#���p�J�i���J�i�L���@�@�@�ˑS�p�J�i���J�i�L��
+#�ꕔ���ꕶ���i�P�ʁj�@�@�˂��ꑊ���̔��p������
+
+# �r���������L��
+kp.sn.delete   : ".�@ ?@"
+kp.ssn.delete  : "���_�h�I���������f�i�j���{�C�|�D�^�F�G�������H���m�n�O�Q�e�o�b�p�`"
+# ���o�C�g����1�� -> 1�o�C�g����1�� �u���e�[�u��
+kp.sn.mbupper  : "�`�a�b�c�d�e�f�g�h�i�j�k�l�m�n�o�p�q�r�s�t�u�v�w�x�y"
+kp.sn.mblower  : "����������������������������������������������������"
+kp.sn.mbnum    : "�O�P�Q�R�S�T�U�V�W�X"
+kp.sn.hankana  : "������������������������������"
+kp.sn.hankana  : "�������������ܦݧ�������������"
+kp.sn.lower    : "abcdefghijklmnopqrstuvwxyz"
+kp.sn.num      : "0123456789"
+kp.sn.zenkana  : "�A�C�E�G�I�J�L�N�P�R�T�V�X�Z�\�^�`�c�e�g�i�j�k�l�m�n�q�t�w�z"
+kp.sn.zenkana  : "�}�~�����������������������������@�B�D�F�H�b�������[�u�v�A�B"
+
+# ����L���A1�o�C�g�J�i �u���e�[�u��
+kp.sn.ngsymbol : "�o", "�p", "�q", "�r", "�s", "�t", "�u"
+kp.sn.ngsymbol : "��", "��", "��", "��", "��", "��", "��", "��", "��", "��"
+kp.sn.ngsymbol : "��", "��", "��", "��", "��", "��", "��", "��", "��", "��"
+kp.sn.ngsymbol : "��", "��", "��", "��", "��"
+
+kp.sn.symbol   : "mm", "cm", "km", "mg", "kg", "cc", "m2"
+kp.sn.symbol   : "�K", "�M", "�O", "�Q", "�S", "�U", "�W", "�Y", "�[", "�]"
+kp.sn.symbol   : "�_", "�a", "�d", "�f", "�h", "�o", "�r", "�u", "�x", "�{"
+kp.sn.symbol   : "�p", "�s", "�v", "�y", "�|"
+
+=kis
+# �u���Ώە����ꗗ�𐶐�
+.setstr kp.sn.search $(
+	.get kp.sn.mbupper;
+	.get kp.sn.mblower;
+	.get kp.sn.mbnum;
+	.get kp.sn.hankana;
+	.get kp.sn.delete;
+);
+
+# �u���㕶���ꗗ�𐶐�
+.setstr kp.sn.replace $(
+	.get kp.sn.lower;
+	.get kp.sn.lower;
+	.get kp.sn.num;
+	.get kp.sn.zenkana;
+);
+
+# �������K���p�̃e�[�u������
+.setstr kp.ssn.search $(.get kp.sn.search ; .get kp.ssn.delete);
+.copy kp.sn.replace kp.ssn.replace;
+.copy kp.sn.ngsymbol kp.ssn.ngsymbol;
+.copy kp.sn.symbol kp.ssn.symbol;
+
+# ��p�G���g����ی�
+.listtree @entries kp.sn;
+.listtree @entries kp.ssn;
+foreach @i @entries $(.writeprotect ${@i});
+
+# ��ꐳ�K���R�}���h
+function StringNormalizeBase $(
+	if $[ $(.size @arg) != 3 ] $(return);
+
+	.setstr @base $@arg[1];
+	# ASCII�p�������������ɕϊ�
+	.setstr @str $(.tolower $@arg[2]);
+
+	# ����L����K���\���ɒu��
+	loop $(.size ${@base}.ngsymbol) $(
+		.setstr @i ${-1};
+		if $[ ${@str} =~ $${@base}.ngsymbol[${@i}] ] $(
+			.setstr @str $(.gsub ${@str} $${@base}.ngsymbol[${@i}] $${@base}.symbol[${@i}]);
+		);
+	);
+
+	# �}���`�o�C�g������1�o�C�g�����ɒu�����A�����ɔr���������L�����폜
+	.setstr @str $(.tr ${@str} ${${@base}.search} ${${@base}.replace});
+	return $(.tr $(.encode_entryname ${@str}) "_" "");
+);
+
+# �W���I�Ȑ��K��
+function StringNormalize $(StringNormalizeBase kp.sn $@arg[1]);
+# �������K��(�S�p�L���ł����p�Ɠ������f��ō폜)
+function StringStrongNormalize $(StringNormalizeBase kp.ssn $@arg[1]);
+=end
+
+# �ی�Ώۊ֐��ł��邱�Ƃ�錾
+kp.FunctionToProtect (
+	StringNormalizeBase,
+	StringNormalize,
+	StringStrongNormalize
+)
+
+#==============================================================================
+
+
+#���[�U��`���K��(StringUserNormalize)=========================================
+#���[�U�̒�`�������K���ϊ��e�[�u���ɂ�鐳�K���R�}���h
+#StringNormalizeBase������Ŏg�p���Ă���
+
+=kis
+.listtree @userdeftable kp.usernormalize;
+if $[ ${kp.config.useusernormalize} && $(.size @userdeftable) ] $(
+	#���[�U��`���K���e�[�u�����\�z
+	.setstr kp.usern.search $(
+		if $[ ${kp.config.useusernormalize} < 3 ] $(
+			.get kp.sn.mbupper;
+			.get kp.sn.mblower;
+			.get kp.sn.mbnum;
+			.get kp.sn.hankana;
+		);
+		.get kp.usernormalize.from;
+		if $[ ${kp.config.useusernormalize} < 3 ] $(.get kp.sn.delete);
+		if $[ ${kp.config.useusernormalize} == 2 ] $(.get kp.ssn.delete);
+		.get kp.usernormalize.delete;
+	);
+	.setstr kp.usern.replace $(
+		if $[ ${kp.config.useusernormalize} < 3 ] $(.get kp.sn.replace);
+		.get kp.usernormalize.to;
+	);
+	if $[ ${kp.config.useusernormalize} < 3 ] $(
+		.copy kp.sn.ngsymbol kp.usern.ngsymbol;
+		.copy kp.sn.symbol kp.usern.symbol;
+	);
+	.copy kp.usernormalize.multisymbol_from kp.usern.ngsymbol;
+	.copy kp.usernormalize.multisymbol_to kp.usern.symbol;
+
+	# ��p�G���g����ی�
+	.listtree @entries kp.usern;
+	foreach @i @entries $(.writeprotect ${@i});
+
+	#�֐����`
+	function StringUserNormalize $(StringNormalizeBase kp.usern $@arg[1]);
+) else $(
+	# ���[�U��`���K�����g��Ȃ��ꍇ�A���K��
+	function StringUserNormalize $(StringNormalizeBase kp.sn $@arg[1])
+);
+=end
+
+# �ی�Ώۊ֐��ł��邱�Ƃ�錾
+kp.FunctionToProtect : StringUserNormalize
+
+#==============================================================================
+
+#�ꕔ�^�O�𖳊Q��(KillDangerousTag)============================================
+#SSTP�U���ɑΏ�����ꍇ�Ɏg���܂�
+
+=kis
+# �O��SSTP�ɑ��݂����ꍇ�A�댯�ȃ^�O�𖳊Q��
+# ��1����: ������
+# �߂�l:  �^�O�𖳊Q������������
+function KillDangerousTag $(
+	if $[ $(.size @arg) != 2 ] $(return);
+
+	.setstr @str $@arg[1];
+	loop $(.size kp.dangeroustag) $(
+		.setstr @i ${-1};
+		if $[ $(.match ${@str} $kp.dangeroustag[${@i}]) == -1 ] $(continue);
+		# �댯�^�O�����݂�����A���Q�������^�O�ɒu��
+		.setstr @str $(.gsub ${@str} $kp.dangeroustag[${@i}] $kp.securedtag[${@i}]);
+	);
+	return ${@str};
+);
+=end
+
+# KillDangerousTag�����ŎQ�Ƃ��Ă���댯�ȃ^�O�̃��X�g
+# �K��2�����ȏォ��Ȃ�^�O����������
+kp.dangeroustag (
+	"\\![updatebymyself]",
+	"\\![vanishbymyself]",
+	"\\![enter,passivemode]",
+	"\\![leave,passivemode]",
+	"\\![lock,repaint]",
+	"\\![unlock,repaint]",
+	"\\![biff]",
+	"\\![open,browser",
+	"\\![open,mailer",
+	"\\![raise",
+	"\\j["
+)
+
+# ���S�������^�O��̐���(kp.securedtag)
+=kis
+if $(.size kp.securedtag) $(.clear kp.securedtag);
+loop $(.size kp.dangeroustag) $(
+	.setstr @i ${-1};
+	.pushstr kp.securedtag " _"$(.substr $kp.dangeroustag[${@i}] 2);
+);
+=end
+
+# �^�O���X�g��������Ė���������Ȃ��悤�A�G���g����ی�
+=kis
+.writeprotect kp.dangeroustag;
+.writeprotect kp.securedtag;
+=end
+
+# �ی�Ώۊ֐��ł��邱�Ƃ�錾
+kp.FunctionToProtect : KillDangerousTag
+
+#==============================================================================
+
+
+#�u]�v��������(GetCloseParenthesis)==========================================
+#������X�N���v�g�̕����ʂ�������ꍇ�Ɏg���܂��B
+#�_�u���N�I�[�g�ł����������ɂ���u]�v�͖������܂��B
+
+=kis
+# ����   : $(GetCloseParenthesis ���������镶���� �������J�n�ʒu��)
+# ��1����: �������镶����
+# ��2����: �����J�n�ʒu�A�ȗ�����0�Ƃ��Ĉ���
+# �߂�l : �u]�v�̈ʒu�A�Y�������̏ꍇ�u-1�v
+# ���l   : �_�u���N�I�[�g�ł������Ă���΁A�u]�v�ł����Ă�����
+function GetCloseParenthesis $(
+	if $[ $(.size @arg) != 2 && $(.size @arg) != 3 ] $(return "-1");
+
+	.setstr @str $@arg[1];
+	.setstr @i $(if $[ $(.size @arg) == 3 ] $@arg[2] else "0");
+	.setstr @length $(.length $@arg[1]);
+	if $[ ${@i} >= ${@length} ] $(return "-1");
+
+	.setstr @quotemode 0;
+	while $[ ${@i} < ${@length} ] $(
+		.setstr @c $(.char_at ${@str} ${@i});
+		if $[ ${@c} == "\"" ] $(
+			if $[ ${@quotemode} == 0 ] $(
+				.setstr @quotemode 1;
+			) else $(
+				.setstr @quotemode 0;
+			);
+		);
+
+		if $[ ! ${@quotemode} && ${@c} == "]" ] $(return ${@i});
+		.inc @i;
+	);
+	return "-1";
+);
+=end
+
+# �ی�Ώۊ֐��ł��邱�Ƃ�錾
+kp.FunctionToProtect : GetCloseParenthesis
+
+#==============================================================================
+
+
+#������X�N���v�g���ӎ����������؂�o��(sslex_char_at)=========================
+#�������������X�N���v�g���ӎ����ĉ�͂��A�w��ʒu���^�O�ȊO�Ȃ炻����1�����A
+#�^�O�Ȃ�^�O�S�̂�Ԃ��܂��B
+
+=kis
+# ����   : $(sslex_char_at ���؂�o���Ώە����� ���؂�o���ʒu��)
+# ��1����: �؂�o���Ώە�����
+# ��2����: �؂�o���ʒu
+# �߂�l : 1������������1�^�O
+# ���l   : ��͎͂w��ʒu����J�n����̂Œ��ӂ̂���
+function sslex_char_at $(
+	if $[ $(.size @arg) != 3 ] $(return);
+
+	.setstr @c $(.char_at $@arg[1] $@arg[2]);
+	# �u\�v�ł͂Ȃ��̂ŁA������X�N���v�g�^�O�ł͂Ȃ�
+	if $[ ${@c} != "\\" ] $(return ${@c});
+
+	# ����ȍ~�A�u\�v�Ŏn�܂邳����X�N���v�g
+	.setstr @str $(.substr $@arg[1] $@arg[2]);
+	.setstr @c1 $(.char_at ${@str} 1);
+	.setstr @c2 $(.char_at ${@str} 2);
+	if $[ ${@c1} == "w" ] $(
+		# \w�^�O
+		return "\\w"${@c2};
+	) else if $[ $(.find sslex_char_at.onechar_maybracket ${@c1}) >= 0 ] $(
+		# []���㑱���邩������Ȃ�1�����^�O
+		if $[ ${@c2} == "[" ] $(
+			# []��������
+			.setstr @len $(GetCloseParenthesis ${@str});
+			if $[ ${@len} == -1 ] $(.setstr @len $[ $(.length ${@str}) - 1 ]);
+			return "\\"$(.substr ${@str} 1 ${@len});
+		) else $(
+			# []�Ȃ�
+			return "\\"${@c1};
+		);
+	) else if $[ $(.find sslex_char_at.onechar ${@c1}) >= 0 ] $(
+		# 1�����^�O
+		return "\\"${@c1};
+	) else if $[ $(.find sslex_char_at.bracket ${@c1}) >= 0 ] $(
+		# []�ŕ���1�����^�O
+		.setstr @len $(GetCloseParenthesis ${@str});
+		if $[ ${@len} == -1 ] $(.setstr @len $[ $(.length ${@str}) - 1 ]);
+		return "\\"$(.substr ${@str} 1 ${@len});
+	) else if $[ ${@c1} == "_" ] $(
+		# �u_�v�Ŏn�܂�^�O
+		return "\\"$(sslex_char_at.ub $(.substr ${@str} 1));
+	);
+
+	# �m��Ȃ��^�O�������ꍇ�A�����͑z��O�̃^�O���̓~�X���������ꍇ�΍�
+	return "\\"${@str};
+);
+=end
+
+=kis
+# �u_�v�Ŏn�܂�^�O����͂���
+# ��1����: �؂�o���J�n�ʒu����̕��������񂩂�A�擪�́u\�v������������
+# �߂�l : 1�^�O
+function sslex_char_at.ub $(
+	if $[ $(.size @arg) != 2 ] $(return);
+
+	.setstr @str $@arg[1];
+	.setstr @c1 $(.char_at ${@str} 1);
+	.setstr @c2 $(.char_at ${@str} 2);
+	if $[ $(.find sslex_char_at._onechar_maybracket ${@c1}) >= 0 ] $(
+		# []���㑱���邩������Ȃ��^�O
+		if $[ ${@c2} == "[" ] $(
+			# []��������
+			.setstr @len $(GetCloseParenthesis ${@str});
+			if $[ ${@len} == -1 ] $(.setstr @len $[ $(.length ${@str}) - 1 ]);
+			return "_"$(.substr ${@str} 1 ${@len});
+		) else $(
+			# []�Ȃ�
+			return  "_"${@c1};
+		);
+	) else if $[ $(.find sslex_char_at._onechar ${@c1}) >= 0 ] $(
+		# �u_�v+1�����^�O
+		return "_"${@c1};
+	) else if $[ $(.find sslex_char_at._bracket ${@c1}) >= 0 ] $(
+		# �u_�v+[]�ŕ���^�O
+		.setstr @len $(GetCloseParenthesis ${@str});
+		if $[ ${@len} == -1 ] $(.setstr @len $[ $(.length ${@str}) - 1 ]);
+		return "_"$(.substr ${@str} 1 ${@len});
+	) else if $[ ${@c1} == "_" ] $(
+		# �u__�v�Ŏn�܂�^�O
+		return "_"$(sslex_char_at.ubub $(.substr ${@str} 1));
+	);
+
+	# �m��Ȃ��^�O�������ꍇ�A�����͑z��O�̃^�O���̓~�X���������ꍇ�΍�
+	return ${@str};
+);
+=end
+
+=kis
+# �u__�v�Ŏn�܂�^�O����͂���
+# ��1����: �؂�o���J�n�ʒu����̕��������񂩂�A�擪�́u\_�v������������
+# �߂�l : 1�^�O
+function sslex_char_at.ubub $(
+	if $[ $(.size @arg) != 2 ] $(return);
+
+	.setstr @str $@arg[1];
+	.setstr @c1 $(.char_at ${@str} 1);
+	if $[ $(.find sslex_char_at.__onechar ${@c1}) >= 0 ] $(
+		# �u_�v+1�����^�O
+		return "_"${@c1};
+	) else if $[ $(.find sslex_char_at.__bracket ${@c1}) >= 0 ] $(
+		# �u_�v+[]�ŕ���^�O
+		.setstr @len $(GetCloseParenthesis ${@str});
+		if $[ ${@len} == -1 ] $(.setstr @len $[ $(.length ${@str}) - 1 ]);
+		return "_"$(.substr ${@str} 1 ${@len});
+	);
+
+	# �m��Ȃ��^�O�������ꍇ�A�����͑z��O�̃^�O���̓~�X���������ꍇ�΍�
+	return ${@str};
+);
+=end
+
+# sslex_char_at�R�}���h�����Ŏg�p���Ă���G���g���Q
+sslex_char_at.onechar_maybracket :  c , n , x
+sslex_char_at.onechar : "\\" , e , t , v , z , "+" , "-" , "*" , 4 , 5
+sslex_char_at.onechar : h , u , 0 , 1 , C
+sslex_char_at.bracket : b , f , i , j , m , p , q , s , 8 , "!" , "&"
+sslex_char_at._onechar_maybracket : a , s
+sslex_char_at._onechar : V
+sslex_char_at._onechar : n , q , "+"
+sslex_char_at._bracket : b , l , m , u , w
+sslex_char_at.__onechar : t
+sslex_char_at.__bracket : w
+
+# �^�O���X�g��������Ė���������Ȃ��悤�A�G���g����ی�
+kp.EntryToProtect (
+	sslex_char_at.onechar_maybracket,
+	sslex_char_at.onechar,
+	sslex_char_at.bracket,
+	sslex_char_at._onechar_maybracket,
+	sslex_char_at._onechar,
+	sslex_char_at._bracket,
+	sslex_char_at.__onechar,
+	sslex_char_at.__bracket
+)
+
+# �ی�Ώۊ֐��ł��邱�Ƃ�錾
+kp.FunctionToProtect : sslex_char_at, sslex_char_at.ub, sslex_char_at.ubub
+
+#==============================================================================
+
+
+#������X�N���v�g�̏����ĕ����𓾂�(GetPlainText)==============================
+#�^����ꂽ�����炳����X�N���v�g�̂ݎ�菜���A������Ԃ��܂��B
+=kis
+# ��1����: ������X�N���v�g����菜���Ώۂ̕�
+# �߂�l:  ���X�N���v�g����菜������̕�
+function GetPlainText $(
+	if $[ $(.size @arg) != 2 ] $(return);
+
+	.setstr @i 0;
+	.setstr @length $(.length $@arg[1]);
+	while $[ ${@i} < ${@length} ] $(
+		.setstr @c $(sslex_char_at $@arg[1] ${@i});
+		if $[ $(.length ${@c}) == 1 ]
+			${@c}
+		else
+			$(if $[ ${@c} == "\\\\" ] "\\")
+		;
+		.inc @i $(.length ${@c});
+	);
+);
+=end
+
+# �ی�Ώۊ֐��ł��邱�Ƃ�錾
+kp.FunctionToProtect : GetPlainText
+
+#==============================================================================
+
+
+#������̐��l��(Integer�ANoNegative)===========================================
+#�������镶���𐔎������Ɍ��肵�����ꍇ�Ɏg���܂�
+
+=kis
+# �����񂩂琮�������������o��
+# ��1����: ������
+# �߂�l:  �����񒆂�0�`9�A�擪�̃}�C�i�X�L�������𔲂��o��������
+#          �����o�������ʂ�$(NULL)�Ȃ��0��Ԃ�
+function Integer $(.inc @arg[1] 0 ; return $@arg[1]);
+=end
+
+=kis
+# �����񂩂�񕉐������������o��
+# ��1����: ������
+# �߂�l:  �����񒆂�0�`9�����𔲂��o��������
+#          �����o�������ʂ�$(NULL)�Ȃ��0��Ԃ�
+#          ������擪�Ƀ}�C�i�X�L�����������ꍇ��0��Ԃ�
+function NonNegative $(.dec @arg[1] 0 0 ; return $@arg[1]);
+=end
+
+# �ی�Ώۊ֐��ł��邱�Ƃ�錾
+kp.FunctionToProtect : Integer,NonNegative
+
+#==============================================================================
+
+
+#Reference�Q��(Reference�ASReference�AIntReference�ANonNegReference)===========
+#Reference���ȒP�ɎQ�Ƃ���ꍇ�Ɏg�p���܂��B
+
+=kis
+# Reference*�Q��
+# ��1����: Reference�ԍ�
+# �߂�l:  Reference*�̓��e
+function Reference $(
+	if $(.size "System.Request.Reference"$@arg[1]) $(
+		.get "System.Request.Reference"$@arg[1][0];
+	)
+);
+
+# �댯�Ȃ�����X�N���v�g�^�O�𖳊Q���������Reference*�Q��
+# ��1����: Reference�ԍ�
+# �߂�l:  �댯�Ȃ�����X�N���v�g�^�O���𖳊Q������Reference*�̓��e
+function SReference $(KillDangerousTag $(Reference $@arg[1]));
+
+# �����l�Ƃ���Reference*�Q��
+# ��1����: Reference�ԍ�
+# �߂�l:  Reference�̓��e�������Ȃ�΂��̓��e�A����ȊO�Ȃ�0
+function IntReference $(Integer $(Reference $@arg[1]));
+
+# �񕉐����Ƃ���Reference*�Q��
+# ��1����: Reference�ԍ�
+# �߂�l:  Reference�̓��e���񕉐����Ȃ�΂��̓��e�A����ȊO�Ȃ�0
+function NonNegReference $(NonNegative $(Reference $@arg[1]));
+
+# �G���g�����Ɏg���镶�������ɂ���Reference*�Q��
+# ��1����: Reference�ԍ�
+# �߂�l:  �G���g�����Ɏg���镶�������ɂ���Reference*�̓��e
+function EntNamReference $(.encode_entryname $(Reference $@arg[1]));
+
+# ���e�𐳋K������Reference*�Q��
+# ��1����: Reference�ԍ�
+# �߂�l:  ���K������Reference*�̓��e
+function NormReference $(StringNormalize $(Reference $@arg[1]));
+
+# ���e���������K������Reference*�Q��
+# ��1����: Reference�ԍ�
+# �߂�l:  �������K������Reference*�̓��e
+function StrongNormReference $(StringStrongNormalize $(Reference $@arg[1]));
+
+# ���e�����[�U��`���K������Reference*�Q��
+# ��1����: Reference�ԍ�
+# �߂�l:  ���[�U���K������Reference*�̓��e
+function UserNormReference $(StringUserNormalize $(Reference $@arg[1]));
+=end
+
+# �ی�Ώۊ֐��ł��邱�Ƃ�錾
+kp.FunctionToProtect (
+	Reference,
+	SReference,
+	IntReference,
+	NonNegReference,
+	EntNamReference,
+	NormReference,
+	StrongNormReference,
+	UserNormReference
+)
+
+#==============================================================================
+
+
+#�u���u���b�N�𖳌������Ă��當����Ƃ��ĕ]��(GetString)=======================
+
+=kis
+# ��1����: �G���g����
+# ��2����: �C���f�b�N�X(�ȗ��\)
+# �߂�l:  �]���O�`���̏�ԂŁu$�v���u_�v�ɒu�����A���̌��ʂ�]����������
+function GetString $(
+	if $[ $(.size @arg) != 2 && $(.size @arg) != 3 ] $(return);
+
+	.set @str $(.gsub $(
+		.getcode $@arg[1][$(
+			if $[ $(.size @arg) == 2 ]
+				$(.rand $(.size $@arg[1]))
+			else
+				$@arg[2]
+		)]
+	) "$" "_");
+	return ${@str};
+);
+=end
+
+# �ی�Ώۊ֐��ł��邱�Ƃ�錾
+kp.FunctionToProtect : GetString
+
+#==============================================================================
+
+
+#�u���u���b�N�𖳌������Ă��琮���Ƃ��ĕ]��(GetInteger)========================
+
+=kis
+# ��1����: �G���g����
+# ��2����: �C���f�b�N�X(�ȗ��\)
+# �߂�l:  �]���O�`���̏�Ԃ��琮�������o��
+function GetInteger $(
+	if $[ $(.size @arg) != 2 && $(.size @arg) != 3 ] $(return);
+
+	.set @str $(.gsub $(
+		.getcode $@arg[1][$(
+			if $[ $(.size @arg) == 2 ]
+				$(.rand $(.size $@arg[1]))
+			else
+				$@arg[2]
+		)]
+	) "$" "_");
+	return $(Integer ${@str});
+);
+=end
+
+# �ی�Ώۊ֐��ł��邱�Ƃ�錾
+kp.FunctionToProtect : GetInteger
+
+
+#==============================================================================
+
+
+#�u���u���b�N�𖳌������Ă���C���N�������g/�f�N�������g(SecureInc/SecureDec)==
+
+=kis
+# ��1����: �G���g����
+# ��2����: ����(�ȗ��\)
+# ��3����: ���(�ȗ��\)
+# �߂�l:  �Ȃ�
+function SecureInc $(
+	if $[ $(.size @arg) < 2 || $(.size @arg) > 4 ] $(return);
+
+	.set @str $(gsub $(.getcode $@arg[1][0]) "$" "_");
+	.setstr $@arg[1] ${@str};
+	.clear @arg[0];
+	.xargs @arg inc;
+);
+=end
+
+=kis
+# ��1����: �G���g����
+# ��2����: ����(�ȗ��\)
+# ��3����: ����(�ȗ��\)
+# �߂�l:  �Ȃ�
+function SecureDec $(
+	if $[ $(.size @arg) < 2 || $(.size @arg) > 4 ] $(return);
+
+	.set @str $(gsub $(.getcode $@arg[1][0]) "$" "_");
+	.setstr $@arg[1] ${@str};
+	.clear @arg[0];
+	.xargs @arg dec;
+);
+=end
+
+# �ی�Ώۊ֐��ł��邱�Ƃ�錾
+kp.FunctionToProtect : SecureInc, SecureDec
+
+#==============================================================================
+
+
+#�擪�̃s���I�h���폜�����������Ԃ�==========================================
+#EntryName�����Ŏg���܂�
+
+=kis
+# ��1����: ������
+# �߂�l : �擪�̃s���I�h���ċA�I�Ɏ�菜����������
+function Del1stPeriod $(
+	if $[ $(.size @arg) != 2 ] $(return);
+
+	.setstr @i 0;
+	while $(.match_at $@arg[1] "." ${@i}) $(.inc @i);
+	return $(.substr $@arg[1] ${@i});
+);
+=end
+
+# �ی�Ώۊ֐��ł��邱�Ƃ�錾
+kp.FunctionToProtect : Del1stPeriod
+
+#==============================================================================
+
+
+#FlagMode���l�������G���g�����̌���============================================
+#EntryRefer�����Ŏg���܂�
+
+=kis
+# ��1����: �Q�Ƃ������G���g����
+# �߂�l : FlagMode���l�������G���g����
+function EntryName $(
+	if $[ $(.size @arg) !=2 ] $(return);
+
+	if $(.match_at $@arg[1] "!") $(
+		# �擪�Ɂu!�v���������ꍇ�AFlagMode�𖳎�����
+		return $(.substr $@arg[1] 1);
+	) else if $(.size OverrideMode) $(
+		# OverrideMode������
+		.setstr @f ${FlagMode};
+		until $(.size $(Del1stPeriod ${@f}.$@arg[1])) $(
+			if $[ $(.length ${@f}) == 0 ] $(break);
+			.setstr @nextf ${$(Del1stPeriod ${@f}.InheritFrom)};
+			if $[ ${@nextf} == "__self__" ] $(break);
+			.setstr @f ${@nextf};
+		);
+		return $(Del1stPeriod ${@f}.$@arg[1]);
+	);
+	# OverrideMode�ł͂Ȃ�����
+	return $(Del1stPeriod ${FlagMode}.$@arg[1]);
+);
+=end
+
+# �ی�Ώۊ֐��ł��邱�Ƃ�錾
+kp.FunctionToProtect : EntryName
+
+#==============================================================================
+
+
+#FlagMode���l�������G���g���̎Q��==============================================
+#Talk�̓����Ŏg�p���Ă��܂�
+
+=kis
+# ��1����: �g�[�N�Ɏg���G���g��
+# ��2����: �G���g���̓Y����(�ȗ����̓����_��)
+# �߂�l : �A�N�Z�X����
+function EntryRefer $(
+	if $[ $(.size @arg) != 2 && $(.size @arg) != 3 ] $(return);
+
+	.setstr @talkentry $(EntryName $@arg[1]);
+
+	# ��2������""�łȂ���΁A�Y�����ƌ��Ȃ�
+	return $(
+		if $[ $(.length $@arg[2]) != 0 ]
+			$${@talkentry}[$@arg[2]]
+		else
+			${${@talkentry}}
+	);
+);
+=end
+
+# �ی�Ώۊ֐��ł��邱�Ƃ�錾
+kp.FunctionToProtect : EntryRefer
+
+#==============================================================================
+
+
+#�����g�[�N���A�����_���g�[�N�^�C�}���~������(MakeLongTalk)==================
+#SSP�ȊO��status�w�b�_�̗��Ȃ��{�̂ŁA�����g�[�N��b���Ă���Œ��Ɍ�̃g�[�N��
+#���荞�܂Ȃ��悤�A�^�C�}���~������\![raise]�^�O��}�����܂��B
+#Talk�R�}���h�̒��ŗ��p���܂��B
+
+=kis
+function MakeLongtalk $(
+	if $[ $(.size @arg) != 2 ] $(return);
+
+	.setstr @s $@arg[1];
+	if $[ $(.length ${@s}) == 0 ] $(return);
+	# �����_���g�[�N�^�C�}���~�܂��Ă���Ȃ�A�o�b�e�B���O�̐S�z�͖���
+	if $[ ! $(isRandomtalkOn) ] $(return ${@s});
+
+	if $(.match_at $(.reverse ${@s}) "e\\") $(
+		.setstr @s $(.substr ${@s} 0 $[ $(length ${@s}) - 2 ]);
+		.setstr @e "\\e";
+	) else $(
+		.setstr @e "";
+	);
+	return (
+		"\\![raise,OnOKTalkCtrl,"${kp.gid}",stop]"
+		${@s}
+		"\\![raise,OnOKTalkCtrl,"${kp.gid}",start]"
+		${@e}
+	);
+)
+=end
+
+# �ی�Ώۊ֐��ł��邱�Ƃ�錾
+kp.FunctionToProtect : MakeLongtalk
+
+#==============================================================================
+
+
+#�C�x���g�ɂ��g�[�N�������[�`��==============================================
+
+#SHIORI3.0�ɂ��C�x���g�̃g�[�N�𔭓�����v�̃��[�`���ł�
+#�܂��AFlagMode�i�l�i���[�h�j�����܂�鎖�ɂ��A
+#�l�i�ʂ̔�����Ԃ����Ƃ��o���܂��B
+
+#���̓p�����[�^
+# FlagMode : �g�[�N���[�h
+
+=kis
+# ��1����: �g�[�N�Ɏg���G���g��
+# ��2����: �G���g���̓Y����(�ȗ����̓����_��)
+# �߂�l : �g�[�N
+function Talk $(
+	if $[ $(.size @arg) != 2 && $(.size @arg) != 3 ] $(return);
+
+	#�f�t�H���g�͎����g�[�N�t���O������
+	.clear kp.internaltalkflag;
+
+	.setstr @str $(EntryRefer $@arg[1] $@arg[2]);
+	if $[ $(.length ${@str}) != 0 ] $(
+		# �O��SSTP�g�[�N�ł͂Ȃ��A�����g�[�N�ł���؋��̃t���O�𗧂Ă�
+		.setstr kp.internaltalkflag 1;
+		resetTalkcount;
+		if $(.size kp.longtalkmode) $(
+			.setstr @str $(MakeLongtalk ${@str});
+		);
+		return ${@str};
+	);
+);
+=end
+
+#OnTranslate�C�x���g�Ńt���O�������Ă���
+
+event2.OnTranslate : $(
+	if $(.size kp.internaltalkflag) $(.clear kp.internaltalkflag);
+	if $(.size kp.longtalkmode) $(.clear kp.longtalkmode);
+)
+
+# �ی�Ώۊ֐��ł��邱�Ƃ�錾
+kp.FunctionToProtect : Talk
+
+#==============================================================================
+
+
+#�g�[�N�G���g���L���`�F�b�N====================================================
+
+#�g�[�N�������Ăяo�����f�Ɏg���܂�
+#�Ăяo���g�[�N�G���g�������݂���Δ��b���[�`���i����Q�l�ɂ��Ă��������j��
+#�Ăяo���d�g�݂ɂȂ��Ă��܂�
+#�� $(if $(EntrySize <Entry>) $(Talk <Entry>))
+
+#���̓p�����[�^
+# FlagMode : �g�[�N���[�h
+
+#�߂茋��
+# �Y���G���g��(�L�����N�^�[���[�h�܂�)���Ȃ���0�A����΃G���g���̒P�ꐔ
+
+=kis
+# ��1����: ���ׂ�G���g��
+# �߂�l : �L�����N�^���[�h���݂̊Y���G���g���̒P�ꐔ
+function EntrySize $(
+	if $[ $(.size @arg) != 2 ] $(return);
+
+	return $(.size $(EntryName $@arg[1]));
+);
+=end
+
+# �ی�Ώۊ֐��ł��邱�Ƃ�錾
+kp.FunctionToProtect : EntrySize
+
+#==============================================================================
+
+
+#�G���g���������[�`��(EntrySearch)=============================================
+
+=kis
+# ��1����: �T���G���g�����Q�̃G���g����
+# �߂�l : �Y������G���g��(FlagMode�܂܂�)
+# ���l   : �������AFlagMode�͈ӎ�����
+function EntrySearch $(
+	if $[ $(.size @arg) != 2 ] $(return);
+
+	loop $(.size $@arg[1]) $(
+		.setstr @i ${-1};
+		.setstr @entry $$@arg[1][${@i}];
+		if $(EntrySize ${@entry}) $(return ${@entry});
+	);
+);
+=end
+
+# �ی�Ώۊ֐��ł��邱�Ƃ�錾
+kp.FunctionToProtect : EntrySearch
+
+#==============================================================================
+
+
+#�G���g���C�����������[�`��(ModifierSearch)====================================
+
+=kis
+# ��1����: �T���C���Q�̃G���g����
+# ��2����: �C���Q��T�����߂̊�i���ԓ��j
+# �߂�l : �C����
+function ModifierSearch $(
+	if $[ $(.size @arg) != 3 ] $(return);
+
+	loop $(.size $@arg[1]) $(
+		.setstr @i ${-1};
+		.clear @modifier;
+		.split @modifier $$@arg[1][${@i}] "_";
+		if $[ $@modifier[0] > $@arg[2] ] $(return $@modifier[1]);
+	);
+	return $@modifier[1];
+);
+=end
+
+# �ی�Ώۊ֐��ł��邱�Ƃ�錾
+kp.FunctionToProtect : ModifierSearch
+
+#==============================================================================
+
+
+#�g�[�N�G���g���Q���������Ĕ��b(TalkSearch)====================================
+
+=kis
+# ��1����: ��������g�[�N�G���g���Q���L�q�����G���g����
+# �߂�l:  �g�[�N(�Y��������Ζ���)
+function TalkSearch $(
+	if $[ $(.size @arg) != 2 ] $(return);
+
+	.setstr @talkentry $(EntrySearch $@arg[1]);
+	if $[ $(.length ${@talkentry}) != 0 ] $(Talk ${@talkentry});
+);
+=end
+
+# �ی�Ώۊ֐��ł��邱�Ƃ�錾
+kp.FunctionToProtect : TalkSearch
+
+#==============================================================================
+
+
+#�g�[�N�G���g���Q���������Ĕ��b(�ی��t)(TalkSafeSearch)========================
+
+=kis
+# ��1����: ��������g�[�N�G���g���Q���L�q�����G���g����
+# �߂�l:  �g�[�N(�Y�������ꍇTalkReturn�̃g�[�N��Ԃ��A�����������΃f�t�H)
+function TalkSafeSearch $(
+	if $[ $(.size @arg) != 2 ] $(return);
+
+	.setstr @aistr $(TalkSearch $@arg[1]);
+	if $(.length ${@aistr}) $(return \t${@aistr});
+
+	# �g�[�N��������Ȃ������̂ŁA�ی��g�[�N���g��
+	if $(EntrySize "TalkReturn") $(return \t$(Talk "TalkReturn"));
+
+	# �ی����猩����Ȃ��̂ŁA�f�t�H���g�T�[�t�B�X��\��
+	Talk "kp.BaseState";
+);
+=end
+
+kp.BaseState : \t\1\s[-1]\0\s[0]\e
+
+# �ی�ΏۃG���g���ł��邱�Ƃ�錾
+kp.EntryToProtect : kp.BaseState
+
+# �ی�Ώۊ֐��ł��邱�Ƃ�錾
+kp.FunctionToProtect : TalkSafeSearch
+
+#==============================================================================
+
+
+#�I���W���␳(AdjustOrigin)====================================================
+#�l�b�g���[�N�X�V�A���[���`�F�b�N�ɑ��݂���x�[�X�E�F�A�ɂ�鐔�̐�������
+#�Ⴂ���z�����܂��B���̊֐���ʂ��ƁA1�I���W���̐���Ԃ��܂��B
+
+kp.BaseWare.0origin : MATERIA , embryo , ninix-aya, crow
+
+=kis
+# 0�I���W���n�Ȃ�1�𑫂��A1�I���W���n�Ȃ炻�̂܂ܕԂ�
+function AdjustOrigin $(
+	if $[ $(.size @arg) != 2 ] $(return);
+
+	if $[ $(.size kp.BaseWare) == 0 ] $(
+		.setstr kp.BaseWare $[ $(KillDangerousTag ${System.Request.Sender}) || "UNKNOWN" ];
+	);
+
+	if ${kp.BaseWare&kp.BaseWare.0origin} $(
+		return $[ $(Integer $@arg[1]) + 1 ];
+	) else $(
+		return $(Integer $@arg[1]);
+	);
+);
+=end
+
+# 0�I���W���n�ȊO�̏ꍇ�A1�I���W�����w��
+resource.useorigin1 : $(
+	if $[ ! ${kp.BaseWare.0origin&System.Request.Sender} ] "1";
+)
+
+=kis
+.writeprotect resource.useorigin1;
+=end
+
+# �ی�ΏۃG���g���ł��邱�Ƃ�錾
+kp.EntryToProtect : kp.BaseWare.0origin
+
+# �ی�Ώۊ֐��ł��邱�Ƃ�錾
+kp.FunctionToProtect : AdjustOrigin
+
+#==============================================================================
+
+
+#���O�t�@�C���ւ̃��b�Z�[�W�o��(LogMsg)========================================
+#���O�t�@�C���Ɏ����A�����C�x���g������t�����ď����L�^���܂��B
+#OpenKEEPS�̃G���[�o�́A�x�����Ɏg�p���܂��B
+
+=kis
+function LogMsg $(
+	if $[ $(.size @arg) < 2 ] $(return);
+
+	.logprint "  =============== [Message from OpenKEEPS] ===============";
+	if $(.size System.Request) $(
+		.logprint "    Request: "$(GetString System.Request)" SHIORI/3.0";
+	);
+	if $(.size System.Request.ID) $(
+		.logprint "    ID:      "$(GetString System.Request.ID);
+	);
+	.logprint "    Time:    "$(.date "%y/%m/%d %H:%M:%S");
+	.logprint "    Message: "$@arg[1];
+	.clear @arg[0..1];
+	foreach @i @arg $(.logprint "             "${@i});
+	.logprint "  =================== [End of Message] ===================";
+);
+=end
+
+#==============================================================================
+
+
+#FlagMode����(chFlagMode)======================================================
+#FlagMode��ύX����ꍇ�A���̊֐����g���܂��B
+#��:
+#  $(chFlagMode Another)
+#  $(chFlagMode)
+
+=kis
+function chFlagMode $(
+	if $[ $@arg[1] != ${FlagMode} ] $(
+		.clear FlagMode;
+		if $[ $(.length $@arg[1]) != 0 ] $(.setstr FlagMode $@arg[1]);
+		.clear talkqueue;
+		.clear beforemousestate;
+		.clear tmp.stroke;
+		.clear stroke.limit;
+		.setstr mousecount 0;
+		.setstr res.phase 0;
+	);
+);
+=end
+
+# �ی�Ώۊ֐��ł��邱�Ƃ�錾
+kp.FunctionToProtect : chFlagMode
+
+#==============================================================================
+
+
+#�ėp�C�x���g�g�[�N�p�C�x���g���(EventInfo)===================================
+#���ݔ������Ă���C�x���g�ɂ��āA�ȒP�Ȑ��������Q�Ƃł��܂��B
+
+EventInfo : $(
+	entry
+	kp.eventinfo.$(.encode_entryname ${kp.locale}.${System.Request.ID})
+	${kp.eventinfo.$(.encode_entryname ${kp.locale}).UnknownEvent}
+)
+
+# �ی�ΏۃG���g���ł��邱�Ƃ�錾
+kp.EntryToProtect : EventInfo
+
+#==============================================================================
+
+
+# �t���O�֘A�����A�t���O����֐�===============================================
+=kis
+
+# freeze�t���O���Z�b�g
+function setFreeze $(.setstr freeze 1);
+
+# freeze�t���O������
+function resetFreeze $(.setstr freeze 0);
+
+# freeze�t���O���Z�b�g����Ă���Ɛ^
+function isFreezing $[ $(GetInteger freeze) == 1 ];
+
+# freeze�t���O���Z�b�g����Ă��Ȃ��Ɛ^
+function isNotFreezing $[ $(GetInteger freeze) == 0 || $(.size freeze) == 0 ];
+
+# ���؂ꔽ����L����
+function MikireOn $(.setstr sw.mikire 0);
+
+# ���؂ꔽ���𖳌���
+function MikireOff $(.setstr sw.mikire 1);
+
+# �d�Ȃ蔽����L����
+function KasanariOn $(.setstr sw.kasanari 0);
+
+# �d�Ȃ蔽���𖳌���
+function KasanariOff $(.setstr sw.kasanari 1);
+
+# ���������_���g�[�N��L����
+function RandomtalkOn $(.setstr sw.randomtalk 0);
+
+# ���������_���g�[�N�𖳌���
+function RandomtalkOff $(.setstr sw.randomtalk 1);
+
+# �}���`�L�����N�^���[�h���I�[�o�[���C�h����
+function OverrideOn $(.setstr OverrideMode true);
+
+# �}���`�L�����N�^���[�h��؂�ւ�����
+function OverrideOff $(.clear OverrideMode);
+
+# ���؂ꔽ�����L�����Ɛ^
+function isMikireOn $[ $(GetInteger sw.mikire) == 0 || $(.size sw.mikire) == 0 ];
+
+# �d�Ȃ蔽�����L�����Ɛ^
+function isKasanariOn $[ $(GetInteger sw.kasanari) == 0 || $(.size sw.kasanari) == 0 ];
+
+# ���������_���g�[�N���L�����Ɛ^
+function isRandomtalkOn $[ $(GetInteger sw.randomtalk) == 0 || $(.size sw.randomtalk) == 0 ];
+
+# �����_���g�[�N
+function Randomtalk $(Talk "sentence");
+
+# �L�����N�^���[�h�Ǘ����I�[�o�[���C�h���Ȃ�^
+function isOverrideMode $(.size OverrideMode);
+
+# �N���b�V����̋N�����Ɛ^
+function isCrashed $[ $(GetInteger kp.iscrashed) == 1 ];
+
+# �g�[�N�J�E���g�����Z�b�g
+function resetTalkcount $(
+	.setstr cnttalk ${interval};
+	.setstr kp.currentinterval ${cnttalk};
+);
+
+# ���b���[�hON(�g�[�N�������_���g�[�N�^�C�}��~�A���b���ƂɃ��Z�b�g)
+function LongtalkMode $(.setstr kp.longtalkmode 1);
+
+=end
+
+# �ی�Ώۊ֐��ł��邱�Ƃ�錾
+kp.FunctionToProtect (
+	setFreeze,resetFreeze,isFreezing,isNotFreezing,
+	MikireOn,MikireOff,KasanariOn,KasanariOff,
+	RandomtalkOn,RandomtalkOff,
+	OverrideOn,OverrideOff,
+	isMikireOn,isKasanariOn,isRandomtalkOn,Randomtalk,
+	isOverrideMode,isCrashed,
+	resetTalkcount
+)
+
+#==============================================================================
+
+
+#�N�����V�X�e������============================================================
+
+System.Callback.OnLoad : $(
+	LogMsg "Load at "$(.date %s);
+
+	# �Z�[�u�t�@�C���ǂݖY�����R�[�h
+	foreach @i kp.datasaveparam $(.inc @entnum $(.size ${@i}));
+	if $[ ! ${@entnum} ] $(
+		# �f�[�^�G���g���t�@�C����ǂݖY��Ă��邩�A����N�����̉\������
+		# ���S��Ƃ��āA�Z�[�u�t�@�C����ǂݍ���
+		.load ${kp.savefile};
+	);
+
+	# ������医�ۑ΍�
+	foreach @i kp.databackupparam $(
+		if $(.size ${@i}) $(.set @j $(.getcode ${@i}[-1]));
+		.clear ${@i};
+		if $(.size @j) $(.move @j ${@i});
+	);
+
+	# �ی�ΏۃG���g����writeprotect
+	.move kp.EntryToProtect @protectlist;
+	.listtree @protectlist kp.callback;
+	foreach @i @protectlist $(.writeprotect ${@i});
+
+	# �ی�Ώۊ֐���writeprotect(kdt�����ŉؘa���Ɍ���)
+	if $[ $(.ver) =~ "KAWARI.kdt" ] $(
+		foreach @i kp.FunctionToProtect $(
+			.writeprotect System.Function.${@i};
+		);
+	);
+	.clear kp.FunctionToProtect;
+)
+
+#==============================================================================

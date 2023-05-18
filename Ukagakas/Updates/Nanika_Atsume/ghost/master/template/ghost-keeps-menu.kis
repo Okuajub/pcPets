@@ -1,0 +1,485 @@
+#==============================================================================
+#
+# 「華和梨」イベント処理用簡易スクリプト(Kawari Easy Event Programmed Script)
+#  メニュー関連辞書
+#
+# ＫＥＥＰＳ製作   ：こやま☆あきら
+# OpenKEEPS製作    : ＯｐｅｎＫＥＥＰＳプロジェクトチーム
+# OpenKEEPSページ  : http://keeps.sourceforge.jp
+# Version2.0 alpha1 2002.09.25 22:30版
+# Version2.0 alpha2 2002.09.27 22:07版
+# Version2.0 alpha3 2002.09.28 20:07版
+# Version2.0 alpha4 2002.09.28 22:06版
+# Version2.0 alpha5 2002.09.30 21:45版
+# Version2.0 beta1  2002.10.07 00:03版
+# Version2.0 beta2  2002.10.12 00:30版
+# Version2.0 RC1    2002.10.31 23:00版
+# Version2.0 RC2    2002.11.10 22:00版
+# Version2.0 RC3    2002.11.25 00:00版
+# Version2.0        2002.12.01 00:00版
+# Version2.1.0      2003.01.03 12:00版
+# Version2.1.1      2003.01.26 23:00版
+# Version2.1.2      2003.03.03 23:00版
+# Version2.2        2003.04.01 00:00版
+# Version2.2.1      2003.04.14 22:00版
+# Version2.2.2      2003.05.01 18:00版
+# Version2.2.3      2003.05.18 00:00版
+# Version2.2.4      2003.06.16 23:00版
+# Version2.2.5      2003.07.31 00:00版
+# Version2.3.0 snapshot0309211444 2003.09.21 15:00版
+# Version3.0.0      2004.06.06 00:00版
+# Version3.0.4      2004.06.27 18:30版
+# Version3.0.5      2004.07.03 11:30版
+# Version3.0.7      2004.07.18 22:30版
+# Version3.1.0      2004.09.12 14:00版
+# Version3.1.1      2004.09.19 23:00版
+# Version3.1.2      2004.09.26 23:15版
+# Version3.1.3      2004.10.16 16:15版
+# Version3.1.4      2004.10.30 22:45版
+# Version3.1.5      2004.11.13 20:30版
+# Version3.1.6      2004.11.23 22:30版
+# Version3.3.0a6    2005.10.17 00:00版
+#
+#==============================================================================
+# 動作対象：「華和梨」Phase 8.2.2 及び上位互換版
+#           「何か」（現「伺か」）MATERIA period 583 以上
+#           CROW、SSP、ninix、偽林檎での動作を考慮
+#==============================================================================
+
+:crypt
+#メニュー周り==================================================================
+
+#条件 : 「\q?」タグで表示された選択肢を選択した時。
+#書式 : Select.＜識別子＞
+# 識別子 : 「\q?」タグで定義された、選択肢が持つ識別子。
+
+Mainmenu : (
+	\b[1]${Mainmenu1}\n\n
+	\q["Talk,Randomtalk"]\n
+	# \q["Communicate,Talk"]\n
+	\q["Goodies,Goodies"]\n
+	\q["Options,Option"]\n
+	\q["Debug Menu,debug"]\n
+	# \q["Special,Special"]\n
+	\q["Cancel,Cancel"]\e
+)
+
+Select.temp : $(
+	# ${mode}". "${food}". "${foodTimeOut}". "${RandomCat}"."
+	# $(TheCatReturns 0)
+	if $[!${SnowballName}] $(setstr SnowballName ${WhitecatNames});
+	if $[!${ToonyName}] $(setstr ToonyName ${GreywhitecatNames});
+	if $[!${FirestarName}] $(setstr FirestarName ${OrangecatNames});
+	if $[!${RomeoName}] $(setstr RomeoName ${BlackcatNames});
+	if $[!${GrayName}] $(setstr GrayName ${GreycatNames});
+	if $[!${GreystripeName}] $(setstr GreystripeName ${GreystripecatNames});
+	echo ${SnowballName} ${ToonyName} ${FirestarName} ${RomeoName} ${GrayName} ${GreystripeName};
+)
+
+Select.debug : (
+	\q[View Cat Stats,catstats]\n
+	\q[Test Variable,test]\n
+	\q[Summon Next Cat,summon]\n
+	\q[Farewell Current Cat,farewell]\n
+)
+
+Select.catstats : (
+	Mode ${mode}\n
+	Food ${food}\n
+	Food was set out at ${foodTimeOut}\n
+	Random cat order is $RandomCat[0] $RandomCat[1] $RandomCat[2] $RandomCat[3] $RandomCat[4] $RandomCat[5]\n
+)
+
+Select.test : $(
+	setstr @vanishtest "0";
+	FirstInitCond;
+	${Select.dry};
+	# echo $RandomCat[0] $RandomCat[1] $RandomCat[2] $RandomCat[3] $RandomCat[4] $RandomCat[5]\n\n[half];
+	if $[${food} != "empty" && ${food} != "none" && $[$(size RandomCat) > 0]] $(
+		setstr NewCat $(shift RandomCat); $(
+			if $[$[${NewCat} != ${CurrentCat}] && $[${CurrentCat} = "none"]] $(setstr CurrentCat ${NewCat}; return $(TheCatReturns ${CurrentCat}));
+			if $[${NewCat} != ${CurrentCat} && ${NewCat} != ${CurrentCat2} && $[${CurrentCat2} = "none"]] $(setstr CurrentCat2 ${newcat}; $(TheCatReturns ${CurrentCat2}));
+		)
+	);
+	if $[($(length ${CurrentCat}) > 0) && ${@vanishtest} = 1] $(TheCatExits ${CurrentCat}; setstr CurrentCat "none"; setstr CurrentCat ${CurrentCat2}; setstr CurrentCat "none");
+)
+
+Select.summon : $(
+
+	setstr NewCat $(shift RandomCat);
+	if $[$[$(size RandomCat) > 0]] $(
+		if $[$[${NewCat} != ${CurrentCat}] && $[${CurrentCat} = "none"]] $(setstr CurrentCat ${NewCat}; return $(TheCatReturns ${CurrentCat}))
+		else if $[${NewCat} != ${CurrentCat} && ${NewCat} != ${CurrentCat2} && $[${CurrentCat2} = "none"]] $(setstr CurrentCat2 ${newcat}; return $(TheCatReturns ${CurrentCat2}))
+	)
+	else $(echo Please fill RandomCat first!)
+)
+
+Select.farewell : $(
+	setstr @LeavingCat ${CurrentCat}; 
+	setstr CurrentCat "none"; 
+	setstr CurrentCat ${CurrentCat2}; 
+	setstr CurrentCat2 "none"; 
+	return $(TheCatExits ${@LeavingCat});
+)
+
+Mainmenu1 : \0\s[0]$(
+	?
+		"What can I do for you?"
+		"Not every day has to be a good day."
+		"You have my attention."
+		"What would you like?"
+)
+
+Select.Randomtalk : ${sentence}
+
+Select.Option : (
+	\1\s[-1]\0\s[0]
+	"\0Optional settings, if you'd like them.\n"
+	\q["Talk rate,Timing"]\n
+	\q["Off-screen talk:" $(if $(isMikireOn) "OFF" else "ON")","Mikire]\n
+	# Overlapping Characters talk
+	\q["Overlap Talk"$(if $(isKasanariOn) "OFF" else "ON")に","Kasanari]\n
+	\q["Name,TeachName"]\n
+	# Changes personality
+	# \q["Change modes,Change"]\n
+	# \q[Personality Override $(if $(isOverrideMode) "OFF" else "ON")","Override]\n
+	\q["Cancel,Cancel"]\e
+	)
+
+Select.Timing : (
+	"\0\s[0]\cHow would you like me to talk?\n\n"
+	\q["Frequently,Timing3"]\n
+	\q["Normally,Timing5"]\n
+	\q["Sometimes,Timing7"]\n
+	\q["Randomly,TimingRand"]\n
+	\q["Never,Timing9"]\n
+	\q["Cancel,Cancel"]\e
+	)
+
+Select.Timing3 : $(
+	setstr interval  28;
+	RandomtalkOn;
+	)"\0\s[0]I'm glad you like my company so much."
+
+Select.Timing5 : $(
+	setstr interval  56;
+	RandomtalkOn;
+	)"\0\s[0]Moderation is a good practice."
+
+Select.Timing7 : $(
+	setstr interval  84;
+	RandomtalkOn;
+	)"\0\s[0]It's nice to just enjoy each other's company."
+
+Select.TimingRand : $(
+	set interval "$[ $(rand 90) + 31 ]";
+	RandomtalkOn;
+	)"\0\s[0]Spontaneity is the spice of life."
+
+Select.Timing9 : $(
+	setstr interval 999;
+	RandomtalkOff;
+	)"\0\s[0]A nice rest for my voice."
+
+Select.Mikire : \0\s[0]$(
+	if $(isMikireOn)
+		$(MikireOff)"When you place me off screen, I won't alert you."
+	else
+		$(MikireOn)"I'll alert you when I'm offscreen, then."
+	)\e
+
+Select.Kasanari : \0\s[0]$(
+	if $(isKasanariOn)
+		$(KasanariOff)"I won't say anything if I'm overlapping something, then."
+	else
+		$(KasanariOn)"I'll let you know if I'm overlapping something."
+	)\e
+
+Select.Override : \0\s[0]$(
+	if $(isOverrideMode)
+		$(OverrideOff)"人格オーバーライドが無効になりました。"
+	else
+		$(OverrideOn)"人格オーバーライドを有効にします。"
+	)\e
+
+
+Select.Cancel : $(resetFreeze)"\b[0]\0\s[0]Another time."
+
+Select.Goodies : (
+	\1\s[-1]\0\s[0]
+	"What would you like to set out?\n\n[half]"
+	"\q[Dry Food,dry]\n"
+	"\q[Wet Food,wet]\n"
+	"\q[Dessert Food,dessert]\n\n[half]"
+	"\q[Cancel,Cancel]"
+
+)
+
+Cats : White,Greywhite,Orange,Black,Grey,Greystripe
+
+# SnowballName
+WhitecatNames : Paris, Perry, Comet, Artemis
+#ToonyName
+GreywhitecatNames : Zilla, Donko, Dizzy, Hector
+#FirestarName
+OrangecatNames : Oranges, Garfield, Heathcliff, Firepaw, Bubba, Egg
+#RomeoName
+BlackcatNames : Jiji, Seven, Miss Kitty, Luna, Coco, Caspian
+#GrayName
+GreycatNames : Yara, Matilda, Cordelia, Nutmeg
+#GreystripeName 
+GreystripecatNames : Toona, Chi, Greystripe
+
+CatNames : ${SnowballName}, ${ToonyName}, ${FirestarName}, ${RomeoName}, ${GrayName}, ${GreystripeName}
+
+White : ${SnowballName},dry,playful
+
+Greywhite : dry,sleepy
+
+Orange : wet,brave
+
+Black : wet,friendly
+
+Grey : dessert,aloof
+
+Greystripe : dessert,funny
+
+CatRandomizer : $(
+	clear RandomCat;
+	loop 6 $(if $[${food} = "dry"] $(adddictstr RandomCat $(rand 2)));
+	loop 6 $(if $[${food} = "wet"] $(adddictstr RandomCat $(rand 4)));
+	loop 6 $(if $[${food} = "dessert"] $(adddictstr RandomCat $[$(rand 2) + 4]));
+)
+
+dryfoodTalk : "Dry food. It's a popular choice.","I enjoy classical music. Unfortunately listening to it rattles my house quite often.","People often ask me if I play the violin.\w8 I play the cello, actually."
+
+Select.dry : (
+	$(setstr mode "changing")
+	$(set foodTimeOut $(date %H)$(date %M))
+	$(setstr food "dry"; setstr mode "dryfull")
+	${CatRandomizer}
+	"\w8\w8\w8\0\s[100]\w8\w8"
+	${dryfoodTalk}
+	"\w8\w8\w8\0\s[0]\i[1]\i[11]"
+)
+
+wetfoodTalk : "Wet food. A lot of cats love it.","My choir group recently started meeting three times a week instead of four.\w8 I don't know what to do with myself on Wednesday nights now.","Have you ever wondered what it would be like to be a sea fish?\w8\w8 I think about it sometimes."
+
+Select.wet : (
+	$(setstr mode "changing")
+	$(set foodTimeOut $(date %H)$(date %M))
+	$(setstr food "wet"; setstr mode "wetfull")
+	${CatRandomizer}
+	"\w8\w8\w8\0\s[100]\w8\w8"
+	${wetfoodTalk}
+	"\w8\w8\w8\0\s[0]\i[2]\i[21]"
+	"\n\n[half]Smush the food?\n"
+	"\q[Yes,smush]\n"
+	"\q[No,nosmush]"
+)
+
+smushtalk : "What a bold choice! The food cannot easily be put back in its can shape... Permanence is striking.","I hear some cats are picky about having their food be pre-smushed. My grandmother told me about one."
+
+Select.smush : (
+	"\0\s[0]\i[2]\i[22]"
+	$(setstr food "wet"; setstr mode "wetsmushed")
+	"The food is smushed now.\n\n[half]\w8\w4"
+	${smushtalk}
+)
+
+Select.nosmush : (
+	"The food remains unsmushed."
+)
+
+dessertfoodTalk : "Dessert food. This cat-safe vanilla pudding is sure to please even the most finicky of felines.","Isn't this bonito and vanilla pudding so sweet?\w8 In a cute sense, I mean.","Did you know that cows are large enough to scare small predators away? They scare me, too."
+dessertfoodTalk : "Don't be afraid to put the plate down on me. It's quite roomy on the bottom, really."
+
+Select.dessert : (
+	$(setstr mode "changing")
+	$(set foodTimeOut $(date %H)$(date %M))
+	$(setstr food "dessert"; setstr mode "dessertfull")
+	${CatRandomizer}
+	"\w8\w8\w8\0\s[100]\w8\w8"
+	${dessertfoodTalk}
+	"\w8\w8\w8\0\s[0]\i[3]\i[31]"
+)
+
+Select.Talk : $(resetFreeze)"\0\s[0]What would you like to say?\![open,communicatebox]"
+
+Select.Special : (
+	\0\s[0]\1\s[-1]
+	\0Testing Options.\n
+	$(anchor Ukagaka 伺か).\n
+	$(anchor SSP SSP).\n
+	$(anchor CROW CROW).\n
+	\q["Queue,TalkQueue"]\n
+	\q["Queue Check,TalkQueueCheck"]\n
+	\q["Send,SendTo"]\n
+	\q["Cancel,Cancel"]\e
+)
+
+予約 : 0
+Select.TalkQueue : (
+	\0\s[0]\1\s[-1]
+	$(push talkqueue "$(inc 予約)\0\s[0]\1\s[10]\0予約発話${予約}回目です。\e")
+	"\0I've reserved that for you.\n"
+	"Please note that the reservation counter is now at "${予約}".\e"
+)
+
+Select.TalkQueueCheck : (
+	\0\s[0]\1\s[-1]
+	"\0There are currently "$(size talkqueue)" in queue.\n"
+	"The reservation counter is at "${予約}"."
+)
+
+# Changes to another mode (sometimes considered a 'personality').
+# Select.Change : $(chFlagMode Another)\c‥‥‥。\e
+
+#==============================================================================
+
+
+#選択肢上にマウスカーソル======================================================
+
+#条件 : 「\q?」タグで表示された選択肢にマウスが乗った時／外れた時。
+#書式 : Selecting.＜識別子＞
+# 識別子 : 「\q?」タグで定義された、選択肢が持つ識別子。
+#
+#主に「さくら」のような、別バルーンによるキャプション表示等に使用します
+#マウスが選択肢から外れた場合、Word1は「NotSelected」になります
+
+#Selecting.Timing : $(callsaori ebl ref "発話タイミング調整")
+#Selecting.Manzai : $(callsaori ebl ref "偽AIトーク")
+#Selecting.Cancel :
+#Selecting.NotSelected : $(callsaori ebl ref)
+
+#==============================================================================
+
+
+#キャラクタ型アンカー(\_a)の選択===============================================
+
+#条件 : 「\_a」タグで表示されたキャラクタ型アンカーを選択した時。
+#書式 : Anchor.＜識別子＞
+# 識別子 : 「\_a」タグで定義された、アンカーが持つ識別子。
+#
+#アンカーを選択しても何も返さない時、バルーン表示はそのままになります。
+
+Anchor.Ukagaka : "\0\s[0]An Ukagaka is a type of desktop toy intended to keep you company.\w8 My additional purpose is to provide a safe place for you, and the cats who visit me."
+Anchor.SSP : "\0\s[0]SSP is a program that runs Ukagaka. It is the most popular program to do so.\w4 There are others, such as \_a[CROW]CROW\_a."
+Anchor.CROW : "\0\s[0]CROW is an older, no longer maintained program to run Ukagaka. I imagine some people still use it. I am glad people still care."
+
+#==============================================================================
+
+
+#Input Box関連=================================================================
+
+#条件 : 「\![open,inputbox,*,*]」タグで表示したInputボックスに入力をした時。
+#書式 : TalkInput.＜識別子＞
+# 識別子 : 「\![open,inputbox,*,*]」タグでのinputbox区別用の識別子名。
+
+#使用出来る変数
+# System.Request.Reference1 : Inputボックスに入力された内容。
+
+#名前覚えて-------------------------------------------------------------------
+
+Select.TeachName : (
+	$(
+		setstr FlagName 1;
+		setFreeze;
+	)
+	"\0\s[0]Forgive me, what would you like me to call you?"
+	\!["open,inputbox,TeachName,-1"]
+	\e
+)
+
+TalkInput.TeachName : (
+	$(
+		clear FlagName;
+		setstr entername $[ $(SReference 1) || ${username} ];
+	)
+	\0\s[0]${entername} "... How nice. Is that correct?\n\n"
+	\q["Yes.,MemoryName"]\n
+	\q["No.,TeachName"]\n
+	\q["My old name is fine.,Cancel"]
+)
+
+Select.MemoryName : (
+	$(
+		resetFreeze;
+		setstr username ${entername};
+		clear entername;
+	)
+	"\0\s[0]"${username}"... Thank you."
+)
+
+#Input Box タイムアウト--------------------------------------------------------
+
+#条件 : Inputボックス表示後、指定時間が経過しても入力されなかった場合。
+#書式 : TalkInputTimeOut.＜識別子＞
+# 識別子 : 「\![open,inputbox,*,*]」タグでのinputbox区別用の識別子名。
+
+#以下は時間制限を施した時の例。
+#*c
+#TalkInputTimeOut.TeachName : \0\s[4]名前入力時間切れです。\e
+
+#==============================================================================
+
+=kis
+function TheCatReturns $(
+	# @arg[1] is the cat's entry number
+	.setstr @catP $[$@arg[1] + 2];
+	setstr @movenum $[$(rand -21) + 10];
+	echo \p[${@catP}]\s[-1]\![move,--X=${@movenum},--time=1,--base=0,--base--offset=right.bottom,--option=(ignore-sticky-window)]\w8\w8\w8\p[${@catP}]\s[6$@arg[1]00]"Miau!";
+)
+=end
+
+=kis
+function TheCatExits $(
+	# @arg[1] is the cat's entry number
+	.setstr @catP $[$@arg[1] + 2];
+	.setstr @catnum $@arg[1];
+	.setstr @catindex $Cats[${@catnum}];
+	.setstr @catname $CatNames[${@catnum}];
+	echo \p[${@catP}]\s[6${@catnum}03]"Miau-u-u!"\0\s[0]"Oh. It appears "${@catname}" is leaving. Take care, "${@catname}"!\w8\w8"\p[${@catP}]\s[-1];
+)
+=end
+
+CatNeutralTalk : "\f[italic,true]They look at their surroundings. They seem curious.\f[italic,false]\n\n[half]Mia?"
+
+=kis
+function CatNeutral $(
+	# @arg[1] is the cat's entry number
+	setstr @catP $[$@arg[1] + 2];
+	setstr @catnum $@arg[1];
+	echo \p[${@catP}]\s[6${@catnum}00]${CatNeutralTalk}\w8\w8\s[6${@catnum}0]
+)
+=end
+
+CatPlayfulTalk : "\f[italic,true]It looks like they want to play.\f[italic,default]\n\n[half]Miau, miau!"
+
+=kis
+function CatPlayful $(
+	# @arg[1] is the cat's entry number
+	setstr @catP $[$@arg[1] + 2];
+	echo \p[${@catP}]\s[6${@catnum}05]${CatPlayfulTalk}\w8\w8\s[6${@catnum}0]
+)
+=end
+
+CatSleepyTalk : "\f[italic,true]They look a bit sleepy.\f[italic,default]\n\n[half]M\w2ii\w2i-\w2\w2aa\w2uu\w2u-\w2\w2ww..."
+
+=kis
+function CatSleepy $(
+	# @arg[1] is the cat's entry number
+	setstr @catP $[$@arg[1] + 2];
+	echo \p[${@catP}]\s[6${@catnum}06]${CatSleepyTalk}
+)
+=end
+
+=kis
+function CatAngry $(
+	# @arg[1] is the cat's entry number
+	setstr @catP $[$@arg[1] + 2];
+	echo \p[${@catP}]\s[6${@catnum}07]${CatAngryTalk}\w8\w8\s[6${@catnum}0]
+)
+=end
+
+:endcrypt
