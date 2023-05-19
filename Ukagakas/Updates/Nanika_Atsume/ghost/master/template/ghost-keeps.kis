@@ -74,11 +74,11 @@ TalkGeneralfail : \1\s[-1]\0\s[0]${EventInfo}\w8\w8\e
 
 #==============================================================================
 
-sentence : $(if $[${CurrentCat} != "none"] $(return $(CatHappy ${CurrentCat})))
-sentence : $(if $[${CurrentCat} != "none"] $(return $(CatNeutral ${CurrentCat})))
-sentence : $(if $[${CurrentCat} != "none"] $(return $(CatAngry ${CurrentCat})))
-sentence : $(if $[${CurrentCat} != "none"] $(return $(CatSleepy ${CurrentCat})))
-sentence : $(if $[${CurrentCat} != "none"] $(return $(CatPlayful ${CurrentCat})))
+sentence : $(if $[${CurrentCat} != "none"] $(CatHappy ${CurrentCat}))
+sentence : $(if $[${CurrentCat} != "none"] $(CatNeutral ${CurrentCat}))
+sentence : $(if $[${CurrentCat} != "none"] $(CatAngry ${CurrentCat}))
+sentence : $(if $[${CurrentCat} != "none"] $(CatSleepy ${CurrentCat}))
+sentence : $(if $[${CurrentCat} != "none"] $(CatPlayful ${CurrentCat}))
 
 sentence : "\0\s[0]I do hope it rains tomorrow."
 sentence : "\0\s[0]I practice meditation. I like to vizualize myself as if I was as tall as a skyscraper."
@@ -89,19 +89,19 @@ dinner2 : wheatgrass, chive, green onion, onion grass, pollen
 
 sentence : "\0\s[0]A little bit of "${dinner1}".. some "${dinner2}"... Forgive me, I was thinking about what to make for dinner."
 
-sentence : "Grass sprints are a great form of exercise.\w8\w8 Pole-vaulting is underrated, however."
-sentence : "Everyday is tomorrow,\w8 and tomorrow is yesterday,\w8\w8 and the day before yesterday is today.\w8\w8 I try to keep track of time by the seasons."
-sentence : "Man likes to think he enjoys winter,\w8 but what he really enjoys is protection from it."
-sentence : "Have you ever thought about what it'd be like, being a bee?\w8\w8 I think I'd stop thinking the phrase 'stop and smell the roses' was so helpful."
-sentence : "I used to live by a Chinese restaurant. A little old lady kept me in an ornate house and fed me leaves.\w8\w8 I miss her, but I do like doing my own cooking now."
-sentence : "I learned to read on the little scraps of paper that would end up in the trash.\w8\w8\w8 They sometimes came wrapped in this sweet crunchy cookie.\w8 It made my stomach hurt."
-sentence : "Some people weren't meant to be in your life forever.\w8\w8 But that doesn't mean your relationship with them couldn't be meaningful."
-sentence : "I used to be afraid of cats, but the ones around here are nice."
-sentence : "The present is exactly what it says it is."
-sentence : "A frog in a well...\w8 The frog and the scorpion...\w8 kick the frog....\w8\w8 Why is there such abuse towards frogs?"
-sentence : "Early to bed,\w8 early to rise..\w8 I suppose it's a good thing I'm not a Man then. Do you find that phrase helpful?"
-sentence : "There's always a nice bit of condensation on the bottom of these bowls. Have you drank anything recently?"
-sentence : "I'm a bit peckish. I wonder if I have any "${dinner1}" stored in here."
+sentence : "\0\s[0]Grass sprints are a great form of exercise.\w8\w8 Pole-vaulting is underrated, however."
+sentence : "\0\s[0]Everyday is tomorrow,\w8 and tomorrow is yesterday,\w8\w8 and the day before yesterday is today.\w8\w8 I try to keep track of time by the seasons."
+sentence : "\0\s[0]Man likes to think he enjoys winter,\w8 but what he really enjoys is protection from it."
+sentence : "\0\s[0]Have you ever thought about what it'd be like, being a bee?\w8\w8 I think I'd stop thinking the phrase 'stop and smell the roses' was so helpful."
+sentence : "\0\s[0]I used to live by a Chinese restaurant. A little old lady kept me in an ornate house and fed me leaves.\w8\w8 I miss her, but I do like doing my own cooking now."
+sentence : "\0\s[0]I learned to read on the little scraps of paper that would end up in the trash.\w8\w8\w8 They sometimes came wrapped in this sweet crunchy cookie.\w8 It made my stomach hurt."
+sentence : "\0\s[0]Some people weren't meant to be in your life forever.\w8\w8 But that doesn't mean your relationship with them couldn't be meaningful."
+sentence : "\0\s[0]I used to be afraid of cats, but the ones around here are nice."
+sentence : "\0\s[0]The present is exactly what it says it is."
+sentence : "\0\s[0]A frog in a well...\w8 The frog and the scorpion...\w8 kick the frog....\w8\w8 Why is there such abuse towards frogs?"
+sentence : "\0\s[0]Early to bed,\w8 early to rise..\w8 I suppose it's a good thing I'm not a Man then. Do you find that phrase helpful?"
+sentence : "\0\s[0]There's always a nice bit of condensation on the bottom of these bowls. Have you drank anything recently?"
+sentence : "\0\s[0]I'm a bit peckish. I wonder if I have any "${dinner1}" stored in here."
 
 #==============================================================================
 
