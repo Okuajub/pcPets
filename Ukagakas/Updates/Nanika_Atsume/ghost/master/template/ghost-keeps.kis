@@ -73,7 +73,7 @@ TalkGeneralComplete : \1\s[-1]\0\s[0]${EventInfo}\w8\w8\e
 TalkGeneralfail : \1\s[-1]\0\s[0]${EventInfo}\w8\w8\e
 
 #==============================================================================
-
+# Update 1
 sentence : $(if $[${CurrentCat} != "none"] $(CatHappy ${CurrentCat}))
 sentence : $(if $[${CurrentCat} != "none"] $(CatNeutral ${CurrentCat}))
 sentence : $(if $[${CurrentCat} != "none"] $(CatAngry ${CurrentCat}))
@@ -100,8 +100,40 @@ sentence : "\0\s[0]I used to be afraid of cats, but the ones around here are nic
 sentence : "\0\s[0]The present is exactly what it says it is."
 sentence : "\0\s[0]A frog in a well...\w8 The frog and the scorpion...\w8 kick the frog....\w8\w8 Why is there such abuse towards frogs?"
 sentence : "\0\s[0]Early to bed,\w8 early to rise..\w8 I suppose it's a good thing I'm not a Man then. Do you find that phrase helpful?"
-sentence : "\0\s[0]There's always a nice bit of condensation on the bottom of these bowls. Have you drank anything recently?"
+sentence : "\0\s[0]There's always a nice bit of condensation on the underside of these bowls. Have you drank anything recently?"
 sentence : "\0\s[0]I'm a bit peckish. I wonder if I have any "${dinner1}" stored in here."
+# Update 2
+sentence : "\0\s[0]I've heard around Halloween, that if you don't carve a Jack o' Lantern, evil things come to your house.\w8\w8 I'm not quite big enough to make one,\w4 so I do hope these evil things are nice enough to understand that."
+sentence : "\0\s[0]Do you like to use "${dinner2}" to garnish your dishes?\w8\w8 I don't usually garnish things.\w4 I just take it off right away anyway."
+sentence : "\0\s[0]I always wondered, when do mothers grow those eyes they have in the back of their head?\w8The body goes through many changes when bearing children, it seems..."
+sentence : "\0\s[0]I saw a rabbit pass by here a few days ago.\w8\w8 I thought about asking him to join my choir group,\w4 but he seemed more like a baker."
+sentence : "\0\s[0]Some people leave our lives suddenly,\w2 or subtly,\w2 or absentmindedly or\w4 entirely accidentally.\w8 I always feel a bit sad, thinking about it.\w8 But seeing as I remember them, they clearly meant something to me."
+sentence : "\0\s[0]Do you think,\w2 the people who make Toyota,\w2 that they know how many of their cars have been used to regrow coral reefs?\w8\w4 I saw that on the TV the other day\w4 and wondered if they asked the folks who made the cars,\w4 or did it all on their own."
+sentence : "\0\s[0]Lucky numbers and unlucky numbers always seemed odd to me.\w8 Did the numbers always exist, and be unlucky?\w8 Or did the person who created the concept of counting, did they make lucky and unlucky things?\w8\w8 It makes my head hurt."
+sentence : "\0\s[0]Music is the sound of the hills."
+sentence : "\0\s[0]You're supposed to mow your lawn in a different pattern every time you do.\w8\w8 But I've never seen anybody really do that."
+sentence : "\0\s[0]I know variety is the spice of life, but I'm not really sure what the meal of it is.\w8 Maybe my friend the Grasshopper would know?"
+sentence : "\0\s[0]The ants store food for winter,\w4 and yet it's not enough.\w8 Oh, how I would very much like to see Seven Samurai performed by them."
+sentence : "\0\s[0]A house or two down from here, there's an old lady who leaves her TV on all day.\w8\w8 I like to visit and see what's on that day.\w8 The subtitles are too fast for me sometimes."
+sentence : "\0\s[0]My friend, the mouse, told me about this time he met a Brown Cricket who lived in the subway awhile ways from here.\w8\w8 He lived in a matchbox in the news stand! And played for the passers by!\w8 Too busy a life for me, too busy."
+sentence : "\0\s[0]I'm ever so fond of my friend, the Grasshopper.\w8 The other day, he came over with a lovely acorn cake.\w4 I hope he comes over again.\w4"
+sentence : "\0\s[0]I always have to do a few sprints after my friend the Grasshopper leaves after visiting. Or else I can't think about anything else."
+sentence : "\0\s[0]A rose by any other name..."
+sentence : "\0\s[0]Ad hoc, ad loc and quid pro quo.\w4 I never quite knew what he meant."
+sentence : "\0\s[0]Hmm~ mmm.. Forgive me, I was thinking of a new composition."
+sentence : "\0\s[0]You are your own worst critic. So remember not to take such a bad reviewer's words to heart."
+sentence : "\0\s[0]To Hark! To Sow!"
+sentence : "\0\s[0]The fact the profession of 'town crier' isn't available anymore is a shame."
+sentence : "\0\s[0]The soles of shoes are so mistreated.\w4 Do they have their own afterlife? I hope so."
+sentence : "\0\s[0]I think what the ants have to say about the Grasshopper is such nonsense. How cruel, to not help someone in need."
+sentence : "\0\s[0]The secret to being happy, is to find someone who you truly wish to press your body to."
+sentence : "\0\s[0]Nowhere, noplace, notime, nohow."
+sentence : "\0\s[0]There was a lovely mountain in the view of where I used to live.\w8 The company of the neighbors here makes up for the lack of it."
+sentence : "\0\s[0]I once found myself lost in the land of salt and pepper shakers once. I looked around, and there were just more shakers\w4 A short, small Man set me outside after a little while."
+sentence : "\0\s[0]I quite like the Man who lives the door over. He was the one who brought me here, although quite accidentally.\w8 The chair he was sitting in on the train started to move, and I got too scared to jump off.\w8 I stayed on it all the way to his home."
+sentence : "\0\s[0]There was a nice milkbottle in the dirt that used to be my house.\w8 But one rainy day, a bunch of rats and a mouse dug it up and took it away. How rude!"
+sentence : "\0\s[0]I've met both a town mouse and a country mouse, and I have to say both of them seemed just as happy as the other."
+sentence : "\0\s[0]Sour grapes make the finest wines.\w8 And yet, so many think they're unattainable."
 
 #==============================================================================
 
@@ -698,7 +730,7 @@ TalkNarCreated : \0\s[5]「nar」ファイルが完成しました。\e
 #エントリ名 : UpdateCaption
 #書式 ： "右クリックメニューに表示されるネットワーク更新名"
 
-UpdateCaption : "ネットワーク更新(&U)"
+UpdateCaption : "Update(&U)"
 
 #==============================================================================
 
@@ -707,7 +739,7 @@ UpdateCaption : "ネットワーク更新(&U)"
 #エントリ名 : VanishCaption
 #書式 ： "右クリックメニューに表示される消滅指示ボタン名"
 
-VanishCaption : "消滅指示ボタン"
+VanishCaption : "Uninstall"
 
 #==============================================================================
 
@@ -716,7 +748,7 @@ VanishCaption : "消滅指示ボタン"
 #エントリ名：BiffCaption
 #書式 ： "右クリックメニューに表示されるメールチェックボタン名"
 
-BiffCaption : "メールチェック(&M)"
+BiffCaption : "Check Email(&M)"
 
 #==============================================================================
 
@@ -725,7 +757,7 @@ BiffCaption : "メールチェック(&M)"
 #エントリ名：HeadlineCaption
 #書式 ： "右クリックメニューに表示されるヘッドラインセンスボタン名"
 
-HeadlineCaption : "ヘッドライン(&H)"
+HeadlineCaption : "Headlines(&H)"
 
 #==============================================================================
 
@@ -743,7 +775,7 @@ RSSCaption : "RSS(&R)"
 #エントリ名：SntpCaption
 #書式 ： "右クリックメニューに表示される時計合わせボタン名"
 
-SntpCaption : "時計合わせ(&T)"
+SntpCaption : "SNTP(&T)"
 
 #==============================================================================
 

@@ -5,7 +5,13 @@ name,Nanika Atsume
 type,shell
 
 sakura.name,Cricket
-kero.name,Kitties
+kero.name,Kitties!
+char2.name,Snowball
+char3.name,Toona
+char4.name,Firestar
+char5.name,Romeo
+char6.name,Gray
+char7.name,Greystripe
 
 sakura.balloon.alignment,none
 kero.balloon.alignment,none

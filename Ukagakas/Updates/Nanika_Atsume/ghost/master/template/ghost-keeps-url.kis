@@ -1,160 +1,133 @@
 #==============================================================================
 #
-#  u‰Ø˜a—œvƒCƒxƒ“ƒgˆ——pŠÈˆÕƒXƒNƒŠƒvƒg(Kawari Easy Event Programmed Script)
-#  u‚¨Š©‚ßvƒTƒCƒgƒŠƒXƒg«‘
+#  ï¿½uï¿½Ø˜aï¿½ï¿½ï¿½vï¿½Cï¿½xï¿½ï¿½ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½pï¿½ÈˆÕƒXï¿½Nï¿½ï¿½ï¿½vï¿½g(Kawari Easy Event Programmed Script)
+#  ï¿½uï¿½ï¿½ï¿½ï¿½ï¿½ßvï¿½Tï¿½Cï¿½gï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½ï¿½
 #
-# ‚j‚d‚d‚o‚r»ì   F‚±‚â‚Ü™‚ ‚«‚ç
-# OpenKEEPS»ì    : ‚n‚‚…‚‚j‚d‚d‚o‚rƒvƒƒWƒFƒNƒgƒ`[ƒ€
-# OpenKEEPSƒy[ƒW  : http://keeps.sourceforge.jp
-# Version2.0 alpha5 2002.09.30 21:45”Å
-# Version2.0 beta1  2002.10.07 00:03”Å
-# Version2.0 beta2  2002.10.12 00:30”Å
-# Version2.0 RC1    2002.10.31 23:00”Å
-# Version2.0 RC2    2002.11.10 22:00”Å
-# Version2.0 RC3    2002.11.25 00.00”Å
-# Version2.0        2002.12.01 00:00”Å
-# Version2.1.0      2003.01.03 12:00”Å
-# Version2.1.1      2003.01.26 23:00”Å
-# Version2.1.2      2003.03.03 23:00”Å
-# Version2.2        2003.04.01 00:00”Å
-# Version2.2.1      2003.04.14 22:00”Å
-# Version2.2.2      2003.05.01 18:00”Å
-# Version2.2.3      2003.05.18 00:00”Å
-# Version2.2.4      2003.06.16 23:00”Å
-# Version2.2.5      2003.07.31 00:00”Å
-# Version2.3.0 snapshot0309211444 2003.09.21 15:00”Å
-# Version3.0.0      2004.06.06 00:00”Å
-# Version3.0.4      2004.06.27 11:00”Å
-# Version3.3.0a6    2005.10.17 00:00”Å
+# ï¿½jï¿½dï¿½dï¿½oï¿½rï¿½ï¿½ï¿½ï¿½   ï¿½Fï¿½ï¿½ï¿½ï¿½Üï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+# OpenKEEPSï¿½ï¿½ï¿½ï¿½    : ï¿½nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½jï¿½dï¿½dï¿½oï¿½rï¿½vï¿½ï¿½ï¿½Wï¿½Fï¿½Nï¿½gï¿½`ï¿½[ï¿½ï¿½
+# OpenKEEPSï¿½yï¿½[ï¿½W  : http://keeps.sourceforge.jp
+# Version2.0 alpha5 2002.09.30 21:45ï¿½ï¿½
+# Version2.0 beta1  2002.10.07 00:03ï¿½ï¿½
+# Version2.0 beta2  2002.10.12 00:30ï¿½ï¿½
+# Version2.0 RC1    2002.10.31 23:00ï¿½ï¿½
+# Version2.0 RC2    2002.11.10 22:00ï¿½ï¿½
+# Version2.0 RC3    2002.11.25 00.00ï¿½ï¿½
+# Version2.0        2002.12.01 00:00ï¿½ï¿½
+# Version2.1.0      2003.01.03 12:00ï¿½ï¿½
+# Version2.1.1      2003.01.26 23:00ï¿½ï¿½
+# Version2.1.2      2003.03.03 23:00ï¿½ï¿½
+# Version2.2        2003.04.01 00:00ï¿½ï¿½
+# Version2.2.1      2003.04.14 22:00ï¿½ï¿½
+# Version2.2.2      2003.05.01 18:00ï¿½ï¿½
+# Version2.2.3      2003.05.18 00:00ï¿½ï¿½
+# Version2.2.4      2003.06.16 23:00ï¿½ï¿½
+# Version2.2.5      2003.07.31 00:00ï¿½ï¿½
+# Version2.3.0 snapshot0309211444 2003.09.21 15:00ï¿½ï¿½
+# Version3.0.0      2004.06.06 00:00ï¿½ï¿½
+# Version3.0.4      2004.06.27 11:00ï¿½ï¿½
+# Version3.3.0a6    2005.10.17 00:00ï¿½ï¿½
 #
 #==============================================================================
-# “®ì‘ÎÛFu‰Ø˜a—œvPhase 8.2.0 ‹y‚ÑãˆÊŒİŠ·”Å
-#           u‰½‚©viŒ»uf‚©vjMATERIA period 583 ˆÈã
-#           CROWASSPAninixA‹U—ÑŒç‚Å‚Ì“®ì‚ğl—¶
+# ï¿½ï¿½ï¿½ï¿½ÎÛFï¿½uï¿½Ø˜aï¿½ï¿½ï¿½vPhase 8.2.0 ï¿½yï¿½Ñï¿½ÊŒİŠï¿½ï¿½ï¿½
+#           ï¿½uï¿½ï¿½ï¿½ï¿½ï¿½vï¿½iï¿½ï¿½ï¿½uï¿½fï¿½ï¿½ï¿½vï¿½jMATERIA period 583 ï¿½Èï¿½
+#           CROWï¿½ASSPï¿½Aninixï¿½Aï¿½Uï¿½ÑŒï¿½Å‚Ì“ï¿½ï¿½ï¿½ï¿½ï¿½lï¿½ï¿½
 #==============================================================================
 
 
-#u‚¨Š©‚ßvƒTƒCƒgƒŠƒXƒg‘®à–¾================================================
+#ï¿½uï¿½ï¿½ï¿½ï¿½ï¿½ßvï¿½Tï¿½Cï¿½gï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½================================================
 
-#ƒGƒ“ƒgƒŠ–¼
-# URL.sakura : –{‘Ì‘¤‚Ì‚¨‚·‚·‚ßƒTƒCƒg
-# URL.kero   : kero‘¤‚Ì‚¨‚·‚·‚ßƒTƒCƒg
-# URL.portal : –{‘Ì‘¤‚Ìƒ|[ƒ^ƒ‹ƒTƒCƒg
+#ï¿½Gï¿½ï¿½ï¿½gï¿½ï¿½ï¿½ï¿½
+# URL.sakura : ï¿½{ï¿½Ì‘ï¿½ï¿½Ì‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ßƒTï¿½Cï¿½g
+# URL.kero   : keroï¿½ï¿½ï¿½Ì‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ßƒTï¿½Cï¿½g
+# URL.portal : ï¿½{ï¿½Ì‘ï¿½ï¿½Ìƒ|ï¿½[ï¿½^ï¿½ï¿½ï¿½Tï¿½Cï¿½g
 
-##®
-# "(ƒTƒCƒg–¼)(‚t‚q‚k)(ƒoƒi[‚t‚q‚k)"
-#@–”‚ÍA
-# "(ƒTƒCƒg–¼)"$(chr 1)"(‚t‚q‚k)"$(chr 1)"(ƒoƒi[‚t‚q‚k)"$(chr 2)
-#@–”‚Í
-# $(urllist "(ƒTƒCƒg–¼)" "(‚t‚q‚k)" "(ƒoƒi[‚t‚q‚k)")
+##ï¿½ï¿½
+# "(ï¿½Tï¿½Cï¿½gï¿½ï¿½)(ï¿½tï¿½qï¿½k)(ï¿½oï¿½iï¿½[ï¿½tï¿½qï¿½k)"
+#ï¿½@ï¿½ï¿½ï¿½ÍA
+# "(ï¿½Tï¿½Cï¿½gï¿½ï¿½)"$(chr 1)"(ï¿½tï¿½qï¿½k)"$(chr 1)"(ï¿½oï¿½iï¿½[ï¿½tï¿½qï¿½k)"$(chr 2)
+#ï¿½@ï¿½ï¿½ï¿½ï¿½
+# $(urllist "(ï¿½Tï¿½Cï¿½gï¿½ï¿½)" "(ï¿½tï¿½qï¿½k)" "(ï¿½oï¿½iï¿½[ï¿½tï¿½qï¿½k)")
 #
-#‹æØ‚èü‚ÍA
-# "-" –”‚ÍA"-"$(chr 2) –”‚Í $(urllist - - -)
+#ï¿½ï¿½Ø‚ï¿½ï¿½ï¿½ÍA
+# "-" ï¿½ï¿½ï¿½ÍA"-"$(chr 2) ï¿½ï¿½ï¿½ï¿½ $(urllist - - -)
 #
-#ƒoƒi[‚Æ‚µ‚Ä•\¦‚Å‚«‚é‚Ì‚ÍJPGEPNGŒ`®‚Ì‚İ‚ÅGIFŒ`®‚Í•\¦‚Å‚«‚È‚¢‚Ì‚Å’ˆÓB
-#—\‚ßubannervƒtƒHƒ‹ƒ_‚É‚ ‚é‚à‚Ì‚ğ•\¦‚·‚é‚É‚ÍA
-#ƒoƒi[‚t‚q‚k‚ğu(¯•Êq)vAbannerƒtƒHƒ‹ƒ_“à‚Ìƒtƒ@ƒCƒ‹–¼‚ğ
-#u(¯•Êq).(Šg’£q)v‚Æ‚·‚éB
-#ƒoƒi[‚ğ•\¦‚³‚¹‚½‚­‚È‚¢‚ÍƒXƒy[ƒX“™‚ğÅ’á‚P•¶š“ü‚ê‚Ä‚¨‚­B
-#—á
+#ï¿½oï¿½iï¿½[ï¿½Æ‚ï¿½ï¿½Ä•\ï¿½ï¿½ï¿½Å‚ï¿½ï¿½ï¿½Ì‚ï¿½JPGï¿½EPNGï¿½`ï¿½ï¿½ï¿½Ì‚İ‚ï¿½GIFï¿½`ï¿½ï¿½ï¿½Í•\ï¿½ï¿½ï¿½Å‚ï¿½ï¿½È‚ï¿½ï¿½Ì‚Å’ï¿½ï¿½ÓB
+#ï¿½\ï¿½ßubannerï¿½vï¿½tï¿½Hï¿½ï¿½ï¿½_ï¿½É‚ï¿½ï¿½ï¿½ï¿½ï¿½Ì‚ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É‚ÍA
+#ï¿½oï¿½iï¿½[ï¿½tï¿½qï¿½kï¿½ï¿½ï¿½u(ï¿½ï¿½ï¿½Êq)ï¿½vï¿½Abannerï¿½tï¿½Hï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½Ìƒtï¿½@ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+#ï¿½u(ï¿½ï¿½ï¿½Êq).(ï¿½gï¿½ï¿½ï¿½q)ï¿½vï¿½Æ‚ï¿½ï¿½ï¿½B
+#ï¿½oï¿½iï¿½[ï¿½ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½ï¿½ï¿½ï¿½ÍƒXï¿½yï¿½[ï¿½Xï¿½ï¿½ï¿½ï¿½ï¿½Å’ï¿½Pï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½B
+#ï¿½ï¿½
 #URL.sakura : "example"$(chr 1)"http://www.nanntoka.net/"$(chr 1)"nanntoka_banner"$(chr 2)
-#bannerƒtƒHƒ‹ƒ_“à‚Ìƒoƒi[‰æ‘œ nanntoka_banner.png
+#bannerï¿½tï¿½Hï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½Ìƒoï¿½iï¿½[ï¿½æ‘œ nanntoka_banner.png
 
-#ƒoƒi[‚ğ•\¦‚³‚¹‚½‚­‚È‚¢‚Æ‚«
+#ï¿½oï¿½iï¿½[ï¿½ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½ï¿½Æ‚ï¿½
 #URL.sakura : "example"$(chr 1)"http://www.nanntoka.net/"$(chr 1)" "$(chr 2)
 
 #==============================================================================
 
 
-#–{‘Ì‚¨Š©‚ßƒŠƒXƒgFSHIORI/2.2 ‘Î‰ƒAƒvƒŠƒP[ƒVƒ‡ƒ“=============================
+#Shiori 2.2 Format URLs=============================
 
-URL.sakura : "SSTP Bottle"$(chr 1)"http://bottle.mikage.to/"$(chr 1)"http://bottle.mikage.to/banner.gif"$(chr 2)
-URL.sakura : "Winamp"$(chr 1)"http://www.winamp.com/"$(chr 1)"soft_winamp"$(chr 2)
-URL.sakura : "YunaSoft SexyFont Plug-in"$(chr 1)"http://yunasoft.nerv.org/"$(chr 1)"soft_yunasoft"$(chr 2)
-URL.sakura : "”L‚Ç‚è‚Ó"$(chr 1)"http://members.jcom.home.ne.jp/umeici/"$(chr 1)"http://members.jcom.home.ne.jp/umeici/image/nd_b.png"$(chr 2)
-URL.sakura : "‚«‚Ì‚±"$(chr 1)"http://homepage3.nifty.com/khsoft/cbs/"$(chr 1)"http://homepage3.nifty.com/khsoft/cbs/image/banner.png"$(chr 2)
-URL.sakura : "SAKURAƒXƒNƒŠƒvƒgƒGƒfƒBƒ^ ‚¾‚Ô‚é‚Ä‚¢‚é"$(chr 1)"http://www.geocities.co.jp/SiliconValley-Cupertino/4430/"$(chr 1)"http://www.geocities.co.jp/SiliconValley-Cupertino/4430/hap_bnr.png"$(chr 2)
-URL.sakura : "wf‚©x—p‚ÌƒEƒJƒK‚©"$(chr 1)"http://www2.airnet.ne.jp/~sirataki/ukagaka/"$(chr 1)"http://www2.airnet.ne.jp/~sirataki/ukagaka/banner.png"$(chr 2)
+URL.sakura : "Nanika Atsume Homepage"$(chr 1)"https://okuajub-netspace.neocities.org/atsume_ukgk"$(chr 1)" "$(chr 2)
+URL.sakura : "Okuajub's Netspace"$(chr 1)"https://okuajub-netspace.neocities.org/"$(chr 1)"https://okuajub-netspace.neocities.org/eva_button.png"$(chr 2)
+
 
 #==============================================================================
 
 
-#kero ‚¨Š©‚ßƒŠƒXƒgFƒAƒ“ƒeƒiAî•ñ=============================================
-
-URL.kero : "‚³‚­‚çƒiƒr.com"$(chr 1)"http://www.remus.dti.ne.jp/~j-o/skin/skin.htm"$(chr 1)"http://www.remus.dti.ne.jp/~j-o/skin/banner00.png"$(chr 2)
-URL.kero : "‰½‚©ƒS[ƒXƒgƒZƒ“ƒ^["$(chr 1)"http://www.aqrs.jp/ngc/"$(chr 1)"http://homepage2.nifty.com/aqrs/ngc/ngc.png"$(chr 2)
-URL.kero : "GHOST TOWN"$(chr 1)"http://ghost.sakura.vg/"$(chr 1)"http://ghost.sakura.vg/banner/bannertown.png"$(chr 2)
-URL.kero : "ZIDAN"$(chr 1)"http://firetire.web.infoseek.co.jp/zidan/"$(chr 1)"-"$(chr 2)
-URL.kero : "‰½‚©ƒAƒ“ƒeƒi"$(chr 1)"http://sakura.nekome.net/antenna/"$(chr 1)" "$(chr 2)
-URL.kero : "‚â‚³‚®‚êƒAƒ“ƒeƒi"$(chr 1)"http://antenna.yasagure.net/"$(chr 1)"http://antenna.yasagure.net/ysgr_antenna.png"$(chr 2)
-URL.kero : "‚¤‚É‚ã‚¤ƒAƒ“ƒeƒi"$(chr 1)"http://www.betiz.nu/nanika/antenna/"$(chr 1)"http://www.betiz.nu/nanika/antenna/unyu_antenna.png"$(chr 2)
-URL.kero : "‰½‚©B‚Ì—ª—ğ"$(chr 1)"http://a1.st/nob/sakura/"$(chr 1)"http://a1.st/nob/sakura/r_banner.png"$(chr 2)
-
+#Kero's URLs=============================================
+URL.kero : "Neko Atsume Homepage"$(chr 1)"https://www.nekoatsume.com/en/"$(chr 1)" "$(chr 2)
 #==============================================================================
 
 
-#–{‘Ìƒ|[ƒ^ƒ‹ƒTƒCƒgF–{‘ÌEî•ñƒTƒCƒgEu‰Ø˜a—œvŠÖŒW==========================
+#Portal URLs==========================
 
 URL.portal : "OpenKEEPS"$(chr 1)"http://keeps.sourceforge.jp"$(chr 1)"http://keeps.sourceforge.jp/banner.png"$(chr 2)
 URL.portal : "-"$(chr 2)
-URL.portal : "f‚©"$(chr 1)"http://usada.sakura.vg/"$(chr 1)"http://sakura.mikage.to/banner.png"$(chr 2)
 URL.portal : "SSP BUGTTRAQ"$(chr 1)"http://ssp.shillest.net/"$(chr 1)" "$(chr 2)
 URL.portal : "CROW"$(chr 1)"http://crow.aqrs.jp/"$(chr 1)"http://homepage2.nifty.com/aqrs/crow/crow_bnr1.png"$(chr 2)
 URL.portal : "ninix"$(chr 1)"http://www.geocities.co.jp/SiliconValley-Cupertino/7565/"$(chr 1)"http://www.geocities.co.jp/SiliconValley-Cupertino/7565/image/ninix-banner.png"$(chr 2)
 URL.portal : "ninix-aya"$(chr 1)"http://ninix-aya.sourceforge.jp/"$(chr 1)"http://ninix-aya.sourceforge.jp/ninix-aya.png"$(chr 2)
-URL.portal : "‹U—ÑŒç"$(chr 1)"http://ccm.sherry.jp/"$(chr 1)" "$(chr 2)
 URL.portal : "-"$(chr 2)
-URL.portal : "‚à‚Ç‚«”Â"$(chr 1)"http://nh.pv.to/"$(chr 1)"http://nh.pv.to/banner0.png"$(chr 2)
-URL.portal : "‚¤‚Ÿ["$(chr 1)"http://da.pekori.to/wiki/"$(chr 1)"-"$(chr 2)
-URL.portal : "-"$(chr 2)
-URL.portal : "‰Ø˜a—œŒö®”z•zƒy[ƒW"$(chr 1)"http://kawari.sf.net/"$(chr 1)"http://kawari.sf.net/images/banner.png"$(chr 2)
-URL.portal : "u‚ ‚êˆÈŠO‚Ì‰½‚©ˆÈŠO‚Ì‰½‚©vŒf¦”Â"$(chr 1)"http://hpcgi1.nifty.com/creative-s/meister/wforum.cgi"$(chr 1)"http://homepage1.nifty.com/creative-s/meister/bbsbanner.png"
-URL.portal : "‰Ø˜a—œ‚ğg‚¢“|‚·H"$(chr 1)"http://www27.tok2.com/home/kawarisp/"$(chr 1)"http://www27.tok2.com/home/kawarisp/banner/kawariplus.png"$(chr 2)
-URL.portal : "„İu‰Ø˜a—œv‰‰‡’c"$(chr 1)"http://shobu.hp.infoseek.co.jp/"$(chr 1)"http://shobu.hp.infoseek.co.jp/images/kpcg_banner.png"$(chr 2)
-URL.portal : "‹U‰Ø˜a—œ‚³‚ñ‚Ì’ƒpƒŒ[ƒh"$(chr 1)"http://wiki.counterghost.net/pukiwiki.php?FakeKawariBts"$(chr 1)"http://wiki.counterghost.net/pukiwiki.php?plugin=attach&openfile=fake-kawaribts.png&refer=FakeKawariBts"$(chr 2)
-URL.portal : "‹U‚©‚í‚è‚ñ‚­‚·"$(chr 1)"http://wiki.counterghost.net/pukiwiki.php?FakeKawaLinks"$(chr 1)"http://wiki.counterghost.net/pukiwiki.php?plugin=attach&openfile=fake-kawalinks.png&refer=FakeKawaLinks"$(chr 2)
-URL.portal : "‹U‚©‚í‚è‚¾‚Ë"$(chr 1)"http://wiki.counterghost.net/pukiwiki.php?KawariFrontPage"$(chr 1)"-"$(chr 2)
-URL.portal : "SPEAKEASY"$(chr 1)"http://www.yk.rim.or.jp/~suikyo/"$(chr 1)"kawari_speakeasy"$(chr 2)
-URL.portal : "Œã‰q"$(chr 1)"http://meister0.hp.infoseek.co.jp/"$(chr 1)"-"$(chr 2)
-URL.portal : "-"$(chr 2)
-#URL.portal : "‚e‚t‚c‚r"$(chr 1)"http://www3.to/TinyPalace/"$(chr 1)"http://www.ah.wakwak.com/~deep/tinybana.jpg"$(chr 2)
-URL.portal : "8.xŒn‰Ø˜a—œ‚ÅƒS[ƒXƒgì‚é•û–@‹³‚¦‚Ü‚·"$(chr 1)"http://kemonomimisippo.hp.infoseek.co.jp/"$(chr 1)"  "$(chr 2)
-URL.portal : "Public Survice Announcement"$(chr 1)"http://psa.ange.ac/"$(chr 1)"http://psa.ange.ac/images/banner.png"$(chr 2)
+URL.portal : "Kawari Sourceforge"$(chr 1)"http://kawari.sf.net/"$(chr 1)"http://kawari.sf.net/images/banner.png"$(chr 2)
+URL.portal : "Ukagaka Dream Team"$(chr 1)"https://ukagakadreamteam.com/wiki/home"$(chr 1)"https://ukagakadreamteam.com/wiki/lib/tpl/vector/user/logo.png"
+URL.portal : "GHOST TOWN"$(chr 1)"http://ghost.sakura.vg/"$(chr 1)"http://ghost.sakura.vg/banner/bannertown.png"$(chr 2)
+
 
 #==============================================================================
 
 
-#ƒCƒxƒ“ƒgFu‚¨Š©‚ßvƒTƒCƒg‘I‘ğ==============================================
+#ï¿½Cï¿½xï¿½ï¿½ï¿½gï¿½Fï¿½uï¿½ï¿½ï¿½ï¿½ï¿½ßvï¿½Tï¿½Cï¿½gï¿½Iï¿½ï¿½ï¿½ï¿½==============================================
 
-#TalkURL.ƒ³‹K‰»‚µ‚½‚¨Š©‚ßƒTƒCƒg–¼„
+#TalkURL.ï¿½ï¿½ï¿½ï¿½ï¿½Kï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ßƒTï¿½Cï¿½gï¿½ï¿½ï¿½ï¿½
 #TalkURL
 
-# ‚¨Š©‚ßƒTƒCƒgƒŠƒXƒg‚ÌƒTƒCƒg–¼‚ÍA‘SE”¼ŠpƒXƒy[ƒX‚ÍíœA‰p”‚Í‘S‚Ä”¼Šp‚Ì‚±‚Æ
-#u‚¨Š©‚ßvƒTƒCƒgƒŠƒXƒg‚©‚ç‘I‘ğ‚µ‚½Bã‚Ù‚Ç—Dæ‚·‚éB
+# ï¿½ï¿½ï¿½ï¿½ï¿½ßƒTï¿½Cï¿½gï¿½ï¿½ï¿½Xï¿½gï¿½ÌƒTï¿½Cï¿½gï¿½ï¿½ï¿½ÍAï¿½Sï¿½Eï¿½ï¿½ï¿½pï¿½Xï¿½yï¿½[ï¿½Xï¿½Ííœï¿½Aï¿½pï¿½ï¿½ï¿½Í‘Sï¿½Ä”ï¿½ï¿½pï¿½Ì‚ï¿½ï¿½ï¿½
+#ï¿½uï¿½ï¿½ï¿½ï¿½ï¿½ßvï¿½Tï¿½Cï¿½gï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Bï¿½ï¿½Ù‚Ç—Dï¿½æ‚·ï¿½ï¿½B
 
-# g—p‰Â”\‚È•Ï”
-# System.Request.Reference0 : ƒTƒCƒg–¼
-# System.Request.Reference1 : ƒTƒCƒg‚ÌURL
+# ï¿½gï¿½pï¿½Â”\ï¿½È•Ïï¿½
+# System.Request.Reference0 : ï¿½Tï¿½Cï¿½gï¿½ï¿½
+# System.Request.Reference1 : ï¿½Tï¿½Cï¿½gï¿½ï¿½URL
 
 
-#TalkURL.clearbrainsystems : \0\s[0]ƒGƒ“ƒ^[ƒeƒCƒ“ƒƒ“ƒgƒ\ƒtƒgu‚«‚Ì‚±v”z•zŒ³B\e
-#TalkURL.”L‚Ç‚è‚Ó : \0\s[0]ƒGƒ“ƒ^[ƒeƒCƒ“ƒƒ“ƒgƒ\ƒtƒgu”L‚Ç‚è‚Óv”z•zŒ³B\e
-#TalkURL.winampcom : \0\s[0]‚l‚o‚RƒvƒŒ[ƒ„uWinampv”z•zŒ³B\w8\1YunaSexyFont‚Æ‚Ì‘g‡‚¹‚Ä‹ÈĞ‰î‚â‰ÌŒ•\¦‚ª‚Å‚«‚é‚ñ‚âB\e
-#TalkURL.yunasoft : \0\s[0]uWinampv—pƒvƒ‰ƒOƒCƒ“uYunaSexyFontv”z•zŒ³B\n\nuWinampv‚ÅA‹ÈĞ‰î‚â‰ÌŒ•\¦‚È‚Ç‚ª‰Â”\‚ÉB\e
-#TalkURL.‚Í‚Ò‚©‚é¥‚¹‚Ô‚ñ : \0\s[0]SHIORIƒ‚ƒWƒ…[ƒ‹—pƒeƒLƒXƒgƒGƒfƒBƒ^u‚¾‚Ô‚é‚Ä‚¢‚év”z•zŒ³B\e
-#TalkURL.‰½‚©—p‚Ìƒiƒj‚© : \0\s[0]uUD Agentvx‰‡ƒ\ƒtƒguUDSensorv”z•zŒ³B\e
-TalkURL : \0\s[0]ƒTƒCƒgu$(SReference 0)v‚Å‚·B\e
+#TalkURL.clearbrainsystems : \0\s[0]ï¿½Gï¿½ï¿½ï¿½^ï¿½[ï¿½eï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½gï¿½\ï¿½tï¿½gï¿½uï¿½ï¿½ï¿½Ì‚ï¿½ï¿½vï¿½zï¿½zï¿½ï¿½ï¿½B\e
+#TalkURL.ï¿½Lï¿½Ç‚ï¿½ï¿½ : \0\s[0]ï¿½Gï¿½ï¿½ï¿½^ï¿½[ï¿½eï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½gï¿½\ï¿½tï¿½gï¿½uï¿½Lï¿½Ç‚ï¿½Óvï¿½zï¿½zï¿½ï¿½ï¿½B\e
+#TalkURL.winampcom : \0\s[0]ï¿½lï¿½oï¿½Rï¿½vï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½uWinampï¿½vï¿½zï¿½zï¿½ï¿½ï¿½B\w8\1YunaSexyFontï¿½Æ‚Ì‘gï¿½ï¿½ï¿½ï¿½ï¿½Ä‹ÈĞ‰ï¿½ï¿½Ìï¿½ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½Å‚ï¿½ï¿½ï¿½ï¿½ï¿½B\e
+#TalkURL.yunasoft : \0\s[0]ï¿½uWinampï¿½vï¿½pï¿½vï¿½ï¿½ï¿½Oï¿½Cï¿½ï¿½ï¿½uYunaSexyFontï¿½vï¿½zï¿½zï¿½ï¿½ï¿½B\n\nï¿½uWinampï¿½vï¿½ÅAï¿½ÈĞ‰ï¿½ï¿½Ìï¿½ï¿½\ï¿½ï¿½ï¿½È‚Ç‚ï¿½ï¿½Â”\ï¿½ÉB\e
+#TalkURL.ï¿½Í‚Ò‚ï¿½ï¿½é¥ï¿½ï¿½ï¿½Ô‚ï¿½ : \0\s[0]SHIORIï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½pï¿½eï¿½Lï¿½Xï¿½gï¿½Gï¿½fï¿½Bï¿½^ï¿½uï¿½ï¿½ï¿½Ô‚ï¿½Ä‚ï¿½ï¿½ï¿½vï¿½zï¿½zï¿½ï¿½ï¿½B\e
+#TalkURL.ï¿½ï¿½ï¿½ï¿½ï¿½pï¿½Ìƒiï¿½jï¿½ï¿½ : \0\s[0]ï¿½uUD Agentï¿½vï¿½xï¿½ï¿½ï¿½\ï¿½tï¿½gï¿½uUDSensorï¿½vï¿½zï¿½zï¿½ï¿½ï¿½B\e
+TalkURL : "\0\s[0]Off to "$(SReference 0)" we go!"
 
 #==============================================================================
 
 
-#ƒŠƒ\[ƒXFu‚¨Š©‚ßvƒTƒCƒgƒŠƒXƒgƒ{ƒ^ƒ“–¼======================================
+#ï¿½ï¿½ï¿½\ï¿½[ï¿½Xï¿½Fï¿½uï¿½ï¿½ï¿½ï¿½ï¿½ßvï¿½Tï¿½Cï¿½gï¿½ï¿½ï¿½Xï¿½gï¿½{ï¿½^ï¿½ï¿½ï¿½ï¿½======================================
 
-#ƒGƒ“ƒgƒŠ–¼ : Sakura.URLCaption : \0‘¤‚Ì‚¨Š©‚ß
-#@@@@@   Kero.URLCaption   : \1‘¤‚Ì‚¨Š©‚ß
-#@@@@@   Portal.URLCaption : –{‘Ì‚Ìƒ|[ƒ^ƒ‹
-#‘® F "‰EƒNƒŠƒbƒNƒƒjƒ…[‚É•\¦‚³‚ê‚éƒTƒCƒgƒŠƒXƒg–¼"
-#•¡”w’è‰Â”\
+#ï¿½Gï¿½ï¿½ï¿½gï¿½ï¿½ï¿½ï¿½ : Sakura.URLCaption : \0ï¿½ï¿½ï¿½Ì‚ï¿½ï¿½ï¿½ï¿½ï¿½
+#ï¿½@ï¿½@ï¿½@ï¿½@ï¿½@   Kero.URLCaption   : \1ï¿½ï¿½ï¿½Ì‚ï¿½ï¿½ï¿½ï¿½ï¿½
+#ï¿½@ï¿½@ï¿½@ï¿½@ï¿½@   Portal.URLCaption : ï¿½{ï¿½Ì‚Ìƒ|ï¿½[ï¿½^ï¿½ï¿½
+#ï¿½ï¿½ï¿½ï¿½ ï¿½F "ï¿½Eï¿½Nï¿½ï¿½ï¿½bï¿½Nï¿½ï¿½ï¿½jï¿½ï¿½ï¿½[ï¿½É•\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Tï¿½Cï¿½gï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½"
+#ï¿½ï¿½ï¿½ï¿½ï¿½wï¿½ï¿½Â”\
 
 Sakura.URLCaption : "Recommendations(&R)"
 Kero.URLCaption   : "Recommendations(&R)"

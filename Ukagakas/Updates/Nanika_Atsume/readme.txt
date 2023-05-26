@@ -22,6 +22,8 @@ Recommended Balloon Creator
       adanteallegro
          Galla
         Zichqec
+	Aegisghosts
+	StrangelyKai
 
 - (Bad) Credits Typesetter - 
 	  Okuajub

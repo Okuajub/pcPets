@@ -1,57 +1,57 @@
 #==============================================================================
 #
-# u‰Ø˜a—œvƒCƒxƒ“ƒgˆ——pŠÈˆÕƒXƒNƒŠƒvƒg(Kawari Easy Event Programmed Script)
-#  ƒƒjƒ…[ŠÖ˜A«‘
+# ï¿½uï¿½Ø˜aï¿½ï¿½ï¿½vï¿½Cï¿½xï¿½ï¿½ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½pï¿½ÈˆÕƒXï¿½Nï¿½ï¿½ï¿½vï¿½g(Kawari Easy Event Programmed Script)
+#  ï¿½ï¿½ï¿½jï¿½ï¿½ï¿½[ï¿½Ö˜Aï¿½ï¿½ï¿½ï¿½
 #
-# ‚j‚d‚d‚o‚r»ì   F‚±‚â‚Ü™‚ ‚«‚ç
-# OpenKEEPS»ì    : ‚n‚‚…‚‚j‚d‚d‚o‚rƒvƒƒWƒFƒNƒgƒ`[ƒ€
-# OpenKEEPSƒy[ƒW  : http://keeps.sourceforge.jp
-# Version2.0 alpha1 2002.09.25 22:30”Å
-# Version2.0 alpha2 2002.09.27 22:07”Å
-# Version2.0 alpha3 2002.09.28 20:07”Å
-# Version2.0 alpha4 2002.09.28 22:06”Å
-# Version2.0 alpha5 2002.09.30 21:45”Å
-# Version2.0 beta1  2002.10.07 00:03”Å
-# Version2.0 beta2  2002.10.12 00:30”Å
-# Version2.0 RC1    2002.10.31 23:00”Å
-# Version2.0 RC2    2002.11.10 22:00”Å
-# Version2.0 RC3    2002.11.25 00:00”Å
-# Version2.0        2002.12.01 00:00”Å
-# Version2.1.0      2003.01.03 12:00”Å
-# Version2.1.1      2003.01.26 23:00”Å
-# Version2.1.2      2003.03.03 23:00”Å
-# Version2.2        2003.04.01 00:00”Å
-# Version2.2.1      2003.04.14 22:00”Å
-# Version2.2.2      2003.05.01 18:00”Å
-# Version2.2.3      2003.05.18 00:00”Å
-# Version2.2.4      2003.06.16 23:00”Å
-# Version2.2.5      2003.07.31 00:00”Å
-# Version2.3.0 snapshot0309211444 2003.09.21 15:00”Å
-# Version3.0.0      2004.06.06 00:00”Å
-# Version3.0.4      2004.06.27 18:30”Å
-# Version3.0.5      2004.07.03 11:30”Å
-# Version3.0.7      2004.07.18 22:30”Å
-# Version3.1.0      2004.09.12 14:00”Å
-# Version3.1.1      2004.09.19 23:00”Å
-# Version3.1.2      2004.09.26 23:15”Å
-# Version3.1.3      2004.10.16 16:15”Å
-# Version3.1.4      2004.10.30 22:45”Å
-# Version3.1.5      2004.11.13 20:30”Å
-# Version3.1.6      2004.11.23 22:30”Å
-# Version3.3.0a6    2005.10.17 00:00”Å
+# ï¿½jï¿½dï¿½dï¿½oï¿½rï¿½ï¿½ï¿½ï¿½   ï¿½Fï¿½ï¿½ï¿½ï¿½Üï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+# OpenKEEPSï¿½ï¿½ï¿½ï¿½    : ï¿½nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½jï¿½dï¿½dï¿½oï¿½rï¿½vï¿½ï¿½ï¿½Wï¿½Fï¿½Nï¿½gï¿½`ï¿½[ï¿½ï¿½
+# OpenKEEPSï¿½yï¿½[ï¿½W  : http://keeps.sourceforge.jp
+# Version2.0 alpha1 2002.09.25 22:30ï¿½ï¿½
+# Version2.0 alpha2 2002.09.27 22:07ï¿½ï¿½
+# Version2.0 alpha3 2002.09.28 20:07ï¿½ï¿½
+# Version2.0 alpha4 2002.09.28 22:06ï¿½ï¿½
+# Version2.0 alpha5 2002.09.30 21:45ï¿½ï¿½
+# Version2.0 beta1  2002.10.07 00:03ï¿½ï¿½
+# Version2.0 beta2  2002.10.12 00:30ï¿½ï¿½
+# Version2.0 RC1    2002.10.31 23:00ï¿½ï¿½
+# Version2.0 RC2    2002.11.10 22:00ï¿½ï¿½
+# Version2.0 RC3    2002.11.25 00:00ï¿½ï¿½
+# Version2.0        2002.12.01 00:00ï¿½ï¿½
+# Version2.1.0      2003.01.03 12:00ï¿½ï¿½
+# Version2.1.1      2003.01.26 23:00ï¿½ï¿½
+# Version2.1.2      2003.03.03 23:00ï¿½ï¿½
+# Version2.2        2003.04.01 00:00ï¿½ï¿½
+# Version2.2.1      2003.04.14 22:00ï¿½ï¿½
+# Version2.2.2      2003.05.01 18:00ï¿½ï¿½
+# Version2.2.3      2003.05.18 00:00ï¿½ï¿½
+# Version2.2.4      2003.06.16 23:00ï¿½ï¿½
+# Version2.2.5      2003.07.31 00:00ï¿½ï¿½
+# Version2.3.0 snapshot0309211444 2003.09.21 15:00ï¿½ï¿½
+# Version3.0.0      2004.06.06 00:00ï¿½ï¿½
+# Version3.0.4      2004.06.27 18:30ï¿½ï¿½
+# Version3.0.5      2004.07.03 11:30ï¿½ï¿½
+# Version3.0.7      2004.07.18 22:30ï¿½ï¿½
+# Version3.1.0      2004.09.12 14:00ï¿½ï¿½
+# Version3.1.1      2004.09.19 23:00ï¿½ï¿½
+# Version3.1.2      2004.09.26 23:15ï¿½ï¿½
+# Version3.1.3      2004.10.16 16:15ï¿½ï¿½
+# Version3.1.4      2004.10.30 22:45ï¿½ï¿½
+# Version3.1.5      2004.11.13 20:30ï¿½ï¿½
+# Version3.1.6      2004.11.23 22:30ï¿½ï¿½
+# Version3.3.0a6    2005.10.17 00:00ï¿½ï¿½
 #
 #==============================================================================
-# “®ì‘ÎÛFu‰Ø˜a—œvPhase 8.2.2 ‹y‚ÑãˆÊŒİŠ·”Å
-#           u‰½‚©viŒ»uf‚©vjMATERIA period 583 ˆÈã
-#           CROWASSPAninixA‹U—ÑŒç‚Å‚Ì“®ì‚ğl—¶
+# ï¿½ï¿½ï¿½ï¿½ÎÛFï¿½uï¿½Ø˜aï¿½ï¿½ï¿½vPhase 8.2.2 ï¿½yï¿½Ñï¿½ÊŒİŠï¿½ï¿½ï¿½
+#           ï¿½uï¿½ï¿½ï¿½ï¿½ï¿½vï¿½iï¿½ï¿½ï¿½uï¿½fï¿½ï¿½ï¿½vï¿½jMATERIA period 583 ï¿½Èï¿½
+#           CROWï¿½ASSPï¿½Aninixï¿½Aï¿½Uï¿½ÑŒï¿½Å‚Ì“ï¿½ï¿½ï¿½ï¿½ï¿½lï¿½ï¿½
 #==============================================================================
 
 :crypt
-#ƒƒjƒ…[ü‚è==================================================================
+#ï¿½ï¿½ï¿½jï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½==================================================================
 
-#ğŒ : u\q?vƒ^ƒO‚Å•\¦‚³‚ê‚½‘I‘ğˆ‚ğ‘I‘ğ‚µ‚½B
-#‘® : Select.ƒ¯•Êq„
-# ¯•Êq : u\q?vƒ^ƒO‚Å’è‹`‚³‚ê‚½A‘I‘ğˆ‚ª‚Â¯•ÊqB
+#ï¿½ï¿½ï¿½ï¿½ : ï¿½u\q?ï¿½vï¿½^ï¿½Oï¿½Å•\ï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B
+#ï¿½ï¿½ï¿½ï¿½ : Select.ï¿½ï¿½ï¿½ï¿½ï¿½Êqï¿½ï¿½
+# ï¿½ï¿½ï¿½Êq : ï¿½u\q?ï¿½vï¿½^ï¿½Oï¿½Å’ï¿½`ï¿½ï¿½ï¿½ê‚½ï¿½Aï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Âï¿½ï¿½Êqï¿½B
 
 Mainmenu : (
 	\b[1]${Mainmenu1}\n\n
@@ -81,47 +81,150 @@ Select.debug : (
 	\q[Test Variable,test]\n
 	\q[Summon Next Cat,summon]\n
 	\q[Farewell Current Cat,farewell]\n
+	\q[Summon ALL Cats,AllCats]\n
 	\q[First Boot Simulation,firstinitsim]
 )
 
 Select.catstats : (
-	Mode ${mode}\n
-	Food ${food}\n
+	Mode is ${mode}\n
+	Food is ${food}\n
 	Food was set out at ${foodTimeOut}\n
-	Random cat order is $RandomCat[0] $RandomCat[1] $RandomCat[2] $RandomCat[3] $RandomCat[4] $RandomCat[5]\n
-	Current cat is ${CurrentCat}\n
+	Random cat order is $(foreach @cat RandomCat $(echo ${@cat}" "))\n
+	Current cat is $(foreach @cats CurrentCat $(echo ${@cats}" "))\n
 )
 
 Select.test : $(
-	setstr @vanishtest "0";
-	FirstInitCond;
-	${Select.dry};
-	# echo $RandomCat[0] $RandomCat[1] $RandomCat[2] $RandomCat[3] $RandomCat[4] $RandomCat[5]\n\n[half];
-	if $[${food} != "empty" && ${food} != "none" && $[$(size RandomCat) > 0]] $(
-		setstr NewCat $(shift RandomCat); $(
-			if $[$[${NewCat} != ${CurrentCat}] && $[${CurrentCat} = "none"]] $(setstr CurrentCat ${NewCat}; return $(TheCatReturns ${CurrentCat}));
-			if $[${NewCat} != ${CurrentCat} && ${NewCat} != ${CurrentCat2} && $[${CurrentCat2} = "none"]] $(setstr CurrentCat2 ${newcat}; $(TheCatReturns ${CurrentCat2}));
-		)
-	);
-	if $[($(length ${CurrentCat}) > 0) && ${@vanishtest} = 1] $(TheCatExits ${CurrentCat}; setstr CurrentCat "none"; setstr CurrentCat ${CurrentCat2}; setstr CurrentCat "none");
+	setstr NewCat $(shift RandomCat); $(
+			if $[ !$[ $(find CurrentCat ${NewCat}) ] ] $( unshift CurrentCat ${NewCat}; return $(TheCatReturns ${NewCat}) )
+	)
 )
 
 Select.summon : $(
-
-	setstr NewCat $(shift RandomCat);
 	if $[$[$(size RandomCat) > 0]] $(
-		if $[$[${NewCat} != ${CurrentCat}] && $[${CurrentCat} = "none"]] $(setstr CurrentCat ${NewCat}; return $(TheCatReturns ${CurrentCat}))
-		else if $[${NewCat} != ${CurrentCat} && ${NewCat} != ${CurrentCat2} && $[${CurrentCat2} = "none"]] $(setstr CurrentCat2 ${newcat}; return $(TheCatReturns ${CurrentCat2}))
+		setstr NewCat $(shift RandomCat); $(
+			if $[ $[$(find CurrentCat "none") > -1] ] $(setstr CurrentCat ${NewCat}; return $(TheCatReturns ${NewCat}) )
+			else if $[ $(find CurrentCat ${NewCat}) == -1 ] $( unshift CurrentCat ${NewCat}; return $(TheCatReturns ${NewCat}) ) 
+		)
 	)
 	else $(echo Please fill RandomCat first!)
 )
 
 Select.farewell : $(
-	setstr @LeavingCat ${CurrentCat}; 
-	setstr CurrentCat "none"; 
-	setstr CurrentCat ${CurrentCat2}; 
-	setstr CurrentCat2 "none"; 
-	return $(TheCatExits ${@LeavingCat});
+	if $[$[$(size CurrentCat ) > 0 ] && $[${CurrentCat} != "none"]] $(
+		setstr @LeavingCat $( pop CurrentCat ); 
+		if $[ ${@LeavingCat} == "none" ] $(setstr @LeavingCat $( pop CurrentCat ));
+		TheCatExits ${@LeavingCat};
+	)
+)
+
+Select.AllCats : $(
+	set CurrentCat 0; push CurrentCat 1; push CurrentCat 2; push CurrentCat 3; push CurrentCat 4; push CurrentCat 5;
+	echo "\p[2]\s[6000]""\p[3]\s[6100]""\p[4]\s[6200]""\p[5]\s[6300]""\p[6]\s[6400]""\p[7]\s[6500]"
+)
+
+Select.Goodies : (
+	\1\s[-1]\0\s[0]
+	"What would you like to set out?\n\n[half]"
+	"\q[Dry Food,dry]\n"
+	"\q[Wet Food,wet]\n"
+	"\q[Dessert Food,dessert]\n\n[half]"
+	"\q[Cancel,Cancel]"
+
+)
+
+Cats : White,Greywhite,Orange,Black,Grey,Greystripe
+
+# SnowballName
+WhitecatNames : Paris, Perry, Comet, Artemis, None, Indrid, Cecil, Drums, Taiko
+#ToonyName
+GreywhitecatNames : Zilla, Donko, Dizzy, Hector, No One, Onkel, Bunny, Piano, Bopem, Socks
+#FirestarName
+OrangecatNames : Oranges, Garfield, Heathcliff, Firepaw, Bubba, Egg, Nobody, Crunchwrap Supreme, Trumpet, Tangle, Duck, Hazelrah
+#RomeoName
+BlackcatNames : Jiji, Seven, Miss Kitty, Luna, Coco, Caspian, Null, Brutus, Burger, Oreo, Juniper, Inle
+#GrayName
+GreycatNames : Yara, Matilda, Cordelia, Nutmeg, Nikt, Mark, Peter, Chicken, Dunky, Doja, Enigma, Fiver, Bigwig
+#GreystripeName 
+GreystripecatNames : Toona, Chi, Greystripe, Nada, Moss, Pusheen, Rob, Kjell, Hachiware, Kris, Rose
+
+#Unused cat data. I might use it at some point.
+
+CatNames : ${SnowballName}, ${ToonyName}, ${FirestarName}, ${RomeoName}, ${GrayName}, ${GreystripeName}
+
+White : ${SnowballName},dry,playful
+
+Greywhite : dry,sleepy
+
+Orange : wet,brave
+
+Black : wet,friendly
+
+Grey : dessert,aloof
+
+Greystripe : dessert,funny
+
+CatRandomizer : $(
+	clear RandomCat;
+	setstr @random $(rand 6);
+	loop $[${@random} + 6] $(if $[${food} = "dry"] $(adddictstr RandomCat $(rand 2)));
+	loop $[${@random} + 6] $(if $[${food} = "wet"] $(adddictstr RandomCat $(rand 4)));
+	loop $[${@random} + 6] $(if $[${food} = "dessert"] $(adddictstr RandomCat $[$(rand 2) + 4]));
+)
+
+dryfoodTalk : "Dry food. It's a popular choice.","I enjoy classical music. Unfortunately listening to it rattles my house quite often.","People often ask me if I play the violin.\w8 I play the cello, actually."
+
+Select.dry : (
+	$(setstr mode "changing")
+	$(set foodTimeOut $(date %H)$(date %M))
+	$(setstr food "dry"; setstr mode "dryfull")
+	${CatRandomizer}
+	"\w8\w8\w8\0\s[100]\w8\w8"
+	${dryfoodTalk}
+	"\w8\w8\w8\0\s[0]\i[1]\i[11]"
+)
+
+wetfoodTalk : "Wet food. A lot of cats love it.","My choir group recently started meeting three times a week instead of four.\w8 I don't know what to do with myself on Wednesday nights now.","Have you ever wondered what it would be like to be a sea fish?\w8\w8 I think about it sometimes."
+wetfoodTalk : "I saw a waterfall, once, on a train ride.\w8 I've never captured the same sense of joy since.\w4 Equal, yes!\w2 But not the same.", ""
+
+Select.wet : (
+	$(setstr mode "changing")
+	$(set foodTimeOut $(date %H)$(date %M))
+	$(setstr food "wet"; setstr mode "wetfull")
+	${CatRandomizer}
+	"\w8\w8\w8\0\s[100]\w8\w8"
+	${wetfoodTalk}
+	"\w8\w8\w8\0\s[0]\i[2]\i[21]"
+	"\n\n[half]Smush the food?\n"
+	"\q[Yes,smush]\n"
+	"\q[No,nosmush]"
+)
+
+smushtalk : "What a bold choice! The food cannot easily be put back in its can shape... Permanence is striking.","I hear some cats are picky about having their food be pre-smushed. My grandmother told me about one."
+smushtalk : "In the infinity of the universe, do you think someone else is going through a metamorphosis?","Extracting more protein?","Do be gentle, please."
+
+Select.smush : (
+	"\0\s[0]\i[2]\i[22]"
+	$(setstr food "wet"; setstr mode "wetsmushed")
+	"The food is smushed now.\n\n[half]\w8\w4"
+	${smushtalk}
+)
+
+Select.nosmush : (
+	"The food remains unsmushed."
+)
+
+dessertfoodTalk : "Dessert food. This cat-safe vanilla pudding is sure to please even the most finicky of felines.","Isn't this bonito and vanilla pudding so sweet?\w8 In a cute sense, I mean.","Did you know that cows are large enough to scare small predators away? They scare me, too."
+dessertfoodTalk : "Don't be afraid to put the plate down on me. It's quite roomy on the bottom, really.","I must admit to you, I'm quite fond of the Grasshopper. I'm not sure what to do about it."
+dessertfoodTalk : "I'm not really quite sure what a pudding is.\w4 I need to watch the cooking channel more often.","Isn't life so exciting? Meeting new people, and growing up..\w4 It can be a bit scary, too."
+
+Select.dessert : (
+	$(setstr mode "changing")
+	$(set foodTimeOut $(date %H)$(date %M))
+	$(setstr food "dessert"; setstr mode "dessertfull")
+	${CatRandomizer}
+	"\w8\w8\w8\0\s[100]\w8\w8"
+	${dessertfoodTalk}
+	"\w8\w8\w8\0\s[0]\i[3]\i[31]"
 )
 
 Select.firstinitsim : $(
@@ -142,9 +245,9 @@ Select.Option : (
 	\1\s[-1]\0\s[0]
 	"\0Optional settings, if you'd like them.\n"
 	\q["Talk rate,Timing"]\n
-	\q["Off-screen talk:" $(if $(isMikireOn) "OFF" else "ON")","Mikire]\n
+	\q["Off-screen talk:" $(if $(isMikireOn) "ON" else "OFF")","Mikire]\n
 	# Overlapping Characters talk
-	\q["Overlap Talk"$(if $(isKasanariOn) "OFF" else "ON")‚É","Kasanari]\n
+	\q["Overlap Talk"$(if $(isKasanariOn) "ON" else "OFF")","Kasanari]\n
 	\q["Name,TeachName"]\n
 	# Changes personality
 	# \q["Change modes,Change"]\n
@@ -203,119 +306,20 @@ Select.Kasanari : \0\s[0]$(
 
 Select.Override : \0\s[0]$(
 	if $(isOverrideMode)
-		$(OverrideOff)"lŠiƒI[ƒo[ƒ‰ƒCƒh‚ª–³Œø‚É‚È‚è‚Ü‚µ‚½B"
+		$(OverrideOff)"ï¿½lï¿½iï¿½Iï¿½[ï¿½oï¿½[ï¿½ï¿½ï¿½Cï¿½hï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É‚È‚ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½B"
 	else
-		$(OverrideOn)"lŠiƒI[ƒo[ƒ‰ƒCƒh‚ğ—LŒø‚É‚µ‚Ü‚·B"
+		$(OverrideOn)"ï¿½lï¿½iï¿½Iï¿½[ï¿½oï¿½[ï¿½ï¿½ï¿½Cï¿½hï¿½ï¿½Lï¿½ï¿½ï¿½É‚ï¿½ï¿½Ü‚ï¿½ï¿½B"
 	)\e
 
 
 Select.Cancel : $(resetFreeze)"\b[0]\0\s[0]Another time."
-
-Select.Goodies : (
-	\1\s[-1]\0\s[0]
-	"What would you like to set out?\n\n[half]"
-	"\q[Dry Food,dry]\n"
-	"\q[Wet Food,wet]\n"
-	"\q[Dessert Food,dessert]\n\n[half]"
-	"\q[Cancel,Cancel]"
-
-)
-
-Cats : White,Greywhite,Orange,Black,Grey,Greystripe
-
-# SnowballName
-WhitecatNames : Paris, Perry, Comet, Artemis
-#ToonyName
-GreywhitecatNames : Zilla, Donko, Dizzy, Hector
-#FirestarName
-OrangecatNames : Oranges, Garfield, Heathcliff, Firepaw, Bubba, Egg
-#RomeoName
-BlackcatNames : Jiji, Seven, Miss Kitty, Luna, Coco, Caspian
-#GrayName
-GreycatNames : Yara, Matilda, Cordelia, Nutmeg
-#GreystripeName 
-GreystripecatNames : Toona, Chi, Greystripe
-
-CatNames : ${SnowballName}, ${ToonyName}, ${FirestarName}, ${RomeoName}, ${GrayName}, ${GreystripeName}
-
-White : ${SnowballName},dry,playful
-
-Greywhite : dry,sleepy
-
-Orange : wet,brave
-
-Black : wet,friendly
-
-Grey : dessert,aloof
-
-Greystripe : dessert,funny
-
-CatRandomizer : $(
-	clear RandomCat;
-	loop 6 $(if $[${food} = "dry"] $(adddictstr RandomCat $(rand 2)));
-	loop 6 $(if $[${food} = "wet"] $(adddictstr RandomCat $(rand 4)));
-	loop 6 $(if $[${food} = "dessert"] $(adddictstr RandomCat $[$(rand 2) + 4]));
-)
-
-dryfoodTalk : "Dry food. It's a popular choice.","I enjoy classical music. Unfortunately listening to it rattles my house quite often.","People often ask me if I play the violin.\w8 I play the cello, actually."
-
-Select.dry : (
-	$(setstr mode "changing")
-	$(set foodTimeOut $(date %H)$(date %M))
-	$(setstr food "dry"; setstr mode "dryfull")
-	${CatRandomizer}
-	"\w8\w8\w8\0\s[100]\w8\w8"
-	${dryfoodTalk}
-	"\w8\w8\w8\0\s[0]\i[1]\i[11]"
-)
-
-wetfoodTalk : "Wet food. A lot of cats love it.","My choir group recently started meeting three times a week instead of four.\w8 I don't know what to do with myself on Wednesday nights now.","Have you ever wondered what it would be like to be a sea fish?\w8\w8 I think about it sometimes."
-
-Select.wet : (
-	$(setstr mode "changing")
-	$(set foodTimeOut $(date %H)$(date %M))
-	$(setstr food "wet"; setstr mode "wetfull")
-	${CatRandomizer}
-	"\w8\w8\w8\0\s[100]\w8\w8"
-	${wetfoodTalk}
-	"\w8\w8\w8\0\s[0]\i[2]\i[21]"
-	"\n\n[half]Smush the food?\n"
-	"\q[Yes,smush]\n"
-	"\q[No,nosmush]"
-)
-
-smushtalk : "What a bold choice! The food cannot easily be put back in its can shape... Permanence is striking.","I hear some cats are picky about having their food be pre-smushed. My grandmother told me about one."
-
-Select.smush : (
-	"\0\s[0]\i[2]\i[22]"
-	$(setstr food "wet"; setstr mode "wetsmushed")
-	"The food is smushed now.\n\n[half]\w8\w4"
-	${smushtalk}
-)
-
-Select.nosmush : (
-	"The food remains unsmushed."
-)
-
-dessertfoodTalk : "Dessert food. This cat-safe vanilla pudding is sure to please even the most finicky of felines.","Isn't this bonito and vanilla pudding so sweet?\w8 In a cute sense, I mean.","Did you know that cows are large enough to scare small predators away? They scare me, too."
-dessertfoodTalk : "Don't be afraid to put the plate down on me. It's quite roomy on the bottom, really."
-
-Select.dessert : (
-	$(setstr mode "changing")
-	$(set foodTimeOut $(date %H)$(date %M))
-	$(setstr food "dessert"; setstr mode "dessertfull")
-	${CatRandomizer}
-	"\w8\w8\w8\0\s[100]\w8\w8"
-	${dessertfoodTalk}
-	"\w8\w8\w8\0\s[0]\i[3]\i[31]"
-)
 
 Select.Talk : $(resetFreeze)"\0\s[0]What would you like to say?\![open,communicatebox]"
 
 Select.Special : (
 	\0\s[0]\1\s[-1]
 	\0Testing Options.\n
-	$(anchor Ukagaka f‚©).\n
+	$(anchor Ukagaka ï¿½fï¿½ï¿½).\n
 	$(anchor SSP SSP).\n
 	$(anchor CROW CROW).\n
 	\q["Queue,TalkQueue"]\n
@@ -324,50 +328,50 @@ Select.Special : (
 	\q["Cancel,Cancel"]\e
 )
 
-—\–ñ : 0
+ï¿½\ï¿½ï¿½ : 0
 Select.TalkQueue : (
 	\0\s[0]\1\s[-1]
-	$(push talkqueue "$(inc —\–ñ)\0\s[0]\1\s[10]\0—\–ñ”­˜b${—\–ñ}‰ñ–Ú‚Å‚·B\e")
+	$(push talkqueue "$(inc ï¿½\ï¿½ï¿½)\0\s[0]\1\s[10]\0ï¿½\ï¿½ñ”­˜b${ï¿½\ï¿½ï¿½}ï¿½ï¿½Ú‚Å‚ï¿½ï¿½B\e")
 	"\0I've reserved that for you.\n"
-	"Please note that the reservation counter is now at "${—\–ñ}".\e"
+	"Please note that the reservation counter is now at "${ï¿½\ï¿½ï¿½}".\e"
 )
 
 Select.TalkQueueCheck : (
 	\0\s[0]\1\s[-1]
 	"\0There are currently "$(size talkqueue)" in queue.\n"
-	"The reservation counter is at "${—\–ñ}"."
+	"The reservation counter is at "${ï¿½\ï¿½ï¿½}"."
 )
 
 # Changes to another mode (sometimes considered a 'personality').
-# Select.Change : $(chFlagMode Another)\cdddB\e
+# Select.Change : $(chFlagMode Another)\cï¿½dï¿½dï¿½dï¿½B\e
 
 #==============================================================================
 
 
-#‘I‘ğˆã‚Éƒ}ƒEƒXƒJ[ƒ\ƒ‹======================================================
+#ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Éƒ}ï¿½Eï¿½Xï¿½Jï¿½[ï¿½\ï¿½ï¿½======================================================
 
-#ğŒ : u\q?vƒ^ƒO‚Å•\¦‚³‚ê‚½‘I‘ğˆ‚Éƒ}ƒEƒX‚ªæ‚Á‚½^ŠO‚ê‚½B
-#‘® : Selecting.ƒ¯•Êq„
-# ¯•Êq : u\q?vƒ^ƒO‚Å’è‹`‚³‚ê‚½A‘I‘ğˆ‚ª‚Â¯•ÊqB
+#ï¿½ï¿½ï¿½ï¿½ : ï¿½u\q?ï¿½vï¿½^ï¿½Oï¿½Å•\ï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½Éƒ}ï¿½Eï¿½Xï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½^ï¿½Oï¿½ê‚½ï¿½ï¿½ï¿½B
+#ï¿½ï¿½ï¿½ï¿½ : Selecting.ï¿½ï¿½ï¿½ï¿½ï¿½Êqï¿½ï¿½
+# ï¿½ï¿½ï¿½Êq : ï¿½u\q?ï¿½vï¿½^ï¿½Oï¿½Å’ï¿½`ï¿½ï¿½ï¿½ê‚½ï¿½Aï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Âï¿½ï¿½Êqï¿½B
 #
-#å‚Éu‚³‚­‚çv‚Ì‚æ‚¤‚ÈA•Êƒoƒ‹[ƒ“‚É‚æ‚éƒLƒƒƒvƒVƒ‡ƒ“•\¦“™‚Ég—p‚µ‚Ü‚·
-#ƒ}ƒEƒX‚ª‘I‘ğˆ‚©‚çŠO‚ê‚½ê‡AWord1‚ÍuNotSelectedv‚É‚È‚è‚Ü‚·
+#ï¿½ï¿½Éuï¿½ï¿½ï¿½ï¿½ï¿½ï¿½vï¿½Ì‚æ‚¤ï¿½ÈAï¿½Êƒoï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½É‚ï¿½ï¿½Lï¿½ï¿½ï¿½vï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½Égï¿½pï¿½ï¿½ï¿½Ü‚ï¿½
+#ï¿½}ï¿½Eï¿½Xï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Oï¿½ê‚½ï¿½ê‡ï¿½AWord1ï¿½ÍuNotSelectedï¿½vï¿½É‚È‚ï¿½Ü‚ï¿½
 
-#Selecting.Timing : $(callsaori ebl ref "”­˜bƒ^ƒCƒ~ƒ“ƒO’²®")
-#Selecting.Manzai : $(callsaori ebl ref "‹UAIƒg[ƒN")
+#Selecting.Timing : $(callsaori ebl ref "ï¿½ï¿½ï¿½bï¿½^ï¿½Cï¿½~ï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½ï¿½")
+#Selecting.Manzai : $(callsaori ebl ref "ï¿½UAIï¿½gï¿½[ï¿½N")
 #Selecting.Cancel :
 #Selecting.NotSelected : $(callsaori ebl ref)
 
 #==============================================================================
 
 
-#ƒLƒƒƒ‰ƒNƒ^Œ^ƒAƒ“ƒJ[(\_a)‚Ì‘I‘ğ===============================================
+#ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½Nï¿½^ï¿½^ï¿½Aï¿½ï¿½ï¿½Jï¿½[(\_a)ï¿½Ì‘Iï¿½ï¿½===============================================
 
-#ğŒ : u\_avƒ^ƒO‚Å•\¦‚³‚ê‚½ƒLƒƒƒ‰ƒNƒ^Œ^ƒAƒ“ƒJ[‚ğ‘I‘ğ‚µ‚½B
-#‘® : Anchor.ƒ¯•Êq„
-# ¯•Êq : u\_avƒ^ƒO‚Å’è‹`‚³‚ê‚½AƒAƒ“ƒJ[‚ª‚Â¯•ÊqB
+#ï¿½ï¿½ï¿½ï¿½ : ï¿½u\_aï¿½vï¿½^ï¿½Oï¿½Å•\ï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½Nï¿½^ï¿½^ï¿½Aï¿½ï¿½ï¿½Jï¿½[ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B
+#ï¿½ï¿½ï¿½ï¿½ : Anchor.ï¿½ï¿½ï¿½ï¿½ï¿½Êqï¿½ï¿½
+# ï¿½ï¿½ï¿½Êq : ï¿½u\_aï¿½vï¿½^ï¿½Oï¿½Å’ï¿½`ï¿½ï¿½ï¿½ê‚½ï¿½Aï¿½Aï¿½ï¿½ï¿½Jï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½Âï¿½ï¿½Êqï¿½B
 #
-#ƒAƒ“ƒJ[‚ğ‘I‘ğ‚µ‚Ä‚à‰½‚à•Ô‚³‚È‚¢Aƒoƒ‹[ƒ“•\¦‚Í‚»‚Ì‚Ü‚Ü‚É‚È‚è‚Ü‚·B
+#ï¿½Aï¿½ï¿½ï¿½Jï¿½[ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô‚ï¿½ï¿½È‚ï¿½ï¿½ï¿½ï¿½Aï¿½oï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½Í‚ï¿½ï¿½Ì‚Ü‚Ü‚É‚È‚ï¿½Ü‚ï¿½ï¿½B
 
 Anchor.Ukagaka : "\0\s[0]An Ukagaka is a type of desktop toy intended to keep you company.\w8 My additional purpose is to provide a safe place for you, and the cats who visit me."
 Anchor.SSP : "\0\s[0]SSP is a program that runs Ukagaka. It is the most popular program to do so.\w4 There are others, such as \_a[CROW]CROW\_a."
@@ -376,16 +380,16 @@ Anchor.CROW : "\0\s[0]CROW is an older, no longer maintained program to run Ukag
 #==============================================================================
 
 
-#Input BoxŠÖ˜A=================================================================
+#Input Boxï¿½Ö˜A=================================================================
 
-#ğŒ : u\![open,inputbox,*,*]vƒ^ƒO‚Å•\¦‚µ‚½Inputƒ{ƒbƒNƒX‚É“ü—Í‚ğ‚µ‚½B
-#‘® : TalkInput.ƒ¯•Êq„
-# ¯•Êq : u\![open,inputbox,*,*]vƒ^ƒO‚Å‚Ìinputbox‹æ•Ê—p‚Ì¯•Êq–¼B
+#ï¿½ï¿½ï¿½ï¿½ : ï¿½u\![open,inputbox,*,*]ï¿½vï¿½^ï¿½Oï¿½Å•\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Inputï¿½{ï¿½bï¿½Nï¿½Xï¿½É“ï¿½ï¿½Í‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B
+#ï¿½ï¿½ï¿½ï¿½ : TalkInput.ï¿½ï¿½ï¿½ï¿½ï¿½Êqï¿½ï¿½
+# ï¿½ï¿½ï¿½Êq : ï¿½u\![open,inputbox,*,*]ï¿½vï¿½^ï¿½Oï¿½Å‚ï¿½inputboxï¿½ï¿½Ê—pï¿½Ìï¿½ï¿½Êqï¿½ï¿½ï¿½B
 
-#g—po—ˆ‚é•Ï”
-# System.Request.Reference1 : Inputƒ{ƒbƒNƒX‚É“ü—Í‚³‚ê‚½“à—eB
+#ï¿½gï¿½pï¿½oï¿½ï¿½ï¿½ï¿½Ïï¿½
+# System.Request.Reference1 : Inputï¿½{ï¿½bï¿½Nï¿½Xï¿½É“ï¿½ï¿½Í‚ï¿½ï¿½ê‚½ï¿½ï¿½ï¿½eï¿½B
 
-#–¼‘OŠo‚¦‚Ä-------------------------------------------------------------------
+#ï¿½ï¿½ï¿½Oï¿½oï¿½ï¿½ï¿½ï¿½-------------------------------------------------------------------
 
 Select.TeachName : (
 	$(
@@ -417,24 +421,31 @@ Select.MemoryName : (
 	"\0\s[0]"${username}"... Thank you."
 )
 
-#Input Box ƒ^ƒCƒ€ƒAƒEƒg--------------------------------------------------------
+#Input Box ï¿½^ï¿½Cï¿½ï¿½ï¿½Aï¿½Eï¿½g--------------------------------------------------------
 
-#ğŒ : Inputƒ{ƒbƒNƒX•\¦ŒãAw’èŠÔ‚ªŒo‰ß‚µ‚Ä‚à“ü—Í‚³‚ê‚È‚©‚Á‚½ê‡B
-#‘® : TalkInputTimeOut.ƒ¯•Êq„
-# ¯•Êq : u\![open,inputbox,*,*]vƒ^ƒO‚Å‚Ìinputbox‹æ•Ê—p‚Ì¯•Êq–¼B
+#ï¿½ï¿½ï¿½ï¿½ : Inputï¿½{ï¿½bï¿½Nï¿½Xï¿½\ï¿½ï¿½ï¿½ï¿½Aï¿½wï¿½èï¿½Ô‚ï¿½ï¿½oï¿½ß‚ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½Í‚ï¿½ï¿½ï¿½È‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‡ï¿½B
+#ï¿½ï¿½ï¿½ï¿½ : TalkInputTimeOut.ï¿½ï¿½ï¿½ï¿½ï¿½Êqï¿½ï¿½
+# ï¿½ï¿½ï¿½Êq : ï¿½u\![open,inputbox,*,*]ï¿½vï¿½^ï¿½Oï¿½Å‚ï¿½inputboxï¿½ï¿½Ê—pï¿½Ìï¿½ï¿½Êqï¿½ï¿½ï¿½B
 
-#ˆÈ‰º‚ÍŠÔ§ŒÀ‚ğ{‚µ‚½‚Ì—áB
+#ï¿½È‰ï¿½ï¿½Íï¿½ï¿½Ôï¿½ï¿½ï¿½ï¿½ï¿½ï¿½{ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì—ï¿½B
 #*c
-#TalkInputTimeOut.TeachName : \0\s[4]–¼‘O“ü—ÍŠÔØ‚ê‚Å‚·B\e
+#TalkInputTimeOut.TeachName : \0\s[4]ï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½Íï¿½ï¿½ÔØ‚ï¿½Å‚ï¿½ï¿½B\e
 
 #==============================================================================
+#
+# Hello! If you're peeking into the functions of this Ghost, thank you for taking interest!
+# These are the functions for.. most of the things in this Ghost. 
+# I am definitely not an expert on Kawari coding, yet, and these were originally made during a 72 hour period, so they may be a bit rough.
+# I also didn't add comments for many of them, as they are fairly straightforward.
+# If you are interested in Kawari programming, I highly suggest you take a look at the Kawari documentation. I have a work-in-progress machine processed version of it on my website.
 
 =kis
 function TheCatReturns $(
 	# @arg[1] is the cat's entry number
 	.setstr @catP $[$@arg[1] + 2];
-	setstr @movenum $[$(rand -21) + 10];
-	echo \p[${@catP}]\s[-1]\![move,--X=${@movenum},--time=1,--base=0,--base--offset=right.bottom,--option=(ignore-sticky-window)]\w8\w8\w8\p[${@catP}]\s[6$@arg[1]00]"Miau!";
+	.setstr @catnum $@arg[1];
+	setstr @movenum $[$(rand -101) + 100];
+	echo \p[${@catP}]\s[-1]\![move,--X=${@movenum},--time=1,--base=0,--base--offset=right.bottom,--option=(ignore-sticky-window)]\w8\w8\w8\p[${@catP}]\s[6$@arg[1]00]"Miau!\0\s[0]Oh! Welcome, "$CatNames[${@catnum}]"!";
 )
 =end
 
@@ -445,6 +456,7 @@ function TheCatExits $(
 	.setstr @catnum $@arg[1];
 	.setstr @catindex $Cats[${@catnum}];
 	.setstr @catname $CatNames[${@catnum}];
+	if $[ $(size CurrentCat) = 0 ] $(setstr CurrentCat "none");
 	echo \p[${@catP}]\s[6${@catnum}03]"Miau-u-u!"\0\s[0]"Oh. It appears "${@catname}" is leaving. Take care, "${@catname}"!\w8\w8\w8\w8\w8\w8"\p[${@catP}]\s[-1];
 )
 =end
