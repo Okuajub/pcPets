@@ -59,7 +59,7 @@ Mainmenu : (
 	# \q["Communicate,Talk"]\n
 	\q["Goodies,Goodies"]\n
 	\q["Options,Option"]\n
-	\q["Debug Menu,debug"]\n
+	# \q["Debug Menu,debug"]\n
 	# \q["Special,Special"]\n
 	\q["Cancel,Cancel"]\e
 )
