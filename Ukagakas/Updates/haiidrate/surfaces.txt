@@ -1,0 +1,69 @@
+descript
+{
+	version,1
+}
+
+surface0
+{
+
+//Liquids
+
+//White milk
+animation0.interval,bind
+animation0.pattern0,overlay,11,0,0,0
+
+//Water
+animation1.interval,bind
+animation1.pattern0,overlay,12,0,0,0
+
+//Strawberry milk
+animation2.interval,bind
+animation2.pattern0,overlay,13,0,0,0
+
+//Choco milk
+animation3.interval,bind
+animation3.pattern0,overlay,14,0,0,0
+
+//Brown tea
+animation4.interval,bind
+animation4.pattern0,overlay,15,0,0,0
+
+//Coffee
+animation5.interval,bind
+animation5.pattern0,overlay,16,0,0,0
+
+//Green Tea
+animation6.interval,bind
+animation6.pattern0,overlay,17,0,0,0
+
+//OJ
+animation7.interval,bind
+animation7.pattern0,overlay,18,0,0,0
+
+//Cotton Candy Milk
+animation8.interval,bind
+animation8.pattern0,overlay,19,0,0,0
+
+//Cups
+
+//Plain
+animation10.interval,bind
+animation10.pattern0,overlay,1,0,0,0
+
+//Spotted
+animation11.interval,bind
+animation11.pattern0,overlay,2,0,0,0
+
+//Brown Spotted
+animation12.interval,bind
+animation12.pattern0,overlay,3,0,0,0
+
+//Striped
+animation13.interval,bind
+animation13.pattern0,overlay,4,0,0,0
+
+//Calico
+animation14.interval,bind
+animation14.pattern0,overlay,5,0,0,0
+	
+}

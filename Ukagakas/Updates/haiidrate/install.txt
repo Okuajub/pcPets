@@ -1,0 +1,4 @@
+Charset,UTF-8
+type,shell
+name,Haiidrate :3
+directory,haiidrate
