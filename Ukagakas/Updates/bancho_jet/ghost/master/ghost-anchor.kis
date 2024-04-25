@@ -65,7 +65,7 @@ OnBassPrizmDesc : (
     "tags that pop up, as N3 is their main rival. Bass Prizms hate those guys, just as much as they hate noise music."
 )
 
-OnNicoNicoNoise : (
+OnNicoNicoNoiseDesc : (
     "\0\s[0]Nico Nico Noise, or N3 for short, is a decentralized gang, they organize on the Net. "
     "Any turf is game for them, as their members are all over. But their goal is to "
     "war with Bass Prizm due to strong music opinion. As long as you don't get involved, "

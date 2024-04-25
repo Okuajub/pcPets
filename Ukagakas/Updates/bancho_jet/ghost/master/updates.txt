@@ -7,7 +7,7 @@ file,ghost/master/dict/dict-functions.kis57b01e3ed9b4813c8d8923ecc878fb8dsize=
 file,ghost/master/dict/dict-menu.kis45c1d4cbf72c275a5bd627063132309asize=11253date=2024-02-07T22:24:50
 file,ghost/master/dict/dict-mouse.kise291cc29985cc5b8b2f8cdfecac2eb60size=1207date=2023-12-13T19:44:47
 file,ghost/master/ghost-aitalk.kis341d3188b15867266b9ccba972cdcafesize=3250date=2024-04-24T21:55:00
-file,ghost/master/ghost-anchor.kis4c681d1dea0056c99836803cd437bc1asize=3858date=2024-04-24T21:58:40
+file,ghost/master/ghost-anchor.kis1d966deacc816d6d81671b34dec9d413size=3862date=2024-04-24T23:28:26
 file,ghost/master/ghost-bootend.kiscaf63e3389def2956f786f130c0b263asize=2862date=2024-04-24T22:16:35
 file,ghost/master/ghost-etc.kisaccce55f39992225b94d5023f349f6cfsize=2413date=2024-04-24T22:17:06
 file,ghost/master/ghost-menu.kis9fe56e93f7734a83f932c396548b9051size=9755date=2024-04-24T21:52:01
@@ -16,7 +16,7 @@ file,ghost/master/ghost-resource.kis4bfecb20a9e4c6ffd666a7897ff2c938size=2380
 file,ghost/master/kawarirc.kis25f6467fba192a4d5db02d6b1addddd6size=782date=2024-04-24T22:33:39
 file,ghost/master/shiori.dll118d5bb9e5d917d66c97722bc970edb9size=268800date=2008-03-30T23:28:44
 file,install.txt15d25a17a024cf23d6620a51560ed51esize=167date=2024-04-24T20:42:29
-file,readme.txt1c8a9553d50db6171574c0624c0055ffsize=333date=2024-04-24T22:25:44
+file,readme.txt3a002e3275382021ed8c68d08bfbdcb2size=333date=2024-04-24T23:27:46
 file,shell/master/back/base_bottom.png8b53fe04857fd82aa5eebb79ddbfef83size=30997date=2020-05-25T22:02:34
 file,shell/master/back/base_face.pngbbdc3e86390e9c6f108b477447d99f6asize=21222date=2020-05-27T06:51:13
 file,shell/master/back/base_hair2.png0f24fe88c758593d7321a921e6fa5986size=5998date=2020-05-27T06:52:29
