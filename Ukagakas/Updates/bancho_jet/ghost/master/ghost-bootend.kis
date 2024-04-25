@@ -1,0 +1,50 @@
+#--
+# Bootend
+#--
+# This is the area that holds the dialogues related to booting and closing the ghost (and similar events). 
+
+talk.OnFirstBoot   : (
+    "\0\s[36]\w8\w8\w8\w8Those damn...\x\w8\w8\s[30]\w8\w8\s[32]Boss?\w8\w8 "
+    "\0\s[2]It really is you!\w8\s[5] Hey, long time no see! It's been a hot minute since you've hit Shibasa! "
+    "What've you been up to? How's life outside been treating ya?\w8\w8 "
+    "\s[8]Oh, I should know better. You've moved on up in the world, while I'm still hanging around. "
+    "I'm sure it's all right. \n\n[half]So, what brings you here?\x"
+    "Oh, you're just stopping by?\s[20] Well, that's alright. I'll enjoy your company no matter how long it lasts. "
+    "How about I catch you up on the happenings? A lot's changed since you left, I don't blame ya if nothing's familiar. "
+    "\w4Walk with me, will you?"
+)
+#talk.OnReinstall   : "\1\s[10]\0\s[0]Reinstalling?"
+#talk.OnLotsInstall : "\0\s[0]\1\s[13]You sure are reinstalling us a lot."
+
+# When switching to another Ghost
+talk.OnGhostChanging : "\0\s[0]Hey, I'll see you again soon, won't I?"
+# You can specify a specific Ghost by specifying the Sakura name (as in descript.txt) and if the switch was manual or automatic. For example:
+#talk.OnGhostChangingSnakemanual : "\1\s[10]\0\s[0]Snake and Otacon, huh?\1\s[13]I've heard Snake's a real mercenary. Be careful!"
+# If you want specific dialogue for the User manually reloading them, put it here.
+talk.OnGhostReloading : "\0\s[8]Need a quick refresh? No problem."
+
+# When the Ghost is called by or changed to from another Ghost.
+talk.OnGhostChanged      : "\0\s[0]What's up, boss?\e"
+# Just like GhostChanging, you can specify if the Ghost is a specific character.
+#talk.OnGhostChangedSnake : "\1\s[10]Hey, you know, those guys look a bit like us.\0\s[0]I don't see the resemblance."
+#talk.OnGhostChangedAngel : "\0\s[0]\1\s[15]Oh, hey, are you new to SSP? Or just learning some new tips? Good luck either way!"
+# And, for if the user reloaded them.
+talk.OnGhostReloaded     : "\0\s[0]Aaand we're back!"
+
+talk.OnGhostCalling      : "\0\s[0]Hey there," $(Reference 0)". Keep your nose clean, will ya?"
+
+# Additional responses are called by the shell name. Case sensitive.
+talk.OnShellChanged       : "\0\s[0]Huh, a new look."
+
+# This happens when the Ghost is unminimized.
+talk.OnWindowStateRestore : \0\s[0]Feels good to be out in the open again.
+
+# You can set multiple responses to the same event, if you want. Just like the sentence entry.
+
+talk.OnBoot : "\0\s[0]Hey, long time no see!"
+talk.OnBoot : "\0\s[0]Yo, boss! What's the haps?"
+
+talk.OnClose : "\0\s[0]It was good seeing you! See ya, boss."
+talk.OnClose : "\0\s[0]Drop by again sometime, will you, boss?"
+talk.OnClose : "\0\s[0]Well, I guess we'll go our separate ways. Thanks for dropping by!"
+

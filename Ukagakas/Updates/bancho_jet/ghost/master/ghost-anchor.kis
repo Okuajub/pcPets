@@ -1,0 +1,85 @@
+#
+#
+#
+
+OnGangMenu : (
+    "\t\*\0\s[20]Sure thing. Which one do you need info on, boss?\n\n[half]\_q\![set,autoscroll,disable]"
+    "\![*]Watchdogs\n"
+    "\![*]Diamond Dogs\n"
+    "\![*]The Nyang Gang\n"
+    "\![*]Nico Nico Noise\n"
+    "\![*]Bass Prizm\n"
+    "\![*]Poison Scales\n"
+    "\![*]The Carnivores\n"
+    "\![*]Chainsaw Heat\n"
+    "\![*]The Night Panthers"
+
+    "\n\n"
+    "\![*]\q[Quit Menu,OnQuit,0]"
+
+)
+
+OnWatchdogDesc : (
+    "\0\s[4]Watchdogs..?\w8 "
+    "\s[6]I'm their leader, Jet. We're the main gang of Shibasa, which is north of Robin Mill. "
+    "\s[0]We're on good terms with The DDs and The Carnivores, "
+    "though Bass Prizm or N3 probably wouldn't like our taste in music. "
+    "It's important to me to keep Shibasa ours, and everyone in the pack safe."
+)
+
+OnDiamondDogsDesc : (
+    "\0\s[0]Diamond Dogs, or The DDs, are a gang close to us. We bond over our dislike of The Nyang Gang. "
+    "They're mainly from north Robin Mill, though they can crash on our turf sometimes. "
+    "\w8\s[5]As long as they don't start stinking up the place."
+)
+
+OnNyangGangDesc : (
+    "\0\s[7]Those brats are a bunch of ne'er-do-well punks.\w8 "
+    "\s[4]Though I guess that isn't saying much, is it?\w8\w4 "
+    "\s[0]The Nyang Gang cats are always messing with other gangs' territory. "
+    "They're not that big of a deal when there's only a few of them. "
+    "But if you let them fester, suddenly you've got a stray problem. "
+    "\w8So... we take good care to scare 'em off."
+)
+
+OnChainsawHeatDesc : (
+    "\0\s[0]Chainsaw Heat is a dangerous gang. They're always brawling with The Carnivores.. "
+    "which is a good thing for us. They keep Chainsaw Heat's hands full. "
+    "They get their name from the serious weaponry they carry with them. "
+    "Mostly milling equipment, like saws, but their leaders and second-in-commands carry guns.\w4 "
+    "\s[23]...Not really my style. "
+    "\s[6]\w8They're \f[italic,true]from\f[italic,default] south Robin Mill, but they're Donson primarily, now."
+)
+
+OnCarnivoresDesc : (
+    "\0\s[6]The Carnivores are an aggressive gang, although they're occupied by Chainsaw Heat. "
+    "Chainsaw Heat is always attacking their turf in Donson, trying to creep a little more. "
+    "\s[0]We're on good terms with The Carnivores, and I'd like to keep it that way. "
+    "They and The DDs keep Chainsaw Heat at bay from approaching Watchdog territory." 
+)
+
+OnBassPrizmDesc : (
+    "\0\s[0]Bass Prizm is a small gang. They'll pick on anyone's turf, "
+    "as they're actually a gang that mobilizes and communicates on the Net. "
+    "So, their members are all over. They're mainly focused on covering up any Nico Nico Noise "
+    "tags that pop up, as N3 is their main rival. Bass Prizms hate those guys, just as much as they hate noise music."
+)
+
+OnNicoNicoNoise : (
+    "\0\s[0]Nico Nico Noise, or N3 for short, is a decentralized gang, they organize on the Net. "
+    "Any turf is game for them, as their members are all over. But their goal is to "
+    "war with Bass Prizm due to strong music opinion. As long as you don't get involved, "
+    "N3're no issue."
+)
+
+OnNightPanthersDesc : (
+    "\0\s[0]The Night Panthers are from Unyuusu. They're pretty serious, "
+    "but not nearly as aggressive as Chainsaw Heat. They mainly want to keep Poison Scales from encroaching on their turf. "
+    "The Panthers all about R&B and rebellion. Real good pack of cats, if you ask me."
+)
+
+OnPoisonScalesDesc : (
+    "\0\s[7]Poison Scales are annoying, more than anything. The Night Panthers were already established "
+    "by the time Poison Scales formed. So they only have a small part of Unyuusu as their turf. "
+    "\s[0]They care more about petty crime than a real goal. So you can imagine they're not exactly family."
+)

@@ -1,0 +1,6 @@
+//This file tells the baseware how to install your Ghost. You don't need to edit either of these.
+charset,UTF-8
+type,ghost
+
+name,Watchdog Banchō 
+directory,bancho_jet

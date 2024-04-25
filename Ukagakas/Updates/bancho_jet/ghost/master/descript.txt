@@ -1,0 +1,25 @@
+//descript.txt holds information about the Ghost and is sent to your baseware.
+
+//These name entries will be how your Ghost is titled in SSP, and how the code recognizes your characters.
+//I suggest making the Sakura/Kero names something simple, as it makes writing code for them easier.
+name,Watchdog Banchō
+sakura.name,Jet
+kero.name,何
+
+//This is your credit, you should put your own name and site here.
+craftman,Okuajub
+craftmanurl,https://okuajub-netspace.neocities.org/
+
+//This is the URL the Ghost checks for updates with when closed (such as through the explorer).
+//If you're not doing network updates, you can leave it as is.
+homeurl,https://raw.githubusercontent.com/Okuajub/pcPets/master/Ukagakas/Updates/bancho_jet/
+
+//If your Ghost comes bundled as a balloon, you should put the name of the balloon here, as SSP will highlight it in the balloon menu.
+//balloon,balloon name
+
+//You won't need to change these.
+charset,UTF-8
+type,ghost
+shiori,shiori.dll
+icon,icon.ico
+readme.charset,UTF-8

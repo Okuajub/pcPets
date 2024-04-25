@@ -1,0 +1,31 @@
+#--
+# Mouse Actions
+#--
+# This little file holds all of the mouse related actions. Here's a few examples to get you started. 
+# 0 refers to the Sakura, while 1 refers to the Kero, and so on.
+# "Hotspots", or collisions, are areas on the Ghost that can have specific entries tied to them by specifying them. The collision coordinates are set in the shell coding.
+
+#These actions happen when double clicking the Ghost. When a hotspot/collision is not specified, it opens the menu.
+MouseDoubleClick0     : ${OnSakuraMenu}
+
+# You can specify a hotspot/collision (as defined in surfaces.txt) of the character, so that they say something unique when the user double clicks there.
+# In some Ghosts, this is used to hit them. It might also be used to ask about an accessory, or as a button. But in this example dialogue it doesn't mean anything in particular.
+#MouseDoubleClick0Head : "\0\s[0]Something wrong?"
+#MouseDoubleClick0Head : "\0\s[0]Looking for something?"
+
+#MouseDoubleClick0Face : "\0\s[0]Something on my face?"
+#MouseDoubleClick0Face : "\0\s[0]What's wrong?"
+
+
+# The favorite part of any Ghost, petting.
+# Petting occurs when moving the mouse over collision areas.
+# In CHIPS, it also occurs when the mousewheel is scrolled over these areas as an accessibility feature. Scrolling requires less precise movements.
+# Petting is probably one of the most consistent feature in Ghosts, in my experience. 
+# That doesn't mean you need to have it (one of my favorite Ghosts doesn't include petting at all), just that users may expect it. Hence it being included.
+
+# Waiting time for petting response. You can adjust this if you feel it is too long or too short.
+strokeLimit : 50
+
+MouseMove0Head : "\0\s[0]Hey, what's that for, boss?"
+
+MouseMove0Face : "\0\s[0]Huh?"

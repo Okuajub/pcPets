@@ -1,0 +1,66 @@
+#--
+# AI TALK / SENTENCE
+#--
+# Hello! This is the dialogue pool file for Pochi.
+
+rivalGang : "The DDs",  "Diamond Dogs", "The Nyang Gang", "Nico Nico Noise", "N3", "Poison Scales"
+rivalGang : "The Carnivores", "Chainsaw Heat", "Bass Prizm", "The Night Panthers"
+
+city : "Unyuusu", "Robin Mill", "Donson", "Shibasa"
+
+sentence : "\0\s[6]Wonder if "${rivalGang}" know the word of "${city}"..."
+
+sentence : "\0\s[6]I need to patrol "${city}"... "${rivalGang}" activity in that area has been up lately."
+
+sentence : "\0\s[4]Man, walking all day really eats dirt.\w4\s[3] I'd ride the train, but I gotta be thorough. \w8\s[5]It's nice to take a break with you, though."
+
+sentence : "\0\s[4]Man.... On the road to "${city}" again..."
+
+sentence : "\0\s[8]Hey, thanks for walking with me."
+
+# Watchdogs
+sentence : "\0\s[22]The rest of the watchdogs would probably appreciate if I stopped patrolling for minute to check in on home base.\w2.\w2.\w8\w8 Maybe tomorrow."
+
+# The DDs/Diamond Dogs
+sentence : "\0\s[0]Yo, don't mess with Diamond Dogs. I'm still in talks with their leader about keeping other gangs in check."
+
+sentence : "\0\s[7]If there's one thing The DDs and us Watchdogs can agree on, it's taking The Nyang Gang to the pound..."
+
+# Nyang Gang
+sentence : "\0\s[7]The Nyang Gang are such a bunch of pests. I can chase them around all day, and they'll prowl to some other part of our turf."
+
+# Chainsaw Heat
+sentence : "\0\s[0]You need to keep an eye on Chainsaw Heat. They're no joke."
+
+# The Carnivores
+sentence : "\0\s[22]Gotta remember to touch ground with The Carnivores about an alliance. Bet the DDs could help with that."
+
+# Nico Nico Noise
+sentence : "\0\s[0]I saw some Nico Nico Noise members near "${city}" recently. \s[5]Maybe I should post a tip on the Bass Prizm BBS to stir up some trouble."
+
+# Bass Prizm
+sentence : ( 
+    "\0\s[22]Maybe those Bass Prizm guys have something right about using the Net to organize. "
+    "\w8\w8\s[5]Nah, I'd look like a nerd if I had a beeper.\s[8] Or whatever it is..."
+)
+
+# The Night Panthers
+sentence : ( 
+    "\0\s[20]You know, I think The Night Panthers have it right. "
+    "I don't visit Donson often since it's far. But they're real tight knit. "
+    "I need to get in talks with them, find out the ties that bind."
+)
+
+# Also, here's the hour roll-over event. It's in the 24-hour format. Be aware it doesn't always go off exactly on the hour. If you don't want it, just erase it or comment it.
+talk.OnHourTimeSignal : $(setstr @minute $(date %M)) "\0\s[0]It's %hour:"${@minute}". Just so y'know."
+
+#--
+# IMPORTANT, DO NOT DELETE
+#--
+# STOP! ! ! Do not write any dialogue past this piece of code! If you do, it won't be called!! 
+# This piece of code calls on a function called "Nonoverlap" which makes sure that none of your Ghost's dialogue repeats before the others are called.
+# You can write as much as you'd like BEFORE THIS POINT. But any dialogue written afterward is *not* added to the Nonoverlap processed version of this entry! It's covered by the 'writeprotect' command.
+# ...Which makes the entry unable to be edited after this point. It's at the *end* of this dictonary for a reason!
+=kis
+Nonoverlap sentence;
+=end

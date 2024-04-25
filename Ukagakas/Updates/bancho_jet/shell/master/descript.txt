@@ -1,0 +1,8 @@
+charset,Shift_JIS
+
+name,master
+type,shell
+
+seriko.use_self_alpha,1
+
+

@@ -1,0 +1,54 @@
+charset,Shift_JIS
+version,1
+
+group,\0
+{
+0,Neutral
+1,Shy
+2,Surprise
+3,Worry
+4,Depressed
+5,Happy
+6,Eyes Closed
+7,Angry
+8,Shy Smile
+9,Angry+Blush
+20,Smile
+21,Surprised+Blush
+22,Looking Away
+23,Shy2
+24,
+25,
+26,
+27,
+28,
+29,
+
+30,Back/Neutral
+31,Back/Shy
+32,Back/Surprise
+33,Back/Worry
+34,Back/Depressed
+35,Back/Happy
+36,Back/Eyes Closed
+37,Back/Angry
+38,Back/Smile
+39,Back/Embarassed
+
+40,Back/
+41,
+42,
+43,
+44,
+45,
+46,
+47,
+48,
+49,
+
+}
+
+group,\1
+{
+10,-
+}
