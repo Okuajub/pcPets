@@ -187,7 +187,7 @@ OnInitializeVars : $(
 	if $[ $(length ${ForceSet}) = 0 ] $(setstr ForceSet '0');
 	# Sets a talk interval if there is none.
     if $[ $(length ${talkinterval}) = 0 ] $(setstr talkinterval '300');
-	setstr vanishFlag '0';
+	setstr vanishFlag '1';
 )
 
 # A set of trees of default pronouns. Used primarily for copying purposes. Split fem/masc/neut (etc.) into different trees for readability in code.
@@ -321,10 +321,6 @@ OnAITalk : $(
 resource.homeurl : $(
 	if $[${devmode} = 1] "https://dummy.url/"
 	else ${homeurl}
-)
-
-resource.vanishbutton.visible : (
-	${vanishFlag}
 )
 
 OnUpdateBegin    : $(
