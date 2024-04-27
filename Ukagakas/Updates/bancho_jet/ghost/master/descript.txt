@@ -6,8 +6,9 @@ name,Watchdog Banchō
 sakura.name,Jet
 kero.name,何
 
-//This is your credit, you should put your own name and site here.
+//This is your credit, you should put your own name and site here. craftmanw is for non-alphanumeric characters, but make sure to fill out both.
 craftman,Okuajub
+craftmanw,Okuajub
 craftmanurl,https://okuajub-netspace.neocities.org/
 
 //This is the URL the Ghost checks for updates with when closed (such as through the explorer).

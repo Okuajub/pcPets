@@ -3,10 +3,16 @@
 #--
 # Hello! This is the dialogue pool file for Pochi.
 
+# Word lists
+
 rivalGang : "The DDs",  "Diamond Dogs", "The Nyang Gang", "Nico Nico Noise", "N3", "Poison Scales"
 rivalGang : "The Carnivores", "Chainsaw Heat", "Bass Prizm", "The Night Panthers"
 
-city : "Unyuusu", "Robin Mill", "Donson", "Shibasa"
+city : Unyuusu, Robin Mill, Donson, Shibasa
+
+foodPlace : ramen, pizza, italian food, taco
+
+# Random talk
 
 sentence : "\0\s[6]Wonder if "${rivalGang}" know the word of "${city}"..."
 
@@ -17,6 +23,10 @@ sentence : "\0\s[4]Man, walking all day really eats dirt.\w4\s[3] I'd ride the t
 sentence : "\0\s[4]Man.... On the road to "${city}" again..."
 
 sentence : "\0\s[8]Hey, thanks for walking with me."
+
+sentence : "\0\s[8]It's good to catch up again."
+
+sentence : "\0\s[4]Ahh, I'm hungry. Too bad that "${foodPlace}" place in "${city}" shut down."
 
 # Watchdogs
 sentence : "\0\s[22]The rest of the watchdogs would probably appreciate if I stopped patrolling for minute to check in on home base.\w2.\w2.\w8\w8 Maybe tomorrow."
