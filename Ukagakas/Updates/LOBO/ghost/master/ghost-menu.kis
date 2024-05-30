@@ -1,0 +1,74 @@
+#--
+# Menus
+#--
+# Most English Ghosts have a double click menu to perform some function, interact with the Ghost, or do something else specific.
+# Every double-click menu is unique! I've left the Sakura's menu pretty simple, but added a little extra to the Kero so you can see what something unique might look like.
+# Now, the SakuraScript tags can get pretty dense here. It's a little easier to parse if you understand that '\![*]\q' starts every menu option. You can change the first phrase in the brackets to whatever you'd like,
+# If you don't want any menus at all, go back to 'ghost-mouse.kis' and erase the 'MouseDoubleClick0' and 'MouseDoubleClick1' lines. You can then safely erase everything in this file, too.
+
+# You can write any dialogue you want for them to say when you first open the menu here.
+SakuMenuTalk : "\0"${adjective} ${noun.plural}, "\0"${verb.present}", for "${noun.plural}" "${verb.present}$(? "!" "." "?" "...")
+SakuMenuTalk : "\0For what "${noun.plural}" do you "${verb.present}"?", "\0"${verb.progressive}", "${verb.progressive}", "${verb.progressive}" "${noun.singular}
+
+OnSakuraMenu : (
+    # You can safely ignore this line. It just remembers what dialogue the user saw when changing the talk interval.
+    $( if $[ $(Reference 0) != 1 ] $(setstr MenuDialogue ${SakuMenuTalk}\w4 ) else if $[ $( match ${MenuDialogue} "\_q" ) == -1 ] $(setstr MenuDialogue \_q${MenuDialogue}\_q ) )
+
+    # The menu starts. Autoscroll disable is to prevent the menu from getting set to the bottom should the User not having a large enough balloon.
+    # If you want to add any new menu options for the Sakura, this is there you would do so.
+    \t\*\b2${MenuDialogue}\_q\![set,autoscroll,disable]
+    \n\n[half]
+    \![*]\q[Say Something,OnAITalk]
+    $( if $[ ${lastTalk} ] (\n\![*]\q[Repeat Yourself,OnLastTalk]) )
+    \n\n[half]
+    \![*]\q[Quit Menu,OnQuit,0]
+    \n\n
+
+    # Talkrate Assignment
+    $(setstr @interval ${talkinterval})
+    $( if $[ ${@interval} == 'Never' ] $(setstr @form "") else if $[ ${@interval} > 59 ] $( setstr @interval $[ ${@interval} / 60 ]; setstr @form minutes ) else $( setstr @form seconds ) )
+    $(if $[${@interval} == 1] $(setstr @form minute))
+
+    # Talkrate Display
+    "\f[italic,true]Talkrate:" ${@interval} ${@form}\n\f[italic,default]
+    \![*]\q[30s,OnAssignTalkRate,30] \![*]\q[1m,OnAssignTalkRate,60] \![*]\q[3m,OnAssignTalkRate,180]
+    "\![*]\q[5m,OnAssignTalkRate,300] \![*]\q[10m,OnAssignTalkRate,600] \![*]\q[15m,OnAssignTalkRate,900] \![*]\q[Never,OnAssignTalkRate,Never]"
+    \n\n[half]
+
+    # Retrieves info about the present time
+    $(setstr @weekday $(if $[$(date %w) == 0] "Sun" else if $[$(date %w) == 1] "Mon" else if $[$(date %w) == 2] "Tues" else if $[$(date %w) == 3] "Weds" else if $[$(date %w) == 4] "Thurs" else if $[$(date %w) == 5] "Fri" else if $[$(date %w) == 6] "Sat"))
+    $(setstr @hour $[ $(date %H) + $(rand 100) ]; setstr @minute $[ $(date %M) + $(rand 100) ])
+
+    # Displays the time
+    \f[italic,true]${@weekday}", %month/%day, "${@hour}":"${@minute}\f[italic,default]
+)
+
+OnAssignTalkRate : (
+    $( setstr talkinterval $(Reference 0); set @dialogue $(Reference 1) )
+    "\![raise,OnSakuraMenu,1]"
+)
+
+OnQuit : $(
+    if $[$(Reference 0) == 0] \![close,inputbox,__SYSTEM_ALL_INPUT__]${SakuraQuit}
+    else \![close,inputbox,__SYSTEM_ALL_INPUT__]${KeroQuit}
+)
+
+# This is used for more than just quitting the menu. It's also used when quitting out of creating custom pronouns, so be mindful of that.
+SakuraQuit : "\0Yes, yes.", "\0Liquify.", "\0Splendiferous!", "\0"${adjective}" "${noun.plural}"..."
+
+# You can ignore this one. Its only purpose is to repeat what the Ghost last said when used, such as the repeat option in the Sakura Menu.
+OnLastTalk : ${lastTalk}
+
+#--
+# Kero Menu
+#--
+# A Kero's menu is often used for extra features or information not provided by the Sakura.
+# If you don't have a Kero, you can leave this alone or remove it. 
+
+KeroMenuTalk : "\1Auwrreeeiiiiiiiiiiii!!!"
+
+KeroQuit : "\1Aaeeeeeeeeiiiii!!!!!"
+
+OnKeroMenu : (
+    \1Aaaaaaaaaaaaaeeiiiiiiiiii!!!!!!
+)

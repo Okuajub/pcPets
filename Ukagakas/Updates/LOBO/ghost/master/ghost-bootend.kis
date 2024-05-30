@@ -1,0 +1,58 @@
+#--
+# Bootend
+#--
+# This is the area that holds the dialogues related to booting and closing the ghost (and similar events). 
+
+# When the Ghost is booted after being installed.
+talk.OnFirstBoot   : (
+    "\1\s[-1]\0Lorem ipsum dolor sit amet, "
+    $(?
+        "this is the domain of "${adjective}" "${noun.singular}". "$(cap ${verb.present})"."
+        "beware of this wretched "${location}", it is as winding as the neurons of our minds."
+        "my good "${noun.singular}". What poor, wretched purpose has brought you here?"
+        "la la la. Oh, "${verb.present}"~! A "${noun.singular}", finally! Welcome, welcome."
+        "my liege. What can I do for you?"
+    )
+)
+talk.OnReinstall   : "\1\s[-1]\0Wretchedness! Worthlessness! Oh, I see, it's merely "${noun.singular}"."
+talk.OnLotsInstall : "\1\s[-1]\0Hellion."
+
+# When switching to another Ghost
+# You can specify a specific Ghost by specifying the Sakura name (as in descript.txt) and if the switch was manual or automatic.
+# If you want specific dialogue for the User manually reloading them, use the reload entry.
+talk.OnGhostChanging : "\1\s[-1]\0Why hath "${noun.singular}" forsaken me?"
+
+talk.OnGhostReloading : "\1\s[-1]\0"$(cap ${adjective})" nature, begone!"
+talk.OnGhostReloading : "\1\s[-1]\0What is the purpose of this? Of all things?"
+
+# When the Ghost is called by or changed to from another Ghost.
+# Just like GhostChanging, you can specify if the Ghost is a specific character.
+# And, for if the user reloaded them.
+talk.OnGhostChanged      : "\1\s[-1]\0\s[0]Parlay, parlay.\e"
+talk.OnGhostChanged      : "\1\s[-1]\0\s[0]Hail and well met. Sleet, too.\e"
+talk.OnGhostChanged      : "\1\s[-1]\0\s[0]"${adjective} ${verb.progressive}". Witch!\e"
+
+talk.OnGhostReloaded     : "\1\s[10]\0\s[0]"${verb.progressive}" myself, in service of you."
+
+talk.OnGhostCalling      : "\0"${verb.present}", "$(Reference 0)"!"
+
+# When the Ghost's shell is changed.
+# Additional responses are called by the shell name. Case sensitive.
+talk.OnShellChanged       : "\1\s[-1]\0\s[0]La, la, no matter."
+talk.OnShellChanged       : "\1\s[-1]\0\s[0]What a "${adjective}" form."
+
+talk.OnShellChangedMaster : "\1\s[-1]\0Thank the "${noun.plural}"."
+
+# When the Ghost is unminimized.
+talk.OnWindowStateRestore : "\1\s[-1]\0"${verb.progressive}", "${verb.progressive}" case of beers."
+
+# When the Ghost is booted.
+talk.OnBoot : "\1\s[-1]\0Hark! What brings this "${adjective} ${noun.singular}" to grace my presence?"
+talk.OnBoot : "\1\s[-1]\0Listen here, you little "${noun.singular}", you listen to me.\w8\w8\w8 The "${noun.singular}" that "${verb.present.singular}", that is your fortune."
+talk.OnBoot : "\1\s[-1]\0"${verb.present}"!"
+
+# When the Ghost is closed.
+talk.OnClose : "\1\s[-1]\0Lie close to me, and "${verb.present}"."
+talk.OnClose : "\1\s[-1]\0Sleep tonight, and think of "${noun.plural}"."
+talk.OnClose : "\1\s[-1]\0See you at the "${location}", tomorrow!"
+

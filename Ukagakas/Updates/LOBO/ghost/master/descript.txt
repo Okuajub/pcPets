@@ -1,0 +1,25 @@
+//descript.txt holds information about the Ghost and is sent to your baseware.
+
+//These name entries will be how your Ghost is titled in SSP, and how the code recognizes your characters.
+name,LOBO
+sakura.name,lorem
+kero.name,ipsum
+
+//This is your credit, you should put your own name and site here. craftmanw is for names with non-alphanumeric characters, but fill out both whether your name is alphanumeric or not.
+craftman,Okuajub
+craftmanw,Okuajub
+craftmanurl,https://dummy.url/
+
+//This is the URL the Ghost checks for updates with when closed (such as through the explorer).
+//If you're not doing network updates, you can leave it as is.
+homeurl,https://dummyupdate.url/
+
+//If your Ghost comes bundled as a balloon, you should put the name of the balloon here, as SSP will highlight it in the balloon menu.
+//balloon,balloon name
+
+//You won't need to change these.
+charset,UTF-8
+type,ghost
+shiori,shiori.dll
+icon,icon.ico
+readme.charset,UTF-8

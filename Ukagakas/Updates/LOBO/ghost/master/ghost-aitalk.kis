@@ -1,0 +1,285 @@
+#--
+# AI TALK / SENTENCE
+#--
+# This is the dialogue pool file for your Ghost. It should also be the first file you start with if you've not written a Ghost before.
+
+noun.singular : butterfly, larva, phaeton, lobo, angle, cerberus, felid, chordate, product, knight, spittle, ass
+noun.singular : bullion, minerall, armour, ark, beacon, meadowgrass, strawberry, pachyderm, advent, memory, fruit
+noun.singluar : baseball, Marx, cryptid, bead, apple-car, hydroflask, whiskey, chainsaw, fiend, bottle of compressed ${noun.plural}
+noun.singular : needle, thread, fate, crocodile, acetaminophen, sulfur, aegis, aglaeca, bealusi, bruin, watership
+noun.singular : hazelnut, quid, skyscraper, artifact, acursed-amulet, bellows, dread, fear, joy, love, flesh, tack, psychopomp
+noun.singular : bug, Mojito, psyche, caladbolg
+
+noun.plural : butterflies, larvae, phaetons, lobos, angles, cerberi, felidae, chordates, products, knights
+noun.plural : bullion, mineralls, armours, arks, beacons, meadowgrass, strawberries, pachydermata, advents, devils, memories, fruits
+noun.plural : cryptids, beads, apple-cars, hydroflasks, chainsaws, fiends, cheese wheels
+noun.plural : cans of ${noun.singular}, spinning wheels, aerospace engineers, thing-a-ma-jigs, wings, recursive bows, rottenous eggs
+noun.plural : wounds, gouges, maws, psychopomps, flowers, bluebells, commies
+
+adjective : frightening, devasting, incomprehensible, sordid, aweful, abhorrent, calamitous, unpropitious, harrowing, unpreventable, portentious, ineluctable
+adjective : decadent, effete, languorous, licentious, bacchanalian, lascivious, summery, redolent, pestilential, putrefactive, effervescing, vituperative
+adjective : auriferous, virulent, pernicious, recrudescent, loathesome, misogynous, caustic, atavistic, belluine, hesperian, diaphanous, heterobasidiomycetous
+adjective : sphenoid, elfin, morphous, justified, star-crossed, aluminous, argentine, goth, viscous, long, hylic, presidential, fruity, bougie, Icarus-like
+adjective : dreadful, lackidasical, ensouled, Greek, Roman, wet
+
+adverb : cleanly, softly, verbosely, beastly, dastardly, ungodly, deliriously, verminly, vixenly, gayly
+adverb : under, never, astern, nigh, undeniably, thin, herewith, bloody, to a lesser extent, to a greater extent
+adverb : weakly, curmudgeonly, rightly, nauseously, crunkedly, ostensibly
+
+verb.present : hark, look, wish, finish, exercise, revolve, arrive, hoist, render, pardon, liquify, hydrate, offend, beg, sniff
+verb.present : resolve, prowl, self-flagellate, grovel, kneel, spit, sum, divide, multiply, fruit, growl, affix, ambulate
+verb.present : manipulate, sculpt, fraternize
+
+verb.present.singular : harks, looks, wishes, finishes, exercises, revolves, arrives, hoists, pardons, liquifies, hydrates, offends, begs, sniffs
+verb.present.singular : resolves, prowls, self-flagellates, grovels, kneels, spits, sums, divides, multiplies, fruits, growls, affixes, ambulates
+verb.present.singular : manipulates, sculpts, fraternizes
+
+verb.progressive : harking, looking, wishing, finishing, exercising, revolving, arriving, hoisting, rendering, pardoning, liquifying
+verb.progressive : hydrating, offending, begging, sniffing, resolving, prowling, self-flagellating, groveling, kneeling, spitting
+verb.progressive : summing, dividing, multiplying, fruiting, growling, affixing, ambulating, pirating, manipulating, sculpting
+verb.progressive : fraternizing, bowling
+
+placeName : Colorado, Ignefio, $(cap ${noun.singular})-$(cap ${noun.singular}), Alderfus, Boinginon, Uumjam, New Brunswick
+placeName : Olympus, Heaven, Unholifax, $(cap ${verb.present})menent, $(cap ${verb.present})${location}, Truth or Consequences
+placeName : Whereabouts, Whoville, Richscountry, Yellowstone National Park, Dubai
+
+location : park, city, town, tower, hall, meadow, space, time, dimension, body, farm, fief, copse, mall, labyrinth
+
+#-- Dialogue
+# Thank you to oldmanhorseface for helping write dialogue.
+
+sentence : "\0While away your time, but feel no guilt. We are not meant to be all the time."
+
+sentence : "\0Every species is a doomed species. No, I'm projecting a little."
+
+sentence : "\0I plead, be merciful to the sun in the morning."
+
+sentence : "\0What are we, if not star stuff that feels?"
+
+sentence : "\0Always remember the stars. They have done so much for you."
+
+sentence : "\0itadakimasu"
+
+sentence : "\0ore wa "${noun.singular}" da ne?"
+
+sentence : "\0Go figure."
+
+sentence : "\0Have you learned anything new about yourself lately?"
+
+sentence : "pregnant goats. "${verb.progressive} ${noun.singular}"."
+
+sentence : "\0Sun Tzu said \""$(cap ${verb.present})" in the "${adjective}" sun. This will defeat your "${noun.plural}".\" At least, I think so."
+
+sentence : (
+    "\0"
+    $(?
+        "World revolving\nKeeps on turning"
+        "In memorium," 
+        "Ahab, Ahab,"
+        "The souls of "${noun.plural}" arrest me,\nHear now,"
+        "killing, murdering, maiming\n"${verb.progressive}", "${verb.progressive}", "${verb.progressive}
+    )
+    "\n\n"
+    $(? 
+        "the "${location}" of "${adjective}" death \nsenseless emotion"
+        "Time "${verb.progressive}"\nKeeps on slipping"
+        "one, two, \nthree, four"
+        "is it I? God?"
+        "Cease.\e"
+    )
+    "\n\n"
+    $(?
+        "whereat "${noun.singular}" "${verb.present.singular}" and is violently sick"
+        "scrumpling tumultuous horrors of "${verb.progressive}
+        "Cease.\e"
+    )
+    "\n\n"
+    $(?
+        "worthless, writhing, wanton ralphage"
+        "the white whale waits for no one"
+        "The Thousand,\nThe Thousand"
+        "eagles save only when required of the narrative, justice"
+        "Maxwell's Belphagor"
+        "Cease.\e"
+    )
+    "\n\n"
+    $(?
+        "i want to be "${verb.progressive}" you."
+        "slink with only your body"
+        "beware the ides of march"
+        "On your wedding day."
+        "Cease.\n\nCease.\n\nCEASE."
+    )
+)
+
+sentence : (
+    "\0"
+    $(?
+        "Senseless violence"
+        "Voices speak to me"
+        "Weakness is holy"
+    )
+    "\n\n"
+    $(?
+        "Lowly beings"
+        "Forgive and forget"
+        "Tear it all down"
+    )
+    "\n\n"
+    $(?
+        "Wholeness is a foolish concept"
+        "And for you?"
+        "Seek him."
+    )
+)
+
+sentence : (
+    $(setstr @being $(? "man" "woman" "person" "talking spindle" "wolflady" "eagle"))
+    "\0There once was a story about "
+    $(?
+        "a "${adjective}" "${noun.singular}", "
+        "the King of Everything, "
+        "an itty bitty bunny rabbit, "
+        "the "$(cap ${noun.singular})" of "${placeName}", "
+        "you, "
+        "this guy I used to know. I met him in college. You had to be there.\e"
+    )
+    "who "
+    $(?
+        "died suddenly of a heart attack. "$(? "Yeesh." "Yow." "Oh dear." "That must have hurt." "Rest in peace." "Ow.")"\e"
+        "was on a quest for the "${adverb}" "${verb.progressive}" maiden."
+        "got lost on the way home."
+        "was madly in love with a "${adjective}" "${@being}", but could not have peace."
+    )
+    "\n\n"
+    $(?
+        "Would you do the same?"
+        "Endless stories, to be told."
+        "Was it true?"
+        "How foolish. I would be "${verb.progressive}" instead."
+    )
+)
+
+sentence : "\0birthing soulless beings, beasts not men"
+
+sentence : "\0Festival of "${noun.singular}", o' hear our pleas"
+
+sentence : "\0hospital."
+
+sentence : "\0lotus eater, lotus eater, can you hear me?"
+
+sentence : "\0Hopeless whelps, always "${verb.progressive}", "${verb.progressive}", "${verb.progressive}"."
+
+sentence : "\0Transmogrify yourself, once and awhile. Keeps the sinuses clear."
+
+sentence : "\0follow the white whale, screaming and kicking."
+
+sentence : "\0Cream of "${noun.singular}", how "${adjective}
+
+sentence : "Be "${adjective}", act "${adverb}"."
+
+sentence :  "\0Dye your hair another color, whisk yourself away, try a "${noun.singular}" on for size."
+
+sentence : "\0Push on, digging, worming, into your organs and resign yourself: Saint."
+
+sentence : "\0Sucking and lolling tongue, grows fat in the mouth."
+
+sentence : "\0Have you considered "${verb.progressive}"?"
+
+sentence : "\0Try a little "${noun.singular}" for the pain."
+
+sentence : "\0Male pattern baldness is not so "${adjective}"."
+
+sentence : "\0Spaceships "${verb.progressive}", flying free"
+
+sentence : "\0Sleep is like a tiny death. Slip into new flesh for a while."
+
+sentence : "\0Remember to save your game. Oh, you're not playing one?"
+
+sentence : "\0Keep on "${verb.progressive}" on."
+
+sentence : "\0You can't really tell, but that's a big "${noun.singular}". Pretty big."
+
+sentence : "\0"$(? "bodacious" "radical" "killer" "sick" "heavenly" "excellent")" "${noun.singular}", "$(? "dude" "my liege" "arisen" "wayfinder" "dudette" "man" "my guy")
+
+sentence : "\0Why the "${adjective}" face?"
+
+sentence : "\0"${verb.progressive} ${noun.singular}", "${verb.progressive} ${noun.singular}", "${verb.progressive} ${noun.singular}
+
+sentence : "\0What is a man, if not a "${adjective}" little "${noun.singular}" of "${noun.plural}"?" 
+
+sentence : "\0The "${noun.singular} ${adverb} ${verb.present.singular}"."
+
+sentence : "\0"${placeName}", the "${location}" of "$(cap ${adjective})" and "$(cap ${adjective})", is getting a new "${location}", I "${verb.present}"."
+
+sentence : "\0"${verb.present} ${noun.singular}"\n"${0} ${1}"\n"${0} ${1}
+
+sentence : "\0"${verb.present}", "${verb.present}", "${verb.present}", "${verb.present}
+
+sentence : "\0i'm "${noun.singular}", \ni "${verb.present}", \ni "${1}", \ni "${1}", \ni "${1}", \ni "${1}
+
+sentence : "\0Is not the "${noun.singular}" of your "${0}" your "${noun.plural}"?"
+
+sentence : "\0Yearn for "${noun.singular}". It is the fuel that will keep you going no matter the odds."
+
+sentence : "\0From ashes to ashes, from "${noun.singular}" to "${0}"."
+
+sentence : "\0It's "${adjective}", the other day I went to "${placeName}" to get "${noun.plural}". When I got there, they were totally out! Isn't that their whole job?"
+
+sentence : "\0As above, so below. At least, that's what the "${adjective} ${noun.singular}" I met the other day told me."
+
+sentence : "\0I think, therefor I "${verb.present}"."
+
+sentence : "\0Think of me, and think "${adverb}"."
+
+sentence : "\0Promethian punishment, sacrificial lamb"
+
+sentence : "\0"${noun.singular}${adjective}" is the newest form of art."
+
+sentence : "\0Welcome to the life of "${noun.singular}", you must be "${verb.progressive}"."
+
+sentence : "\0Do you listen to "$(cap ${adjective}) $(cap ${noun.singular})"? No?"
+
+sentence : "\0"${adjective}" hole"
+
+sentence : "\0Tenement of "${noun.plural}"."
+
+sentence : "\0Bring forth your "${noun.plural}" to me."
+
+sentence : "\0Bear your "${noun.plural}" for me."
+
+sentence : "\0Hot air balloons, such an affront to "${noun.singular}"."
+
+sentence : "\0Stomach hurting, revelry"
+
+sentence : "\0Pedantry is for the "${adjective}"."
+
+sentence : "\0Bow to iconographic minimalism"
+
+sentence : "\0Say \"Hi\" to Ahab for me."
+
+sentence : "\0If you think about it, "${noun.plural}" are an aweful lot like "${noun.plural}", in an "${adjective}" sort of way."
+
+sentence : "\0I've been really getting into studying "${noun.plural}" recently. It's very "${adjective}"."
+
+sentence : "\0You are the "${noun.singular}" of the universe. Remember this."
+
+sentence : "\0The world would be better off if we got rid of "${noun.plural}", I "${verb.present}". Or maybe not, I may just be "${adjective}"."
+
+sentence : "\0Once, I dreamt that we were all the gods of our own universe. Or perhaps that was a memory. I've never been sure."
+
+sentence : "\0What would you do with a tiny man, the size of your finger? Be kind, have mercy? Enact your fantasies? I am glad I am not him."
+
+# Here's the hour roll-over event. It's in the 24-hour format. Be aware it doesn't always go off exactly on the hour. If you don't want it, just erase it or comment it.
+talk.OnHourTimeSignal : "\0Have you considered the shortness of your lives? Shortness of your breath? Shortness of your "${noun.singular}"?"
+
+#--
+# IMPORTANT, DO NOT DELETE
+#--
+# STOP! ! ! Do not write any dialogue past this piece of code! If you do, it won't be called!! 
+# This piece of code calls on a function called "Nonoverlap" which makes sure that none of your Ghost's dialogue repeats before the others are called.
+# You can write as much as you'd like BEFORE THIS POINT. But any dialogue written afterward is *not* added to the Nonoverlap processed version of this entry! It's covered by the 'writeprotect' command.
+# ...Which makes the entry unable to be edited after this point. It's at the *end* of this dictonary for a reason!
+=kis
+Nonoverlap sentence;
+=end

@@ -1,0 +1,46 @@
+descript
+{
+  version,1
+}
+
+//--
+//Surfaces.txt
+//--
+
+//--The Sakura (Main Character)
+//
+
+surface0
+{
+
+	element0,overlay,body1.png,0,0
+
+	animation0.interval,talk,4
+	animation0.pattern0,alternativestart,[1.2.3]
+
+	animation1.interval,never
+	animation1.pattern0,replace,100,25,0,0
+	animation1.pattern1,replace,101,80,0,0
+	animation1.pattern2,replace,100,130,0,0
+	animation1.pattern3,overlay,-1,25,0,0
+
+	animation2.interval,never
+	animation2.pattern0,replace,100,20,0,0
+	animation2.pattern1,replace,101,65,0,0
+	animation2.pattern2,replace,100,100,0,0
+	animation2.pattern3,overlay,-1,25,0,0
+
+	animation3.interval,never
+	animation3.pattern0,replace,100,25,0,0
+	animation3.pattern1,replace,101,130,0,0
+	animation3.pattern2,replace,100,90,0,0
+	animation3.pattern3,overlay,-1,25,0,0
+
+}
+
+//--The Kero (Side Character)
+
+surface10
+{
+	element0,overlay,menu_foreground.png,0,0
+}

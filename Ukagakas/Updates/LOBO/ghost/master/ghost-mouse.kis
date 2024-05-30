@@ -1,0 +1,26 @@
+#--
+# Mouse Actions
+#--
+# This little file holds all of the mouse related actions. Here's a few examples to get you started. 
+# 0 refers to the Sakura, while 1 refers to the Kero, and so on.
+
+#-- Double clicking
+#
+
+# When the Ghost is double clicked.
+MouseDoubleClick0     : ${OnSakuraMenu}
+
+# When a hotspot is specified.
+MouseDoubleClick0Head : "\0\s[0]Something wrong?"
+
+# -- Petting
+#
+
+# Waiting time for petting response.
+strokeLimit : 50
+
+# Sakura petting responses.
+MouseMove0Head : "\0\s[0]Hey, cut that out."
+
+# Kero petting responses.
+MouseMove0Face : "\0\s[0]That tickles.\w8 I bite when things tickle."
