@@ -7,7 +7,7 @@
 #-- Network Update URL
 # This is the link you'll use to update your Ghost. Don't forget to change this in descript.txt as well!
 # If you are in devmode, the Ghost will automatically check a dummy URL instead.
-homeurl : "https://dummy.url/"
+homeurl : "https://raw.githubusercontent.com/Okuajub/pcPets/master/Ukagakas/Updates/LOBO/"
 
 #--
 # Recommended Sites
