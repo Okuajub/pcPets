@@ -12,6 +12,7 @@ talk.OnFirstBoot   : (
         "my good "${noun.singular}". What poor, wretched purpose has brought you here?"
         "la la la. Oh, "${verb.present}"~! A "${noun.singular}", finally! Welcome, welcome."
         "my liege. What can I do for you?"
+        "in medias res."
     )
 )
 talk.OnReinstall   : "\1\s[-1]\0Wretchedness! Worthlessness! Oh, I see, it's merely "${noun.singular}"."
@@ -50,6 +51,7 @@ talk.OnWindowStateRestore : "\1\s[-1]\0"${verb.progressive}", "${verb.progressiv
 talk.OnBoot : "\1\s[-1]\0Hark! What brings this "${adjective} ${noun.singular}" to grace my presence?"
 talk.OnBoot : "\1\s[-1]\0Listen here, you little "${noun.singular}", you listen to me.\w8\w8\w8 The "${noun.singular}" that "${verb.present.singular}", that is your fortune."
 talk.OnBoot : "\1\s[-1]\0"${verb.present}"!"
+talk.OnBoot : "\1\s[-1]\0"${sentence}
 
 # When the Ghost is closed.
 talk.OnClose : "\1\s[-1]\0Lie close to me, and "${verb.present}"."

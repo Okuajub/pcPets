@@ -3,47 +3,61 @@
 #--
 # This is the dialogue pool file for your Ghost. It should also be the first file you start with if you've not written a Ghost before.
 
+sentence : (
+    "\0I know "$(size noun.singular)" nouns, "$(size adjective)" adjectives, and "$(size verb.present)" verbs. "
+    "I can use "
+    $[$(size noun.singular) + $(size noun.plural) + $(size adjective) + $(size adverb) + $(size verb.present) + $(size verb.present.singular) + $(size verb.progressive)]
+    " different words. "
+    $(? "What about you?" "I think I'm smarter than a 5th grader." "I could run for president with that kind of vocabulary." "I read the dictionary for fun.")
+)
+
 noun.singular : butterfly, larva, phaeton, lobo, angle, cerberus, felid, chordate, product, knight, spittle, ass
 noun.singular : bullion, minerall, armour, ark, beacon, meadowgrass, strawberry, pachyderm, advent, memory, fruit
 noun.singluar : baseball, Marx, cryptid, bead, apple-car, hydroflask, whiskey, chainsaw, fiend, bottle of compressed ${noun.plural}
 noun.singular : needle, thread, fate, crocodile, acetaminophen, sulfur, aegis, aglaeca, bealusi, bruin, watership
-noun.singular : hazelnut, quid, skyscraper, artifact, acursed-amulet, bellows, dread, fear, joy, love, flesh, tack, psychopomp
-noun.singular : bug, Mojito, psyche, caladbolg
+noun.singular : hazelnut, quid, skyscraper, artifact, acursed-amulet, bellows, dread, joy, love, flesh, tack, psychopomp
+noun.singular : bug, Mojito, psyche, caladbolg, Excalibur, art, sin, meat, chuckeye, fear
 
 noun.plural : butterflies, larvae, phaetons, lobos, angles, cerberi, felidae, chordates, products, knights
 noun.plural : bullion, mineralls, armours, arks, beacons, meadowgrass, strawberries, pachydermata, advents, devils, memories, fruits
 noun.plural : cryptids, beads, apple-cars, hydroflasks, chainsaws, fiends, cheese wheels
 noun.plural : cans of ${noun.singular}, spinning wheels, aerospace engineers, thing-a-ma-jigs, wings, recursive bows, rottenous eggs
-noun.plural : wounds, gouges, maws, psychopomps, flowers, bluebells, commies
+noun.plural : wounds, gouges, maws, psychopomps, flowers, bluebells, commies, Excaliburs, sins, chuckeyes, cow tools, dreams, rumors
+noun.plural : fears, sensibilities
 
 adjective : frightening, devasting, incomprehensible, sordid, aweful, abhorrent, calamitous, unpropitious, harrowing, unpreventable, portentious, ineluctable
 adjective : decadent, effete, languorous, licentious, bacchanalian, lascivious, summery, redolent, pestilential, putrefactive, effervescing, vituperative
 adjective : auriferous, virulent, pernicious, recrudescent, loathesome, misogynous, caustic, atavistic, belluine, hesperian, diaphanous, heterobasidiomycetous
 adjective : sphenoid, elfin, morphous, justified, star-crossed, aluminous, argentine, goth, viscous, long, hylic, presidential, fruity, bougie, Icarus-like
-adjective : dreadful, lackidasical, ensouled, Greek, Roman, wet
+adjective : dreadful, lackidasical, ensouled, Greek, Roman, wet, white, modern, Midwestern, deluxe, sadomasochistic, recreational
 
 adverb : cleanly, softly, verbosely, beastly, dastardly, ungodly, deliriously, verminly, vixenly, gayly
 adverb : under, never, astern, nigh, undeniably, thin, herewith, bloody, to a lesser extent, to a greater extent
-adverb : weakly, curmudgeonly, rightly, nauseously, crunkedly, ostensibly
+adverb : weakly, curmudgeonly, rightly, nauseously, crunkedly, ostensibly, greatly, minimally, boyishly
+adverb : institutionally, recreationally, annoyingly, also, anyway, instead
 
 verb.present : hark, look, wish, finish, exercise, revolve, arrive, hoist, render, pardon, liquify, hydrate, offend, beg, sniff
 verb.present : resolve, prowl, self-flagellate, grovel, kneel, spit, sum, divide, multiply, fruit, growl, affix, ambulate
-verb.present : manipulate, sculpt, fraternize
+verb.present : manipulate, sculpt, fraternize, vex
 
 verb.present.singular : harks, looks, wishes, finishes, exercises, revolves, arrives, hoists, pardons, liquifies, hydrates, offends, begs, sniffs
 verb.present.singular : resolves, prowls, self-flagellates, grovels, kneels, spits, sums, divides, multiplies, fruits, growls, affixes, ambulates
-verb.present.singular : manipulates, sculpts, fraternizes
+verb.present.singular : manipulates, sculpts, fraternizes, vexes
 
 verb.progressive : harking, looking, wishing, finishing, exercising, revolving, arriving, hoisting, rendering, pardoning, liquifying
 verb.progressive : hydrating, offending, begging, sniffing, resolving, prowling, self-flagellating, groveling, kneeling, spitting
 verb.progressive : summing, dividing, multiplying, fruiting, growling, affixing, ambulating, pirating, manipulating, sculpting
-verb.progressive : fraternizing, bowling
+verb.progressive : fraternizing, bowling, vexing
 
 placeName : Colorado, Ignefio, $(cap ${noun.singular})-$(cap ${noun.singular}), Alderfus, Boinginon, Uumjam, New Brunswick
 placeName : Olympus, Heaven, Unholifax, $(cap ${verb.present})menent, $(cap ${verb.present})${location}, Truth or Consequences
-placeName : Whereabouts, Whoville, Richscountry, Yellowstone National Park, Dubai
+placeName : Whereabouts, Whatsit, Richscountry, Yellowstone National Park, Dubai, Hork, The Matrix
 
 location : park, city, town, tower, hall, meadow, space, time, dimension, body, farm, fief, copse, mall, labyrinth
+
+personName : Daniel, Prometheus, Neil, Aaron, Sam, Shannon, ${tempUser}, Faust, Starbuck, Jordan, Derek, Theresa, Liam, Robert, David
+personName : Lammy, Shinji, Leon, Christian, Lee, Ted, Kate, Mac, Christine, Wayne, Thomas, Charlie, Giles, "Stevie Nicks", Michael, Haru
+personName : Watson, Bacchus, Sannan, Rahman, Umar
 
 #-- Dialogue
 # Thank you to oldmanhorseface for helping write dialogue.
@@ -58,15 +72,166 @@ sentence : "\0What are we, if not star stuff that feels?"
 
 sentence : "\0Always remember the stars. They have done so much for you."
 
-sentence : "\0itadakimasu"
+sentence : "\0hold me down, hogtie me, throw me on the trolley tracks. Hey, what's that lever over there?"
 
-sentence : "\0ore wa "${noun.singular}" da ne?"
+sentence : "\0itadakimasu"
 
 sentence : "\0Go figure."
 
 sentence : "\0Have you learned anything new about yourself lately?"
 
-sentence : "pregnant goats. "${verb.progressive} ${noun.singular}"."
+sentence : "\0in absentia"
+
+sentence : "\0Eat your cake and have it too."
+
+sentence : "\0i want to be with you anyway."
+
+sentence : "\0Remain undiagnosable"
+
+sentence : "\0How predictable."
+
+sentence : "\0What a good boy am I!"
+
+sentence : "\0sometimes latent angers are strangers."
+
+sentence : "\0birthing soulless beings, beasts not men"
+
+sentence : "\0hospital."
+
+sentence : "\0lotus eater, lotus eater, can you hear me?"
+
+sentence : "\0Transmogrify yourself, once and awhile. Keeps the sinuses clear."
+
+sentence : "\0follow the white whale, screaming and kicking."
+
+sentence : "\0Push on, digging, worming, into your organs and resign yourself: Saint."
+
+sentence : "\0Sucking and lolling tongue, grows fat in the mouth."
+
+sentence : "\0Stomach hurting, revelry"
+
+sentence : "\0Sleep is like a tiny death. Slip into new flesh for a while."
+
+sentence : "\0Remember to save your game. Oh, you're not playing one?"
+
+sentence : "\0Promethian punishment, sacrificial lamb"
+
+sentence : "\0Bow to iconographic minimalism"
+
+sentence : "\0Say \"Hi\" to Ahab for me."
+
+sentence : "\0Once, I dreamt that we were all the gods of our own universe. Or perhaps that was a memory. I've never been sure."
+
+sentence : "\0What would you do with a tiny man, the size of your finger? Be kind, have mercy? Enact your fantasies? I am glad I am not him."
+
+sentence : "\0Step outside and enjoy a little cadenza."
+
+sentence : "\0Consider a mimosa, will you?"
+
+sentence : (
+    "\0Every "
+    $(? 
+        "puppy"
+        "kitty"
+        "baby"
+        "bunny"
+        "skeleton"
+        "white rapper"
+        "treehugger"
+        "ochestrator"
+    )
+    " needs a pack of "
+    $(? 
+        "Lucky Strikes"
+        "Marlboros"
+        "Camels"
+        "Newports"
+    )
+    ", "
+    $(? 
+        "good for the nerves"
+        "good for the bones"
+        "just a little personal poison"
+        "the union negotiated for smoke breaks"
+        "none of that fruity vape shit"
+        "it's good for them"
+        "it's not healthy but it makes me feel "${adjective}
+        "rots your lungs away"
+        "it makes you feel awesome"
+        "don't mind the warning labels"
+        "it's not illegal"
+    )
+    "."
+)
+sentence : "\0You should take a vacation in "${placeName}". I've heard they've got "${adjective}" "$(? "beaches" "malls" "gift shops" "mountains" "blood lakes" "massacre sites" "butlers" "sunrises" "schools")"."
+
+sentence : "\0I heard that "${personName}" got run over by a bus. Yowch."
+
+sentence : "\0The market has crashed in "${placeName}". How "${adjective}"."
+
+sentence : "\0if you think about it, "${noun.plural}" are just a husk of "${noun.plural}"."
+
+sentence : "\0hold me and whisper "${adjective}" "${noun.plural}" in my ears." 
+
+sentence : "\0ore wa "${noun.singular}" da ne?"
+
+sentence : "\0pregnant goats. "${verb.progressive} ${noun.singular}"."
+
+sentence : "\0Please do not give up on your dreams. If not for me, then for "${personName}"."
+
+sentence : "\0Obfuscate. "$(cap ${verb.present})". "$(cap ${verb.present})". Unburden."
+
+sentence : "\0Morality is a bit "${adjective}", is it not?"
+
+sentence : "\0Spread thin, like too little "$(? marmite vegemite peanutbutter jam butter pestilence)" spread over too much "$(? bread "pastry puff" wine flesh skin)"."
+
+sentence : (
+    "\0I'm writing a new song today. It's called \f[italic,true]'"
+    $(? 
+        ${verb.present}" of "${adjective}" "${noun.plural} 
+        ${noun.plural}
+        ${adjective}" "${noun.plural}
+        ${verb.progressive}" that "${noun.singular}
+        "Ode to "${noun.singular}
+        "Regrets"
+        "Legend of "${personName}" ("${verb.progressive}" the "${noun.plural}")"
+    )
+    "'\f[italic,default]. Do you "$(? like hate love dislike chew spew holler mewl)" it?"
+)
+
+sentence : "\0Listen closely, to the beating of your heart. "$(? "Does it drive you mad?" "Be still, and think quietly." "Nothing can recreate this moment." "")
+
+sentence : "\0all your "${noun.singular}" are belong to us"
+
+sentence : "\0What a terrible night to have a "${noun.singular}"."
+
+sentence : "\0Who is afraid of "${adjective} ${noun.singular}"?"
+
+sentence : "\0That's so "$(? ${noun.singular} ${adjective})"core."
+
+sentence : "\0"${verb.present}" to me."
+
+sentence : $(? "\0Who's "${personName}"?" "\0I forgot what I was going to say." "\0Hm?" "\0How demented of you.")
+
+sentence : "\0There was a sniper in "${placeName}"."
+
+sentence : (
+    $(setstr @hour $[ $(date %H) + $(rand 100) ]; setstr @minute $[ $(date %M) + $(rand 100) ]) 
+    "\0What time is it? "${@hour}":"${@minute}"? Seems like your clock doesn't match."
+)
+
+sentence : ( 
+    "\0.\w8.\w8."
+    $(? 
+        "" 
+        " Animalian." 
+        "\c\f[height,+10]Damn fucking "${adjective}" fucking "${adjective}" fucking "${adjective}" "${noun.plural}
+        " Say your prayers at night."
+        "Do you remember "$(? ${personName} "yourself" "to brush your teeth at night" "how to live" "to embrace incontinuity")"?"
+        " Speak, and bring it into existence."
+        " Have a family of "$(? stringbeans goats hellspawn lovers queers psychonauts ${noun.plural})" some day."
+    )
+)
 
 sentence : "\0Sun Tzu said \""$(cap ${verb.present})" in the "${adjective}" sun. This will defeat your "${noun.plural}".\" At least, I think so."
 
@@ -160,29 +325,38 @@ sentence : (
     )
 )
 
-sentence : "\0birthing soulless beings, beasts not men"
+sentence : (
+    "\0Wet 'n Wild Fun at "
+    $(?
+        ${personName}"'s "$(cap ${adjective})" Fun Water World"
+        "the Wild West Waterpark Saloon"
+        "California's first non-chlorinated waterpark, Dasani Land"
+        $(cap ${adjective})" "$(cap ${noun.singular})": The Movie: The Waterpark"
+        "Slip 'n Slide 2: The Big One"
+        "Wheezy's "$(cap ${verb.progressive})" Watermania"
+        "Evangelion 4.5: You Can (Not) Slide. The anime tie-in waterpark exclusively in "$(? "Rhode Island" "Colorado" "Nebraska" "the middle of nowhere" "Canada" "Fortnite")
+    )
+    "! Tickets now only $"$(? 19 29 39 49 69)".99! "
+    $(? 
+        "Children under 4 admitted free."
+        "Limited time only. While Supplies last."
+        "Pricing and availability may vary."
+        "No refunds."
+        "Just off Highway 66."
+        "Sponsored by Al Gore."
+        "\n\n\f[height,-4]Warning: Pregnant women and children under 13 should not engage in Wet 'n Wild Fun. Please discontinue use if you experience: dizziness, nausea, sudden loss of libido, muscle spasms, or tumors."
+    )
+)
 
 sentence : "\0Festival of "${noun.singular}", o' hear our pleas"
 
-sentence : "\0hospital."
-
-sentence : "\0lotus eater, lotus eater, can you hear me?"
-
 sentence : "\0Hopeless whelps, always "${verb.progressive}", "${verb.progressive}", "${verb.progressive}"."
-
-sentence : "\0Transmogrify yourself, once and awhile. Keeps the sinuses clear."
-
-sentence : "\0follow the white whale, screaming and kicking."
 
 sentence : "\0Cream of "${noun.singular}", how "${adjective}
 
-sentence : "Be "${adjective}", act "${adverb}"."
+sentence : "\0Be "${adjective}", act "${adverb}"."
 
 sentence :  "\0Dye your hair another color, whisk yourself away, try a "${noun.singular}" on for size."
-
-sentence : "\0Push on, digging, worming, into your organs and resign yourself: Saint."
-
-sentence : "\0Sucking and lolling tongue, grows fat in the mouth."
 
 sentence : "\0Have you considered "${verb.progressive}"?"
 
@@ -191,10 +365,6 @@ sentence : "\0Try a little "${noun.singular}" for the pain."
 sentence : "\0Male pattern baldness is not so "${adjective}"."
 
 sentence : "\0Spaceships "${verb.progressive}", flying free"
-
-sentence : "\0Sleep is like a tiny death. Slip into new flesh for a while."
-
-sentence : "\0Remember to save your game. Oh, you're not playing one?"
 
 sentence : "\0Keep on "${verb.progressive}" on."
 
@@ -232,8 +402,6 @@ sentence : "\0I think, therefor I "${verb.present}"."
 
 sentence : "\0Think of me, and think "${adverb}"."
 
-sentence : "\0Promethian punishment, sacrificial lamb"
-
 sentence : "\0"${noun.singular}${adjective}" is the newest form of art."
 
 sentence : "\0Welcome to the life of "${noun.singular}", you must be "${verb.progressive}"."
@@ -250,13 +418,7 @@ sentence : "\0Bear your "${noun.plural}" for me."
 
 sentence : "\0Hot air balloons, such an affront to "${noun.singular}"."
 
-sentence : "\0Stomach hurting, revelry"
-
 sentence : "\0Pedantry is for the "${adjective}"."
-
-sentence : "\0Bow to iconographic minimalism"
-
-sentence : "\0Say \"Hi\" to Ahab for me."
 
 sentence : "\0If you think about it, "${noun.plural}" are an aweful lot like "${noun.plural}", in an "${adjective}" sort of way."
 
@@ -265,10 +427,6 @@ sentence : "\0I've been really getting into studying "${noun.plural}" recently. 
 sentence : "\0You are the "${noun.singular}" of the universe. Remember this."
 
 sentence : "\0The world would be better off if we got rid of "${noun.plural}", I "${verb.present}". Or maybe not, I may just be "${adjective}"."
-
-sentence : "\0Once, I dreamt that we were all the gods of our own universe. Or perhaps that was a memory. I've never been sure."
-
-sentence : "\0What would you do with a tiny man, the size of your finger? Be kind, have mercy? Enact your fantasies? I am glad I am not him."
 
 # Here's the hour roll-over event. It's in the 24-hour format. Be aware it doesn't always go off exactly on the hour. If you don't want it, just erase it or comment it.
 talk.OnHourTimeSignal : "\0Have you considered the shortness of your lives? Shortness of your breath? Shortness of your "${noun.singular}"?"
