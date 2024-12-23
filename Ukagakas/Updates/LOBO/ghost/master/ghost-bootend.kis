@@ -13,15 +13,22 @@ talk.OnFirstBoot   : (
         "la la la. Oh, "${verb.present}"~! A "${noun.singular}", finally! Welcome, welcome."
         "my liege. What can I do for you?"
         "in medias res."
+        "welcome to my domain, "${personName}". where two plus two equals twenty, and there is only one way out."
     )
 )
 talk.OnReinstall   : "\1\s[-1]\0Wretchedness! Worthlessness! Oh, I see, it's merely "${noun.singular}"."
+talk.OnReinstall   : "\1\s[-1]\0Why must you bring me back? Just to suffer?"
+talk.OnReinstall   : "\1\s[-1]\0Changed your mind, hm? Missed my company?"
+talk.OnReinstall   : "\1\s[-1]\0another angel has fallen from heaven, today"
 talk.OnLotsInstall : "\1\s[-1]\0Hellion."
 
 # When switching to another Ghost
 # You can specify a specific Ghost by specifying the Sakura name (as in descript.txt) and if the switch was manual or automatic.
 # If you want specific dialogue for the User manually reloading them, use the reload entry.
 talk.OnGhostChanging : "\1\s[-1]\0Why hath "${noun.singular}" forsaken me?"
+talk.OnGhostChanging : "\1\s[-1]\0Ta-ta!"
+talk.OnGhostChanging : "\1\s[-1]\0sure, sure, toss me away like a used tissue, a "${adjective} ${noun.singular}"."
+talk.OnGhostChanging : "\1\s[-1]\0oyasumi, oyasumi"
 
 talk.OnGhostReloading : "\1\s[-1]\0"$(cap ${adjective})" nature, begone!"
 talk.OnGhostReloading : "\1\s[-1]\0What is the purpose of this? Of all things?"
@@ -29,9 +36,10 @@ talk.OnGhostReloading : "\1\s[-1]\0What is the purpose of this? Of all things?"
 # When the Ghost is called by or changed to from another Ghost.
 # Just like GhostChanging, you can specify if the Ghost is a specific character.
 # And, for if the user reloaded them.
-talk.OnGhostChanged      : "\1\s[-1]\0\s[0]Parlay, parlay.\e"
-talk.OnGhostChanged      : "\1\s[-1]\0\s[0]Hail and well met. Sleet, too.\e"
-talk.OnGhostChanged      : "\1\s[-1]\0\s[0]"${adjective} ${verb.progressive}". Witch!\e"
+talk.OnGhostChanged      : "\1\s[-1]\0Parlay, parlay."
+talk.OnGhostChanged      : "\1\s[-1]\0Hail and well met. Sleet, too."
+talk.OnGhostChanged      : "\1\s[-1]\0"${adjective} ${verb.progressive}". Witch!"
+talk.OnGhostChanged      : "\1\s[-1]\0"${talk.OnBoot}
 
 talk.OnGhostReloaded     : "\1\s[10]\0\s[0]"${verb.progressive}" myself, in service of you."
 
@@ -52,9 +60,12 @@ talk.OnBoot : "\1\s[-1]\0Hark! What brings this "${adjective} ${noun.singular}" 
 talk.OnBoot : "\1\s[-1]\0Listen here, you little "${noun.singular}", you listen to me.\w8\w8\w8 The "${noun.singular}" that "${verb.present.singular}", that is your fortune."
 talk.OnBoot : "\1\s[-1]\0"${verb.present}"!"
 talk.OnBoot : "\1\s[-1]\0"${sentence}
+talk.OnBoot : "\1\s[-1]\0Merry Birthday!"
 
 # When the Ghost is closed.
 talk.OnClose : "\1\s[-1]\0Lie close to me, and "${verb.present}"."
 talk.OnClose : "\1\s[-1]\0Sleep tonight, and think of "${noun.plural}"."
 talk.OnClose : "\1\s[-1]\0See you at the "${location}", tomorrow!"
+talk.OnClose : "\1\s[-1]\0Goodbye, Mark."
+talk.OnClose : "\1\s[-1]\0silence."
 

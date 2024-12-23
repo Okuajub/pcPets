@@ -11,53 +11,61 @@ sentence : (
     $(? "What about you?" "I think I'm smarter than a 5th grader." "I could run for president with that kind of vocabulary." "I read the dictionary for fun.")
 )
 
+# "\0I know approximately "$(size noun.singular)" nouns, "$(size adjective)" adjectives, and "$(size verb.present)" verbs. I can use "$[$(size noun.singular) + $(size noun.plural) + $(size adjective) + $(size adverb) + $(size verb.present) + $(size verb.present.singular) + $(size verb.progressive)]" different words. "$(? "What about you?" "I think I'm smarter than a 5th grader." "I could run for president with that kind of vocabulary." "I read the dictionary for fun.")
+
 noun.singular : butterfly, larva, phaeton, lobo, angle, cerberus, felid, chordate, product, knight, spittle, ass
 noun.singular : bullion, minerall, armour, ark, beacon, meadowgrass, strawberry, pachyderm, advent, memory, fruit
 noun.singluar : baseball, Marx, cryptid, bead, apple-car, hydroflask, whiskey, chainsaw, fiend, bottle of compressed ${noun.plural}
 noun.singular : needle, thread, fate, crocodile, acetaminophen, sulfur, aegis, aglaeca, bealusi, bruin, watership
 noun.singular : hazelnut, quid, skyscraper, artifact, acursed-amulet, bellows, dread, joy, love, flesh, tack, psychopomp
-noun.singular : bug, Mojito, psyche, caladbolg, Excalibur, art, sin, meat, chuckeye, fear
+noun.singular : bug, Mojito, psyche, caladbolg, Excalibur, art, sin, meat, chuckeye, fear, digestive biscuit, rose
+noun.singular : chocolate, shadow, hole, wifey, webpage, amnesia, corpse, dandelion, televangelist, autonomy, stardust
 
 noun.plural : butterflies, larvae, phaetons, lobos, angles, cerberi, felidae, chordates, products, knights
 noun.plural : bullion, mineralls, armours, arks, beacons, meadowgrass, strawberries, pachydermata, advents, devils, memories, fruits
-noun.plural : cryptids, beads, apple-cars, hydroflasks, chainsaws, fiends, cheese wheels
+noun.plural : cryptids, beads, apple-cars, hydroflasks, chainsaws, fiends, cheese wheels, gallows
 noun.plural : cans of ${noun.singular}, spinning wheels, aerospace engineers, thing-a-ma-jigs, wings, recursive bows, rottenous eggs
 noun.plural : wounds, gouges, maws, psychopomps, flowers, bluebells, commies, Excaliburs, sins, chuckeyes, cow tools, dreams, rumors
-noun.plural : fears, sensibilities
+noun.plural : fears, sensibilities, digestive biscuits, tails, shadows, pantaloons, draculas, webpages, dandelions, televangelists, meteors
 
 adjective : frightening, devasting, incomprehensible, sordid, aweful, abhorrent, calamitous, unpropitious, harrowing, unpreventable, portentious, ineluctable
 adjective : decadent, effete, languorous, licentious, bacchanalian, lascivious, summery, redolent, pestilential, putrefactive, effervescing, vituperative
 adjective : auriferous, virulent, pernicious, recrudescent, loathesome, misogynous, caustic, atavistic, belluine, hesperian, diaphanous, heterobasidiomycetous
-adjective : sphenoid, elfin, morphous, justified, star-crossed, aluminous, argentine, goth, viscous, long, hylic, presidential, fruity, bougie, Icarus-like
-adjective : dreadful, lackidasical, ensouled, Greek, Roman, wet, white, modern, Midwestern, deluxe, sadomasochistic, recreational
+adjective : sphenoid, elfin, morphous, justified, star-crossed, aluminous, argentine, goth, gothic, viscous, long, hylic, presidential, fruity, bougie, Icarus-like
+adjective : dreadful, lackidasical, ensouled, Greek, Roman, wet, white, modern, Midwestern, deluxe, sadomasochistic, recreational, undigestible
+adjective : post-manic, waifuish, waifish, worthwhile, child-like, infinite, stemmed, arisen, mountainous, transsexual, heterochromic, fascist
+adjective : therianthropic, bird-like, cozy, autonomous, meteorological, astrological, anatomical, hydraulic
 
 adverb : cleanly, softly, verbosely, beastly, dastardly, ungodly, deliriously, verminly, vixenly, gayly
 adverb : under, never, astern, nigh, undeniably, thin, herewith, bloody, to a lesser extent, to a greater extent
 adverb : weakly, curmudgeonly, rightly, nauseously, crunkedly, ostensibly, greatly, minimally, boyishly
-adverb : institutionally, recreationally, annoyingly, also, anyway, instead
+adverb : institutionally, recreationally, annoyingly, also, anyway, instead, anatomically
 
 verb.present : hark, look, wish, finish, exercise, revolve, arrive, hoist, render, pardon, liquify, hydrate, offend, beg, sniff
 verb.present : resolve, prowl, self-flagellate, grovel, kneel, spit, sum, divide, multiply, fruit, growl, affix, ambulate
-verb.present : manipulate, sculpt, fraternize, vex
+verb.present : manipulate, sculpt, fraternize, vex, flower, nuzzle, peace-make, fly, sprint, howl, illustrate, illuminate
+verb.present : purr, marry
 
 verb.present.singular : harks, looks, wishes, finishes, exercises, revolves, arrives, hoists, pardons, liquifies, hydrates, offends, begs, sniffs
 verb.present.singular : resolves, prowls, self-flagellates, grovels, kneels, spits, sums, divides, multiplies, fruits, growls, affixes, ambulates
-verb.present.singular : manipulates, sculpts, fraternizes, vexes
+verb.present.singular : manipulates, sculpts, fraternizes, vexes, flowers, nuzzles, peace-makes, flies, sprints, howls, illustrates, illuminates
+verb.present.singular : purrs, marries
 
 verb.progressive : harking, looking, wishing, finishing, exercising, revolving, arriving, hoisting, rendering, pardoning, liquifying
 verb.progressive : hydrating, offending, begging, sniffing, resolving, prowling, self-flagellating, groveling, kneeling, spitting
 verb.progressive : summing, dividing, multiplying, fruiting, growling, affixing, ambulating, pirating, manipulating, sculpting
-verb.progressive : fraternizing, bowling, vexing
+verb.progressive : fraternizing, bowling, vexing, flowering, nuzzling, peace-making, flying, rotoscoping, sprinting, howling
+verb.progressive : illustrating, illuminating, purring, marrying
 
 placeName : Colorado, Ignefio, $(cap ${noun.singular})-$(cap ${noun.singular}), Alderfus, Boinginon, Uumjam, New Brunswick
 placeName : Olympus, Heaven, Unholifax, $(cap ${verb.present})menent, $(cap ${verb.present})${location}, Truth or Consequences
-placeName : Whereabouts, Whatsit, Richscountry, Yellowstone National Park, Dubai, Hork, The Matrix
+placeName : Whereabouts, Richscountry, Yellowstone National Park, Dubai, Hork, The Matrix, Brokeback Mountain
 
-location : park, city, town, tower, hall, meadow, space, time, dimension, body, farm, fief, copse, mall, labyrinth
+location : park, city, town, tower, hall, meadow, space, time, dimension, body, farm, fief, copse, mall, labyrinth, dune
 
 personName : Daniel, Prometheus, Neil, Aaron, Sam, Shannon, ${tempUser}, Faust, Starbuck, Jordan, Derek, Theresa, Liam, Robert, David
 personName : Lammy, Shinji, Leon, Christian, Lee, Ted, Kate, Mac, Christine, Wayne, Thomas, Charlie, Giles, "Stevie Nicks", Michael, Haru
-personName : Watson, Bacchus, Sannan, Rahman, Umar
+personName : Watson, Bacchus, Sannan, Rahman, Umar, Logic, Mario, Sakura, Kero, Nosferatu
 
 #-- Dialogue
 # Thank you to oldmanhorseface for helping write dialogue.
@@ -104,8 +112,6 @@ sentence : "\0Transmogrify yourself, once and awhile. Keeps the sinuses clear."
 
 sentence : "\0follow the white whale, screaming and kicking."
 
-sentence : "\0Push on, digging, worming, into your organs and resign yourself: Saint."
-
 sentence : "\0Sucking and lolling tongue, grows fat in the mouth."
 
 sentence : "\0Stomach hurting, revelry"
@@ -128,6 +134,66 @@ sentence : "\0Step outside and enjoy a little cadenza."
 
 sentence : "\0Consider a mimosa, will you?"
 
+sentence : "\0What's your problem?"
+
+sentence : "\0I do not think, therefore I do not am."
+
+sentence : "\0strange, isn't it?"
+
+sentence : "\0star-embossed lovers, dying in wait"
+
+sentence : "\0open your heart. stop having it be closed."
+
+sentence : "\0the stars slowly drift apart, the constellations losing shape. all the more stories to be told."
+
+sentence : "\0why are you running away?"
+
+sentence : "\0oh, ye of little faith."
+
+sentence : "\0the light of Heaven shines down upon you, like an ant under a magnifying glass. the ever watching eye."
+
+sentence : "\0big money, no whammies"
+
+sentence : ( 
+    "\0Quackery, often synonymous with health fraud, is the promotion of fraudulent or ignorant medical practices.\n\n\f[size,-3]"
+    "Wikipedia contributors. (2024, December 9). Quackery. In Wikipedia, The Free Encyclopedia. "
+    "Retrieved December 23, 2024, from https://en.wikipedia.org/w/index.php?title=Quackery&oldid=1262133047"
+)
+
+sentence : "\0do you think the hands that shaped me live in fear of what they created?"
+
+sentence : "\0I am The One Among Us. The Thing. Disgusting Disguise of Life."
+
+sentence : "\0The Frightened Ones are in need of prosthetic limbs and reconstructive surgery."
+
+sentence : "\0War planes fly like artifical albatrosses, screaming and screeching through the sky. diving to earth, covered in oil."
+
+sentence : (
+    "\0what the "
+    $(? 
+        fuck 
+        shit 
+        hell 
+        piss 
+        "@!$&" 
+        "fuck shit hell piss" 
+        ${noun.singular} 
+        "H-E-double-hockey-sticks" 
+        mouthwash 
+        whiskey 
+        wolf
+    )
+    " is a "
+    $(? 
+        ${noun.singular} 
+        wolf
+        baby
+        ${location}
+        brain
+        lemon
+    )
+    "?"
+)
 sentence : (
     "\0Every "
     $(? 
@@ -155,7 +221,7 @@ sentence : (
         "the union negotiated for smoke breaks"
         "none of that fruity vape shit"
         "it's good for them"
-        "it's not healthy but it makes me feel "${adjective}
+        "it's not healthy but it makes me feel "$(? ${adjective} "something.")
         "rots your lungs away"
         "it makes you feel awesome"
         "don't mind the warning labels"
@@ -163,6 +229,7 @@ sentence : (
     )
     "."
 )
+
 sentence : "\0You should take a vacation in "${placeName}". I've heard they've got "${adjective}" "$(? "beaches" "malls" "gift shops" "mountains" "blood lakes" "massacre sites" "butlers" "sunrises" "schools")"."
 
 sentence : "\0I heard that "${personName}" got run over by a bus. Yowch."
@@ -183,7 +250,78 @@ sentence : "\0Obfuscate. "$(cap ${verb.present})". "$(cap ${verb.present})". Unb
 
 sentence : "\0Morality is a bit "${adjective}", is it not?"
 
+sentence : "\0scatter my ashes in "${adjective} ${location}"."
+
 sentence : "\0Spread thin, like too little "$(? marmite vegemite peanutbutter jam butter pestilence)" spread over too much "$(? bread "pastry puff" wine flesh skin)"."
+
+sentence : "\0what "${noun.plural}" built up your walls?"
+
+sentence : "\0do you ever leave the "${location}" and the "${adjective}" people keep talking?"
+
+sentence : "\0I'm wanted in "$(? seventeen twenty two infinite "a harrowing amount of" "too many")" countries for "$(? "tax evasion" murder counterfeiting cruising)".\n\nI plead "$(? insanity "not guilty" "Not Guilty")"."
+
+sentence : "\0Wikipedia, the "${adjective}" encyclopedia."
+
+sentence : "\0the tree has the initials: \"Q R + G H\" carved into it in a little heart. How "${adjective}"."
+
+sentence : "\0"$(? his her their xis faer)" laugh is the greatest thing in the world, isn't it?"
+
+sentence : "\0that's a "$(? ${noun.singular}"-ass "${noun.singular}" if I ever saw one." ${noun.singular}" ass-"${noun.singular}" if I ever saw one.")
+
+sentence : "\0Push on, digging, worming, into your organs and resign yourself: "$(? Saint $(? Sainte Grunch) Hollow $(cap ${noun.singular}) Sinner Gay Walled )"."
+
+sentence : "\0All "$(cap ${noun.plural})" Are "$(cap ${adjective})"."
+
+sentence : "\0"${noun.plural}" make me retch."
+
+sentence : "\0beware the worms, or else find yourself a "${adjective}" dictator."
+
+sentence : "\0they've got "${noun.plural}", they've got "${noun.plural}",\nthey've got "${0}", they've got "${1}",\nthey've got "${0}", they've got "${1}"."
+
+sentence : "\0god's watching the apples, take as many "$(? cookies sins boyfriends actions "programming classes" ${noun.plural})" as you like."
+
+sentence : "\0i got a jury duty notice in the mail. "$(? "do you think i'll do a good job?" "i forgot where my mailbox is." "guess i'll walk." "i must perform CIVIC DUTY.")
+
+sentence : "\0sell your "${noun.singular}" to the "$(? billionares "military industrial complex" horses ${noun.plural})"."
+
+sentence : "\0what color is a "${noun.singular}"?"
+
+sentence : "\0i love you so strongly i look like a "${adjective} ${noun.singular}" in your presence. you reduce me to a shivering mess of adoration."
+
+sentence : "\0hate. hate. you do not know how strongly i feel the hate for you. the hand that "${verb.present.singular}" against my "${noun.singular}", shaping my clay into a grimacing visage."
+
+sentence : "\0welcome back to the world of the "${verb.progressive}", by the way."
+
+sentence : "\0living automaton, "${verb.progressive}" animal, mimicry of "$(? ${noun.singular} ${personName})"."
+
+sentence : ( 
+    "\0is your credit card number "
+    $(rand 10)$(rand 10)$(rand 10)$(rand 10) $(rand 10)$(rand 10)$(rand 10)$(rand 10) $(rand 10)$(rand 10)$(rand 10)$(rand 10) $(rand 10)$(rand 10)$(rand 10)$(rand 10)
+    "? " 
+    $(? 
+        "Now just tell me the three numbers on the back and "$(? "your mother's maiden name." "your dream car." "your first pet's name.")
+        "i wanna go on a shopping spree."
+        "ha ha, just kidding. and your phone number is 555-"$(rand 10)$(rand 10)$(rand 10)"-"$(rand 10)$(rand 10)$(rand 10)$(rand 10)" too, right?"
+    )
+)
+sentence : (
+    "\0i want to be "
+    $(?
+        "the prime minister"
+        "the president of the united states"
+        "the CEO of nintendo"
+        "a veterinarian"
+        "a human being"
+        "a cowboy! cowboy cowboy"
+        "sentient"
+    )
+    $(?
+        " when i grow up."
+        ". would you, too?"
+        ". what about you?"
+        ". But i'll never make it in this miserable little world."
+    )
+)
 
 sentence : (
     "\0I'm writing a new song today. It's called \f[italic,true]'"
@@ -328,7 +466,6 @@ sentence : (
 sentence : (
     "\0Wet 'n Wild Fun at "
     $(?
-        ${personName}"'s "$(cap ${adjective})" Fun Water World"
         "the Wild West Waterpark Saloon"
         "California's first non-chlorinated waterpark, Dasani Land"
         $(cap ${adjective})" "$(cap ${noun.singular})": The Movie: The Waterpark"
@@ -344,7 +481,7 @@ sentence : (
         "No refunds."
         "Just off Highway 66."
         "Sponsored by Al Gore."
-        "\n\n\f[height,-4]Warning: Pregnant women and children under 13 should not engage in Wet 'n Wild Fun. Please discontinue use if you experience: dizziness, nausea, sudden loss of libido, muscle spasms, or tumors."
+        "\n\n\f[height,-3]Warning: Pregnant women and children under 13 should not engage in Wet 'n Wild Fun. Please discontinue use if you experience: dizziness, nausea, sudden loss of libido, muscle spasms, or tumors."
     )
 )
 
@@ -428,6 +565,26 @@ sentence : "\0You are the "${noun.singular}" of the universe. Remember this."
 
 sentence : "\0The world would be better off if we got rid of "${noun.plural}", I "${verb.present}". Or maybe not, I may just be "${adjective}"."
 
+sentence : "\0and let you be healed, by the power of "${noun.singular}"!"
+
+sentence : "\0try a little sip of this granderwasser. it's "${adjective}"."
+
+sentence : "\0i did not even know i was unloved, until i met you. i would take all of the "${noun.plural}" in the "${location}" and give them to you, if it would make you happy."
+
+sentence : "\0i hid my "${noun.plural}" in a secret room in your home. don't go looking for them."
+
+sentence : "\0where have you buried all your "${noun.plural}"?"
+
+sentence : "\0i ate too many "${noun.plural}". my "${noun.singular}" hurts."
+
+sentence : "\0i'm a little "${adjective}" of myself. i'm not quite sure about the whole thing, to be "${adjective}"."
+
+sentence : "\0rise from your "${noun.singular}"!"
+
+sentence : "\0oh, what headache those "${adjective} ${noun.plural}" are giving me. Would you mind turning them off?"
+
+sentence : "\0Da-don, da-don. thump my tail on your chest like a drum. i love you, so "${adverb}"."
+
 # Here's the hour roll-over event. It's in the 24-hour format. Be aware it doesn't always go off exactly on the hour. If you don't want it, just erase it or comment it.
 talk.OnHourTimeSignal : "\0Have you considered the shortness of your lives? Shortness of your breath? Shortness of your "${noun.singular}"?"
 
@@ -438,6 +595,6 @@ talk.OnHourTimeSignal : "\0Have you considered the shortness of your lives? Shor
 # This piece of code calls on a function called "Nonoverlap" which makes sure that none of your Ghost's dialogue repeats before the others are called.
 # You can write as much as you'd like BEFORE THIS POINT. But any dialogue written afterward is *not* added to the Nonoverlap processed version of this entry! It's covered by the 'writeprotect' command.
 # ...Which makes the entry unable to be edited after this point. It's at the *end* of this dictonary for a reason!
-=kis
-Nonoverlap sentence;
-=end
+#=kis
+#Nonoverlap sentence;
+#=end
