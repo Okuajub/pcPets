@@ -58,9 +58,10 @@ talk.OnWindowStateRestore : "\1\s[-1]\0"${verb.progressive}", "${verb.progressiv
 # When the Ghost is booted.
 talk.OnBoot : "\1\s[-1]\0Hark! What brings this "${adjective} ${noun.singular}" to grace my presence?"
 talk.OnBoot : "\1\s[-1]\0Listen here, you little "${noun.singular}", you listen to me.\w8\w8\w8 The "${noun.singular}" that "${verb.present.singular}", that is your fortune."
+talk.OnBoot : "\1\s[-1]\0Merry Birthday!"
+talk.OnBoot : "\1\s[-1]\0This is the Zodiac speaking. Firewalker, do you read me? Over."
 talk.OnBoot : "\1\s[-1]\0"${verb.present}"!"
 talk.OnBoot : "\1\s[-1]\0"${sentence}
-talk.OnBoot : "\1\s[-1]\0Merry Birthday!"
 
 # When the Ghost is closed.
 talk.OnClose : "\1\s[-1]\0Lie close to me, and "${verb.present}"."

@@ -7,7 +7,7 @@
 #-- Network Update URL
 # This is the link you'll use to update your Ghost. Don't forget to change this in descript.txt as well!
 # If you are in devmode, the Ghost will automatically check a dummy URL instead.
-homeurl : "https://raw.githubusercontent.com/Okuajub/pcPets/master/Ukagakas/Updates/LOBO/"
+homeurl : "https://raw.githubusercontent.com/Okuajub/LOBO-Ukagaka/master/lobo_okuajub/"
 
 #--
 # Recommended Sites
@@ -22,6 +22,9 @@ resource.sakura.portalsites : $(urllist
 	"-" "-" "-"
 	"CHIPS Github"
 	"https://github.com/Okuajub/CHIPS/"
+	"-"
+	"LOBO Github"
+	"https://github.com/Okuajub/LOBO-Ukagaka/"
 	"-"
 )
 

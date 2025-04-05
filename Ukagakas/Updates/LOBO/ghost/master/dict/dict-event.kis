@@ -387,6 +387,11 @@ OnHeadlinesenseFailure, OnRSSFailure : $(
 	${talk.OnNewsFailure}
 )
 
+OnNeedlePoke : $(
+    if $(IsExist ${talk.OnNeedlePoke$(Reference 0)$(Reference 1)} ) ${talk.OnNeedlePoke$(Reference 0)$(Reference 1)}
+	else ${talk.OnNeedlePoke$(Reference 0)};
+)
+
 #--
 # Notify
 #--

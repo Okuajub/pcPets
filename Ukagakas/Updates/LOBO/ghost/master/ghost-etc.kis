@@ -43,3 +43,14 @@ talk.OnBIFFFailure  : "\0\s[0]Failed to connect to "$(Reference 2)". The reason 
 # Headlines and RSS - These entries are for responding to the Headline and RSS options.
 talk.OnNewsBegin : "\0\s[0]Checking the feed of "$(Reference 0)"..."
 talk.OnNewsFailure : "\0\s[0]Failed to check the feed. The reason was '"$(Reference 0)"'."
+
+# Needle pokes
+talk.OnNeedlePoke0 : $(? "\0\s[1]\f[size,+20]\f[name,Impact]Aaaaaiiiieee!\_w[1000]\0\s[0]" "\0\s[0]'Tis but a scratch." "")
+talk.OnNeedlePoke0 : (
+    "\0\s[1]"$(cap ${vulgar.noun.singular})$(? "" " ")
+    $(loop $(rand 5) ${vulgar.noun.singular}" ")${vulgar.noun.singular}
+    $(loop $(rand 3) "!")
+    "! \0\s[0]What the "${vulgar.noun.singular}", "${personName}"?"
+    $(? " A "${vulgar.verb.progressive}" "$(Reference 1)"?")
+)
+talk.OnNeedlePoke0 : "\0\s[1]\![raiseother,__SYSTEM_ALL_GHOST__,OnLoboHowl,pain]"${soulscream}"!\_w[1000]\0\s[0]"

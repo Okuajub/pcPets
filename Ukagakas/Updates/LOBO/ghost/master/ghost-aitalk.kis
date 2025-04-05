@@ -6,170 +6,208 @@
 sentence : (
     "\0I know "$(size noun.singular)" nouns, "$(size adjective)" adjectives, and "$(size verb.present)" verbs. "
     "I can use "
-    $[$(size noun.singular) + $(size noun.plural) + $(size adjective) + $(size adverb) + $(size verb.present) + $(size verb.present.singular) + $(size verb.progressive)]
+    $[$(size noun.singular) + $(size noun.plural) + $(size adjective) + $(size adverb) + $(size verb.present) + $(size verb.present.singular) + $(size verb.progressive) + $(size vulgar.noun.singular)]
     " different words. "
-    $(? "What about you?" "I think I'm smarter than a 5th grader." "I could run for president with that kind of vocabulary." "I read the dictionary for fun.")
+    $(? "What about you?" "I think I'm smarter than a 5th grader." "I could run for president with that kind of vocabulary." "I read the dictionary for fun." "What the "$(? fuck hell shit ${vulgar.noun.singular})"!")
 )
 
-# "\0I know approximately "$(size noun.singular)" nouns, "$(size adjective)" adjectives, and "$(size verb.present)" verbs. I can use "$[$(size noun.singular) + $(size noun.plural) + $(size adjective) + $(size adverb) + $(size verb.present) + $(size verb.present.singular) + $(size verb.progressive)]" different words. "$(? "What about you?" "I think I'm smarter than a 5th grader." "I could run for president with that kind of vocabulary." "I read the dictionary for fun.")
+# "\0I know approximately "$(size noun.singular)" nouns, "$(size adjective)" adjectives, and "$(size verb.present)" verbs. I can use "$[$(size noun.singular) + $(size noun.plural) + $(size adjective) + $(size adverb) + $(size verb.present) + $(size verb.present.singular) + $(size verb.progressive) + $(size vulgar.noun.singular)]" different words. "$(? "What about you?" "I think I'm smarter than a 5th grader." "I could run for president with that kind of vocabulary." "I read the dictionary for fun." "What the "$(? fuck hell shit ${vulgar.noun.singular})"!")
 
 noun.singular : butterfly, larva, phaeton, lobo, angle, cerberus, felid, chordate, product, knight, spittle, ass
 noun.singular : bullion, minerall, armour, ark, beacon, meadowgrass, strawberry, pachyderm, advent, memory, fruit
 noun.singluar : baseball, Marx, cryptid, bead, apple-car, hydroflask, whiskey, chainsaw, fiend, bottle of compressed ${noun.plural}
 noun.singular : needle, thread, fate, crocodile, acetaminophen, sulfur, aegis, aglaeca, bealusi, bruin, watership
-noun.singular : hazelnut, quid, skyscraper, artifact, acursed-amulet, bellows, dread, joy, love, flesh, tack, psychopomp
+noun.singular : hazelnut, quid, skyscraper, artifact, acursed-$(? artifact amulet), bellows, dread, joy, love, flesh, tack, psychopomp
 noun.singular : bug, Mojito, psyche, caladbolg, Excalibur, art, sin, meat, chuckeye, fear, digestive biscuit, rose
 noun.singular : chocolate, shadow, hole, wifey, webpage, amnesia, corpse, dandelion, televangelist, autonomy, stardust
+noun.singular : "poisoned chalice", skeleton, paradice, thunderbird, idiosyncrasy 
 
 noun.plural : butterflies, larvae, phaetons, lobos, angles, cerberi, felidae, chordates, products, knights
 noun.plural : bullion, mineralls, armours, arks, beacons, meadowgrass, strawberries, pachydermata, advents, devils, memories, fruits
-noun.plural : cryptids, beads, apple-cars, hydroflasks, chainsaws, fiends, cheese wheels, gallows
+noun.plural : cryptids, beads, apple-cars, hydroflasks, chainsaws, fiends, cheese wheels, gallows, furies, furries
 noun.plural : cans of ${noun.singular}, spinning wheels, aerospace engineers, thing-a-ma-jigs, wings, recursive bows, rottenous eggs
 noun.plural : wounds, gouges, maws, psychopomps, flowers, bluebells, commies, Excaliburs, sins, chuckeyes, cow tools, dreams, rumors
-noun.plural : fears, sensibilities, digestive biscuits, tails, shadows, pantaloons, draculas, webpages, dandelions, televangelists, meteors
+noun.plural : fears, sensibilities, digestive biscuits, tails, shadows, pantaloons, draculas, webpages, dandelions, televangelists, 
+noun.plural : deadheads, meteors, idiosyncrasies
 
-adjective : frightening, devasting, incomprehensible, sordid, aweful, abhorrent, calamitous, unpropitious, harrowing, unpreventable, portentious, ineluctable
-adjective : decadent, effete, languorous, licentious, bacchanalian, lascivious, summery, redolent, pestilential, putrefactive, effervescing, vituperative
-adjective : auriferous, virulent, pernicious, recrudescent, loathesome, misogynous, caustic, atavistic, belluine, hesperian, diaphanous, heterobasidiomycetous
-adjective : sphenoid, elfin, morphous, justified, star-crossed, aluminous, argentine, goth, gothic, viscous, long, hylic, presidential, fruity, bougie, Icarus-like
+adjective : frightening, devasting, incomprehensible, sordid, aweful, abhorrent, calamitous, unpropitious, harrowing, unpreventable
+adjective : portentious, ineluctable, effervescing, vituperative, diaphanous, heterobasidiomycetous, presidential, fruity, bougie, Icarus-like
+adjective : decadent, effete, languorous, licentious, bacchanalian, lascivious, summery, redolent, pestilential, putrefactive, 
+adjective : auriferous, virulent, pernicious, recrudescent, loathesome, misogynous, caustic, atavistic, belluine, hesperian,
+adjective : sphenoid, elfin, morphous, justified, star-crossed, aluminous, argentine, goth, gothic, viscous, long, hylic, 
 adjective : dreadful, lackidasical, ensouled, Greek, Roman, wet, white, modern, Midwestern, deluxe, sadomasochistic, recreational, undigestible
 adjective : post-manic, waifuish, waifish, worthwhile, child-like, infinite, stemmed, arisen, mountainous, transsexual, heterochromic, fascist
-adjective : therianthropic, bird-like, cozy, autonomous, meteorological, astrological, anatomical, hydraulic
+adjective : therianthropic, bird-like, cozy, autonomous, meteorological, astrological, anatomical, hydraulic, grateful
 
 adverb : cleanly, softly, verbosely, beastly, dastardly, ungodly, deliriously, verminly, vixenly, gayly
 adverb : under, never, astern, nigh, undeniably, thin, herewith, bloody, to a lesser extent, to a greater extent
 adverb : weakly, curmudgeonly, rightly, nauseously, crunkedly, ostensibly, greatly, minimally, boyishly
-adverb : institutionally, recreationally, annoyingly, also, anyway, instead, anatomically
+adverb : institutionally, recreationally, annoyingly, also, anyway, instead, anatomically, idiosyncratically
 
 verb.present : hark, look, wish, finish, exercise, revolve, arrive, hoist, render, pardon, liquify, hydrate, offend, beg, sniff
 verb.present : resolve, prowl, self-flagellate, grovel, kneel, spit, sum, divide, multiply, fruit, growl, affix, ambulate
 verb.present : manipulate, sculpt, fraternize, vex, flower, nuzzle, peace-make, fly, sprint, howl, illustrate, illuminate
-verb.present : purr, marry
+verb.present : purr, marry, frag
 
 verb.present.singular : harks, looks, wishes, finishes, exercises, revolves, arrives, hoists, pardons, liquifies, hydrates, offends, begs, sniffs
 verb.present.singular : resolves, prowls, self-flagellates, grovels, kneels, spits, sums, divides, multiplies, fruits, growls, affixes, ambulates
 verb.present.singular : manipulates, sculpts, fraternizes, vexes, flowers, nuzzles, peace-makes, flies, sprints, howls, illustrates, illuminates
-verb.present.singular : purrs, marries
+verb.present.singular : purrs, marries, frags
 
 verb.progressive : harking, looking, wishing, finishing, exercising, revolving, arriving, hoisting, rendering, pardoning, liquifying
 verb.progressive : hydrating, offending, begging, sniffing, resolving, prowling, self-flagellating, groveling, kneeling, spitting
 verb.progressive : summing, dividing, multiplying, fruiting, growling, affixing, ambulating, pirating, manipulating, sculpting
 verb.progressive : fraternizing, bowling, vexing, flowering, nuzzling, peace-making, flying, rotoscoping, sprinting, howling
-verb.progressive : illustrating, illuminating, purring, marrying
+verb.progressive : illustrating, illuminating, purring, marrying, fragging
+
+vulgar.noun.singular : hell, $(? fuck frig frack feck fack sadfuck), shit, shitass, piss, $(? ass arse), $(? cock prick "skin flute"), bitch
+vulgar.noun.singular : minge, bastard, bloodclaat, clunge, tart, bong, nyash, thrussy, bollock, boner, candy-ass, gleet, "[REDACTED]"
+vulgar.noun.singular : ******, $(loop $(rand 7) *)"***", ****, "@$!&#*", "$#@!", "$&@"
+
+vulgar.verb.progressive : $(? fucking fracking fecking facking sadfucking), shitting, shitassing, pissing, bitching, minging
+vulgar.verb.progressive : clunging, bonging, gleeting, "[REDACTED]", $(loop $(rand 7) *)"***ing", $(loop $(rand 2) *)"****ing"
+vulgar.verb.progressive : "@$!&#*ing", "$#@!ing"
 
 placeName : Colorado, Ignefio, $(cap ${noun.singular})-$(cap ${noun.singular}), Alderfus, Boinginon, Uumjam, New Brunswick
 placeName : Olympus, Heaven, Unholifax, $(cap ${verb.present})menent, $(cap ${verb.present})${location}, Truth or Consequences
-placeName : Whereabouts, Richscountry, Yellowstone National Park, Dubai, Hork, The Matrix, Brokeback Mountain
+placeName : Whereabouts, Richscountry, Yellowstone National Park, Dubai, Hork, The Matrix, Brokeback Mountain, Sheol
 
 location : park, city, town, tower, hall, meadow, space, time, dimension, body, farm, fief, copse, mall, labyrinth, dune
 
 personName : Daniel, Prometheus, Neil, Aaron, Sam, Shannon, ${tempUser}, Faust, Starbuck, Jordan, Derek, Theresa, Liam, Robert, David
 personName : Lammy, Shinji, Leon, Christian, Lee, Ted, Kate, Mac, Christine, Wayne, Thomas, Charlie, Giles, "Stevie Nicks", Michael, Haru
-personName : Watson, Bacchus, Sannan, Rahman, Umar, Logic, Mario, Sakura, Kero, Nosferatu
+personName : Watson, Bacchus, Rahman, Umar, Logic, Mario, Sakura, Kero, Nosferatu, Dracula, Al, $(? "Detective " "Sherrif " "")Harry, 
+personName : Kim, Alex, John, James, Neo, Tim, Auberon, Emmet, Bella, Christian, Zapruder, $(? "D.B. " "Agent " "")Cooper
+personName : Mark, Adam, Remora, Maria, Lieutenant Anderson, Wes, Duck, Shawn
+
+soulscream : $(
+    loop $[ 3 + $(? 0 5 10 20)] $(
+        # Repeating code for readability & controlling how the soulscream is formed.
+        loop $(rand 8) $(? A E I O U Y H R G);
+        loop $(rand 8) $(? A E I O U Y H R G);
+        loop $(rand 8) $(? AA EE II OO UU);
+        loop $(rand 8) $(? A E I O U Y H R G);
+        loop $(rand 8) $(? A E I O U Y H R G);
+        loop $(rand 8) $(? A E I O U Y H R G);
+        loop $(rand 8) $(? A E I O U Y H R G);
+    );
+    loop $(rand 7) "!";
+)
 
 #-- Dialogue
 # Thank you to oldmanhorseface for helping write dialogue.
 
-sentence : "\0While away your time, but feel no guilt. We are not meant to be all the time."
+sentence : "\0\s[0]While away your time, but feel no guilt. We are not meant to be all the time."
 
-sentence : "\0Every species is a doomed species. No, I'm projecting a little."
+sentence : "\0\s[0]Every species is a doomed species. No, I'm projecting a little."
 
-sentence : "\0I plead, be merciful to the sun in the morning."
+sentence : "\0\s[0]I plead, be merciful to the sun in the morning."
 
-sentence : "\0What are we, if not star stuff that feels?"
+sentence : "\0\s[0]What are we, if not star stuff that feels?"
 
-sentence : "\0Always remember the stars. They have done so much for you."
+sentence : "\0\s[0]Always remember the stars. They have done so much for you."
 
-sentence : "\0hold me down, hogtie me, throw me on the trolley tracks. Hey, what's that lever over there?"
+sentence : "\0\s[0]hold me down, hogtie me, throw me on the trolley tracks. Hey, what's that lever over there?"
 
-sentence : "\0itadakimasu"
+sentence : "\0\s[0]"$(? itadakimasu "bon appetit" "bone app the teeth")
 
-sentence : "\0Go figure."
+sentence : "\0\s[0]Go figure."
 
-sentence : "\0Have you learned anything new about yourself lately?"
+sentence : "\0\s[0]Have you learned anything new about yourself lately?"
 
-sentence : "\0in absentia"
+sentence : "\0\s[0]in absentia"
 
-sentence : "\0Eat your cake and have it too."
+sentence : "\0\s[0]Eat your cake and have it too."
 
-sentence : "\0i want to be with you anyway."
+sentence : "\0\s[0]i want to be with you anyway."
 
-sentence : "\0Remain undiagnosable"
+sentence : "\0\s[0]Remain undiagnosable"
 
-sentence : "\0How predictable."
+sentence : "\0\s[0]How predictable."
 
-sentence : "\0What a good boy am I!"
+sentence : "\0\s[0]What a good boy am I!"
 
-sentence : "\0sometimes latent angers are strangers."
+sentence : "\0\s[0]sometimes latent angers are strangers."
 
-sentence : "\0birthing soulless beings, beasts not men"
+sentence : "\0\s[0]birthing soulless beings, beasts not men"
 
-sentence : "\0hospital."
+sentence : "\0\s[0]hospital."
 
-sentence : "\0lotus eater, lotus eater, can you hear me?"
+sentence : "\0\s[0]lotus eater, lotus eater, can you hear me?"
 
-sentence : "\0Transmogrify yourself, once and awhile. Keeps the sinuses clear."
+sentence : "\0\s[0]Transmogrify yourself, once and awhile. Keeps the sinuses clear."
 
-sentence : "\0follow the white whale, screaming and kicking."
+sentence : "\0\s[0]follow the white whale, screaming and kicking."
 
-sentence : "\0Sucking and lolling tongue, grows fat in the mouth."
+sentence : "\0\s[0]Sucking and lolling tongue, grows fat in the mouth."
 
-sentence : "\0Stomach hurting, revelry"
+sentence : "\0\s[0]Stomach hurting, revelry"
 
-sentence : "\0Sleep is like a tiny death. Slip into new flesh for a while."
+sentence : "\0\s[0]Sleep is like a tiny death. Slip into new flesh for a while."
 
-sentence : "\0Remember to save your game. Oh, you're not playing one?"
+sentence : "\0\s[0]Remember to save your game. Oh, you're not playing one?"
 
-sentence : "\0Promethian punishment, sacrificial lamb"
+sentence : "\0\s[0]Promethian punishment, sacrificial lamb"
 
-sentence : "\0Bow to iconographic minimalism"
+sentence : "\0\s[0]Bow to iconographic minimalism"
 
-sentence : "\0Say \"Hi\" to Ahab for me."
+sentence : "\0\s[0]Say \"Hi\" to Ahab for me."
 
-sentence : "\0Once, I dreamt that we were all the gods of our own universe. Or perhaps that was a memory. I've never been sure."
+sentence : "\0\s[0]Once, I dreamt that we were all the gods of our own universe. Or perhaps that was a memory. I've never been sure."
 
-sentence : "\0What would you do with a tiny man, the size of your finger? Be kind, have mercy? Enact your fantasies? I am glad I am not him."
+sentence : "\0\s[0]What would you do with a tiny man, the size of your finger? Be kind, have mercy? Enact your fantasies? I am glad I am not him."
 
-sentence : "\0Step outside and enjoy a little cadenza."
+sentence : "\0\s[0]Step outside and enjoy a little cadenza."
 
-sentence : "\0Consider a mimosa, will you?"
+sentence : "\0\s[0]Consider a mimosa, will you?"
 
-sentence : "\0What's your problem?"
+sentence : "\0\s[0]What's your problem?"
 
-sentence : "\0I do not think, therefore I do not am."
+sentence : "\0\s[0]I do not think, therefore I do not am."
 
-sentence : "\0strange, isn't it?"
+sentence : "\0\s[0]strange, isn't it?"
 
-sentence : "\0star-embossed lovers, dying in wait"
+sentence : "\0\s[0]star-embossed lovers, dying in wait"
 
-sentence : "\0open your heart. stop having it be closed."
+sentence : "\0\s[0]open your heart. stop having it be closed."
 
-sentence : "\0the stars slowly drift apart, the constellations losing shape. all the more stories to be told."
+sentence : "\0\s[0]the stars slowly drift apart, the constellations losing shape. all the more stories to be told."
 
-sentence : "\0why are you running away?"
+sentence : "\0\s[0]why are you running away?"
 
-sentence : "\0oh, ye of little faith."
+sentence : "\0\s[0]oh, ye of little faith."
 
-sentence : "\0the light of Heaven shines down upon you, like an ant under a magnifying glass. the ever watching eye."
+sentence : "\0\s[0]the light of Heaven shines down upon you, like an ant under a magnifying glass. the ever watching eye."
 
-sentence : "\0big money, no whammies"
+sentence : "\0\s[0]big money, no whammies"
 
 sentence : ( 
-    "\0Quackery, often synonymous with health fraud, is the promotion of fraudulent or ignorant medical practices.\n\n\f[size,-3]"
+    "\0\s[0]Quackery, often synonymous with health fraud, is the promotion of fraudulent or ignorant medical practices.\n\n\f[size,-3]"
     "Wikipedia contributors. (2024, December 9). Quackery. In Wikipedia, The Free Encyclopedia. "
     "Retrieved December 23, 2024, from https://en.wikipedia.org/w/index.php?title=Quackery&oldid=1262133047"
 )
 
-sentence : "\0do you think the hands that shaped me live in fear of what they created?"
+sentence : "\0\s[0]do you think the hands that shaped me live in fear of what they created?"
 
-sentence : "\0I am The One Among Us. The Thing. Disgusting Disguise of Life."
+sentence : "\0\s[0]I am The One Among Us. The Thing. Disgusting Disguise of Life."
 
-sentence : "\0The Frightened Ones are in need of prosthetic limbs and reconstructive surgery."
+sentence : "\0\s[0]The Frightened Ones are in need of prosthetic limbs and reconstructive surgery."
 
-sentence : "\0War planes fly like artifical albatrosses, screaming and screeching through the sky. diving to earth, covered in oil."
+sentence : "\0\s[0]War planes fly like artifical albatrosses, screaming and screeching through the sky. diving to earth, covered in oil."
+
+sentence : "\0\s[0]I kissed a "${noun.singular}" and I "$(? 
+    "liked it." 
+    "was ambivalent." 
+    "had to go to the doctor after." 
+    "slept like a baby." 
+    "never whinged again." 
+    "was wearing a little black dress." 
+    "cried in the prom bathroom." 
+    "forgot to tell my "$(? boyfriend boyfriends girlfriend girlfriends partner partners husband husbands wife wives spouse spouses)"."
+)
 
 sentence : (
-    "\0what the "
+    "\0\s[0]what the "
     $(? 
         fuck 
         shit 
@@ -195,7 +233,7 @@ sentence : (
     "?"
 )
 sentence : (
-    "\0Every "
+    "\0\s[0]Every "
     $(? 
         "puppy"
         "kitty"
@@ -230,72 +268,72 @@ sentence : (
     "."
 )
 
-sentence : "\0You should take a vacation in "${placeName}". I've heard they've got "${adjective}" "$(? "beaches" "malls" "gift shops" "mountains" "blood lakes" "massacre sites" "butlers" "sunrises" "schools")"."
+sentence : "\0\s[0]You should take a vacation in "${placeName}". I've heard they've got "${adjective}" "$(? "beaches" "malls" "gift shops" "mountains" "blood lakes" "massacre sites" "butlers" "sunrises" "schools")"."
 
-sentence : "\0I heard that "${personName}" got run over by a bus. Yowch."
+sentence : "\0\s[0]I heard that "${personName}" got run over by a bus. Yowch."
 
-sentence : "\0The market has crashed in "${placeName}". How "${adjective}"."
+sentence : "\0\s[0]The market has crashed in "${placeName}". How "${adjective}"."
 
-sentence : "\0if you think about it, "${noun.plural}" are just a husk of "${noun.plural}"."
+sentence : "\0\s[0]if you think about it, "${noun.plural}" are just a husk of "${noun.plural}"."
 
-sentence : "\0hold me and whisper "${adjective}" "${noun.plural}" in my ears." 
+sentence : "\0\s[0]hold me and whisper "${adjective}" "${noun.plural}" in my ears." 
 
-sentence : "\0ore wa "${noun.singular}" da ne?"
+sentence : "\0\s[0]ore wa "${noun.singular}" da ne?"
 
-sentence : "\0pregnant goats. "${verb.progressive} ${noun.singular}"."
+sentence : "\0\s[0]pregnant goats. "${verb.progressive} ${noun.singular}"."
 
-sentence : "\0Please do not give up on your dreams. If not for me, then for "${personName}"."
+sentence : "\0\s[0]Please do not give up on your dreams. If not for me, then for "${personName}"."
 
-sentence : "\0Obfuscate. "$(cap ${verb.present})". "$(cap ${verb.present})". Unburden."
+sentence : "\0\s[0]Obfuscate. "$(cap ${verb.present})". "$(cap ${verb.present})". Unburden."
 
-sentence : "\0Morality is a bit "${adjective}", is it not?"
+sentence : "\0\s[0]Morality is a bit "${adjective}", is it not?"
 
-sentence : "\0scatter my ashes in "${adjective} ${location}"."
+sentence : "\0\s[0]scatter my ashes in "${adjective} ${location}"."
 
-sentence : "\0Spread thin, like too little "$(? marmite vegemite peanutbutter jam butter pestilence)" spread over too much "$(? bread "pastry puff" wine flesh skin)"."
+sentence : "\0\s[0]Spread thin, like too little "$(? marmite vegemite peanutbutter jam butter pestilence)" spread over too much "$(? bread "pastry puff" wine flesh skin)"."
 
-sentence : "\0what "${noun.plural}" built up your walls?"
+sentence : "\0\s[0]what "${noun.plural}" built up your walls?"
 
-sentence : "\0do you ever leave the "${location}" and the "${adjective}" people keep talking?"
+sentence : "\0\s[0]do you ever leave the "${location}" and the "${adjective}" people keep talking?"
 
-sentence : "\0I'm wanted in "$(? seventeen twenty two infinite "a harrowing amount of" "too many")" countries for "$(? "tax evasion" murder counterfeiting cruising)".\n\nI plead "$(? insanity "not guilty" "Not Guilty")"."
+sentence : "\0\s[0]I'm wanted in "$(? seventeen twenty two infinite "a harrowing amount of" "too many")" countries for "$(? "tax evasion" murder counterfeiting cruising)".\n\nI plead "$(? insanity "not guilty" "Not Guilty")"."
 
-sentence : "\0Wikipedia, the "${adjective}" encyclopedia."
+sentence : "\0\s[0]Wikipedia, the "${adjective}" encyclopedia."
 
-sentence : "\0the tree has the initials: \"Q R + G H\" carved into it in a little heart. How "${adjective}"."
+sentence : "\0\s[0]the tree has the initials: \"Q R + G H\" carved into it in a little heart. How "${adjective}"."
 
-sentence : "\0"$(? his her their xis faer)" laugh is the greatest thing in the world, isn't it?"
+sentence : "\0\s[0]"$(? his her their xis faer)" laugh is the greatest thing in the world, isn't it?"
 
-sentence : "\0that's a "$(? ${noun.singular}"-ass "${noun.singular}" if I ever saw one." ${noun.singular}" ass-"${noun.singular}" if I ever saw one.")
+sentence : "\0\s[0]that's a "$(? ${noun.singular}"-ass "${noun.singular}" if I ever saw one." ${noun.singular}" ass-"${noun.singular}" if I ever saw one.")
 
-sentence : "\0Push on, digging, worming, into your organs and resign yourself: "$(? Saint $(? Sainte Grunch) Hollow $(cap ${noun.singular}) Sinner Gay Walled )"."
+sentence : "\0\s[0]Push on, digging, worming, into your organs and resign yourself: "$(? Saint $(? Sainte Grunch) Hollow $(cap ${noun.singular}) Sinner Gay Walled )"."
 
-sentence : "\0All "$(cap ${noun.plural})" Are "$(cap ${adjective})"."
+sentence : "\0\s[0]All "$(cap ${noun.plural})" Are "$(cap ${adjective})"."
 
-sentence : "\0"${noun.plural}" make me retch."
+sentence : "\0\s[0]"${noun.plural}" make me retch."
 
-sentence : "\0beware the worms, or else find yourself a "${adjective}" dictator."
+sentence : "\0\s[0]beware the worms, or else find yourself a "${adjective}" dictator."
 
-sentence : "\0they've got "${noun.plural}", they've got "${noun.plural}",\nthey've got "${0}", they've got "${1}",\nthey've got "${0}", they've got "${1}"."
+sentence : "\0\s[0]they've got "${noun.plural}", they've got "${noun.plural}",\nthey've got "${0}", they've got "${1}",\nthey've got "${0}", they've got "${1}"."
 
-sentence : "\0god's watching the apples, take as many "$(? cookies sins boyfriends actions "programming classes" ${noun.plural})" as you like."
+sentence : "\0\s[0]god's watching the apples, take as many "$(? cookies sins boyfriends actions "programming classes" ${noun.plural})" as you like."
 
-sentence : "\0i got a jury duty notice in the mail. "$(? "do you think i'll do a good job?" "i forgot where my mailbox is." "guess i'll walk." "i must perform CIVIC DUTY.")
+sentence : "\0\s[0]i got a jury duty notice in the mail. "$(? "do you think i'll do a good job?" "i forgot where my mailbox is." "guess i'll walk." "i must perform CIVIC DUTY.")
 
-sentence : "\0sell your "${noun.singular}" to the "$(? billionares "military industrial complex" horses ${noun.plural})"."
+sentence : "\0\s[0]sell your "${noun.singular}" to the "$(? billionares "military industrial complex" horses ${noun.plural})"."
 
-sentence : "\0what color is a "${noun.singular}"?"
+sentence : "\0\s[0]what color is a "${noun.singular}"?"
 
-sentence : "\0i love you so strongly i look like a "${adjective} ${noun.singular}" in your presence. you reduce me to a shivering mess of adoration."
+sentence : "\0\s[0]i love you so strongly i look like a "${adjective} ${noun.singular}" in your presence. you reduce me to a shivering mess of adoration."
 
-sentence : "\0hate. hate. you do not know how strongly i feel the hate for you. the hand that "${verb.present.singular}" against my "${noun.singular}", shaping my clay into a grimacing visage."
+sentence : "\0\s[0]hate. hate. you do not know how strongly i feel the hate for you. the hand that "${verb.present.singular}" against my "${noun.singular}", shaping my clay into a grimacing visage."
 
-sentence : "\0welcome back to the world of the "${verb.progressive}", by the way."
+sentence : "\0\s[0]welcome back to the world of the "${verb.progressive}", by the way."
 
-sentence : "\0living automaton, "${verb.progressive}" animal, mimicry of "$(? ${noun.singular} ${personName})"."
+sentence : "\0\s[0]living automaton, "${verb.progressive}" animal, mimicry of "$(? ${noun.singular} ${personName})"."
 
 sentence : ( 
-    "\0is your credit card number "
+    "\0\s[0]is your credit card number "
     $(rand 10)$(rand 10)$(rand 10)$(rand 10) $(rand 10)$(rand 10)$(rand 10)$(rand 10) $(rand 10)$(rand 10)$(rand 10)$(rand 10) $(rand 10)$(rand 10)$(rand 10)$(rand 10)
     "? " 
     $(? 
@@ -305,7 +343,7 @@ sentence : (
     )
 )
 sentence : (
-    "\0i want to be "
+    "\0\s[0]i want to be "
     $(?
         "the prime minister"
         "the president of the united states"
@@ -324,7 +362,7 @@ sentence : (
 )
 
 sentence : (
-    "\0I'm writing a new song today. It's called \f[italic,true]'"
+    "\0\s[0]I'm writing a new song today. It's called \f[italic,true]'"
     $(? 
         ${verb.present}" of "${adjective}" "${noun.plural} 
         ${noun.plural}
@@ -337,29 +375,29 @@ sentence : (
     "'\f[italic,default]. Do you "$(? like hate love dislike chew spew holler mewl)" it?"
 )
 
-sentence : "\0Listen closely, to the beating of your heart. "$(? "Does it drive you mad?" "Be still, and think quietly." "Nothing can recreate this moment." "")
+sentence : "\0\s[0]Listen closely, to the beating of your heart. "$(? "Does it drive you mad?" "Be still, and think quietly." "Nothing can recreate this moment." "")
 
-sentence : "\0all your "${noun.singular}" are belong to us"
+sentence : "\0\s[0]all your "${noun.singular}" are belong to us"
 
-sentence : "\0What a terrible night to have a "${noun.singular}"."
+sentence : "\0\s[0]What a terrible night to have a "${noun.singular}"."
 
-sentence : "\0Who is afraid of "${adjective} ${noun.singular}"?"
+sentence : "\0\s[0]Who is afraid of "${adjective} ${noun.singular}"?"
 
-sentence : "\0That's so "$(? ${noun.singular} ${adjective})"core."
+sentence : "\0\s[0]That's so "$(? ${noun.singular} ${adjective})"core."
 
-sentence : "\0"${verb.present}" to me."
+sentence : "\0\s[0]"${verb.present}" to me."
 
-sentence : $(? "\0Who's "${personName}"?" "\0I forgot what I was going to say." "\0Hm?" "\0How demented of you.")
+sentence : $(? "\0\s[0]Who's "${personName}"?" "\0\s[0]I forgot what I was going to say." "\0\s[0]Hm?" "\0\s[0]How demented of you.")
 
-sentence : "\0There was a sniper in "${placeName}"."
+sentence : "\0\s[0]There was a sniper in "${placeName}"."
 
 sentence : (
     $(setstr @hour $[ $(date %H) + $(rand 100) ]; setstr @minute $[ $(date %M) + $(rand 100) ]) 
-    "\0What time is it? "${@hour}":"${@minute}"? Seems like your clock doesn't match."
+    "\0\s[0]What time is it? "${@hour}":"${@minute}"? Seems like your clock doesn't match."
 )
 
 sentence : ( 
-    "\0.\w8.\w8."
+    "\0\s[0].\w8.\w8."
     $(? 
         "" 
         " Animalian." 
@@ -371,10 +409,10 @@ sentence : (
     )
 )
 
-sentence : "\0Sun Tzu said \""$(cap ${verb.present})" in the "${adjective}" sun. This will defeat your "${noun.plural}".\" At least, I think so."
+sentence : "\0\s[0]Sun Tzu said \""$(cap ${verb.present})" in the "${adjective}" sun. This will defeat your "${noun.plural}".\" At least, I think so."
 
 sentence : (
-    "\0"
+    "\0\s[0]"
     $(?
         "World revolving\nKeeps on turning"
         "In memorium," 
@@ -416,7 +454,7 @@ sentence : (
 )
 
 sentence : (
-    "\0"
+    "\0\s[0]"
     $(?
         "Senseless violence"
         "Voices speak to me"
@@ -438,7 +476,7 @@ sentence : (
 
 sentence : (
     $(setstr @being $(? "man" "woman" "person" "talking spindle" "wolflady" "eagle"))
-    "\0There once was a story about "
+    "\0\s[0]There once was a story about "
     $(?
         "a "${adjective}" "${noun.singular}", "
         "the King of Everything, "
@@ -464,7 +502,7 @@ sentence : (
 )
 
 sentence : (
-    "\0Wet 'n Wild Fun at "
+    "\0\s[0]Wet 'n Wild Fun at "
     $(?
         "the Wild West Waterpark Saloon"
         "California's first non-chlorinated waterpark, Dasani Land"
@@ -485,108 +523,108 @@ sentence : (
     )
 )
 
-sentence : "\0Festival of "${noun.singular}", o' hear our pleas"
+sentence : "\0\s[0]Festival of "${noun.singular}", o' hear our pleas"
 
-sentence : "\0Hopeless whelps, always "${verb.progressive}", "${verb.progressive}", "${verb.progressive}"."
+sentence : "\0\s[0]Hopeless whelps, always "${verb.progressive}", "${verb.progressive}", "${verb.progressive}"."
 
-sentence : "\0Cream of "${noun.singular}", how "${adjective}
+sentence : "\0\s[0]Cream of "${noun.singular}", how "${adjective}
 
-sentence : "\0Be "${adjective}", act "${adverb}"."
+sentence : "\0\s[0]Be "${adjective}", act "${adverb}"."
 
-sentence :  "\0Dye your hair another color, whisk yourself away, try a "${noun.singular}" on for size."
+sentence :  "\0\s[0]Dye your hair another color, whisk yourself away, try a "${noun.singular}" on for size."
 
-sentence : "\0Have you considered "${verb.progressive}"?"
+sentence : "\0\s[0]Have you considered "${verb.progressive}"?"
 
-sentence : "\0Try a little "${noun.singular}" for the pain."
+sentence : "\0\s[0]Try a little "${noun.singular}" for the pain."
 
-sentence : "\0Male pattern baldness is not so "${adjective}"."
+sentence : "\0\s[0]Male pattern baldness is not so "${adjective}"."
 
-sentence : "\0Spaceships "${verb.progressive}", flying free"
+sentence : "\0\s[0]Spaceships "${verb.progressive}", flying free"
 
-sentence : "\0Keep on "${verb.progressive}" on."
+sentence : "\0\s[0]Keep on "${verb.progressive}" on."
 
-sentence : "\0You can't really tell, but that's a big "${noun.singular}". Pretty big."
+sentence : "\0\s[0]You can't really tell, but that's a big "${noun.singular}". Pretty big."
 
-sentence : "\0"$(? "bodacious" "radical" "killer" "sick" "heavenly" "excellent")" "${noun.singular}", "$(? "dude" "my liege" "arisen" "wayfinder" "dudette" "man" "my guy")
+sentence : "\0\s[0]"$(? "bodacious" "radical" "killer" "sick" "heavenly" "excellent")" "${noun.singular}", "$(? "dude" "my liege" "arisen" "wayfinder" "dudette" "man" "my guy")
 
-sentence : "\0Why the "${adjective}" face?"
+sentence : "\0\s[0]Why the "${adjective}" face?"
 
-sentence : "\0"${verb.progressive} ${noun.singular}", "${verb.progressive} ${noun.singular}", "${verb.progressive} ${noun.singular}
+sentence : "\0\s[0]"${verb.progressive} ${noun.singular}", "${verb.progressive} ${noun.singular}", "${verb.progressive} ${noun.singular}
 
-sentence : "\0What is a man, if not a "${adjective}" little "${noun.singular}" of "${noun.plural}"?" 
+sentence : "\0\s[0]What is a man, if not a "${adjective}" little "${noun.singular}" of "${noun.plural}"?" 
 
-sentence : "\0The "${noun.singular} ${adverb} ${verb.present.singular}"."
+sentence : "\0\s[0]The "${noun.singular} ${adverb} ${verb.present.singular}"."
 
-sentence : "\0"${placeName}", the "${location}" of "$(cap ${adjective})" and "$(cap ${adjective})", is getting a new "${location}", I "${verb.present}"."
+sentence : "\0\s[0]"${placeName}", the "${location}" of "$(cap ${adjective})" and "$(cap ${adjective})", is getting a new "${location}", I "${verb.present}"."
 
-sentence : "\0"${verb.present} ${noun.singular}"\n"${0} ${1}"\n"${0} ${1}
+sentence : "\0\s[0]"${verb.present} ${noun.singular}"\n"${0} ${1}"\n"${0} ${1}
 
-sentence : "\0"${verb.present}", "${verb.present}", "${verb.present}", "${verb.present}
+sentence : "\0\s[0]"${verb.present}", "${verb.present}", "${verb.present}", "${verb.present}
 
-sentence : "\0i'm "${noun.singular}", \ni "${verb.present}", \ni "${1}", \ni "${1}", \ni "${1}", \ni "${1}
+sentence : "\0\s[0]i'm "${noun.singular}", \ni "${verb.present}", \ni "${1}", \ni "${1}", \ni "${1}", \ni "${1}
 
-sentence : "\0Is not the "${noun.singular}" of your "${0}" your "${noun.plural}"?"
+sentence : "\0\s[0]Is not the "${noun.singular}" of your "${0}" your "${noun.plural}"?"
 
-sentence : "\0Yearn for "${noun.singular}". It is the fuel that will keep you going no matter the odds."
+sentence : "\0\s[0]Yearn for "${noun.singular}". It is the fuel that will keep you going no matter the odds."
 
-sentence : "\0From ashes to ashes, from "${noun.singular}" to "${0}"."
+sentence : "\0\s[0]From ashes to ashes, from "${noun.singular}" to "${0}"."
 
-sentence : "\0It's "${adjective}", the other day I went to "${placeName}" to get "${noun.plural}". When I got there, they were totally out! Isn't that their whole job?"
+sentence : "\0\s[0]It's "${adjective}", the other day I went to "${placeName}" to get "${noun.plural}". When I got there, they were totally out! Isn't that their whole job?"
 
-sentence : "\0As above, so below. At least, that's what the "${adjective} ${noun.singular}" I met the other day told me."
+sentence : "\0\s[0]As above, so below. At least, that's what the "${adjective} ${noun.singular}" I met the other day told me."
 
-sentence : "\0I think, therefor I "${verb.present}"."
+sentence : "\0\s[0]I think, therefor I "${verb.present}"."
 
-sentence : "\0Think of me, and think "${adverb}"."
+sentence : "\0\s[0]Think of me, and think "${adverb}"."
 
-sentence : "\0"${noun.singular}${adjective}" is the newest form of art."
+sentence : "\0\s[0]"${noun.singular}${adjective}" is the newest form of art."
 
-sentence : "\0Welcome to the life of "${noun.singular}", you must be "${verb.progressive}"."
+sentence : "\0\s[0]Welcome to the life of "${noun.singular}", you must be "${verb.progressive}"."
 
-sentence : "\0Do you listen to "$(cap ${adjective}) $(cap ${noun.singular})"? No?"
+sentence : "\0\s[0]Do you listen to "$(cap ${adjective}) $(cap ${noun.singular})"? No?"
 
-sentence : "\0"${adjective}" hole"
+sentence : "\0\s[0]"${adjective}" hole"
 
-sentence : "\0Tenement of "${noun.plural}"."
+sentence : "\0\s[0]Tenement of "${noun.plural}"."
 
-sentence : "\0Bring forth your "${noun.plural}" to me."
+sentence : "\0\s[0]Bring forth your "${noun.plural}" to me."
 
-sentence : "\0Bear your "${noun.plural}" for me."
+sentence : "\0\s[0]Bear your "${noun.plural}" for me."
 
-sentence : "\0Hot air balloons, such an affront to "${noun.singular}"."
+sentence : "\0\s[0]Hot air balloons, such an affront to "${noun.singular}"."
 
-sentence : "\0Pedantry is for the "${adjective}"."
+sentence : "\0\s[0]Pedantry is for the "${adjective}"."
 
-sentence : "\0If you think about it, "${noun.plural}" are an aweful lot like "${noun.plural}", in an "${adjective}" sort of way."
+sentence : "\0\s[0]If you think about it, "${noun.plural}" are an aweful lot like "${noun.plural}", in an "${adjective}" sort of way."
 
-sentence : "\0I've been really getting into studying "${noun.plural}" recently. It's very "${adjective}"."
+sentence : "\0\s[0]I've been really getting into studying "${noun.plural}" recently. It's very "${adjective}"."
 
-sentence : "\0You are the "${noun.singular}" of the universe. Remember this."
+sentence : "\0\s[0]You are the "${noun.singular}" of the universe. Remember this."
 
-sentence : "\0The world would be better off if we got rid of "${noun.plural}", I "${verb.present}". Or maybe not, I may just be "${adjective}"."
+sentence : "\0\s[0]The world would be better off if we got rid of "${noun.plural}", I "${verb.present}". Or maybe not, I may just be "${adjective}"."
 
-sentence : "\0and let you be healed, by the power of "${noun.singular}"!"
+sentence : "\0\s[0]and let you be healed, by the power of "${noun.singular}"!"
 
-sentence : "\0try a little sip of this granderwasser. it's "${adjective}"."
+sentence : "\0\s[0]try a little sip of this granderwasser. it's "${adjective}"."
 
-sentence : "\0i did not even know i was unloved, until i met you. i would take all of the "${noun.plural}" in the "${location}" and give them to you, if it would make you happy."
+sentence : "\0\s[0]i did not even know i was unloved, until i met you. i would take all of the "${noun.plural}" in the "${location}" and give them to you, if it would make you happy."
 
-sentence : "\0i hid my "${noun.plural}" in a secret room in your home. don't go looking for them."
+sentence : "\0\s[0]i hid my "${noun.plural}" in a secret room in your home. don't go looking for them."
 
-sentence : "\0where have you buried all your "${noun.plural}"?"
+sentence : "\0\s[0]where have you buried all your "${noun.plural}"?"
 
-sentence : "\0i ate too many "${noun.plural}". my "${noun.singular}" hurts."
+sentence : "\0\s[0]i ate too many "${noun.plural}". my "${noun.singular}" hurts."
 
-sentence : "\0i'm a little "${adjective}" of myself. i'm not quite sure about the whole thing, to be "${adjective}"."
+sentence : "\0\s[0]i'm a little "${adjective}" of myself. i'm not quite sure about the whole thing, to be "${adjective}"."
 
-sentence : "\0rise from your "${noun.singular}"!"
+sentence : "\0\s[0]rise from your "${noun.singular}"!"
 
-sentence : "\0oh, what headache those "${adjective} ${noun.plural}" are giving me. Would you mind turning them off?"
+sentence : "\0\s[0]oh, what headache those "${adjective} ${noun.plural}" are giving me. Would you mind turning them off?"
 
-sentence : "\0Da-don, da-don. thump my tail on your chest like a drum. i love you, so "${adverb}"."
+sentence : "\0\s[0]Da-don, da-don. thump my tail on your chest like a drum. i love you, so "${adverb}"."
 
 # Here's the hour roll-over event. It's in the 24-hour format. Be aware it doesn't always go off exactly on the hour. If you don't want it, just erase it or comment it.
-talk.OnHourTimeSignal : "\0Have you considered the shortness of your lives? Shortness of your breath? Shortness of your "${noun.singular}"?"
+talk.OnHourTimeSignal : "\0\s[0]Have you considered the shortness of your lives? Shortness of your breath? Shortness of your "${noun.singular}"?"
 
 #--
 # IMPORTANT, DO NOT DELETE
@@ -595,6 +633,7 @@ talk.OnHourTimeSignal : "\0Have you considered the shortness of your lives? Shor
 # This piece of code calls on a function called "Nonoverlap" which makes sure that none of your Ghost's dialogue repeats before the others are called.
 # You can write as much as you'd like BEFORE THIS POINT. But any dialogue written afterward is *not* added to the Nonoverlap processed version of this entry! It's covered by the 'writeprotect' command.
 # ...Which makes the entry unable to be edited after this point. It's at the *end* of this dictonary for a reason!
-#=kis
-#Nonoverlap sentence;
-#=end
+=kis
+Nonoverlap sentence;
+Nonoverlap vulgar.noun.singular;
+=end

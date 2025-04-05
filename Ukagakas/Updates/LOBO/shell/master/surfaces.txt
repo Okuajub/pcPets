@@ -38,6 +38,11 @@ surface0
 
 }
 
+surface1
+{
+	element0,overlay,body2.png,0,0
+}
+
 //--The Kero (Side Character)
 
 surface10
