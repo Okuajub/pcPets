@@ -28,6 +28,14 @@ sentence : "\0\s[8]It's good to catch up again."
 
 sentence : "\0\s[4]Ahh, I'm hungry. Too bad that "${foodPlace}" place in "${city}" shut down."
 
+sentence : "\0\s[4]I can definitely see now why you stepped back from this life\![set,serikotalk,false].\w2.\w2. \![set,serikotalk,true]\w8\0\s[5]It was all the walking!"
+
+sentence : "\0\s[0]I hope life has been treating you well enough since we last saw each other."
+
+sentence : "\0\s[0]There's a lot going on everyday. \w4\0\s[20]I don't just mean local politics, either. \w8\0\s[3]How did you manage it all?\n\n\_w[800]\0\s[6]\_w[1600]I see... \_w[500]\0\s[3]Thank you, that's a little comforting."
+
+sentence : "\0\s[0]I'd invite you back to my place for some "$(? ramen pizza chow)", boss, \0\s[8]but it's all box mix, frozen or canned for me. \_w[800]\0\s[20]Maybe one of these days I'll learn to cook properly. \_w[400]\0\s[4]It's all about having enough time, though, isn't it?"
+
 # Watchdogs
 sentence : "\0\s[22]The rest of the watchdogs would probably appreciate if I stopped patrolling for minute to check in on home base.\w2.\w2.\w8\w8 Maybe tomorrow."
 

@@ -44,7 +44,19 @@ talk.OnWindowStateRestore : \0\s[0]Feels good to be out in the open again.
 talk.OnBoot : "\0\s[0]Hey, long time no see!"
 talk.OnBoot : "\0\s[0]Yo, boss! What's the haps?"
 
-talk.OnClose : "\0\s[0]It was good seeing you! See ya, boss."
+talk.OnJetBirthdayBoot : (
+    "\0\s[5]Hey, boss! What's up? "
+    "\_w[800]\0\s[0]\n\n\"...Happy Birthday?\" "
+    "\_w[500]\0\s[8]Jeez, I totally forgot! "
+    "\0\s[20]Thank you. "
+    $(? 
+        "\n\n\_w[1600]\0\s[4]N\w2o\w2o\w2o\w2, I \f[italic,true]didn't\f[italic,default] almost say \"Happy birthday to you, too.\" "
+        "\n\n\0\s[5]Let's hope "${year}" is a good one, yeah?"
+        "And happy birthday to you, too. \n\n\_w[500]\0\s[9]I mean..! \_w[1000]\0\s[8]Oh well."
+    )
+)
+
+talk.OnClose : "\0\s[0]It was good seeing you! See ya some other time, boss."
 talk.OnClose : "\0\s[0]Drop by again sometime, will you, boss?"
 talk.OnClose : "\0\s[0]Well, I guess we'll go our separate ways. Thanks for dropping by!"
 

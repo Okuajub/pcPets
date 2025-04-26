@@ -241,9 +241,12 @@ OnFirstBoot : $(
 )
 
 # This happens during the specific event "OnBoot".
-OnBoot : \1\s[10]\0\s[0]${talk.OnBoot}
+OnBoot : $(
+	if $[ ${day} > 25 && ${month} == 4] "\1\s[-1]\0\s[0]"${talk.OnJetBirthdayBoot}
+	else "\1\s[-1]\0\s[0]"${talk.OnBoot}
+)
 # This happens during the specific event "OnClose".
-OnClose : \1\s[10]\0\s[0]${talk.OnClose}"\_w[500]\-\e"
+OnClose : \1\s[-1]\0\s[0]${talk.OnClose}"\_w[500]\-\e"
 
 # OK, OK. Time to indulge in a little ramble since you made it this far. ( •̀ ω •́ )✧
 # My entire philosophy when writing how events are handled in CHIPS is that the writer should be able to create new responses to events painlessly, without having to mess with the back-end.

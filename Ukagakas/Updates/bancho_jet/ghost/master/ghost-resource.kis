@@ -4,6 +4,12 @@
 # Resources are information your Ghost draws upon to create the right click menu and a couple other things.
 # There's a large variety of resources, and You can read more about them here: https://ukagakadreamteam.github.io/ukadoc/manual/list_shiori_resource.html
 
+day : $(date %e)
+
+month : $(date %n)
+
+year : $(date %y)
+
 #--
 # Network Update URL
 #--
@@ -15,23 +21,13 @@ homeurl : "https://raw.githubusercontent.com/Okuajub/pcPets/master/Ukagakas/Upda
 #--
 # Recommended Sites
 #--
-# These sites show up in the right click menu under 'Portal' and 'Recommendations'.
+# These sites show up in the right click menu under 'Recommendations' and 'Portal'.
 # You can set a banner image in the third URL (as shown in the link to my Neocities). Three dashes creates a divider in the menu.
-
-resource.sakura.portalsites : $(urllist
-	"Okuajub's Netspace" 
-	"https://okuajub-netspace.neocities.org/ukagaka" 
-	"https://okuajub-netspace.neocities.org/eva_button.png"
-	"-" "-" "-"
-	"CHIPS Github"
-	"https://github.com/Okuajub/CHIPS/"
-	"-"
-)
 
 resource.sakura.recommendsites : $(urllist
 	"Kawari Landing Page (JP)"
 	"https://kawari.github.io/"
-	"-" 
+	"-"
 	"Kawari Documentation (EN)"
 	"https://okuajub-netspace.neocities.org/Kawari/"
 	"-"
@@ -41,6 +37,16 @@ resource.sakura.recommendsites : $(urllist
 	"-"
 	"SHIORI Event Documentation (EN)"
 	"https://ukagakadreamteam.github.io/ukadoc/manual/list_shiori_event.html"
+	"-"
+)
+
+resource.sakura.portalsites : $(urllist
+	"Okuajub's Netspace" 
+	"https://okuajub-netspace.neocities.org/ukagaka" 
+	"https://okuajub-netspace.neocities.org/eva_button.png"
+	"-" "-" "-"
+	"CHIPS Github"
+	"https://github.com/Okuajub/CHIPS/"
 	"-"
 )
 
