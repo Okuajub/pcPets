@@ -116,7 +116,7 @@ function SaveData $(
 # Variables to be saved. If you add any that need to be kept over boots, please remember to put them here.
 # 'devmode' is an entry to engage development mode. To engage it, put '$(setstr devmode 1)' in the script input.
 savedataParam (
-	talkinterval, 
+	talkinterval, hoursignal,
     tempUser, userfull, username, 
     birthdate, usergender, ForceSet,
     user.they, user.them, user.their, user.theirs, user.themself, user.singularplural,

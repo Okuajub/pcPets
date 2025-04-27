@@ -15,16 +15,20 @@ OnSakuraMenu : (
     $( if $[ ${lastTalk} ] (\n\![*]\q[Repeat Yourself,OnLastTalk]) )
     \n\n[half]
     \![*]\q[Gang Info,OnGangMenu]
-    #\![*]\q[Config Menu,OnConfigMenu]
-    #\![*]\q[Change Name,OnChangeName]
     \n\n[half]
     \![*]\q[Quit Menu,OnQuit,0]
     \n\n
+    # Hour Signal Toggle
+    $(setstr @hourtoggle $(if $[ ${hoursignal} == 1 ] "On" else "Off"))
+    \f[italic,true]"Hour Signal: "${@hourtoggle}
+    \n
+    \![*]\q[On,OnToggleHourSignal,1]" / "\q[Off,OnToggleHourSignal,0]
+    \n
 
     # Talkrate Assignment
     $(setstr @interval ${talkinterval})
     $( if $[ ${@interval} = 'Never' ] $(setstr @form "") else if $[ ${@interval} > 59 ] $( setstr @interval $[ ${@interval} / 60 ]; setstr @form minutes ) else $( setstr @form seconds ) )
-    $(if $[${@interval} == 1] $(setstr @form minute))
+    $( if $[${@interval} == 1] $(setstr @form minute) )
 
     # Talkrate Display
     "\f[italic,true]Talkrate:" ${@interval} ${@form}\n\f[italic,default]
@@ -40,88 +44,9 @@ OnSakuraMenu : (
     \f[italic,true]${@weekday}", %month/%day, "${@hour}":"${@minute}\f[italic,default]
 )
 
-#--
-# Config Menu
-#--
-# Shouldn't be able to access this.
-
-# Config Menu Talks
-ConfigMenuTalk : "\0\s[0]Huh?"
-
-OnConfigMenu : (
-    \t\*\b2${ConfigMenuTalk}\w4\_q\![set,autoscroll,disable]
-    \n\n[half]
-    \![*]\q[Change Name,OnChangeName]
-    \n
-    \![*]\q[Change Pronouns,OnChangePronouns]
-    \n
-    \![*]"Uninstall: "\q[$( if $[${vanishFlag} = 1] $(echo "ON") else $(echo "OFF") ),OnToggleVanish]
-    \n\n[half]
-    \![*]\q[Back,OnSakuraMenu]
-)
-
-#-- Name Change Talk
-# These talks are used as reactions to name choices.
-
-# This is what your Ghost will say when selecting the name config.
-talk.OnChangeName : "\0\s[0]Hey, no problem! What would you like me to call you?"
-# This is what your Ghost will say when selecting the add name option.
-talk.OnAddName : "\0\s[0]Soooo.... What would you like to be called as well?"
-# This is what your Ghost will say when selecting the replace name option.
-talk.OnReplaceName : "\0\s[0]I understand. What would you like me to call you instead?"
-# This is what your Ghost will say when selecting the delete name option.
-talk.OnDeleteName : "\0\s[0]Anything for you, what name shouldn't I call you anymore?"
-
-# A response for if the name was the same as the name they already had.
-talk.UnchangedName : "\0\s[0]Huh. Oookay."
-# A response for if the user didn't input anything.
-talk.NoName : "\0\s[0]Is "${username}" still fine, then?"
-# A response for if the User inputs a name which is the same as the characters' names.
-talk.SelfName : "\0\s[0]Heyyy, that's my name. You trying to steal my style?"
-# A response for if the User inputs a name which is in the blacklist. You can edit the blacklist in dict-menu.kis.
-talk.BadName : "\0\s[0]Errr, are you sure about that?"
-
-# This is what your Ghost will say to confirm if the user's name is correct. $(Reference 0) is the inputted name name.
-talk.OnConfirmName : "\0\s[0]So, "$(Reference 0)", right?"
-# This is what the Ghost will say after the name has been changed.
-talk.OnNameChanged : "\0\s[0]"$(Reference 0)"! Nice name."
-
-# This is what the Ghost will say to confirm if the user wants to delete a name. $(Reference 0) is the name to be deleted.
-talk.ConfirmNameDelete : "\0\s[0]Not going with "$username[$(Reference 0)]" anymore?"
-# This is what the Ghost will say when the name has been deleted.
-talk.OnNameDeleted : "\0\s[0]You betcha. I won't call you that anymore."
-
-#-- Pronouns Change Talk
-# These talks are used when configuring the pronoun change options.
-
-# This is what your Ghost will say when selecting the change pronouns option.
-talk.OnChangePronouns : "\0\s[0]Can do. What's right, then?"
-# What your Ghost says when providing the default pronouns.
-talk.OnChoosePronouns : "\0\s[0]Which of these seems right?"
-# When successfully changing pronouns.
-talk.OnPronounsChanged : "\0\s[0]Thanks. I've got it down now."
-# When choosing a pronoun set to delete.
-talk.OnDeletePronouns : "\0\s[0]Which one shouldn't I use?"
-# When successsfully deleting a set of pronouns.
-talk.OnPronounsDeleted : "\0\s[0]Alright. I'll remember not to use those."
-
-# When inputting custom pronouns
-# You can change this as you'd like, but I do suggest giving an example of the pronoun for the ease of the user.
-talk.Pronouns1 : "\0\s[0]What pronoun would you use in place of 'he', 'she', or 'they'?"
-talk.Pronouns2 : "\0\s[0]And what pronoun would you use in place of 'him', 'her', or 'them'?"
-talk.Pronouns3 : "\0\s[0]How about 'his', 'her', or 'their'?"
-talk.Pronouns4 : "\0\s[0]What pronoun would you use in place of 'his', 'hers', or 'theirs'?"
-talk.Pronouns5 : "\0\s[0]Last one. What pronoun would you use in place of 'himself', 'herself', or 'themself'?"
-talk.Pronouns6 : "\0\s[0]Alright. Last question. Is this set singular or plural? '"${temp.they}" are tired.' is an example of these being used in the plural."
-
-# When checking with the User if they typed their pronouns right.
-talk.OnConfirmPronouns : "\0\s[0]So, is "${temp.they}/${temp.them}/${temp.their}/${temp.theirs}/${temp.themself}" correct?"
-# When the User cancels the pronoun change.
-talk.OnExitPronouns : "\0\s[0]No problem."
-# When a user tests their pronouns. If you add another, remember to use the '$user.they[${i}]' format, or else it won't print right.
-talk.OnTestPronouns : (
-    "I heard that "${username}" went to the animal shelter recently. "$(cap $user.they[${i}])" saw a bunch of cute animals that "$user.they[${i}]" wanted to be "$user.theirs[${i}]". "
-    $(cap $user.their[${i}])" face lit up looking at them. At least, that's what I heard about "$user.them[${i}]". I hope "$user.they[${i}] $(SP 'is' 'are') "taking care of "$user.themself[${i}]"."
+OnToggleHourSignal : (
+    $( setstr hoursignal $(Reference 0); set @dialogue $(Reference 1) )
+    "\![raise,OnSakuraMenu,1]"
 )
 
 OnAssignTalkRate : (
